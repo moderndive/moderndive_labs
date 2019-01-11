@@ -1,0 +1,121 @@
+---
+title: "Proposal: Part I"
+author: "Names Here"
+date: "Date here"
+output:
+  html_document:
+    fig_caption: yes
+    theme: lumen
+    toc: yes
+    toc_depth: 2
+    df_print: kable
+    toc_float:
+      collapsed: no
+---
+
+```{r, include=FALSE}
+# Do not edit this code block/chunk
+knitr::opts_chunk$set(message=FALSE, warning = FALSE, fig.width = 16/2, fig.height = 9/2)
+```
+
+# 1. Load all necessary packages 
+```{r}
+
+```
+
+***
+
+# 2. Import and glimpse the data 
+```{r message = F}
+
+
+```
+
+```{r message = F}
+
+```
+
+***
+
+# 3. Clean/wrangle the data 
+
+The steps will be a different for each project, but the basic elements include: 
+
+* Making sure it is in Tidy format
+* Selecting only the variables you'll be using in the following order:
+
+a) (If any are included) identification variables
+b) The numerical outcome variable y
+c) The numerical explanatory variable x1
+d) The categorical explanatory variable x2
+
+You may need to transform variables, reclassify, filter, etc. See the R Ninja formatting file for help. 
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+## 3.a. Print a slice of cleaned data 
+
+```{r}
+
+```
+
+## 3.b. Glimpse cleaned data 
+Make sure the outcome variable is numeric, one explanatory variable is numeric, and another is either a character <chr> or a factor <fct>. 
+
+```{r}
+
+```
+
+***
+
+# 4. Exploratory analysis 
+
+## 4.a. Inspect for NA values
+```{r}
+
+```
+
+## 4.b. Summary statistics outcome variable
+```{r fig.cap = "Table 1. Summary statistics of..... ", fig.align = "center"}
+            
+```
+
+*** 
+
+# 5. Data Visualization 
+
+## 5.a. Histogram- outcome variable 
+```{r, fig.cap = "Figure 1. Distribution of...", fig.align = "center"}
+
+```
+
+
+
+## 5.b. Scatterplot- outcome variable against numeric variable
+
+```{r, fig.cap = "Figure 2. Scatterplot showing... ", fig.align = "center"}
+
+```
+
+
+## 5.c. Boxplot- outcome variable by categorical variable
+
+```{r, fig.cap = "Figure 3. Boxplot showing.....", fig.align = "center"}
+
+```
+
+
+## 5.d. Scatterplot- outcome variable against both predictors
+
+```{r, fig.cap = "Figure 4. Scatterplot illustrating...", fig.align = "center"}
+
+```
+
