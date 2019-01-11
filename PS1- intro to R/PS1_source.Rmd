@@ -48,18 +48,18 @@ Any plots that you generate will show up in the panel in the lower right corner.
 
 ## File Management
 
-We will start by making a course folder in RStudio Server that you can use to store all your R work for the course on the web. Click on the Files tab in the lower right panel, and the New Folder tab. Enter the file name **introstatsR** in the window that opens, and click OK. You should now have a new folder! 
+We will start by making a course folder in RStudio Server that you can use to store all your R work for the course on the web. Click on the Files tab in the lower right panel, and the New Folder tab. Enter the file name ``introstatsR`` in the window that opens, and click OK. You should now have a new folder! 
 
-Next, go to the course site, and **download** the data set posted for this week's lab session. Put it in a location on your computer that you will remember! I **highly** suggest you **also** make an **introstats** folder on your computer to store all your material for this course. Check in with the instructor if you don't know how to do this! 
+Next, go to the course site, and **download** the data set posted for this week's lab session. Put it in a location on your computer that you will remember! I **highly** suggest you **also** make an `introstatsR` folder on your computer to store all your material for this course. Check in with the instructor if you don't know how to do this! 
 
-To have access to files stored on the **hard drive** on your computer in RStudio Server, you need to **upload them from your computer to the server**. To upload the data set  click on the RStudio Server **introstatsR** folder **once**, and click the upload button, like so: 
+To have access to files stored on the **hard drive** on your computer in RStudio Server, you need to **upload them from your computer to the server**. To upload the data set  click on the RStudio Server `introstatsR` folder **once**, and click the upload button, like so: 
 
 <br>
 ![](figures/upload.png){width=50%}
 <br> 
 
 <br>
-In the window that opens, browse to where you stored your data set on your computer, click on the data file, then click OK. Open the introstatsR folder again in RStudio Server, to make sure the data is in there. You can upload any sort of file like this. 
+In the window that opens, browse to where you stored your data set on your computer, click on the data file, then click OK. Open the `introstatsR` folder again in RStudio Server, to make sure the data is in there. You can upload any sort of file like this. 
 
 We are not doing anything with this toy data file, except learning how to upload it. 
 
@@ -100,18 +100,18 @@ Your final result should look like this:
 You will complete your lab work in an R Markdown file like this each week, so it is important to learn how to save these files. 
 
 -  Click File > Save As...
--  Browse to the **introstatsR** course folder you just created
+-  Browse to the `introstatsR` course folder you just created
 -  Name the file: Intro to RStudio
 -  Click save
 
-This is now saved in the **introstatsR** course folder **on the web**. 
+This is now saved in the `introstatsR` course folder **on the web**. 
 
 ## Knitting a file
 
 Click the Knit button at the top left side of the screen. An  html file will be generated. It is automatically saved in the same folder that your R markdown file was saved. 
 
 <div id="license">
-Note that there is now a R Markdown file (.rmd) and an html file (.html) in the **introstatsR** folder.
+Note that there is now a R Markdown file (.rmd) and an html file (.html) in the `introstatsR` folder.
 </div>
 
 Inspect the html file to see how what you typed was formatted. There are lots of tricks for controlling the formatting of the knitted html file. For instance:
@@ -262,7 +262,7 @@ If you want to keep working in the RStudio Server, when the browser refreshes, y
 
 <br> 
 
-To open your R Markdown file, navigate to the Files pane, to your **introstatsR** folder. Click on the `Intro to R and RStudio.Rmd` file. It will open!
+To open your R Markdown file, navigate to the Files pane, to your `introstatsR` folder. Click on the `Intro to R and RStudio.Rmd` file. It will open!
 
 <br> 
 
@@ -280,11 +280,11 @@ Each week you will submit your lab **html** file on Moodle. This involves downlo
 -    Make sure you **knit a final copy with all your changes** and work
 -    Look at your final html file to make sure it contains the work you expect, and is formatted properly (e.g. 11-12 Exercise headers, each with answers for this week)
 -   Go to your Files pane
--   Click on your introstatsR folder
+-   Click on your `introstatsR` folder
 -   Check the little box in front of the **html** file
 -   Click the little blue gear labeled **More** just a little to the upper right
 -   Click export > Download
--   **Be sure to then put the downloaded file in the introstats folder on your machine**
+-   **Be sure to then put the downloaded file in the ``introstatsR`` folder on your machine**
 -   Submit the file to Moodle
 
 If you need more help, there is a video at the top of <a href="https://smithcollege-sds.github.io/sds-public/rmarkdown_problems.html" target="_blank">this page that can help</a>. 
