@@ -1,2 +1,4 @@
-# moderndive_labs
-Labs and Problem Sets for ModernDive
+ModernDive Problem Sets
+================
+
+Problem sets and labs for ModernDive
