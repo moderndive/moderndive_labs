@@ -1,5 +1,5 @@
 ---
-title: "Intro to R and R Studio"
+title: "Intro to R and RStudio"
 output:
   html_document:
     theme: lumen
@@ -16,30 +16,30 @@ library(knitr)
 ![](figures/cbrown.jpg)
 
 
-The goal of this lab is to introduce you to R and R Studio, which you'll be using throughout the course both to review the statistical concepts discussed in the  course and to analyze real data and come to informed conclusions. To clarify which is which: R is the name of the programming language itself and R Studio is a convenient interface. 
+The goal of this lab is to introduce you to R and RStudio, which you'll be using throughout the course both to review the statistical concepts discussed in the  course and to analyze real data and come to informed conclusions. To clarify which is which: R is the name of the programming language itself and RStudio is a convenient interface. 
 
-Today we begin with the fundamental building blocks of R and R Studio: the interface, creating and saving files, and basic commands.
+Today we begin with the fundamental building blocks of R and RStudio: the interface, creating and saving files, and basic commands.
 
 
-# Opening R studio Server 
+# Opening RStudio Server 
 
-Open Smith's R Studio Server and sign in:
-<a href="https://rstudio.smith.edu/auth-sign-in" target="_blank">R Studio Server</a>
+Open Smith's RStudio Server and sign in:
+<a href="https://rstudio.smith.edu/auth-sign-in" target="_blank">RStudio Server</a>
 
 Your credentials are the same as for your email. 
 
 Please **DO NOT** choose Stay signed in. 
 
-#  The R Studio Interface
+#  The RStudio Interface
 
-In R Studio Server you should see a window that looks like the image below.
+In RStudio Server you should see a window that looks like the image below.
 
 ![](figures/Studio_opening.png){width=100%}
 
 
 <br>
 
-The panel on the left is where the action happens. It's called the *console*.  Every time you launch R Studio, it will have the same text at the top of the  console telling you the version of R that you're running.
+The panel on the left is where the action happens. It's called the *console*.  Every time you launch RStudio, it will have the same text at the top of the  console telling you the version of R that you're running.
 
 The panel in the upper right contains your *workspace*. This shows the variables and objects you define during your R session, and a history of the commands that you enter. 
 
@@ -48,18 +48,18 @@ Any plots that you generate will show up in the panel in the lower right corner.
 
 ## File Management
 
-We will start by making a course folder in R Studio Server that you can use to store all your R work for the course on the web. Click on the Files tab in the lower right panel, and the New Folder tab. Enter the file name **introstatsR** in the window that opens, and click OK. You should now have a new folder! 
+We will start by making a course folder in RStudio Server that you can use to store all your R work for the course on the web. Click on the Files tab in the lower right panel, and the New Folder tab. Enter the file name **introstatsR** in the window that opens, and click OK. You should now have a new folder! 
 
 Next, go to the course site, and **download** the data set posted for this week's lab session. Put it in a location on your computer that you will remember! I **highly** suggest you **also** make an **introstats** folder on your computer to store all your material for this course. Check in with the instructor if you don't know how to do this! 
 
-To have access to files stored on the **hard drive** on your computer in R Studio Server, you need to **upload them from your computer to the server**. To upload the data set  click on the R Studio Server **introstatsR** folder **once**, and click the upload button, like so: 
+To have access to files stored on the **hard drive** on your computer in RStudio Server, you need to **upload them from your computer to the server**. To upload the data set  click on the RStudio Server **introstatsR** folder **once**, and click the upload button, like so: 
 
 <br>
 ![](figures/upload.png){width=50%}
 <br> 
 
 <br>
-In the window that opens, browse to where you stored your data set on your computer, click on the data file, then click OK. Open the introstatsR folder again in R Studio Server, to make sure the data is in there. You can upload any sort of file like this. 
+In the window that opens, browse to where you stored your data set on your computer, click on the data file, then click OK. Open the introstatsR folder again in RStudio Server, to make sure the data is in there. You can upload any sort of file like this. 
 
 We are not doing anything with this toy data file, except learning how to upload it. 
 
@@ -85,7 +85,7 @@ When you open a new R Markdown file, there is some example code in it that you c
 
 Let's make some changes to the R Markdown file you just opened. Using the image below as a guide
 
-- First, change the title of the lab at the top to "Getting to know R Studio". Be sure to keep the quotation marks. 
+- First, change the title of the lab at the top to "Getting to know RStudio". Be sure to keep the quotation marks. 
 -  Second, add an author line, following the example below. You need quotation marks!
 -  Third, delete everything in the document from line 6 downwards.
 -  Fourth, add headers and text, following the example below. 
@@ -101,7 +101,7 @@ You will complete your lab work in an R Markdown file like this each week, so it
 
 -  Click File > Save As...
 -  Browse to the **introstatsR** course folder you just created
--  Name the file: Intro to R Studio
+-  Name the file: Intro to RStudio
 -  Click save
 
 This is now saved in the **introstatsR** course folder **on the web**. 
@@ -256,13 +256,13 @@ Finally, let's learn how to save, close and re-open this document properly.
 <br> 
  
 
-If you want to keep working in the R Studio Server, when the browser refreshes, you can choose new session. 
+If you want to keep working in the RStudio Server, when the browser refreshes, you can choose new session. 
 
 ![](figures/new.session.png){width=40%}
 
 <br> 
 
-To open your R Markdown file, navigate to the Files pane, to your **introstatsR** folder. Click on the `Intro to R and R Studio.Rmd` file. It will open!
+To open your R Markdown file, navigate to the Files pane, to your **introstatsR** folder. Click on the `Intro to R and RStudio.Rmd` file. It will open!
 
 <br> 
 
@@ -275,7 +275,7 @@ Remember the code in the Rmd file are only instructions. To get R to **RUN** tho
 
 # Turning in your work
 
-Each week you will submit your lab **html** file on Moodle. This involves downloading the html file **from the R Studio Server to your personal computer**. The steps to do this are as follows: 
+Each week you will submit your lab **html** file on Moodle. This involves downloading the html file **from the RStudio Server to your personal computer**. The steps to do this are as follows: 
 
 -    Make sure you **knit a final copy with all your changes** and work
 -    Look at your final html file to make sure it contains the work you expect, and is formatted properly (e.g. 11-12 Exercise headers, each with answers for this week)
