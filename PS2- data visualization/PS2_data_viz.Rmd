@@ -1,3 +1,4 @@
+
 ---
 title: "Problem set 2: Data Visualization"
 output:
@@ -25,9 +26,9 @@ In short, the grammar tells us that:
 
 We can break a graphic into the following three **essential** components:
 
--   `data`: the data-set comprised of variables that we plot
--   `geom`: this refers to our type of `geom`etric objects we see in our plot (points, lines, bars, etc.)
--   `aes`: aesthetic attributes of the geometric object that we can perceive on a graphic. For example, x/y position, color, shape, and size. Each assigned aesthetic attribute can be mapped to a variable in our data-set.
+- `data`: the data-set comprised of variables that we plot
+- `geom`: this refers to our type of `geom`etric objects we see in our plot (points, lines, bars, etc.)
+- `aes`: aesthetic attributes of the geometric object that we can perceive on a graphic. For example, x/y position, color, shape, and size. Each assigned aesthetic attribute can be mapped to a variable in our data-set.
 
 
 # Getting Set up
@@ -55,8 +56,9 @@ Once you have opened the document:
 Finally, save your new document:
 
 -  File > Save As
--  Browse to your introstatsR folder
+-  Browse to your `introstatsR` folder
 -  set the file name 
+
 <br> 
 
 You will hand in a **knitted html file** as your problem set. It is OK if your lab report includes the example code from the lab, as well as your Exercises. Just be sure to **make a header to label each Exercise**. Please type your code to answer the questions in a code chunk (gray part), under the exercise headers and type (**BRIEF**) answers to any interpretation questions in the white part under the headers. 
@@ -65,7 +67,7 @@ You will hand in a **knitted html file** as your problem set. It is OK if your l
 
 R Packages are like apps on your cell phone - they are tools for accomplishing common tasks. R is an open-source programming language, meaning that people can contribute packages that make our lives easier, and we can use them for free.  For this problem set we will use the following R packages:
 
-- `dplyr`:   for data wrangling
+- `dplyr`: for data wrangling
 - `ggplot2`: for data visualization
 - `oilabs`: for a built-in data set
 
@@ -77,16 +79,20 @@ library(ggplot2)
 library(oilabs)
 ```
 
-Remember, to run the code you can:
+Remember, "running code means" telling R "do this". You tell R to do something by passing it through the console. You can run existing code many ways:
 
-- click on the green triangle in the code chunk
-- highlight the code and hit `Control-Enter` on PC or `Command-Return` on a Mac
+- re-typing code out directly in the console (most laborious method)
+- copying and pasting existing code into the console and hitting enter (easier method)
+- click on the green triangle in the code chunk (easiest method 1)
+- highlight the code and hit `Control-Enter` on PC or `Command-Return` on a Mac (easiest method 2)
 
 
 ### The Data
-Today we will practice data visualization using data on births from the state of North Carolina, stored in a data frame called `nc`. Load the data by running the following in a new code chunk.  
+
+Today we will practice data visualization using data on births from the state of North Carolina, stored in a data frame called `nc`, which is included in the `oilabs` package. So remember, before we can look at this data, we need to ensure the `oilabs` package is loaded. Load the data by running the following in a new code chunk.  
 
 ```{r, results = "hide"}
+library(oilabs)
 data(nc)
 ```
 
@@ -98,7 +104,7 @@ The `data` command instructs R to load some data built into a package.  The  wor
 
 ### The data viewer
 
-You can view the data by clicking on the name `nc` in the *Environment* pane (upper right window). This will bring up an alternative display of the  data set in the *Data Viewer* (upper left window). R has stored these data in a kind of spreadsheet called a *data frame*. Each row represents a  different birth: the first entry or column in each row is simply the row number, the rest are the different variables that were recorded for each birth. You can close the data viewer by clicking on the `x` in the upper left hand corner.
+You can view the data by clicking on the name `nc` in the *Environment* pane (upper right window). This will bring up an alternative display of the data set in the *Data Viewer* (upper left window). R has stored these data in a kind of spreadsheet called a *data frame*. Each row represents a  different birth: the first entry or column in each row is simply the row number, the rest are the different variables that were recorded for each birth. You can close the data viewer by clicking on the `x` in the upper left hand corner.
 
 ### Take a glimpse
 
@@ -113,10 +119,10 @@ We can see that there are 1000 observations and 13 variables in this data set. T
 1. What type of variable is R considering the variable `habit` to be? What variable type is `visits`? (answer with text)
 
 ### Help files
-Since this is a data set built into an R package (`oilabs`), it has a help file describing all the variables. Type `?nc` into the **Console** (the pane on the bottom left), and hit `Enter`. Read through the help file. 
+
+Because this is a data set built into an R package (`oilabs`), it has a help file describing all the variables. Type `?nc` into the **Console** (the pane on the bottom left), and hit `Enter`. Read through the help file. 
 
 1.  In what year were these data collected? What is variable `gained` in this data set? What is the name of the variable that shows the weight of a baby at birth in pounds? (answer with text)
-
 
 <div id="license">
 It is a good idea to try kitting your document from time to time as you go along! Go ahead, and make sure your document is knitting, and that your html file includes Exercise headers, text, and code. Note that knitting automatically saves your Rmd file too!
@@ -133,8 +139,8 @@ We will explore four different types of graphs in this problem set.
 ##  Scatterplots
 Scatterplots allow you to investigate the relationship between two **numerical** variables. While you may already be familiar with this type of plot, let's view it through the lens of the Grammar of Graphics. Specifically, we will graphically investigate the relationship between the following two numerical variables in the flights data frame:
 
--   `weeks`: length of a pregnancy on the horizontal "x" axis and
--   `weight`: birth weight of a baby in pounds on the vertical "y" axis
+- `weeks`: length of a pregnancy on the horizontal "x" axis and
+- `weight`: birth weight of a baby in pounds on the vertical "y" axis
 
 
 ```{r fig.height=3, fig.width=4, warning=F}
@@ -145,10 +151,10 @@ ggplot(data = nc, aes(x = weeks, y = weight)) +
 
 Let's view this plot through the grammar of graphics. Within the `ggplot()` function call, we specified:
 
--   The data frame to be `nc` by setting `data = nc`
--   The `aes`thetic `mapping` by setting `aes(x = weeks, y = weight)`
--   The variable `weeks` maps to the `x`-position `aes`thetic
--   The variable `weight` maps to the `y`-position `aes`thetic.
+- The data frame to be `nc` by setting `data = nc`
+- The `aes`thetic `mapping` by setting `aes(x = weeks, y = weight)`
+- The variable `weeks` maps to the `x`-position `aes`thetic
+- The variable `weight` maps to the `y`-position `aes`thetic.
 
 We also add a layer to the `ggplot()` function call using the `+` sign. The layer in question specifies the `geom`etric object here as `point`s,  by specifying `geom_point()`.
 
@@ -220,10 +226,10 @@ ggplot(data = nc, aes(x = weeks))+
 
 A few things to note here:
 
--   There is only one variable being mapped in `aes()`: the single numerical variable `weeks`. You don't need to compute the `y`-`aes`thetic: R calculates it automatically.
--   We set the geometric object as `geom_histogram()`
--   We got a warning message about removing two rows because a few values were missing (NA). 
--   Another warning message encourages us to specify the number of bins on the histogram, as R chose 30 for us. 
+- There is only one variable being mapped in `aes()`: the single numerical variable `weeks`. You don't need to compute the `y`-`aes`thetic: R calculates it automatically.
+- We set the geometric object as `geom_histogram()`
+- We got a warning message about removing two rows because a few values were missing (NA). 
+- Another warning message encourages us to specify the number of bins on the histogram, as R chose 30 for us. 
 
 We can change the binwidth (and thus the number of bins), as well as the colors like so. 
 
@@ -292,12 +298,12 @@ ggplot(data = nc, aes(x = gender, y = gained)) +
 <div id="license">
 For review, these are the different parts of the boxplot: '
 
--   The bottom of the "box" portion represents the 25th percentile (1st quartile)
--   The horizontal line in the "box" shows the median (50th percentile, 2nd quartile)
--   The top of the "box" represents the 75th percentile (3rd quartile)
--   The height of each "box", i.e. the value of the 3rd quartile minus the value of the 1st quartile, is called the interquartile range (IQR). It is a measure of spread of the middle 50% of values. Longer boxes indicating more variability.
--   The "whiskers" extending out from the bottoms and tops of the boxes represent points less than the 25th percentile and greater than the 75th percentiles respectively. They extend out **no more than** 1.5×IQR units away from either end of the boxes. The length of these whiskers show how the data outside the middle 50% of values vary. Longer whiskers indicate more variability.
--   The dots represent values falling outside the whiskers or outliers. The definition of an outlier is somewhat arbitrary and not absolute. In this case, they are defined by the length of the whiskers, which are no more than 1.5×IQR units long.
+- The bottom of the "box" portion represents the 25th percentile (1st quartile)
+- The horizontal line in the "box" shows the median (50th percentile, 2nd quartile)
+- The top of the "box" represents the 75th percentile (3rd quartile)
+- The height of each "box", i.e. the value of the 3rd quartile minus the value of the 1st quartile, is called the interquartile range (IQR). It is a measure of spread of the middle 50% of values. Longer boxes indicating more variability.
+- The "whiskers" extending out from the bottoms and tops of the boxes represent points less than the 25th percentile and greater than the 75th percentiles respectively. They extend out **no more than** 1.5 x IQR units away from either end of the boxes. The length of these whiskers show how the data outside the middle 50% of values vary. Longer whiskers indicate more variability.
+- The dots represent values falling outside the whiskers or outliers. The definition of an outlier is somewhat arbitrary and not absolute. In this case, they are defined by the length of the whiskers, which are no more than 1.5 x IQR units long.
 </div>
 
 
@@ -324,6 +330,7 @@ Make sure your document is knitting, and that your html file includes Exercise h
 
 
 ## Barplots
+
 While histograms and boxplots visualize the variability of **numerical** variables, we need a different tool to visualize **categorical** variables. We can use barplots (barcharts) to show many elements from the data fall into different levels of a categorical variable. 
 
 For an example, we will first  make a barchart showing the number of male and female births. Recall that every row in the `nc` data frame is a birth.  The column `gender` is a categorical variable, with one gender listed for each birth. If we were to make a graph like this manually, we would need to go through the data and count how many times each gender is listed. R does this counting for us! Copy, paste and run the following to plot the number of male and female births. 
@@ -402,15 +409,15 @@ http://moderndive.netlify.com/index.html
 
 Submit your problem set **html** file on Moodle. This involves downloading the html file **from the R Studio Server to your personal computer**. The steps to do this are as follows: 
 
--    Make sure you **knit a final copy with all your changes** and work
--    Look at your final html file to make sure it contains the work you expect, and is formatted properly (e.g. Exercise headers, each with answers)
--   Go to your Files pane
--   Click on your introstatsR folder
--   Check the little box in front of the **html** file
--   Click the little blue gear labeled **More** just a little to the upper right
--   Click export > Download
--   **Be sure to then put the downloaded file in the introstats folder on your machine**
--   Submit the file to Moodle
+- Make sure you **knit a final copy with all your changes** and work
+- Look at your final html file to make sure it contains the work you expect, and is formatted properly (e.g. Exercise headers, each with answers)
+- Go to your Files pane
+- Click on your `introstatsR` folder
+- Check the little box in front of the **html** file
+- Click the little blue gear labeled **More** just a little to the upper right
+- Click export > Download
+- **Be sure to then put the downloaded file in the introstats folder on your machine**
+- Submit the file to Moodle
 
 If you need more help, there is a video at the top of <a href="https://smithcollege-sds.github.io/sds-public/rmarkdown_problems.html" target="_blank">this page that can help</a>. 
 
@@ -419,10 +426,8 @@ If you need more help, there is a video at the top of <a href="https://smithcoll
 - Save all your work. 
 - Click on the orange button in the far right corner of the screen to quit R 
 - Choose **don't save** for the **Workspace image**
-
-
--  When the browser refreshes, you can click on the icon of your name in the top right. 
--  You are signed out! 
+- When the browser refreshes, you can click on the icon of your name in the top right. 
+- You are signed out! 
 
 
 * * *
