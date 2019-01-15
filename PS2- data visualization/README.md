@@ -1,5 +1,6 @@
 ## Bert's Comments/Edits:
 
+* Side-by-side comparison of changes [here](https://github.com/rudeboybert/moderndive_labs/pull/2/files?utf8=%E2%9C%93&diff=split&w=1)
 * Note that `oilabs` is not on CRAN, and hence students will have to install from GitHub using `devtools::install_github("OpenIntroStat/oilabs")`. This won't be a problem if everyone is using RStudio Server. However I'm almost certain there are students from 192 Data Science taking 220, and they'll all have RStudio Desktop installed. When they try to install the package from CRAN, you'll have to show them the above. More on this below...
 * So it sounds like we are assuming that all packages are installed i.e. everyone is using the server. I like the idea of abstracting away package installation at first.
 * See `data(nc)` note below about using the Viewer. I would include a note that there are two ways to "look at your data" using "RStudio's built-in spreadsheet viewer":
