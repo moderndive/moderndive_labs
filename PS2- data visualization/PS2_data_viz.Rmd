@@ -57,7 +57,7 @@ Finally, save your new document:
 
 -  File > Save As
 -  Browse to your `introstatsR` folder
--  set the file name 
+-  set the file name as `ps02_lastname_firstname`
 
 <br> 
 
@@ -69,14 +69,14 @@ R Packages are like apps on your cell phone - they are tools for accomplishing c
 
 - `dplyr`: for data wrangling
 - `ggplot2`: for data visualization
-- `oilabs`: for a built-in data set
+- `readr`: for reading in data
 
 These packages are already installed for you on Smith's R Studio Server. **Every time** you open a new R session you need to **load (open)** any packages you want to use. We do this with the `library` function.  Copy, paste and run the following in a code chunk (see the figure above if you forget how to insert a code chunk). 
 
 ```{r message = F}
 library(dplyr)
 library(ggplot2)
-library(oilabs)
+library(readr)
 ```
 
 Remember, "running code means" telling R "do this". You tell R to do something by passing it through the console. You can run existing code many ways:
@@ -89,22 +89,17 @@ Remember, "running code means" telling R "do this". You tell R to do something b
 
 ### The Data
 
-Today we will practice data visualization using data on births from the state of North Carolina, stored in a data frame called `nc`, which is included in the `oilabs` package. So remember, before we can look at this data, we need to ensure the `oilabs` package is loaded. Load the data by running the following in a new code chunk.  
+Today we will practice data visualization using data on births from the state of North Carolina. Copy, paste and run the code below to load the data.   
 
-```{r, results = "hide"}
-library(oilabs)
-data(nc)
+```{r, message = F}
+nc <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTm2WZwNBoQdZhMgot7urbtu8eG7tzAq-60ZJsQ_nupykCAcW0OXebVpHksPWyR4x8xJTVQ8KAulAFS/pub?gid=202410847&single=true&output=csv")
 ```
 
-The data set that shows up in your Environment is a large **data frame**. Each *observation* or case is a birth. 
+The data set that shows up in your Environment is a large **data frame**. Each observation or **case** is a birth of a single child. 
 
-The `data` command instructs R to load some data built into a package.  The  workspace area in the upper right hand corner of the R Studio window should now list a  data set called `nc` with 1000 observations (rows or cases) and 13 variables (columns). 
+The `data` command instructs R to load some data built into a package.  The  workspace area in the upper right hand corner of the R Studio window should now list a  data set called `nc` with 800 observations (rows or cases) and 13 variables (columns). 
 
 # How to look at data in R
-
-### The data viewer
-
-You can view the data by clicking on the name `nc` in the *Environment* pane (upper right window). This will bring up an alternative display of the data set in the *Data Viewer* (upper left window). R has stored these data in a kind of spreadsheet called a *data frame*. Each row represents a  different birth: the first entry or column in each row is simply the row number, the rest are the different variables that were recorded for each birth. You can close the data viewer by clicking on the `x` in the upper left hand corner.
 
 ### Take a glimpse
 
@@ -118,23 +113,21 @@ We can see that there are 1000 observations and 13 variables in this data set. T
 
 1. What type of variable is R considering the variable `habit` to be? What variable type is `visits`? (answer with text)
 
-### Help files
+### The data viewer
 
-Because this is a data set built into an R package (`oilabs`), it has a help file describing all the variables. Type `?nc` into the **Console** (the pane on the bottom left), and hit `Enter`. Read through the help file. 
+You can view the data by clicking on the name `nc` in the *Environment* pane (upper right window). This will bring up an alternative display of the data set in the *Data Viewer* (upper left window). R has stored these data in a kind of spreadsheet called a *data frame*. Each row represents a  different birth: the first entry or column in each row is simply the row number, the rest are the different variables that were recorded for each birth. You can close the data viewer by clicking on the `x` in the upper left hand corner.
 
-1.  In what year were these data collected? What is variable `gained` in this data set? What is the name of the variable that shows the weight of a baby at birth in pounds? (answer with text)
 
 <div id="license">
 It is a good idea to try kitting your document from time to time as you go along! Go ahead, and make sure your document is knitting, and that your html file includes Exercise headers, text, and code. Note that knitting automatically saves your Rmd file too!
 </div>
 
 # Types of Graphs
-We will explore four different types of graphs in this problem set. 
+We will explore three different types of graphs in this problem set. 
 
     scatterplots
     boxplots
     histograms
-    barplots
 
 ##  Scatterplots
 Scatterplots allow you to investigate the relationship between two **numerical** variables. While you may already be familiar with this type of plot, let's view it through the lens of the Grammar of Graphics. Specifically, we will graphically investigate the relationship between the following two numerical variables in the flights data frame:
@@ -158,7 +151,6 @@ Let's view this plot through the grammar of graphics. Within the `ggplot()` func
 
 We also add a layer to the `ggplot()` function call using the `+` sign. The layer in question specifies the `geom`etric object here as `point`s,  by specifying `geom_point()`.
 
-> Note that the warning is just telling us that there were two rows of data with a missing value for either weeks, weight, or both. 
 
 <br>
 
@@ -174,7 +166,7 @@ ggplot(data = nc, aes(x = weeks, y = weight)) +
 1. Is there a positive or negative relationship between these variables? (text only to answer)
 
 
-1.  Make a graph showing `weeks` again on the x axis and `gained` on the y axis (the amount of weight a mother gained during pregnancy).  Include axis labels with measurement units, and a title. (code only to answer)
+1.  Make a graph showing `weeks` again on the x axis and the variabel `gained` on the y axis (the amount of weight a mother gained during pregnancy).  Include axis labels with measurement units, and a title. (code only to answer)
 
 ```{r include = F}
 ggplot(data = nc, aes(x = weeks, y = gained))+ 
@@ -182,13 +174,13 @@ ggplot(data = nc, aes(x = weeks, y = gained))+
 ```
 
 
-1.  Study the code below, and the resulting graphical output. Note that I added a new argument of `color = premie` **inside** the `aes`thetic mapping. Please answer with text:
+1.  Study the code below, and the resulting graphical output. Note that I added a new argument of `color = premie` **inside** the `aes`thetic mapping. The variable `premie` indicates whether a birth was early (premie) or went full term. Please answer with text:
 
-     **A.** What did this accomplish? 
+     **A.** What did adding the argument `color = premie` accomplish? 
      
-     **B.** How many variables are now displayed on this plot?  
+     **B.** How many **variables** are now displayed on this plot?  
      
-     **C.** What appears to (roughly) by the pregnancy length cutoff for classifying a newborn as a "premie"" versus a "full term". 
+     **C.** What appears to (roughly) be the pregnancy length cutoff for classifying a newborn as a "premie"" versus a "full term". 
 
 ```{r fig.height=3, fig.width=5, warning=F}
 ggplot(data = nc, aes(x = weeks, y = gained, color = premie))+ 
@@ -198,7 +190,7 @@ ggplot(data = nc, aes(x = weeks, y = gained, color = premie))+
 
 
 
-1. Make a new scatterplot that shows a mothers age on the x axis and birth weight of newborns on the y axis. Color the points on the plot based on the gender of the resulting baby. Does there appear to be any strong relationship between a mother's age and the weight of her newborn? (code and text to answer)
+1. Make a new scatterplot that shows a mothers age on the x axis (variable called `mage`) and birth weight of newborns on the y axis (`weight`). Color the points on the plot based on the gender of the resulting baby (variable called `gender`). Does there appear to be any strong relationship between a mother's age and the weight of her newborn? (code and text to answer)
 
 ```{r include = F}
 ggplot(data = nc, aes(x = mage, y = weight, color = gender)) + 
@@ -216,7 +208,7 @@ Make sure your document is knitting, and that your html file includes Exercise h
 Histograms are useful plots for showing how many elements of a **single numerical** variable fall in specified bins. This is a very useful way to get a sense of the **distribution** of your data. Histograms are often one of the first steps in exploring data visually. 
 
 
-For instance, to look at the distribution of pregnancy duration, paste and run the following in a new code chunk:
+For instance, to look at the distribution of pregnancy duration (variable called `weeks`), copy, paste and run the following in a new code chunk:
 
 ```{r fig.height=3, fig.width=5}
 ggplot(data = nc, aes(x = weeks))+ 
@@ -228,8 +220,7 @@ A few things to note here:
 
 - There is only one variable being mapped in `aes()`: the single numerical variable `weeks`. You don't need to compute the `y`-`aes`thetic: R calculates it automatically.
 - We set the geometric object as `geom_histogram()`
-- We got a warning message about removing two rows because a few values were missing (NA). 
-- Another warning message encourages us to specify the number of bins on the histogram, as R chose 30 for us. 
+- The warning message encourages us to specify the number of bins on the histogram, as R chose 30 for us. 
 
 We can change the binwidth (and thus the number of bins), as well as the colors like so. 
 
@@ -250,7 +241,7 @@ Note that none of these arguments went inside the `aes`thetic `mapping` argument
     
 
 
-5.  Make a histogram of `weight`, including a title and axis labels. (code only to answer)
+5.  Make a histogram of the birth `weight` of newborns (which is in lbs), including a title and axis labels. (code only to answer)
 
 ```{r include = F}
 ggplot(data = nc, aes(x =  weight)) +
@@ -261,9 +252,9 @@ ggplot(data = nc, aes(x =  weight)) +
 
 
 ### Faceting 
-Before continuing to barplots, we will look quickly at a useful concept called **faceting**. Faceting is used when we'd like to create small multiples of the same plot over a different categorical variable. By default, all of the small multiples will have the same vertical axis.
+Faceting is used when we'd like to create small multiples of the same plot over a different categorical variable. By default, all of the small multiples will have the same vertical axis.
 
-For example, suppose we were interested in looking at whether pregnancy length varied by the maturity  status of a mother (column name `mature`). This is what is meant by "the distribution of one variable over another variable": `weeks` is one variable and `mature` is the other variable. In order to look at histograms of `weeks` for each gender, we add a plot layer `facet_wrap(~ mature, ncol = 1)`. The `ncol = 1` part just tells R to stack the two histograms into one column. 
+For example, suppose we were interested in looking at whether pregnancy length varied by the maturity  status of a mother (column name `mature`). This is what is meant by "the distribution of one variable over another variable": `weeks` is one variable and `mature` is the other variable. In order to look at histograms of `weeks` for older and more mature mothers, we add a plot layer `facet_wrap(~ mature, ncol = 1)`. The `ncol = 1` argument just tells R to stack the two histograms into one column. 
 
 ```{r fig.height=3, fig.width=4, warning = F}
 ggplot(data = nc, aes(x = weeks)) +
@@ -329,28 +320,6 @@ Make sure your document is knitting, and that your html file includes Exercise h
 </div>
 
 
-## Barplots
-
-While histograms and boxplots visualize the variability of **numerical** variables, we need a different tool to visualize **categorical** variables. We can use barplots (barcharts) to show many elements from the data fall into different levels of a categorical variable. 
-
-For an example, we will first  make a barchart showing the number of male and female births. Recall that every row in the `nc` data frame is a birth.  The column `gender` is a categorical variable, with one gender listed for each birth. If we were to make a graph like this manually, we would need to go through the data and count how many times each gender is listed. R does this counting for us! Copy, paste and run the following to plot the number of male and female births. 
-
-```{r eval = FALSE}
-ggplot(data = nc,  aes(x = gender)) +
-  geom_bar()  
-```
-
-Here you see we only specify an `aes`thetic for `gender`, because R counts how many times each `gender` is listed for us. 
-
-<br>
-
-1. Make a plot showing the number of premie and full-term births. (code only to answer)
-
-```{r include = FALSE}
-ggplot(data = nc,  aes(x = premie)) +
-  geom_bar() 
-```
-
 
 ------
 
@@ -380,14 +349,6 @@ ggplot(data = nc, aes(x = habit, y = weight)) +
 ```{r include = F}
 ggplot(data = nc, aes(x = mage, y = weeks)) +
   geom_point()
-```
-
-
-1. Use data visualization to show the sample size of babies that were classified as low birthweight or not (column name `lowbirthweight`). Roughly how many babies in this sample were classified as low birthweight?
-
-```{r include = F}
-ggplot(data = nc, aes(x = lowbirthweight)) + 
-  geom_bar()
 ```
 
 ------

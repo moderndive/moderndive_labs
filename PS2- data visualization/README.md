@@ -38,3 +38,20 @@ Either we:
 1. Or instead of loading `nc` from `oilabs`, perhaps we load our own version of `nc` from Google Sheets using `readr::read_csv()` and skirt this whole issue?
 
 Thoughts?
+
+# Jenny's comments/responses
+I think reading in the data from google sheets is the simplest solution. I will adapt the code to this. It will be a shame that they cannot access the help files for the data though....we will need to make sure we show them how to access those in the future. 
+
+I did not realize some of the students would be working on their desktop...so did not think `oilabs` would be a problem. I would have chosen a different data set had I known. That said, I had the PSY students install the `oilabs` on desktop last semester, and it actually went fine!
+
+Regarding lazy loading...this is why I always just have the students use the `data()` command... it covers their bases, regardless...also this is why I always have the students take a `glimpse` of the data first...skirts that issue! 
+
+I can just take the barplots out.
+
+Pedagogical questions:  
+
+1. why teach the students how to do the `View()` command with code, if it can cause problems when knitting? Simplest just to show them how to click on the data name, no? (as long as they have taken a glimpse already, and it is loaded)
+
+2. Why teach the students that they can type code into the console? If they run a bunch of code only in the console, when they go to knit, they are going to have a problem. Seems like a dangerous thing to teach them, no? I would personally take out options 1&2 for running code (I did not remove them...just suggesting this)
+
+Let me know when this is a go, and I will put together the solution file. 
