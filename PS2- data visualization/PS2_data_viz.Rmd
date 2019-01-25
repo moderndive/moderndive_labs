@@ -235,7 +235,7 @@ Note that none of these arguments went inside the `aes`thetic `mapping` argument
 
     **A.** The y axis is labeled **count**. What is specifically being counted in this case? Hint: think about what each case is in this data set. 
     
-    **B.** What appears to be roughly the average lenght of pregnancies in weeks?
+    **B.** What appears to be roughly the average length of pregnancies in weeks?
     
     **C.** If we changed the binwidth to 100, how many bins would there be? Roughly how many cases would be in each bin?
     
@@ -308,7 +308,7 @@ ggplot(data = nc, aes(x = mature, y = gained)) +
 ```
 
 
-1. Make a boxplot of pregnancy duration by smoking `habit`. Is the duration of pregnancy more **variable** for smokers or non-smokers? (i.e. which group has the greater spread for the variable `weeks`?). (code and text to answer)
+1. Make a boxplot of pregnancy duration in `weeks` by smoking `habit`. Is the duration of pregnancy more **variable** for smokers or non-smokers? (i.e. which group has the greater spread for the variable `weeks`?). (code and text to answer)
 
 ```{r include = F}
 ggplot(data = nc, aes(x = habit, y = weeks)) + 
@@ -337,14 +337,14 @@ ggplot(data = nc, aes(x = fage)) +
 ```
 
 
-1. Using a data visualization, visually assess: (in this sample) is the median birth weight of babies greater for smoking mom, non-smoking moms, or fairly similar for the two groups?
+1. Using a data visualization, visually assess: (in this sample) is the median birth `weight` of babies greater for white or non-white mothers (variable called `whitemom`)?
 
 ```{r include = F}
-ggplot(data = nc, aes(x = habit, y = weight)) +
+ggplot(data = nc, aes(x = whitemom, y = weight)) +
   geom_boxplot(fill = "lightblue") 
 ```
 
-1. Using a data visualization, visually assess: (in this sample) as a mother's age increases, does the duration of pregnancy appear to decrease? 
+1. Using a data visualization, visually assess: (in this sample) as a mother's age (`mage`) increases, does the duration of pregnancy (`weeks`) appear to decrease? 
 
 ```{r include = F}
 ggplot(data = nc, aes(x = mage, y = weeks)) +
