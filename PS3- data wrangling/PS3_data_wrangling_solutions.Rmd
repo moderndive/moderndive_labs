@@ -67,7 +67,7 @@ Imagine for instance that we wanted to reduce the data set include data for only
 austin_12 <- txhousing %>% filter(year == 2012, city == "Austin")
 ```
  
-> Note that we use `==` to identify the desired criteria. 
+> Note that we use `==` to identify the desired criteria and not `=`. 
 
 What if we wanted to restrict our data set to only years before 2004 and the City of Austin? Below we use the `<` symbol to accomplish this. Note we did not **SAVE** these results in a new data frame...so no new data frame showed up in our Environment pane, but the results print out immediately below the code chunk. 
 
