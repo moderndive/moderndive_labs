@@ -52,7 +52,7 @@ glimpse(txhousing)
 These data are about housing in Texas. Each row is monthly data for a given city in Texas in a given year. There are multiple years of data for each city. 
 
 ## Question 1
-Click on the name of the data in the Environment pane to open it in the data viewer. What is the last city listed in the data set (in row 8602)?
+Take a look at the data in the data viewer. You can accomplish this two different ways: A) click on the name of the data in the Environment pane, or b) type `View(txhousing)` in the **console**. What is the last city listed in the data set (in row 8602)?
 
 
 ## Question 2
@@ -223,4 +223,6 @@ txhousing %>%
 ```
 
 ## Question 11
-Generate a single table that shows the total number of houses sold in Austin in 2000 and 2001 (total over the entire period), & the total number of houses sold in Dallas in 2000 and 2001 (total over the entire period). This calculation requires a number of steps, so it might help to want to write out **pseudocode**, or steps that sets out a "blueprint" of your chain. 
+Generate a single table that shows the total number of houses sold in **Austin** in **2000 and 2001** (total over the entire period), & the total number of houses sold in **Dallas** in **2000 and 2001** (total over the entire period). This calculation requires a number of steps, so it might help you to first write out on paper the different steps you will need to take. That will help you set out a "blueprint" for tackling the problem. **Hint**: recall the `sum()` function can add values. 
+
+

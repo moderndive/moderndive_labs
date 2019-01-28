@@ -221,6 +221,7 @@ txhousing %>%
 In 2012, in which month were the most houses sold in Texas? (show code and text please)
 
 **Answer: August**
+**Note to grader: if the student breaks this into separate steps, that is OK**
 
 ```{r }
 txhousing %>% 
@@ -230,13 +231,24 @@ txhousing %>%
   arrange(desc(top_sales))
 ```
 
+
 ## Question 11
-Generate a single table that shows the total number of houses sold in Austin in 2000 and 2001 (total over the entire period), & the total number of houses sold in Dallas in 2000 and 2001 (total over the entire period). This calculation requires a number of steps, so it might help to want to write out **pseudocode**, or steps that sets out a "blueprint" of your chain. 
+Generate a single table that shows the total number of houses sold in Austin in 2000 and 2001 (total over the entire period), & the total number of houses sold in Dallas in 2000 and 2001 (total over the entire period). This calculation requires a number of steps, so it might help to want to write out **pseudocode**, or steps that sets out a "blueprint" of your chain. **Hint**: recall the `sum()` function can add values. 
+
+**note to grader: the c("item", "item") the separate == inside the filter commands are both acceptable, and the filtering can also be done in one step!** 
 
 ```{r }
 txhousing %>% 
   filter(city == "Austin"| city == "Dallas") %>%
   filter(year == c(2000:2001)) %>%
+  group_by(city) %>%
+  summarize(total_sales = sum(sales))
+```
+
+```{r}
+txhousing %>% 
+  filter(city == c("Austin", "Dallas")) %>%
+  filter(year == 2000 | year == 2001) %>%
   group_by(city) %>%
   summarize(total_sales = sum(sales))
 ```
