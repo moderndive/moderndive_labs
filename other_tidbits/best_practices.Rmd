@@ -1,0 +1,83 @@
+---
+title: "Best practices in R"
+author: "Dr. Danger"
+output: html_document
+---
+
+![](https://www.michiganautolaw.com/wp-content/uploads/2016/03/risky-driving-image-1024x626.jpg){width=90%}
+
+<br> 
+
+***
+
+# Save your work! 
+
+When you can see this little blue disk icon, and your file tab is in red, you have work that is not saved!! Click the little blue save button. 
+
+![](save_me_already.png)
+
+<br> 
+
+***
+
+# Knit often!! 
+
+This also performs a save automatically!
+
+<br>
+
+***
+
+# Put white spaces between code chunks!
+
+<br>
+
+## For instance, do this:
+
+<br>
+
+
+![](do_this.png)
+
+<br>
+
+## Do not do this:
+
+<br>
+
+![](not_this.png)
+
+<br>
+
+***
+
+# Only a little bit of code per chunk!!
+
+### Or this will be you looking for your errors in a haystack of code. 
+
+![](http://i.huffpost.com/gen/2279142/thumbs/o-SVEN-570.jpg){width=30%}
+
+<br>
+
+***
+
+# Put files into folders
+
+## with sensible names...
+## in places you can find! 
+
+### Or this will be you looking for your files! 
+
+![](https://theladykillers.typepad.com/.a/6a00d83451f4a069e201538f64d522970b-320wi)
+
+<br>
+
+***
+
+
+
+
+<style type="text/css">
+h1 { /* Header 1 */color: Darkgreen;}
+h2 { /* Header 2 */color: Sienna;}}
+</style>
