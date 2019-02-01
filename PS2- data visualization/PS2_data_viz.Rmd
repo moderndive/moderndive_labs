@@ -47,7 +47,7 @@ Once you have opened the document:
 
 *  change the title at the top to "Data Visualization". Be sure to keep the quotation marks. 
 *  add an author line, following the example below. You need quotation marks!
-*  delete any extra code below line 6
+*  delete any extra code 
 
 ![](figures/set.up.png){width=100%}
 
@@ -166,7 +166,7 @@ ggplot(data = nc, aes(x = weeks, y = weight)) +
 1. Is there a positive or negative relationship between these variables? (text only to answer)
 
 
-1.  Make a graph showing `weeks` again on the x axis and the variabel `gained` on the y axis (the amount of weight a mother gained during pregnancy).  Include axis labels with measurement units, and a title. (code only to answer)
+1.  Make a graph showing `weeks` again on the x axis and the variable `gained` on the y axis (the amount of weight a mother gained during pregnancy).  Include axis labels with measurement units, and a title. (code only to answer)
 
 ```{r include = F}
 ggplot(data = nc, aes(x = weeks, y = gained))+ 
@@ -377,7 +377,6 @@ Submit your problem set **html** file on Moodle. This involves downloading the h
 - Check the little box in front of the **html** file
 - Click the little blue gear labeled **More** just a little to the upper right
 - Click export > Download
-- **Be sure to then put the downloaded file in the introstats folder on your machine**
 - Submit the file to Moodle
 
 If you need more help, there is a video at the top of <a href="https://smithcollege-sds.github.io/sds-public/rmarkdown_problems.html" target="_blank">this page that can help</a>. 
@@ -386,8 +385,7 @@ If you need more help, there is a video at the top of <a href="https://smithcoll
 
 - Save all your work. 
 - Click on the orange button in the far right corner of the screen to quit R 
-- Choose **don't save** for the **Workspace image**
-- When the browser refreshes, you can click on the icon of your name in the top right. 
+- Click on the icon of your name in the top right to log out
 - You are signed out! 
 
 
