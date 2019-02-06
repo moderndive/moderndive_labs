@@ -126,11 +126,11 @@ Unfortunately, the data does not contain overall SAT scores, only averaged Math 
 
 # 2. Exploratory data analysis
 
-We had a sample size of 390 high schools; however, since 58 of these had missing SAT scores, our total sample size was `r 390-58` (Table 1). The mean of the average SAT scores was greatest for large schools ($n = 238$, $\bar{x} = 517.5$, $sd = 56.2$), intermediate for medium schools ($n = 74$, $\bar{x} = 483.3$, $sd = 58.7$), and lowest for small schools ($n = 78$, $\bar{x} = 478.0$, $sd = 77.4$). In MA in 2017, the average percentage of economically disadvantaged students in schools was 31 % ($SD = 21.74), 
+We had a sample size of 390 high schools; however, since 58 of these had missing SAT scores, our total sample size was `r 390-58` (Table 1). The mean of the average SAT scores was greatest for large schools ($n = 238$, $\bar{x} = 517.5$, $sd = 56.2$), intermediate for medium schools ($n = 74$, $\bar{x} = 483.3$, $sd = 58.7$), and lowest for small schools ($n = 78$, $\bar{x} = 478.0$, $sd = 77.4$). In MA in 2017, the average percentage of economically disadvantaged students in schools was 31 % ($SD = 21.74$), 
 
 The percentage of students that were considered economically disadvantaged ranged from 3.1% to a shockingly high 93.9% ($\bar{x} = 31.6$, $sd = 21.7$). 
 
-```{r}
+```{r include = F}
 high_schools_data_sat %>% 
   summarize(min = min(percent_economically_disadvantaged), 
             max = max(percent_economically_disadvantaged), 
@@ -159,7 +159,7 @@ high_schools_data_sat %>%
 ***
 
 
-Since the data were not skewed, and looked normally distributed we did not do any transformations (Fig. 1). We did notice a potential outlier around a score of 750, which is something to consider throughout our analysis.
+Since the data were not skewed, and looked normally distributed (Fig. 1) we did not do any transformations. We did notice a potential outlier around a score of 750, which is something to consider throughout our analysis.
 
 ```{r, fig.cap = "Figure 1. Distribution of average Math SAT scores in the State of Massachusetts in 2017", fig.align = "center"}
 ggplot(high_schools_data_sat, aes(x = score)) +
@@ -169,7 +169,7 @@ ggplot(high_schools_data_sat, aes(x = score)) +
 
 We generated a scatterplot to see the relationship between our numerical explanatory variable, percentage of economically disadvantaged students, and our numerical outcome variable, Math SAT score (Fig. 2). As the percentage of economically disadvantaged students increased, there was an associated decrease in Math SAT score. Reflecting this we calculated a correlation coefficient of -0.83. 
 
-```{r}
+```{r include = F}
 high_schools_data_sat %>%  
   filter(!is.na(score)) %>%
   summarize(cor(score, percent_economically_disadvantaged))
@@ -243,7 +243,7 @@ get_regression_table(math_model)
 
 ## 3.3 Interpreting the regression table
 
-The intercept ($\beta_0 = 88.19$) represents the Math SAT score when zero percent of the students are said to be economically disadvantaged and the school size is small (Table 2). The estimate for the percent_economically_disadvantaged ($\beta_ {prct} = -2.77$) is the associated change in score depending on the percentage of economically disadvantaged students. Based on this estimate, for every 1% increase in the percent of economically disadvantaged students in a school, MATH SAT scores went down on average by 2.78 points. The estimate for sizeMedium ($\beta_ {med} = -11.91$) and sizeLarge ($\beta_ {large} = -6.36$) are the offsets in intercept relative to the baseline group's, sizeSmall, intercept (Table 2). 
+The intercept ($\beta_0 = 588.19$) represents the Math SAT score when zero percent of the students are said to be economically disadvantaged and the school size is small (Table 2). The estimate for the percent_economically_disadvantaged ($\beta_ {prct} = -2.77$) is the associated change in score depending on the percentage of economically disadvantaged students. Based on this estimate, for every 1% increase in the percent of economically disadvantaged students in a school, MATH SAT scores went down on average by 2.78 points. The estimate for sizeMedium ($\beta_ {med} = -11.91$) and sizeLarge ($\beta_ {large} = -6.36$) are the offsets in intercept relative to the baseline group's, sizeSmall, intercept (Table 2). 
 
 The regression equation for Math SAT score is the following:
 
@@ -320,7 +320,7 @@ get_regression_table(math_model2)
 
 ## 4.1 Conclusions
 
-We found that there was no significant difference in Math SAT scores at different sized schools, but that as the percentage of economically disadvantaged students increased, the scores decreased significantly. On average, Math SAT scores decreased by approximately 3 points for every 1% increase in percentage of economically disadvantaged students. This however does not necessarily mean that economic disadvantage *causes* lower test scores. We were surprised to find that school size did not have a significant influence on SAT scores. We expected to see higher SAT scores in small schools, assuming that students could get more one-on-one attention from teachers. 
+We found that there was no significant difference in Math SAT scores at different sized schools, but that as the percentage of economically disadvantaged students increased, the scores decreased significantly. On average, Math SAT scores decreased by approximately 3 points for every one unit increase in the percentage of economically disadvantaged students. This however does not necessarily mean that economic disadvantage *causes* lower test scores. We were surprised to find that school size did not have a significant influence on SAT scores. We expected to see higher SAT scores in small schools, assuming that students could get more one-on-one attention from teachers. 
 
 Overall, these results suggest that the economic well being of families is a factor in academic success. Our findings are consistent with previous studies showing that found wealth is correlated to SAT scores in the US^[Goldfarb, Zacchary. _These four charts show how the SAT favors rich, educated families_. Washington Post. March 2014. https://www.washingtonpost.com/news/wonk/wp/2014/03/05/these-four-charts-show-how-the-sat-favors-the-rich-educated-families/?noredirect=on&utm_term=.aac2fb6c0f32].  In order to mitigate this, we believe that there should be more support systems in schools with higher percentages of economically disadvantaged students. These could include free SAT prep courses or college readiness programs. Furthermore, programs that help remove barriers to education (transportation, hunger, etc.) may benefit overall student learning, and outcomes. The trends found in this analysis are important because SAT scores are a factor for college acceptances, which in our current society is a often a prerequisite for higher paying jobs.
 
