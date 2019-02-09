@@ -8,16 +8,17 @@ library(nycflights13)
 library(ggplot2)
 library(dplyr)
 
-jfk <- weather %>% filter(origin == "JFK", month == 7 | month == 12) %>% 
-  mutate(month = as.factor(month)) %>%
-  mutate(month = recode_factor(month, "7" = "July", 
-                               "12" = "December"))
+jfk <- weather %>% 
+  filter(origin == "JFK", month == 7 | month == 12) %>% 
+  mutate(
+    month = as.factor(month),
+    month = recode_factor(month, "7" = "July", "12" = "December")
+  )
 
 ggplot(jfk, aes(x = humid, y = temp, color = month)) + 
   geom_point() + 
-  geom_smooth(method = "lm") + 
+  geom_smooth(method = "lm", se=FALSE) + 
   labs(x = "Percent humidty", y = "Temperature (\u00B0F)", 
-       title = "Relationship between humidity and temeperature
-       in NYC during summer and winter")
+       title = "Relationship between humidity and temeperature in NYC during summer and winter")
 ```
 
