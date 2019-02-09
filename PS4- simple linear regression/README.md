@@ -1,5 +1,6 @@
 ## Bert's Comments/Edits:
 
+* Side-by-side comparison of edits can be seen [here](https://github.com/rudeboybert/moderndive_labs/pull/4/files?utf8=%E2%9C%93&diff=split&w=1)
 * Background:
     + "If you want to see the instructions...remember you can knit this file...and you can read through all the instructions." I would be more insistent. "Please knit this file once and read all instructions"
     + Can you make a mention of the data's source?
