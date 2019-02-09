@@ -12,17 +12,19 @@ output: html_document
 
 # Save your work! 
 
-When you can see this little blue disk icon, and your file tab is in red, you have work that is not saved!! Click the little blue save button. 
+When you can see this little blue disk icon, and your file tab is in red, you have work that is not saved!!
 
 ![](save_me_already.png)
+
+Click the little blue disk save icon to save your work. This way if something goes wrong with your computer, you won't lose hours of work!
 
 <br> 
 
 ***
 
-# Knit often!! 
+# Knit early, knit often!! 
 
-This also performs a save automatically!
+By making small incremental changes and knitting often, if a bug i.e. an "error" creeps into your code, you'll be able to isolate where it is easier! Note that knitting also performs a save automatically!
 
 <br>
 
@@ -30,12 +32,13 @@ This also performs a save automatically!
 
 # Put white spaces between code chunks!
 
+While the computer doesn't care if your code is easy to read, humans do! Careful use of formatting tricks like using blank spaces between code chunks can go a long way to make your code easier to read. Be emphathetic to potential collaborators who might read this code! Including your [most important collaborator of all!!!](https://rmhogervorst.nl/cleancode/blog/2016/05/26/content/post/2016-05-26-your-most-valuable-collaborator-future-you/){target="_blank"}
+
 <br>
 
 ## For instance, do this:
 
 <br>
-
 
 ![](do_this.png)
 
@@ -52,6 +55,8 @@ This also performs a save automatically!
 ***
 
 # Only a little bit of code per chunk!!
+
+Don't be afraid to break up your code into several chunks. For example, create one code chunk per rough task. 
 
 ### Or this will be you looking for your errors in a haystack of code. 
 
