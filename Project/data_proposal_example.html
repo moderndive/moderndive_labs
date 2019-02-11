@@ -1625,6 +1625,7 @@ We will drop these rows while being sure to report this fact in the next step of
 <div id="preview-data" class="section level2">
 <h2>Preview data</h2>
 <p><em>Display a random sample of 5 rows of your data frame by piping it into the <code>sample_n(5)</code> function from the <code>dplyr</code> package . You’ll get the same 5 rows everytime you knit this document and hence replicable results because we set the seed value of the random number generator in the first code chunk above.</em></p>
+<p>We see we have missing values below. Some of these are missing because some of the schools are not high schools so the students don’t take the Math SAT. We will address these missing values in the next step of the project once we are more experienced with data wrangling.</p>
 <pre class="r"><code>ma_schools %&gt;% 
   sample_n(5)</code></pre>
 <div class="kable-table">

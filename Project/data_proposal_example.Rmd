@@ -188,6 +188,8 @@ ma_schools <- ma_schools %>%
 
 _Display a random sample of 5 rows of your data frame by piping it into the `sample_n(5)` function from the `dplyr` package . You'll get the same 5 rows everytime you knit this document and hence replicable results because we set the seed value of the random number generator in the first code chunk above._
 
+We see we have missing values below. Some of these are missing because some of the schools are not high schools so the students don't take the Math SAT. We will address these missing values in the next step of the project once we are more experienced with data wrangling.
+
 ```{r}
 ma_schools %>% 
   sample_n(5)
