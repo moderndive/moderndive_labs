@@ -69,7 +69,6 @@ _Be sure to explore your data. Note that `eval=FALSE` is set so that R Markdown 
 
 ```{r, eval = FALSE}
 glimpse(ma_schools)
-View(ma_schools)
 ```
 
 
