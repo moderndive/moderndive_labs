@@ -14,8 +14,13 @@ output:
       collapsed: no
 ---
 
+<<<<<<< HEAD
 ```{r, include=FALSE}
 # This sets the options for the output of each code chunk in the resulting
+=======
+```{r, message=FALSE}
+# This sets the options for the output of each code chunk in the resulting 
+>>>>>>> 250594090550ca5347d5b59c689536b0ba644a13
 # .html report:
 knitr::opts_chunk$set(
   echo = TRUE, # Do not show code in each code chunk
@@ -23,7 +28,7 @@ knitr::opts_chunk$set(
   warning = FALSE, # Hide all warnings
   fig.width = 16/2, # Set the widths of all figures/visualizations
   fig.height = 9/2 # Set the height of all figures/visualizations
-  )
+)
 
 # Load all packages here:
 library(readr)
@@ -32,8 +37,7 @@ library(ggplot2)
 library(janitor)
 
 # Set seed value of random number generator to get "replicable" random numbers.
-# Why 76? For no other reason than I like this number. Why? See here:
-# https://www.youtube.com/watch?v=xjJ7FheCkCU
+# The choice of seed value of 76 was an arbitrary one on my part.
 set.seed(76)
 ```
 
@@ -45,20 +49,19 @@ set.seed(76)
 
 _What is your research question?_
 
-Overall, we are hoping to better understand how and if school conditions influence student performance. Our question specifically is whether percentage of economically disadvantaged students and school size predict the average math SAT score in Massachusetts high schools. 
+
 
 ## Description of data
 
 _Please give a very short description of the data set along with it's original source._
 
-We have data from all schools in Massachusetts from 2017. The data set contains SAT scores, and some information about school demographics. While the data was downloaded from Kaggle [here](https://www.kaggle.com/ndalziel/massachusetts-public-schools-data), the original source of the data are Massachusetts Department of Education [reports](http://profiles.doe.mass.edu/state_report/).
 
 ## Load data into R
 
 _Include the code to load your data here. If your data is not confidential nor is it private in nature, consider publishing it as a `.csv` file on Google Sheets as in the code chunk below; instructions on how to do this are in Steps 1-6 [here](https://twitter.com/rudeboybert/status/1055821846539591680). If the data shouldn't be published online, then please submit the spreadsheet file on Moodle._
 
 ```{r}
-ma_schools <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSrWSNyNqRVA950sdYa1QazAT-l0T7dl6pE5Ewvt7LkSm9LXmeVNbCbqEcrbygFmFyK4B6VQQGebuk9/pub?gid=1469057204&single=true&output=csv")
+
 ```
 
 
@@ -67,8 +70,7 @@ ma_schools <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSrWSNyN
 _The `clean_names()` function from the `janitor` package will clean your variable names, making them easier to work with._
 
 ```{r}
-ma_schools <- ma_schools %>% 
-  clean_names()
+
 ```
 
 
@@ -83,34 +85,25 @@ ma_schools <- ma_schools %>%
 
 _What is your identification (ID) variable (if you have one)?_
 
-Our identification variable is `school_name`; it allows us to uniquely identify each school.
 
 ## Outcome variable
 
 _What is your outcome variable $y$? What are its units of measurement?_
 
-The outcome variable is called `average_sat_math`: the average Math SAT score for a school measured in points.  We did not have data on overall SAT scores for each school, so we decided to focus solely on the math SAT score in order to make this report more concise.
+
 
 ## Numerical explantory variable
 
 _What is your numeric explanatory variable? What are its units of measurement?_
 
-The numerical explantory variable is called `percent_economically_disadvantaged` and its unit of measurement are percentage points between 0-100.  It represents the percentage of students in a school that are considered "economically disadvantaged".
+
 
 ## Categorical explantory variable
 
 _What is your categorical explanatory variable? Does it have between 3 and 5 levels. Please list the different levels._
 
-The categorical explantory variable is called `size` and it has three levels: `small`, `medium`, and `large`. We constructed this variable by cutting the numeric variable `total_enrollment` into `n=3` roughly equally sized parts so that schools with 0-341 students were called `small`, schools with 342-541 students were classified as `medium` and those with > 541 students were `large`. 
-
 ```{r}
-ma_schools <- ma_schools %>% 
-  mutate(
-    school_size = cut_number(total_enrollment, n = 3),
-    size = recode_factor(
-      school_size, "[0,341]" = "Small", "(341,541]" = "Medium", "(541,4.26e+03]" = "Large"
-    )
-  )
+
 ```
 
 
@@ -124,34 +117,16 @@ ma_schools <- ma_schools %>%
 
 _What is the observational unit of your data? In other words, what does each row in your data represent?_
 
-Each row/case in our data set will be a high school in Massachusetts (see below):
 
 ## Sample size
 
 _How many rows/cases are in the data i.e. what is the sample size? Is the sample size at least 50?_
 
-There are 1861 rows in the original data set. However, we are limiting our analysis to only the 390 high schools (where 11th and 12th grade enrollment is greater than 0) as younger grades do not take the SAT. 
 
 ```{r}
-ma_schools <- ma_schools %>% 
-  filter(x11_enrollment > 0 & x12_enrollment > 0)
+
 ```
 
-There also appear to be 58 `NA` missing values for `average_sat_math`:
-
-```{r}
-ma_schools %>% 
-  mutate(is_missing = is.na(average_sat_math)) %>% 
-  summarize(total_missing = sum(is_missing))
-```
-
-We will drop these rows while being sure to report this fact in the next step of the project, as this may have implications on our interpretation of the results. So the final sample size will be 332. 
-
-
-```{r}
-ma_schools <- ma_schools %>% 
-  filter(!is.na(average_sat_math))
-```
 
 
 
@@ -171,8 +146,7 @@ _`select()` the following variables and drop all others:_
 1. Optional: any other variable you find interesting
 
 ```{r}
-ma_schools <- ma_schools %>% 
-  select(school_name, average_sat_math, percent_economically_disadvantaged, size)
+
 ```
 
 
@@ -183,8 +157,7 @@ rows everytime you knit this document and hence replicable results because we
 set the seed value of the random number generator in the first code chunk above._
 
 ```{r}
-ma_schools %>% 
-  sample_n(5)
+
 ```
 
 
