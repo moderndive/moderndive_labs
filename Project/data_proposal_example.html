@@ -9,7 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="WRITE YOUR GROUP NAME HERE" />
+<meta name="author" content="Jenny Smetzer &amp; Albert Y. Kim" />
 
 
 <title>SDS/MTH 220 Project Data Proposal</title>
@@ -1503,13 +1503,13 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">SDS/MTH 220 Project Data Proposal</h1>
-<h4 class="author"><em>WRITE YOUR GROUP NAME HERE</em></h4>
+<h4 class="author"><em>Jenny Smetzer &amp; Albert Y. Kim</em></h4>
 <h4 class="date"><em>Last updated on 2019-02-11</em></h4>
 
 </div>
 
 
-<pre class="r"><code># This sets the options for the output of each code chunk in the resulting 
+<pre class="r"><code># This sets the options for the output of each code chunk in the resulting
 # .html report:
 knitr::opts_chunk$set(
   echo = TRUE, # Do not show code in each code chunk
@@ -1533,18 +1533,23 @@ set.seed(76)</code></pre>
 <div id="research-question" class="section level2">
 <h2>Research question</h2>
 <p><em>What is your research question?</em></p>
+<p>Overall, we are hoping to better understand how and if school conditions influence student performance. Our question specifically is whether percentage of economically disadvantaged students and school size predict the average math SAT score in Massachusetts high schools.</p>
 </div>
 <div id="description-of-data" class="section level2">
 <h2>Description of data</h2>
 <p><em>Please give a very short description of the data set along with it’s original source.</em></p>
+<p>We have data from all schools in Massachusetts from 2017. The data set contains SAT scores, and some information about school demographics. While the data was downloaded from Kaggle <a href="https://www.kaggle.com/ndalziel/massachusetts-public-schools-data">here</a>, the original source of the data are Massachusetts Department of Education <a href="http://profiles.doe.mass.edu/state_report/">reports</a>.</p>
 </div>
 <div id="load-data-into-r" class="section level2">
 <h2>Load data into R</h2>
 <p><em>Include the code to load your data here. If your data is not confidential nor is it private in nature, consider publishing it as a <code>.csv</code> file on Google Sheets as in the code chunk below; instructions on how to do this are in Steps 1-6 <a href="https://twitter.com/rudeboybert/status/1055821846539591680">here</a>. If the data shouldn’t be published online, then please submit the spreadsheet file on Moodle.</em></p>
+<pre class="r"><code>ma_schools &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vSrWSNyNqRVA950sdYa1QazAT-l0T7dl6pE5Ewvt7LkSm9LXmeVNbCbqEcrbygFmFyK4B6VQQGebuk9/pub?gid=1469057204&amp;single=true&amp;output=csv&quot;)</code></pre>
 </div>
 <div id="clean-variable-names" class="section level2">
 <h2>Clean variable names</h2>
 <p><em>The <code>clean_names()</code> function from the <code>janitor</code> package will clean your variable names, making them easier to work with.</em></p>
+<pre class="r"><code>ma_schools &lt;- ma_schools %&gt;% 
+  clean_names()</code></pre>
 <hr />
 </div>
 </div>
@@ -1553,18 +1558,29 @@ set.seed(76)</code></pre>
 <div id="identification-variable" class="section level2">
 <h2>Identification variable</h2>
 <p><em>What is your identification (ID) variable (if you have one)?</em></p>
+<p>Our identification variable is <code>school_name</code>; it allows us to uniquely identify each school.</p>
 </div>
 <div id="outcome-variable" class="section level2">
 <h2>Outcome variable</h2>
 <p><em>What is your outcome variable <span class="math inline">\(y\)</span>? What are its units of measurement?</em></p>
+<p>The outcome variable is called <code>average_sat_math</code>: the average Math SAT score for a school measured in points. We did not have data on overall SAT scores for each school, so we decided to focus solely on the math SAT score in order to make this report more concise.</p>
 </div>
 <div id="numerical-explantory-variable" class="section level2">
 <h2>Numerical explantory variable</h2>
 <p><em>What is your numeric explanatory variable? What are its units of measurement?</em></p>
+<p>The numerical explantory variable is called <code>percent_economically_disadvantaged</code> and its unit of measurement are percentage points between 0-100. It represents the percentage of students in a school that are considered “economically disadvantaged”.</p>
 </div>
 <div id="categorical-explantory-variable" class="section level2">
 <h2>Categorical explantory variable</h2>
 <p><em>What is your categorical explanatory variable? Does it have between 3 and 5 levels. Please list the different levels.</em></p>
+<p>The categorical explantory variable is called <code>size</code> and it has three levels: <code>small</code>, <code>medium</code>, and <code>large</code>. We constructed this variable by cutting the numeric variable <code>total_enrollment</code> into <code>n=3</code> roughly equally sized parts so that schools with 0-341 students were called <code>small</code>, schools with 342-541 students were classified as <code>medium</code> and those with &gt; 541 students were <code>large</code>.</p>
+<pre class="r"><code>ma_schools &lt;- ma_schools %&gt;% 
+  mutate(
+    school_size = cut_number(total_enrollment, n = 3),
+    size = recode_factor(
+      school_size, &quot;[0,341]&quot; = &quot;Small&quot;, &quot;(341,541]&quot; = &quot;Medium&quot;, &quot;(541,4.26e+03]&quot; = &quot;Large&quot;
+    )
+  )</code></pre>
 <hr />
 </div>
 </div>
@@ -1573,10 +1589,35 @@ set.seed(76)</code></pre>
 <div id="observational-units" class="section level2">
 <h2>Observational units</h2>
 <p><em>What is the observational unit of your data? In other words, what does each row in your data represent?</em></p>
+<p>Each row/case in our data set will be a high school in Massachusetts (see below):</p>
 </div>
 <div id="sample-size" class="section level2">
 <h2>Sample size</h2>
 <p><em>How many rows/cases are in the data i.e. what is the sample size? Is the sample size at least 50?</em></p>
+<p>There are 1861 rows in the original data set. However, we are limiting our analysis to only the 390 high schools (where 11th and 12th grade enrollment is greater than 0) as younger grades do not take the SAT.</p>
+<pre class="r"><code>ma_schools &lt;- ma_schools %&gt;% 
+  filter(x11_enrollment &gt; 0 &amp; x12_enrollment &gt; 0)</code></pre>
+<p>There also appear to be 58 <code>NA</code> missing values for <code>average_sat_math</code>:</p>
+<pre class="r"><code>ma_schools %&gt;% 
+  mutate(is_missing = is.na(average_sat_math)) %&gt;% 
+  summarize(total_missing = sum(is_missing))</code></pre>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="right">total_missing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">58</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>We will drop these rows while being sure to report this fact in the next step of the project, as this may have implications on our interpretation of the results. So the final sample size will be 332.</p>
+<pre class="r"><code>ma_schools &lt;- ma_schools %&gt;% 
+  filter(!is.na(average_sat_math))</code></pre>
 <hr />
 </div>
 </div>
@@ -1592,10 +1633,58 @@ set.seed(76)</code></pre>
 <li>The categorical explanatory variable</li>
 <li>Optional: any other variable you find interesting</li>
 </ol>
+<pre class="r"><code>ma_schools &lt;- ma_schools %&gt;% 
+  select(school_name, average_sat_math, percent_economically_disadvantaged, size)</code></pre>
 </div>
 <div id="preview-data" class="section level2">
 <h2>Preview data</h2>
 <p><em>Display a random sample of 5 rows of your data frame. You’ll get the same 5 rows everytime you knit this document and hence replicable results because we set the seed value of the random number generator in the first code chunk above.</em></p>
+<pre class="r"><code>ma_schools %&gt;% 
+  sample_n(5)</code></pre>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">school_name</th>
+<th align="right">average_sat_math</th>
+<th align="right">percent_economically_disadvantaged</th>
+<th align="left">size</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Newton South High</td>
+<td align="right">620</td>
+<td align="right">8.8</td>
+<td align="left">Large</td>
+</tr>
+<tr class="even">
+<td align="left">Quincy High</td>
+<td align="right">502</td>
+<td align="right">34.7</td>
+<td align="left">Large</td>
+</tr>
+<tr class="odd">
+<td align="left">Hopedale Jr Sr High</td>
+<td align="right">535</td>
+<td align="right">9.0</td>
+<td align="left">Medium</td>
+</tr>
+<tr class="even">
+<td align="left">Madison Park High</td>
+<td align="right">358</td>
+<td align="right">68.1</td>
+<td align="left">Large</td>
+</tr>
+<tr class="odd">
+<td align="left">Center For Technical Education Innovation</td>
+<td align="right">555</td>
+<td align="right">36.5</td>
+<td align="left">Large</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 
