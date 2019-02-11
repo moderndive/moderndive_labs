@@ -1,6 +1,6 @@
 
 ---
-title: "SDS/MTH 220 Project Data Proposal"
+title: "SDS/MTH 220 Project Data Proposal Example"
 author: "Jenny Smetzer & Albert Y. Kim"
 date: "Last updated on `r Sys.Date()`"
 output:
@@ -15,16 +15,6 @@ output:
 ---
 
 ```{r, message=FALSE}
-# This sets the options for the output of each code chunk in the resulting
-# .html report:
-knitr::opts_chunk$set(
-  echo = TRUE, # Do not show code in each code chunk
-  message = FALSE, # Hide all messages
-  warning = FALSE, # Hide all warnings
-  fig.width = 16/2, # Set the widths of all figures/visualizations
-  fig.height = 9/2 # Set the height of all figures/visualizations
-)
-
 # Load all packages here:
 library(readr)
 library(dplyr)
@@ -36,7 +26,9 @@ library(janitor)
 set.seed(76)
 ```
 
+# Please note
 
+**Your data proposal may not follow the exact same steps in the example below. Jenny and Albert are merely providing one example to give you an overall sense of where you are heading; the details may change from project to project.**
 
 # Big-picture
 
@@ -56,18 +48,28 @@ We have data from all schools in Massachusetts from 2017. The data set contains 
 
 _Include the code to load your data here. If your data is not confidential nor is it private in nature, consider publishing it as a `.csv` file on Google Sheets as in the code chunk below; instructions on how to do this are in Steps 1-6 [here](https://twitter.com/rudeboybert/status/1055821846539591680). If the data shouldn't be published online, then please submit the spreadsheet file on Moodle._
 
-```{r}
+```{r, message=FALSE}
 ma_schools <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSrWSNyNqRVA950sdYa1QazAT-l0T7dl6pE5Ewvt7LkSm9LXmeVNbCbqEcrbygFmFyK4B6VQQGebuk9/pub?gid=1469057204&single=true&output=csv")
 ```
 
 
 ## Clean variable names
 
-_The `clean_names()` function from the `janitor` package will clean your variable names, making them easier to work with._
+_Piping your data frame into the `clean_names()` function from the `janitor` package will clean your variable names, making them easier to work with._
 
 ```{r}
 ma_schools <- ma_schools %>% 
   clean_names()
+```
+
+
+## Explore your data
+
+_Be sure to explore your data. Note that `eval=FALSE` is set so that R Markdown doesn't "evaluate" this code chunk, i.e. it will ignore it in the ultimate `.html` report. You should run this code on your own, but not in the ultimate `.html` report._
+
+```{r, eval = FALSE}
+glimpse(ma_schools)
+View(ma_schools)
 ```
 
 
@@ -100,9 +102,13 @@ The numerical explantory variable is called `percent_economically_disadvantaged`
 
 _What is your categorical explanatory variable? Does it have between 3 and 5 levels. Please list the different levels._
 
-The categorical explantory variable is called `size` and it has three levels: `small`, `medium`, and `large`. We constructed this variable by cutting the numeric variable `total_enrollment` into `n=3` roughly equally sized parts so that schools with 0-341 students were called `small`, schools with 342-541 students were classified as `medium` and those with > 541 students were `large`. 
+Since we didn't feel any of the existing categorical variables in `ma_schools` were appropriate for our analysis, we hope to create a new categorical explantory variable called `size`, which will be based on the numerical variable `total_enrollment`. We'll divide this numerical variable into three equally sized groups, and hence our levels will be: `small`, `medium`, and `large`. We will do this in the next step of the project once we are more experienced with data wrangling.
 
-```{r}
+<!--
+We constructed this variable by cutting the numeric variable `total_enrollment` into `n=3` roughly equally sized parts so that schools with 0-341 students were called `small`, schools with 342-541 students were classified as `medium` and those with > 541 students were `large`. 
+-->
+
+```{r, eval=FALSE, echo=FALSE}
 ma_schools <- ma_schools %>% 
   mutate(
     school_size = cut_number(total_enrollment, n = 3),
@@ -129,16 +135,17 @@ Each row/case in our data set will be a high school in Massachusetts (see below)
 
 _How many rows/cases are in the data i.e. what is the sample size? Is the sample size at least 50?_
 
-There are 1861 rows in the original data set. However, we are limiting our analysis to only the 390 high schools (where 11th and 12th grade enrollment is greater than 0) as younger grades do not take the SAT. 
+For now there are 1861 rows in our original data set `ma_schools`. However, eventually we would like to limit our analysis to only high schools as younger grades do not take the SAT. We will do this in the next step of the project once we are more experienced with data wrangling.
 
-```{r}
+<!--
+```{r, eval=FALSE, echo=FALSE}
 ma_schools <- ma_schools %>% 
   filter(x11_enrollment > 0 & x12_enrollment > 0)
 ```
 
 There also appear to be 58 `NA` missing values for `average_sat_math`:
 
-```{r}
+```{r, eval=FALSE, echo=FALSE}
 ma_schools %>% 
   mutate(is_missing = is.na(average_sat_math)) %>% 
   summarize(total_missing = sum(is_missing))
@@ -147,11 +154,11 @@ ma_schools %>%
 We will drop these rows while being sure to report this fact in the next step of the project, as this may have implications on our interpretation of the results. So the final sample size will be 332. 
 
 
-```{r}
+```{r, eval=FALSE, echo=FALSE}
 ma_schools <- ma_schools %>% 
   filter(!is.na(average_sat_math))
 ```
-
+-->
 
 
 ***
@@ -163,23 +170,23 @@ ma_schools <- ma_schools %>%
 
 _`select()` the following variables and drop all others:_
 
-1. The identification variable
-1. The outcome variable $y$
-1. The numerical explanatory variable
-1. The categorical explanatory variable
-1. Optional: any other variable you find interesting
+1. _The identification variable_
+1. _The outcome variable $y$_
+1. _The numerical explanatory variable_
+1. _The categorical explanatory variable_
+1. _Optional: any other variable you find interesting_
+
+Recall that we didn't find a categorical variable to our liking in the original `ma_schools` data. So eventually we'll create a categorical explanatory variable `school_size` with three levels: `small`, `medium`, `large` based on the values of `total_enrollment`. We will do this in the next step of the project once we are more experienced with data wrangling.
 
 ```{r}
 ma_schools <- ma_schools %>% 
-  select(school_name, average_sat_math, percent_economically_disadvantaged, size)
+  select(school_name, average_sat_math, percent_economically_disadvantaged, total_enrollment)
 ```
 
 
 ## Preview data
 
-_Display a random sample of 5 rows of your data frame. You'll get the same 5
-rows everytime you knit this document and hence replicable results because we
-set the seed value of the random number generator in the first code chunk above._
+_Display a random sample of 5 rows of your data frame by piping it into the `sample_n(5)` function from the `dplyr` package . You'll get the same 5 rows everytime you knit this document and hence replicable results because we set the seed value of the random number generator in the first code chunk above._
 
 ```{r}
 ma_schools %>% 

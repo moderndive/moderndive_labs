@@ -14,22 +14,7 @@ output:
       collapsed: no
 ---
 
-<<<<<<< HEAD
-```{r, include=FALSE}
-# This sets the options for the output of each code chunk in the resulting
-=======
 ```{r, message=FALSE}
-# This sets the options for the output of each code chunk in the resulting 
->>>>>>> 250594090550ca5347d5b59c689536b0ba644a13
-# .html report:
-knitr::opts_chunk$set(
-  echo = TRUE, # Do not show code in each code chunk
-  message = FALSE, # Hide all messages
-  warning = FALSE, # Hide all warnings
-  fig.width = 16/2, # Set the widths of all figures/visualizations
-  fig.height = 9/2 # Set the height of all figures/visualizations
-)
-
 # Load all packages here:
 library(readr)
 library(dplyr)
@@ -42,13 +27,11 @@ set.seed(76)
 ```
 
 
-
 # Big-picture
 
 ## Research question
 
 _What is your research question?_
-
 
 
 ## Description of data
@@ -60,17 +43,27 @@ _Please give a very short description of the data set along with it's original s
 
 _Include the code to load your data here. If your data is not confidential nor is it private in nature, consider publishing it as a `.csv` file on Google Sheets as in the code chunk below; instructions on how to do this are in Steps 1-6 [here](https://twitter.com/rudeboybert/status/1055821846539591680). If the data shouldn't be published online, then please submit the spreadsheet file on Moodle._
 
-```{r}
+```{r, message=FALSE}
 
 ```
 
 
 ## Clean variable names
 
-_The `clean_names()` function from the `janitor` package will clean your variable names, making them easier to work with._
+_Piping your data frame into the `clean_names()` function from the `janitor` package will clean your variable names, making them easier to work with._
 
 ```{r}
 
+```
+
+
+## Explore your data
+
+_Be sure to explore your data. Note that `eval=FALSE` is set so that R Markdown doesn't "evaluate" this code chunk, i.e. it will ignore it in the ultimate `.html` report. You should run this code on your own, but not in the ultimate `.html` report._
+
+```{r, eval = FALSE}
+glimpse()
+View()
 ```
 
 
@@ -91,20 +84,14 @@ _What is your identification (ID) variable (if you have one)?_
 _What is your outcome variable $y$? What are its units of measurement?_
 
 
-
 ## Numerical explantory variable
 
 _What is your numeric explanatory variable? What are its units of measurement?_
 
 
-
 ## Categorical explantory variable
 
 _What is your categorical explanatory variable? Does it have between 3 and 5 levels. Please list the different levels._
-
-```{r}
-
-```
 
 
 
@@ -123,12 +110,6 @@ _What is the observational unit of your data? In other words, what does each row
 _How many rows/cases are in the data i.e. what is the sample size? Is the sample size at least 50?_
 
 
-```{r}
-
-```
-
-
-
 
 ***
 
@@ -139,11 +120,12 @@ _How many rows/cases are in the data i.e. what is the sample size? Is the sample
 
 _`select()` the following variables and drop all others:_
 
-1. The identification variable
-1. The outcome variable $y$
-1. The numerical explanatory variable
-1. The categorical explanatory variable
-1. Optional: any other variable you find interesting
+1. _The identification variable_
+1. _The outcome variable $y$_
+1. _The numerical explanatory variable_
+1. _The categorical explanatory variable_
+1. _Optional: any other variable you find interesting_
+
 
 ```{r}
 
@@ -152,9 +134,7 @@ _`select()` the following variables and drop all others:_
 
 ## Preview data
 
-_Display a random sample of 5 rows of your data frame. You'll get the same 5
-rows everytime you knit this document and hence replicable results because we
-set the seed value of the random number generator in the first code chunk above._
+_Display a random sample of 5 rows of your data frame by piping it into the `sample_n(5)` function from the `dplyr` package . You'll get the same 5 rows everytime you knit this document and hence replicable results because we set the seed value of the random number generator in the first code chunk above._
 
 ```{r}
 
