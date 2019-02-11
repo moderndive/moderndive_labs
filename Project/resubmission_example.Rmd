@@ -90,7 +90,7 @@ high_schools_data <- ma_schools_categ %>%
 # gather() function from the tidyr pacakge. See moderndive chapter 4 for more 
 # details. We gathered the three SAT test columns into rows, under the column 
 # name "sat_type" and "score"
-high_schools_data_sat <-gather(high_schools_data, "sat_type", "score", 3:5)%>%
+high_schools_data_sat <- gather(high_schools_data, "sat_type", "score", 3:5) %>%
   filter(sat_type == "average_sat_math")
 
 # Here is the final, cleaned, tidy data set with the ID variable, 
