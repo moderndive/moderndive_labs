@@ -20,3 +20,14 @@
     + Whenever refering to a `function` I like to add `()` to emphasize this. Ex: `get_regression_table()`
 * Q11:
     + I'm not sure what you are expecting from the students to use here. `get_regression_points(newdata = something)` I think it might be easier for them to use a math formula. 
+    
+# Jenny's response
+I specifically and intentionally removed the state names and called these voting areas because students were perplexed about how data from all 50 states was a "sample" and not a "census". 
+
+Q1- Not sure what you want/are looking for here... (?) please add what you want before this needs to be posted on Friday. 
+
+Q7- forgot to take this out- thanks
+
+RE Q 11...if they use the `get_regression_points()` function, one of the first few rows has an observed value of 50%...they can get all the info thus from that function. Just wanted them to see the utter *power* of the function. I have removed the hint. 
+
+Made all the other changes. 

@@ -26,9 +26,9 @@ knitr::opts_chunk$set(
 
 ## Background 
 
-For this problem set you will first run through an example of a simple linear regression, answering a few questions on the way. Then you will work through a regression analysis independently. If you want to see the instructions...remember you can knit this file...and you can read through all the instructions. You can do your work in this `.Rmd` file....simply insert your answers below each Question, knit your final copy, and turn in the `.html` file.
+For this problem set you will first run through an example of a simple linear regression, answering a few questions on the way. Then you will work through a regression analysis independently. Knit this file...and you can read through all the instructions. You can do your work in this `.Rmd` file....simply insert your answers below each Question, knit your final copy, and turn in the `.html` file.
 
-We will look at some demographic data recorded for a random sampling of 48 voting regions in the different US states just after the 2016 presidential election. We will investigate what variables within those regions might be tied to the percentage of US voters that supported Donald Trump, and in turn, which variables might be useful to predict Trump support in other regions (i.e. to a wider US population). 
+We will look at some demographic data from the `fivethirtyeight` package recorded for 48 voting areas in the US states just after the 2016 presidential election. We will investigate what variables within those regions might be tied to the percentage of US voters that supported Donald Trump, and in turn, which variables might be useful to predict Trump support in other regions (i.e. to a wider US population). 
 
 ***
 
@@ -244,9 +244,8 @@ Do you expect the correlation coefficient (for `non_white` and `trump_support`) 
 
 Run a linear regression using `non_white` as the **explanatory** variable, and `trump_support` as the **outcome** variable. Interpret the Intercept and slope estimates. 
 
-```{r include = F}
-wh_mod <- lm(trump_support ~ non_white, data = trump)
-get_regression_points(wh_mod)
+```{r}
+
 ```
 
 **Answer:** 
@@ -270,7 +269,7 @@ Based on the evidence you have so far (scatterplots and correlation coefficients
 
 # QUESTION 11
 
-If Representative Ocasio-Cortez saw the regression line and not the actual data, what would her prediction of Trump support be for a region with 50% of people that identify as non-white? Would her prediction be an overestimate or an underestimate (compared to the observed data), and by how much? In other words, what is the residual for this prediction? **Hint:** use the `get_regression_points()` function!
+If Representative Ocasio-Cortez saw the regression line and not the actual data, what would her prediction of Trump support be for a region with 50% of people that identify as non-white? Would her prediction be an overestimate or an underestimate (compared to the observed data), and by how much? In other words, what is the residual for this prediction? 
 
 ```{r}
 

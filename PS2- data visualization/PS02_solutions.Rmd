@@ -138,7 +138,7 @@ ggplot(data = nc, aes(x = mature, y = gained)) +
 ## Exercise 10
 Make a boxplot of pregnancy duration by smoking `habit`. Is the duration of pregnancy more **variable** for smokers or non-smokers? (i.e. which group has the greater spread for the variable `weeks`?). (code and text to answer)
 
-**answer: pregnancy duration is more variable for nonsmokers**
+**answer: based on the RANGE, pregnancy duration is more variable for nonsmokers...based on the IQR pregnancy duration is more variable for smokers**
 
 ```{r fig.height=3, fig.width=5, warning = F}
 ggplot(data = nc, aes(x = habit, y = weeks)) + 

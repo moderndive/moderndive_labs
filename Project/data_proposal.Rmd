@@ -15,7 +15,7 @@ output:
 ---
 
 ```{r, include=FALSE}
-# This sets the options for the output of each code chunk is the resulting
+# This sets the options for the output of each code chunk in the resulting
 # .html report:
 knitr::opts_chunk$set(
   echo = TRUE, # Do not show code in each code chunk

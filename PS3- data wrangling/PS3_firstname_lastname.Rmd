@@ -1,16 +1,42 @@
 
 ---
-title: "Problem Set 3: Data Wrangling Solutions"
+title: "Problem Set 3: Data Wrangling"
 author: "WRITE YOUR NAME HERE"
 date: "WRITE DATE HERE"
 output:
   html_document:
     theme: lumen
-    toc: yes
-    toc_float: yes
     df_print: kable
     
 ---
+
+![](http://www.tworvgypsies.us/!USA-2012-trip-5/30-Amarillo_Texas/tx-sign.jpg)
+
+# HOW TO USE THIS RMD FILE
+For the rest of the semester you will be given a `.Rmd` file like this to type your Problem set answers into. Please first be sure to put/save this file into your `introstatsR` folder so you can find it. 
+
+Take a moment to knit the file, and you will see all the instructions for the problem set in the resulting `html` file. 
+
+> You can type your answers right into this `.Rmd` document, knit the final copy, and turn in the **knitted `.html` file** as the answers to the problem sets. 
+
+Please be sure to type your name above where it says `WRITE YOUR NAME HERE` and fill in the date too. 
+
+<br> 
+
+***
+
+In this problem set we will practice some of the key data manipulation tasks for describing, summarizing, and working with data. We will specifically review the following functions from the `dplyr` package: 
+
+-  `select`
+-  `mutate`
+-  `summarize`
+-  `arrange`
+-  `filter`
+-  `group_by`
+-  `%>%`
+
+In addition we will review how to save objects using the `<-` assignment operator. 
+
 
 ### R Packages
 Run the following to load the necessary packages for this problem set:
@@ -21,28 +47,29 @@ library(dplyr)
 
 ### The data
 Run the following to load and take a `glimpse` of the data:
-```{r eval = F}
+```{r }
 data(txhousing)
 glimpse(txhousing)
 ```
 
 These data are about housing in Texas. Each row is monthly data for a given city in Texas in a given year. There are multiple years of data for each city. 
 
-## Question 1
-Take a look at the data in the data viewer. You can accomplish this two different ways: A) click on the name of the data in the Environment pane, or b) type `View(txhousing)` in the **console**. What is the last city listed in the data set (in row 8602)?
+# Question 1
+Take a look at the data in the data viewer. You can accomplish this by clicking on the name of the data in the Environment pane. What is the last city listed in the data set (in row 8602)?
 
 **Answer:**
 
-## Question 2
+# Question 2
 Take a look at the variable descriptions by typing ?txhousing into the **console**. What is the `listings` variable in this data set?
 
 **Answer:**
 
 ***
-# DATA WRANGLING REVIEW
+## DATA WRANGLING REVIEW
 
 ## select
 Sometimes we want to pull out or extract just one or two columns of data. The following code will extract only the column in the data set for the variables `sales` and `volume`. 
+
 ```{r eval = F}
 txhousing %>% select(sales, volume)
 ```
@@ -97,7 +124,7 @@ One of the first tasks in data analysis is often to get descriptive statistics t
 
 For instance, the code below uses the `austin_12` data set made earlier to calculate the mean monthly number of `sales` in Austin in 2012. 
 
-```{r eval = F}
+```{r }
 austin_12 %>% summarize(x_bar_sales = mean(sales))
 ```
 This code tells R to calculate the `mean` of the variable `sales`, and to save the results in a variable called `x_bar_sales`. 
@@ -137,46 +164,46 @@ aust_ab %>% group_by(city) %>%
 From the results we can see that there were an average of 150 sales per month in Abilene, and 1996 in Austin. 
 
 We can give R multiple variables to group by. For instance, this code gives us the mean sales for each month in each city, averaged across all the years. So for instance the mean number of sales in January, in Abilene was 96 homes. 
-```{r eval = F}
+```{r }
 aust_ab %>% group_by(city, month) %>% 
   summarize(x_bar_sales = mean(sales))
 ```
 
 ***
-# Independent practice 
+## Independent practice 
 
 ## Basic syntax
 This first set of questions will help you practice basic syntax. All you need to include is a Question header, and code for each. 
 
-## Question 3
+# Question 3
 Write a code chunk to remove the inventory variable. Save the results in a data frame called `txhousing`. Confirm in the data viewer that the variable has been removed. 
 
 ```{r }
 
 ```
 
-## Question 4
+# Question 4
 Make a data set called `dallas_sub` that includes data only from the city of Dallas in 2012 & 2013. 
 
 ```{r }
 
 ```
 
-## Question 5
+# Question 5
 Add a column **to the `dallas_sub` data set** called `prct_sold` that calculates the percentage of `listings` that were `sold` (`sales/listings * 1000`). Be sure to **save** the results also as a data frame called `dallas_sub`. 
 
 ```{r }
 
 ```
 
-## Question 6
+# Question 6
 Calculate the **average** percentage of listings that were sold in Dallas **in each month of the year** based on your `dallas_sub` data set. Save the results of the calculation in an data frame called `dallas_summary`. 
 
 ```{r }
 
 ```
 
-## Question 7
+# Question 7
 Arrange the `dallas_summary` in `desc`ending order based on the average percentage of listings that were sold in Dallas in 2012, so you can see **which month** had the greatest percentage of houses sold in Dallas on average from 2012-2013.  You do not need to save the results. 
 
 ```{r }
@@ -188,7 +215,7 @@ Arrange the `dallas_summary` in `desc`ending order based on the average percenta
 
 Please answer the following questions with text and/or code where appropriate. You may have to use multiple `dplyr` functions to answer each question. Think through the steps of how to get to the answer you are trying to find. 
 
-## Question 8
+# Question 8
 Run the following code chunk. Study the code, and the output. Explain in your own words what this code chunk calculated. 
 ```{r eval = F}
 txhousing %>% 
@@ -202,7 +229,7 @@ txhousing %>%
 
 **Answer:** 
 
-## Question 9
+# Question 9
 In January of 2015, what city had the fewest houses listed for sale? (show code and text please)
 
 **Answer:**
@@ -211,7 +238,7 @@ In January of 2015, what city had the fewest houses listed for sale? (show code 
 
 ```
 
-## Question 10
+# Question 10
 In 2012, in which month were the most houses sold in Texas? (show code and text please)
 
 **Answer: **
@@ -220,11 +247,18 @@ In 2012, in which month were the most houses sold in Texas? (show code and text 
 
 ```
 
-## Question 11
+# Question 11
 Generate a single table that shows the total number of houses sold in **Austin** in **2000 and 2001** (total over the entire period), & the total number of houses sold in **Dallas** in **2000 and 2001** (total over the entire period). This calculation requires a number of steps, so it might help you to first write out on paper the different steps you will need to take. That will help you set out a "blueprint" for tackling the problem. **Hint**: recall the `sum()` function can add values. 
 
 ```{r }
 
 ```
 
+***
+[//]: (students- please do not delete anything below this line!) 
 
+<style type="text/css">
+h1 { /* Header 1 */
+  color: Blue;
+}}
+</style>
