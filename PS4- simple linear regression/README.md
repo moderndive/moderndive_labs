@@ -1,4 +1,4 @@
-## Bert's Comments/Edits:
+# Bert's Comments/Edits:
 
 * Side-by-side comparison of edits can be seen [here](https://github.com/rudeboybert/moderndive_labs/pull/4/files?utf8=%E2%9C%93&diff=split&w=1)
 * Background:
