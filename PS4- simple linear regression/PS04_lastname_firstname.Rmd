@@ -131,7 +131,7 @@ get_regression_table(poverty_mod)
 
 We can interpret the `intercept` and `poverty` slope like so:
 
-* When the poverty level is 0, what the predicted average Trump support is 30.81%
+* When the poverty level is 0, the predicted average Trump support is 30.81%
 * For every increase in poverty level of 1 percentage point, there is an **associated increase** in Trump support of 2.059 percentage points. 
 
 Revisiting the plot from earlier, we can see that the best-fit line hits the y axis at 30.8064 (if we extend it). This is the intercept...the y value at which poverty = 0 (note, a value that is sadly not close to the range of values for "percentage of white households in poverty"). 
@@ -269,13 +269,19 @@ Based on the evidence you have so far (scatterplots and correlation coefficients
 
 # QUESTION 11
 
-If Representative Ocasio-Cortez saw the regression line and not the actual data, what would her prediction of Trump support be for a region with 50% of people that identify as non-white? Would her prediction be an overestimate or an underestimate (compared to the observed data), and by how much? In other words, what is the residual for this prediction? 
+If Representative Ocasio-Cortez saw the regression line and not the actual data: 
+
+**A.** What would her prediction of Trump support be for a region in whic 61% of the people identify as non-white? 
+
+**B.** Would her prediction be an overestimate or an underestimate (compared to the observed data), and by how much? 
+
+**C.** In other words, what is the residual for this prediction? 
 
 ```{r}
 
 ```
 
-**Answer:** 
+**Answers:** 
 
 
 ***

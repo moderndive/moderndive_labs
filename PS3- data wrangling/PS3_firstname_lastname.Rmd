@@ -6,7 +6,7 @@ date: "WRITE DATE HERE"
 output:
   html_document:
     theme: lumen
-    df_print: kable
+    df_print:  
     
 ---
 
@@ -204,7 +204,7 @@ Calculate the **average** percentage of listings that were sold in Dallas **in e
 ```
 
 # Question 7
-Arrange the `dallas_summary` in `desc`ending order based on the average percentage of listings that were sold in Dallas in 2012, so you can see **which month** had the greatest percentage of houses sold in Dallas on average from 2012-2013.  You do not need to save the results. 
+Arrange the `dallas_summary` data frame in `desc`ending order based on the **average** percentage of listings sold, so you can see **which month** had the greatest **average** percentage of listings sold.  You do not need to save the results.  You do not need to save the results. 
 
 ```{r }
 
@@ -230,7 +230,7 @@ txhousing %>%
 **Answer:** 
 
 # Question 9
-In January of 2015, what city had the fewest houses listed for sale? (show code and text please)
+In January of 2015, what city had the fewest houses listed for sale in all of Texas? (show code and text please)
 
 **Answer:**
 

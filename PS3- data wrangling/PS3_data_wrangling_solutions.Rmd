@@ -5,8 +5,6 @@ author: "Jenny"
 output:
   html_document:
     theme: lumen
-    toc: yes
-    toc_float: yes
     df_print: kable
     
 ---
@@ -163,7 +161,7 @@ dallas_sub <- txhousing %>% filter(city == "Dallas", year == 2012 | year == 2013
 ```
 
 ## Question 5
-Add a column **to the `dallas_sub` data set** called `prct_sold` that calculates the percentage of `listings` that were `sold` (`sales/listings * 1000`). Be sure to **save** the results also as a data frame called `dallas_sub`. 
+Add a column **to the `dallas_sub` data set** called `prct_sold` that calculates the percentage of `listings` that were `sold` (`sales/listings * 100`). Be sure to **save** the results also as a data frame called `dallas_sub`. 
 
 ```{r }
 dallas_sub <- dallas_sub %>% 
@@ -180,7 +178,7 @@ dallas_summary <- dallas_sub %>%
 ```
 
 ## Question 7
-Arrange the `dallas_summary` in `desc`ending order based on the average percentage of listings that were sold in Dallas in 2012, so you can see **which month** had the greatest percentage of houses sold in Dallas on average from 2012-2013.  You do not need to save the results. 
+Arrange the `dallas_summary` in `desc`ending order based on the average percentage of listings, so you can see **which month** had the greatest **average** percentage of listings sold.  You do not need to save the results. 
 
 ```{r }
 dallas_summary  %>% 
