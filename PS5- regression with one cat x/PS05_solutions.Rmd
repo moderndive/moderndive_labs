@@ -44,26 +44,28 @@ library(readr)
 
 Next load the data set, from where it is stored on the web: 
 ```{r}
-hate_crimes <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTluPzQ4ou81CtyFNiVuvmRUC5ZVj8YPUSrE6FxGtIp9J-8Eqdq7g9bWPI7u64vFDXJGldjJbqcT6oo/pub?gid=1616495486&single=true&output=csv")
+hate_crimes <- read_csv("http://bit.ly/2ItxYg3")
 ```
 
-Be sure to take a look at the data in the viewer, and take a glimpse at the data like so: 
+You can take a glimpse at the data like so: 
 
 ```{r eval = F}
 glimpse(hate_crimes)
 ```
 
+Be sure to **ALSO** take a look at the data in the viewer.
+
 <br> 
 
 Each case/row in these data is a state in the US. The response variable we will consider is `hate_crimes`, which is the number of hate crimes per 100k individuals in the 10 days after the 2016 US election as measured by the Southern Poverty Law Center (SPLC). 
 
-We have three categorical explanatory variables in this data set: 
+This week we will use three categorical explanatory variables in this data set: 
 
 * `trump_support`: level of Trump support in 2016 election (low, medium or high)
 
 * `unemployment`: level of unemployment in a state (low or high)
 
-* `median_house_inc`: median household income in the stat (low or high)
+* `median_house_inc`: median household income in the state (low or high)
 
 
 <br> 

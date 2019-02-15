@@ -271,7 +271,7 @@ Based on the evidence you have so far (scatterplots and correlation coefficients
 
 If Representative Ocasio-Cortez saw the regression line and not the actual data: 
 
-**A.** What would her prediction of Trump support be for a region in whic 61% of the people identify as non-white? 
+**A.** What would her prediction of Trump support be for a region in which 61% of the people identify as non-white? 
 
 **B.** Would her prediction be an overestimate or an underestimate (compared to the observed data), and by how much? 
 

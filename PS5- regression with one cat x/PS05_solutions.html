@@ -250,16 +250,17 @@ library(moderndive)
 library(fivethirtyeight)
 library(readr)</code></pre>
 <p>Next load the data set, from where it is stored on the web:</p>
-<pre class="r"><code>hate_crimes &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vTluPzQ4ou81CtyFNiVuvmRUC5ZVj8YPUSrE6FxGtIp9J-8Eqdq7g9bWPI7u64vFDXJGldjJbqcT6oo/pub?gid=1616495486&amp;single=true&amp;output=csv&quot;)</code></pre>
-<p>Be sure to take a look at the data in the viewer, and take a glimpse at the data like so:</p>
+<pre class="r"><code>hate_crimes &lt;- read_csv(&quot;http://bit.ly/2ItxYg3&quot;)</code></pre>
+<p>You can take a glimpse at the data like so:</p>
 <pre class="r"><code>glimpse(hate_crimes)</code></pre>
+<p>Be sure to <strong>ALSO</strong> take a look at the data in the viewer.</p>
 <p><br></p>
 <p>Each case/row in these data is a state in the US. The response variable we will consider is <code>hate_crimes</code>, which is the number of hate crimes per 100k individuals in the 10 days after the 2016 US election as measured by the Southern Poverty Law Center (SPLC).</p>
-<p>We have three categorical explanatory variables in this data set:</p>
+<p>This week we will use three categorical explanatory variables in this data set:</p>
 <ul>
 <li><p><code>trump_support</code>: level of Trump support in 2016 election (low, medium or high)</p></li>
 <li><p><code>unemployment</code>: level of unemployment in a state (low or high)</p></li>
-<li><p><code>median_house_inc</code>: median household income in the stat (low or high)</p></li>
+<li><p><code>median_house_inc</code>: median household income in the state (low or high)</p></li>
 </ul>
 <p><br></p>
 <hr />
@@ -402,64 +403,70 @@ get_regression_points(hate_mod)</code></pre>
 <tr class="header">
 <th align="left">state</th>
 <th align="left">median_house_inc</th>
-<th align="right">share_unemp_seas</th>
 <th align="right">share_pop_metro</th>
-<th align="right">share_pop_hs</th>
+<th align="right">hs</th>
 <th align="right">hate_crimes</th>
 <th align="left">trump_support</th>
 <th align="left">unemployment</th>
+<th align="left">urbanization</th>
+<th align="right">income</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left">District of Columbia</td>
 <td align="left">high</td>
-<td align="right">0.07</td>
 <td align="right">1.00</td>
-<td align="right">0.87</td>
+<td align="right">87</td>
 <td align="right">1.522</td>
 <td align="left">low</td>
 <td align="left">high</td>
+<td align="left">high</td>
+<td align="right">68277</td>
 </tr>
 <tr class="even">
 <td align="left">Oregon</td>
 <td align="left">high</td>
-<td align="right">0.06</td>
 <td align="right">0.87</td>
-<td align="right">0.89</td>
+<td align="right">89</td>
 <td align="right">0.833</td>
 <td align="left">low</td>
 <td align="left">high</td>
+<td align="left">high</td>
+<td align="right">58875</td>
 </tr>
 <tr class="odd">
 <td align="left">Washington</td>
 <td align="left">high</td>
-<td align="right">0.05</td>
 <td align="right">0.86</td>
-<td align="right">0.90</td>
+<td align="right">90</td>
 <td align="right">0.677</td>
 <td align="left">low</td>
 <td align="left">high</td>
+<td align="left">high</td>
+<td align="right">59068</td>
 </tr>
 <tr class="even">
 <td align="left">Massachusetts</td>
 <td align="left">high</td>
-<td align="right">0.05</td>
 <td align="right">0.97</td>
-<td align="right">0.89</td>
+<td align="right">89</td>
 <td align="right">0.631</td>
 <td align="left">low</td>
 <td align="left">low</td>
+<td align="left">high</td>
+<td align="right">63151</td>
 </tr>
 <tr class="odd">
 <td align="left">Minnesota</td>
 <td align="left">high</td>
-<td align="right">0.04</td>
 <td align="right">0.75</td>
-<td align="right">0.92</td>
+<td align="right">92</td>
 <td align="right">0.627</td>
 <td align="left">low</td>
 <td align="left">low</td>
+<td align="left">low</td>
+<td align="right">67244</td>
 </tr>
 </tbody>
 </table>
