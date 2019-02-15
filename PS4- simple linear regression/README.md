@@ -22,12 +22,17 @@
     + I'm not sure what you are expecting from the students to use here. `get_regression_points(newdata = something)` I think it might be easier for them to use a math formula. 
     
 # Jenny's response
-I specifically and intentionally removed the state names and called these voting areas because students were perplexed about how data from all 50 states was a "sample" and not a "census". 
 
-Q1- Not sure what you want/are looking for here... (?) please add what you want before this needs to be posted on Friday. 
-
-Q7- forgot to take this out- thanks
-
-RE Q 11...if they use the `get_regression_points()` function, one of the first few rows has an observed value of 50%...they can get all the info thus from that function. Just wanted them to see the utter *power* of the function. I have removed the hint. 
+* I specifically and intentionally removed the state names and called these voting areas because students were perplexed about how data from all 50 states was a "sample" and not a "census". 
+* Q1- Not sure what you want/are looking for here... (?) please add what you want before this needs to be posted on Friday. 
+* Q7- forgot to take this out- thanks
+* RE Q 11...if they use the `get_regression_points()` function, one of the first few rows has an observed value of 50%...they can get all the info thus from that function. Just wanted them to see the utter *power* of the function. I have removed the hint. 
 
 Made all the other changes. 
+
+# Albert's response
+
+* No prob about state names as we discussed this week; not a top priority
+* Q1: Probably easier if I do in that case. Added "While the points do scatter/vary around the blue regression line, of all possible lines we can draw in this point of clouds, the blue line is the "best-fitting" line in that in minimizes the sum of the squared residuals (see moderndive 6.3.3 for a fuller explanation)."
+* Q7: :)
+* Sounds good!
