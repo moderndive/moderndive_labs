@@ -177,7 +177,7 @@ Make a data set called `dallas_sub` that includes data only from the city of Dal
 
 
 ## Question 5
-Add a column **to the `dallas_sub` data set** called `prct_sold` that calculates the percentage of `listings` that were `sold` (`sales/listings * 1000`). Be sure to **save** the results also as a data frame called `dallas_sub`. 
+Add a column **to the `dallas_sub` data set** called `prct_sold` that calculates the percentage of `listings` that were `sold` (`sales/listings * 100`). Be sure to **save** the results also as a data frame called `dallas_sub`. 
 
 
 ## Question 6
