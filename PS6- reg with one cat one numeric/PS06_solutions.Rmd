@@ -1,0 +1,325 @@
+
+---
+title: "Problem Set 06"
+author: "WRITE YOUR NAME HERE"
+date: "WRITE DATE HERE"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+    df_print: kable
+---
+
+```{r, include=FALSE}
+# Do not edit this code block/chunk
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning = FALSE, fig.width = 16/2, fig.height = 9/2)
+```
+
+
+## Background {-}
+
+We will again use the hate crimes data we used in Problem Set 05. The FiveThirtyEight article article about those data are in the Jan 23, 2017  ["Higher Rates Of Hate Crimes Are Tied To Income
+Inequality"](https://fivethirtyeight.com/features/higher-rates-of-hate-crimes-are-tied-to-income-inequality/). This week, we will use these data  to run regression models with a single categorical predictor (explanatory) variable **and** a single numeric predictor (explanatory) variable. 
+
+Remember you can knit this file to see the instructions. You can type your answers again right into this file, knit the final draft with all your answers. Please submit the `html` file on Moodle. 
+
+## Setup
+
+First load the necessary packages 
+
+```{r message = F}
+library(ggplot2)
+library(dplyr)
+library(moderndive)
+library(readr)
+```
+
+Copy paste and run the following in a code chunk to 
+```{r}
+hate_crimes <- read_csv("http://bit.ly/2ItxYg3")
+```
+
+
+Next let's explore the `hate_crimes` data set using the `glimpse()` function from the `dplyr` package:
+```{r eval = F}
+glimpse(hate_crimes)
+```
+
+You should also take a look at the data in the **data viewer**.  
+
+<br> 
+
+Each case/row in these data is a state in the US. This week we will consider the response variable `income`, which is the numeric variable of median income of households in each state. 
+
+We will use the following categorical explanatory variables: 
+
+* `trump_support`: level of Trump support in 2016 election (low, medium or high)
+
+* `unemployment`: level of unemployment in a state (low or high)
+
+* `urbanization`: level of urbanization in a region ()
+
+
+And we will consider the following numerical explanatory variable: 
+
+* `share_pop_hs`: the percentage of adults 25 and older with a high school degree 
+
+*** 
+
+## Income, education and urbanization 
+
+Let's start by modeling the relationship between:
+
+* $y$: Median household income in 2016
+* $x_1$: numerical variable percent of adults 25 and older with a high-school degree, contained in the `hs` variable  
+* $x_2$: categorical variable level of urbanization in a state: `low`,  or `high`, as
+contained in the variable `urbanization`
+
+***
+
+# Question 1
+
+Create a scatterplot showing: 
+
+* Median household `income` on the $y$ axis
+* Percent of adults 25 or older with a high school degree on the $x$ axis
+* The points colored by the variable `urbanization`
+* A line of best fit (regression line) for each level of the variable `urbanization` (one for "low", one for "high")
+
+Please include axis labels and and title. 
+
+```{r}
+ggplot(data = hate_crimes, aes(y = income, x = hs, color = urbanization)) +
+  geom_point()+ 
+  geom_smooth(method = "lm", se = F) + 
+  labs(
+    x = "Percent of adults with high-school degree", 
+    y = "Median household income in USD $", 
+    title = "Education and income in states with differing levels of urbanization"
+  )
+```
+
+***
+
+# Question 2.A
+
+Do you think the relationship between `hs` and `income` is strong or weak, linear or non-linear?
+
+**Answer:** Fairly strong, linear relationship 
+
+# Question 2.B
+Does the slope look fairly similar for the two levels of urbanization?
+
+**Answer:** Yes
+
+# Question 2.B
+Which regression line (high `urbanization` or low `urbanization`) appears to have the larger intercept?
+
+**Answer:** high urbanization
+
+***
+
+# Question 3.A
+Create a data visualization comparing median household income at "low" and "high" levels of urbanization. Please include axis labels and and title. 
+
+```{r}
+ggplot(data = hate_crimes, aes(x = urbanization, y = income)) + 
+  geom_boxplot(fill = c("sienna", "darkgreen")) + 
+  labs(x = "Level of urbanization in a state", y = "Median household income in USD $", 
+       title = "Household income across an urbanization gradient in 2016")
+```
+
+***
+
+# Question 4
+
+Run a linear regression model that examines the relationship between household `income` (as response variable), and high-school education, and `urbanization` as explanatory variables. Generate the regression table using the `get_regression_table` function from the `moderndive` package. 
+
+```{r}
+med_income_model <- lm(income ~ hs + urbanization, data = hate_crimes)
+get_regression_table(med_income_model)
+```
+
+
+***
+
+# Question 5.A
+Is the intercept the same for the states with a "low" and "high" level of urbanization? Is the slope the same? (look at the data visualization above to help with this!) 
+
+**Answers:** Slope is the same, intercept is not. 
+
+# Question 5.B
+What is the slope for the regression line of the states with a "high" level of urbanization? What is the intercept?
+
+**Answers:** Slope is 1986.794 (rounded is OK), Intercept is -113725.193
+
+# Question 5.C
+What is the slope for the regression line of the states with a "low" level of urbanization? What is the intercept?
+
+**Answers:** Slope is 1986.794 (rounded is OK), Intercept is -119929 + -7333.326 = -127262.3
+
+```{r}
+-119929 + -7333.326
+```
+
+# Question 5.D
+Based on your regression table output (and the data visualizations), is median household income greater in states that have lower or higher levels of urbanization? By how much?
+
+**Answer:** Median household income is **$7333 greater** in states with high levels of urbanization 
+
+# Question 5.E
+For every increase in 1 percentage unit of high-school educated adults, what is the associated increase in the median household income of a state?
+
+**Answer:** The associated increase is the slope: $1986
+
+
+*** 
+
+# Question 6
+This is the regression equation for this model:
+
+$widehat_{income} = -113725 + 1986 \times hs + -7333 \times is\_urbanization_{low}$
+
+Solve the regression equation for a US state in which `urbanization` is "high"
+
+**Answer:**
+$widehat_{income} = -113725 + 1986 \times hs + -7333 \times 0$
+
+$widehat_{income} = -113725 + 1986 \times hs + -7333$
+
+***
+
+# Question 7
+
+What would you predict as the median household income for a state with a **high** level of urbanization, in which 85% of the share of adults have a high school degree?
+
+```{r}
+# urbanization high - if they round
+-113725 + (1986* 85) + (-7333 * 0)
+```
+
+
+```{r}
+# urbanization high - if they don't round
+-113725.193	 + (1986.794 * 85) + (-7333.326 * 0)
+```
+
+***
+
+# Question 8
+What would you predict as the median household income for a state with a **low** level of urbanization, in which 85% of the share of adults have a high school degree?
+
+
+```{r}
+# urbanization high - if they round
+-113725 + (1986* 85) + (-7333 * 1)
+```
+
+
+```{r}
+# urbanization high - if they don't round
+-113725.193	 + (1986.794 * 85) + (-7333.326 * 1)
+```
+
+***
+
+# Question 9
+What would you predict as the median household income for a state with a **low** level of urbanization, in which 30% of the share of adults have a high school degree?
+
+**Answer:** I wouldn't make that  prediction. The lowest percentage in our data set was ~ 70, so extrapolating like this would not be a good idea.
+
+***
+
+# Question 10
+What was the observed `income` value for Maine (ID2)? What was the prediction for Maine according to our model? What is the residual? Did our model over or underestimate the median income for this state? 
+
+**Answer:** 
+observed: 51710
+
+predicted: 57752.93
+
+this was an over prediction 
+
+the residual was -6042.926
+
+```{r eval = F}
+get_regression_points(med_income_model)
+```
+
+***
+
+## Indpendent analysis 
+
+![](https://ptes.org/wp-content/uploads/2017/11/water-vole-credit-Iain-Green-www.wildwonder.co_.uk-2_cropped.jpg){width=50%}
+
+<br> 
+
+You will now use the tools you have learned, and a new data set to solve a conservation problem.  
+
+Wildlife biologists are interested in managing/protecting habitats for a declining species of vole, but are not sure about what habitats it prefers. Two things that biologists can easily control with management is percent cover of vegetation, and where habitat improvements occur (i.e. is it important to create/protect habitat in moist or dry sites, etc). To help inform habitat management of this vole species, the researchers in this study counted the number of `voles` at 56 random study sites. At each site, they measured percent cover of  `veg`etation, and recorded whether a site had moist or dry `soil`. 
+
+The data can be read in like so
+
+```{r}
+vole_trapping <- read_csv("http://bit.ly/2IgDF0E")
+```
+
+The data contains the variables: 
+
+* `site` for the id of each random study site (each case or row is a survey/trapping site)
+* `voles` for the vole count at each site
+* `veg` for the percent cover of vegetation at each site
+* `soil` identifying a site as "moist" or "dry"
+
+```{r}
+ggplot(data = vole_trapping, aes(x = veg, y = voles, color = soil)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = F)
+```
+
+```{r}
+mod <- lm(voles ~ soil + veg, data = vole_trapping)
+get_regression_table(mod)
+```
+
+
+***
+
+# Question 11
+Would you recommend to a manager that they try to protect sites with high or low vegetation cover? Why?
+
+**Answer:** high vegetation cover...as veg cov goes up, # moles goes up
+
+***
+
+# Question 12 
+Dry sites are typically a lot less money to purchase and maintain for conservation organizations. Thus, if a conservation organization decides to purchase a few dry sites, roughly what percent cover of vegetation do they need to maintain on these sites (at a minimum) to support a population of about 30 voles at the site? 
+
+**Answer** Eyeballing it from the graph, ~ 55%
+
+***
+
+# Question 13
+The Nature Conservancy is looking at purchasing a site for this species (in the same study area) that has moist soil and 40% vegetation cover. **Using the regression equation** what would you predict as the possible vole population the site might be able to support?
+
+```{r}
+15.46 + (0.259 * 40) + (9.1 *1)
+```
+
+
+**Answer:** 34 or 35 critters
+
+
+***
+
+[//]: (students- please do not delete anything below this line!) 
+
+<style type="text/css">
+h1 { /* Header 1 */
+  color: Blue;
+}}
+</style>
+
