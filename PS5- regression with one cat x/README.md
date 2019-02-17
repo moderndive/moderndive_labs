@@ -14,3 +14,4 @@
     + Could you do the same for all other indicator functions and series of equations for the rest of PS?
 * Question 4: Perhaps instead of gerrymandering, we could suggest a more conservative explanation of "measuring at the unit level of the state is misleading as it ignores any rural vs urban differences within states"? I'm not sure how gerrymandering, which involves congresstional districting, comes into play here? Happy to chat more about this.
 * Question 6: I'm going to remove the "Trump is evil" title. While I don't disagree, I feel kind of uncomfortable making explicit political statements like this one in publicly facing documents. 
+* As always, the side-by-side comparison of the before/after my suggestions is [here](https://github.com/rudeboybert/moderndive_labs/pull/6/files?utf8=%E2%9C%93&diff=split&w=1)
