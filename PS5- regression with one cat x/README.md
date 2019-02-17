@@ -7,11 +7,11 @@
 * Formatting:
     + Could you always include a blank line after all `# section`, `## subsection`, and `### subsubsection` header lines?
     + Wrapping `***` with `<br>` seems to yield three stars in the html, and not a horizontal line. I've removed all surrounding `<br>`'s around `***`
+    + Equations: In Question 3E notice how:
+        + I changed the indicator function notation (for Trump support low and medium)? I made this match up with what's in moderndive so that students don't get confused.
+        + I changed your three separate equations to a single one with `begin{aligned}` to have three equations aligned by the equal sign.  
+        + Could you do the same for all other indicator functions and series of equations for the rest of PS?
 * Setup: Could you include the cutoffs that define the levels for each of the three categorical variables?
-* Question 3E: In regression equation notice how:
-    + I changed the indicator function notation (for Trump support low and medium)? I made this match up with what's in moderndive so that students don't get confused.
-    + I changed your three separate equations to a single one with `begin{aligned}` to have three equations aligned by the equal sign.  
-    + Could you do the same for all other indicator functions and series of equations for the rest of PS?
 * Question 4: Perhaps instead of gerrymandering, we could suggest a more conservative explanation of "measuring at the unit level of the state is misleading as it ignores any rural vs urban differences within states"? I'm not sure how gerrymandering, which involves congresstional districting, comes into play here? Happy to chat more about this.
 * Question 6: I'm going to remove the "Trump is evil" title. While I don't disagree, I feel kind of uncomfortable making explicit political statements like this one in publicly facing documents. 
 * As always, the side-by-side comparison of the before/after my suggestions is [here](https://github.com/rudeboybert/moderndive_labs/pull/6/files?utf8=%E2%9C%93&diff=split&w=1)
