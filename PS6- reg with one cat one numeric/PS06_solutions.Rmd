@@ -57,9 +57,7 @@ Each case/row in these data is a state in the US. This week we will consider the
 We will use the following categorical explanatory variables: 
 
 * `trump_support`: level of Trump support in 2016 election (low, medium or high)
-
 * `unemployment`: level of unemployment in a state (low or high)
-
 * `urbanization`: level of urbanization in a region ()
 
 
@@ -171,7 +169,7 @@ Based on your regression table output (and the data visualizations), is median h
 **Answer:** Median household income is **$7333 greater** in states with high levels of urbanization 
 
 # Question 5.E
-For every increase in 1 percentage unit of high-school educated adults, what is the associated increase in the median household income of a state?
+For every increase in 1 percentage point of high-school educated adults, what is the associated increase in the median household income of a state?
 
 **Answer:** The associated increase is the slope: $1986
 
@@ -229,7 +227,7 @@ What would you predict as the median household income for a state with a **low**
 # Question 9
 What would you predict as the median household income for a state with a **low** level of urbanization, in which 30% of the share of adults have a high school degree?
 
-**Answer:** I wouldn't make that  prediction. The lowest percentage in our data set was ~ 70, so extrapolating like this would not be a good idea.
+**Answer:** I wouldn't make that prediction. The lowest percentage in our data set was ~ 70, so extrapolating like this would not be a good idea.
 
 ***
 
@@ -251,7 +249,7 @@ get_regression_points(med_income_model)
 
 ***
 
-## Indpendent analysis 
+## Independent analysis 
 
 ![](https://ptes.org/wp-content/uploads/2017/11/water-vole-credit-Iain-Green-www.wildwonder.co_.uk-2_cropped.jpg){width=50%}
 
