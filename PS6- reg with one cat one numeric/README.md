@@ -6,3 +6,4 @@
     + Love it!!
     + Q10: Please add labels to plot
 * Overall: At first glance, this looks great! I don't imagine much changes to the overall content/structure. However, I'd like to only drill down on comments/edits after you've updated the formatting. I'll make a second pass over this after you've done so. 
+* The first side-by-side comparison of before/after of code can be found [here](https://github.com/rudeboybert/moderndive_labs/pull/7/files?utf8=%E2%9C%93&diff=split&w=1)
