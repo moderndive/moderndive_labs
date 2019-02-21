@@ -99,7 +99,7 @@ ggplot(data = trump, aes(y = trump_support, x = poverty))+
 
 We found a positive correlation coefficient. Is it reasonable for us to conclude that social policies that increase white poverty will **cause** an increase in Trump support? Explain why or why not? 
 
-**Answer:** No because this is not an experiment, this is an observational study. The levels of white poverty were not randomly assigned. 
+**Answer:** No- correlation does not necessarily imply causation.  
 
 ***
 

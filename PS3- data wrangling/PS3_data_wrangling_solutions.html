@@ -456,34 +456,8 @@ glimpse(txhousing)</code></pre>
 <div id="question-11" class="section level2">
 <h2>Question 11</h2>
 <p>Generate a single table that shows the total number of houses sold in Austin in 2000 and 2001 (total over the entire period), &amp; the total number of houses sold in Dallas in 2000 and 2001 (total over the entire period). This calculation requires a number of steps, so it might help to want to write out <strong>pseudocode</strong>, or steps that sets out a “blueprint” of your chain. <strong>Hint</strong>: recall the <code>sum()</code> function can add values.</p>
-<p><strong>note to grader: the c(“item”, “item”) the separate == inside the filter commands are both acceptable, and the filtering can also be done in one step!</strong></p>
 <pre class="r"><code>txhousing %&gt;% 
   filter(city == &quot;Austin&quot;| city == &quot;Dallas&quot;) %&gt;%
-  filter(year == c(2000:2001)) %&gt;%
-  group_by(city) %&gt;%
-  summarize(total_sales = sum(sales))</code></pre>
-<div class="kable-table">
-<table>
-<thead>
-<tr class="header">
-<th align="left">city</th>
-<th align="right">total_sales</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Austin</td>
-<td align="right">18444</td>
-</tr>
-<tr class="even">
-<td align="left">Dallas</td>
-<td align="right">46184</td>
-</tr>
-</tbody>
-</table>
-</div>
-<pre class="r"><code>txhousing %&gt;% 
-  filter(city == c(&quot;Austin&quot;, &quot;Dallas&quot;)) %&gt;%
   filter(year == 2000 | year == 2001) %&gt;%
   group_by(city) %&gt;%
   summarize(total_sales = sum(sales))</code></pre>
@@ -498,11 +472,11 @@ glimpse(txhousing)</code></pre>
 <tbody>
 <tr class="odd">
 <td align="left">Austin</td>
-<td align="right">18727</td>
+<td align="right">37013</td>
 </tr>
 <tr class="even">
 <td align="left">Dallas</td>
-<td align="right">45562</td>
+<td align="right">92438</td>
 </tr>
 </tbody>
 </table>
