@@ -247,7 +247,6 @@ div.tocify {
 <pre class="r"><code>library(ggplot2)
 library(dplyr)
 library(moderndive)
-library(fivethirtyeight)
 library(readr)</code></pre>
 <p>Next load the data set, from where it is stored on the web:</p>
 <pre class="r"><code>hate_crimes &lt;- read_csv(&quot;http://bit.ly/2ItxYg3&quot;)</code></pre>
@@ -418,21 +417,21 @@ group_by(trump_support) %&gt;%
 <h2>Hate crimes and household income</h2>
 </div>
 </div>
-<div id="question-9" class="section level1">
-<h1>Question 9</h1>
+<div id="question-9a" class="section level1">
+<h1>Question 9A</h1>
 <p>Now run a model that examines the relationship between <code>hate_crimes</code> and median household income in the state <code>median_house_inc</code>.</p>
 </div>
-<div id="question-9.a" class="section level1">
-<h1>Question 9.A</h1>
+<div id="question-9.b" class="section level1">
+<h1>Question 9.B</h1>
 <p>Were there more hate crimes in areas with high or low median household incomes? How large was the difference between states with “low” and “high” levels of household income?</p>
 <p><strong>Answer:</strong></p>
 </div>
-<div id="question-10" class="section level1">
-<h1>Question 10</h1>
-<p>Run the <code>get_regression_points()</code> function for the <code>hate_crimes</code> and <code>median_house_inc</code> model.</p>
-</div>
 <div id="question-10.a" class="section level1">
 <h1>Question 10.A</h1>
+<p>Run the <code>get_regression_points()</code> function for the <code>hate_crimes</code> and <code>median_house_inc</code> model.</p>
+</div>
+<div id="question-10.b" class="section level1">
+<h1>Question 10.B</h1>
 <p>Take a look at data for Maine (row 2). Did the model <strong>overpredict</strong> or <strong>underpredict</strong> the <code>hate_crimes</code> level, compared to what was observed in the data?</p>
 <p><strong>Answer:</strong></p>
 <hr />

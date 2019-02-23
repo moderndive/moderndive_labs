@@ -38,7 +38,6 @@ First load the necessary packages
 library(ggplot2)
 library(dplyr)
 library(moderndive)
-library(fivethirtyeight)
 library(readr)
 ```
 
@@ -280,7 +279,7 @@ Use the `get_regression_points()` function to generate a table showing the fitte
 
 ## Hate crimes and household income 
 
-# Question 9 
+# Question 9A 
 
 Now run a model that examines the relationship between `hate_crimes` and median household income in the state `median_house_inc`. 
 
@@ -289,14 +288,14 @@ Now run a model that examines the relationship between `hate_crimes` and median 
 ```
 
 
-# Question 9.A 
+# Question 9.B 
 
 Were there more hate crimes in areas with high or low median household incomes? How large was the difference between states with "low" and "high" levels of household income?
 
 **Answer:** 
 
 
-# Question 10
+# Question 10.A
 
 Run the `get_regression_points()` function for the `hate_crimes` and `median_house_inc` model. 
 
@@ -304,7 +303,7 @@ Run the `get_regression_points()` function for the `hate_crimes` and `median_hou
 
 ```
 
-# Question 10.A
+# Question 10.B
 
 Take a look at data for Maine (row 2). Did the model **overpredict** or **underpredict** the `hate_crimes` level, compared to what was observed in the data?
 
