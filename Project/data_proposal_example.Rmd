@@ -167,7 +167,7 @@ ma_schools <- ma_schools %>%
 
 ## Pare down variables
 
-_`select()` the following variables and drop all others:_
+_`select()` the following variables **in this order** and drop all others. Eliminating all unnecessary variables will making visually exploring the raw values less taxing mentally, as we'll have less data to look at._
 
 1. _The identification variable_
 1. _The outcome variable $y$_
