@@ -1,6 +1,6 @@
 
 ---
-title: "SDS/MTH 220 Project Data Proposal Example"
+title: "SDS/MTH 220 Data Proposal Example"
 author: "Jenny Smetzer & Albert Y. Kim"
 date: "Last updated on `r Sys.Date()`"
 output:
@@ -29,6 +29,12 @@ set.seed(76)
 # Please note
 
 **Your data proposal may not follow the exact same steps in the example below. Jenny and Albert are merely providing one example to give you an overall sense of where you are heading; the details may change from project to project.**
+
+
+
+***
+
+
 
 # Big-picture
 
