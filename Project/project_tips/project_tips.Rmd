@@ -1,5 +1,5 @@
 ---
-title: "Helpful tips for your project"
+title: "Become an R Data Ninja!"
 author: "Jenny Smetzer & Albert Y. Kim"
 date: "Last updated on `r Sys.Date()`"
 output:
@@ -29,33 +29,30 @@ library(scales)
 
 # Reading data into R
 
-You will need to bring your project data into R. So far all the data we have used in class has been built into a package. Your project data will likely be in an Excel sheet. For your project, you can publish (non-sensitive) data to the web so it can be easily read into R. The advantage to this approach for your project is that 
+You will need to bring your project data into R. So far all the data we have used in class has mostly been built into packages. Your project data will likely be in an Excel spreadsheet. For your project, instead of submitting this Excel spreadsheet, you can publish (non-sensitive and non-private) data to the web so it can be easily read into R. The advantage to this approach for your project is that 
 
-* It is an easy way to share the data with very person in your group and the instructor
+* It is an easy way to share the data with very person in your group and the instructor without having to pass around the Excel file. 
 * If **one person** in the group makes a change to the data file, **everyone else** in the group will have those changes updated when they bring the data into R. 
 
-Here are [instructions](https://twitter.com/rudeboybert/status/1055821833512071168){target="_blank"} on how to do this. 
+Here are [instructions](https://twitter.com/rudeboybert/status/1055821833512071168){target="_blank"} on how to do this; follow through "Step 5: Copy the URL to the published CSV." The next step is to copy, paste, and adapt the code block below: 
 
-Follow through "Step 5: Copy the URL to the published CSV." The next step is to copy, paste, and adapt the code below: 
-
-* Put the URL to your published csv below where it says `paste_the_url_here`. 
-* Be sure you include the **quotation marks**!
-* Name the data frame whatever you want it to be called
-
-```{r eval = F}
+```{r eval = FALSE}
 library(readr)
 my_data <- read_csv("paste_the_url_here")
 ```
 
-Only one person in the group should do this step. However, once the google sheet is published, make to **share** the original Google Sheet with everyone else in your project, so anyone in your group can make changes to the data. 
+1. Put the URL of your published CSV file where it says `paste_the_url_here`. Be sure you include the **quotation marks**!
+1. Name the data frame whatever you want it to be called. Here we named it `my_data`
 
-For example, take a look at the following [Google Sheet](https://docs.google.com/spreadsheets/d/1JIeADfp3ky3xExXWQz5lxbB0Tx5bTo0BA0sH6bzAqAA/edit?ts=5c75a9a5#gid=1970549377){target="_blank"} of movie data. Following the above mentioned [instructions](https://twitter.com/rudeboybert/status/1055821833512071168){target="_blank"}, we "published" the Google Sheet as a CSV, and thus we can load into R as follows: 
+Only one person in the group should do this step. However, once the google sheet is published, make sure to **share** the original Google Sheet with everyone else in your project, so anyone in your group can make changes to the data. 
 
-```{r message = F}
+For example, take a look at the following [Google Sheet](https://docs.google.com/spreadsheets/d/1JIeADfp3ky3xExXWQz5lxbB0Tx5bTo0BA0sH6bzAqAA/edit?ts=5c75a9a5#gid=1970549377){target="_blank"} of movie data. Following the above mentioned [instructions](https://twitter.com/rudeboybert/status/1055821833512071168){target="_blank"}, we "published" the Google Sheet as a CSV, and thus anyone in the world can load into R as follows: 
+
+```{r message = FALSE}
 movies <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSw7gf9uPFvUBpk5NoL1oX-S6g-eWBYVThEDPLPXqYzkYXtNyYtVrcf2cSpnNpZLdGWsk-WunvYYN27/pub?gid=1970549377&single=true&output=csv")
 ```
 
-Let's preview the first 10 movies using the `slice()` function from the `dplyr` package
+Let's preview the first 10 rows of `movies` using the `slice()` function from the `dplyr` package:
 
 ```{r eval = TRUE}
 library(dplyr)
@@ -113,7 +110,9 @@ We see "2 Fast 2 Furious" is now gone. The `filter()` code says keep only rows i
 
 ## log10 transformations
 
-You might find that you need to create a new variable and add it to your data frame. For instance, suppose we wanted to log base 10 transform the `millions` variable in the movies data. (`millions` is the amount of $ each movie made). The following adds the variable `log10_mill` to the movies data, which is the log 10 of the millions variable: 
+You might find that you need to create a new variable and add it to your data frame. For instance, suppose we wanted to log base 10 transform the `millions` variable in the movies data. (`millions` is the amount of $ each movie made). For example, since one million is 10^6^, `log10(1000000)` is equal to 6.
+
+The following code adds the variable `log10_mill` to the movies data, which is the log 10 of the millions variable: 
 
 ```{r}
 movies <- movies %>%
@@ -121,7 +120,7 @@ movies <- movies %>%
 movies
 ```
 
-For example, since one million is 10^6^, `log10(1000000)` is equal to 6. The following code does the same thing, but rounds the output to 2 decimal points. 
+The following code does the same thing, but rounds the output to 2 decimal points. 
 
 ```{r}
 movies <- movies %>%
@@ -132,7 +131,7 @@ movies <- movies %>%
 ```
 
 
-## Computing proportions?
+## Computing proportions
 
 How do I compute proportions? By using a `group_by()`, but not followed by a `summarize()` as is often the case, but rather a `mutate()`. So say we compute the total revenue millions for each movie rating and type:
 
@@ -145,7 +144,7 @@ rating_by_type_millions <- movies %>%
 rating_by_type_millions
 ```
 
-Say within each movie rating (G, PG, PG-13, R), we want to know the proportion of `total_millions` that made by each movie type (animated, action, comedy, etc). We can:
+Say within each movie `rating` (G, PG, PG-13, R), we want to know the proportion of `total_millions` that made by each movie `type` (animated, action, comedy, etc). We can:
 
 ```{r}
 rating_by_type_millions %>% 
@@ -158,12 +157,15 @@ rating_by_type_millions %>%
     )
 ```
 
-So for example, the 7 proportions corresponding to PG rated movies are 0.0349 + 0.0817 + 0.0480 + 0.606 + 0.118 + 0.108 + 0.0036 = 1.
+So for example:
+
+* For `rating` equals G there is only one `type` of movie (animated), the proportion of `total_millions` is 1. 
+* For `rating` equals PG there are 7 `type` of movies (action, adventure, animated, comedy, drama, fantasy, and musical), so the 7 proportions are 0.0349 + 0.0817 + 0.0480 + 0.606 + 0.118 + 0.108 + 0.0036 = 1.
 
 
 ## How do I deal with %, commas, and \$? {#numerical}
 
-Say you have numerical data that are recorded as percentages, have commas, or are in dollar form and hence are character strings. How do you convert these to numerical values? Using `parse_number()` from the `readr` package inside a `mutate()`! Shout out to [Stack Overflow](https://stackoverflow.com/a/52965808/3674500){target="_blank"}
+Often time variables that are in theory numerical are saved as text data because of the presence of perctage signs, commas, and dollar signs. How do you convert these to numerical values? Using `parse_number()` from the `readr` package inside a `mutate()`! Shout out to [Stack Overflow](https://stackoverflow.com/a/52965808/3674500){target="_blank"}
 
 ```{r}
 library(readr)
@@ -172,7 +174,7 @@ parse_number("145,897")
 parse_number("$1,234.5")
 ```
 
-What about the other way around? Use the `scales` package!
+What about converting the other way around? Use the `scales` package!
 
 ```{r}
 library(scales)
@@ -251,11 +253,11 @@ movies %>%
 
 # Categorical variables
 
+Working with categorical variables in R can be tricky. However it is an essential tool given that so much of the world's data is categorical in nature.
+
 ## Inspecting levels of a categorical variable 
 
-Sometimes it is useful to find out what all the different values are for a categorical variable, and/or to count how many cases are in each of the levels. 
-
-This gives us a count of each rating category:
+Sometimes it is useful to find out what all the *levels* are for a categorical variable (in other words the variable's possible categories) and to count how many cases are in each of the levels. The following code gives us a count of each level of the `rating` categorical variable:
 
 ```{r}
 movies %>% 
@@ -263,7 +265,7 @@ movies %>%
   tally()
 ```
 
-This tells us all the distinct types of movies in the `type` column:
+The following code tells us all the distinct types of movies in the `type` column:
 
 ```{r}
 movies %>%
@@ -282,7 +284,7 @@ glimpse(movies)
 
 We see here that the `over200` variable is `int` for integer i.e. a whole number. What if we wanted it to be a categorical variable? The following will accomplish this!
 
-```{r}
+```{r, eval = FALSE}
 movies <- movies %>%
   mutate(over200 = as.factor(over200))
 ```
@@ -295,7 +297,7 @@ glimpse(movies)
 
 Notice that now `over200` is `fct` for "factor", which is R speak for "categorical variable." What if you decide later that you actually needed this variable to be a number? The following will change a factor or character to a numeric:
 
-```{r}
+```{r, eval = FALSE}
 movies <- movies %>%
   mutate(over200 = as.numeric(over200))
 ```
@@ -305,20 +307,24 @@ movies <- movies %>%
 
 ## Create a categorical variable from a numerical one
 
-Sometimes we want to turn a numeric, continuous variable into a categorical variable. For instance, what if we wanted to have a variable that tells us if a movie made ten million dollars or more. We can again use the `mutate()` function, like so .
+Sometimes we want to turn a numerical variable into a categorical variable. For instance, what if we wanted to have a variable that tells us if a movie made ten million dollars or more? We can again use the `mutate()` function, like so:
 
 ```{r}
 movies <- movies %>% 
   mutate(big_money = as.factor(millions > 100))
 ```
 
-Here we create a new column called `big_money` and fill it with TRUE or FALSE values based on whether the values in the column `millions` are greater than 100 or not. We use the `as.factor()` to ensure the output is a factor. 
+Here we create a new column called `big_money` and fill it with `TRUE` or `FALSE` values based on whether the values in the column `millions` are greater than 100 or not. We use the `as.factor()` to ensure the output is a factor, R's way of saving categorical variables. 
 
 Again, check your work
 
 ```{r}
-glimpse(movies)
+movies %>% 
+  select(name, millions, big_money) %>% 
+  glimpse()
 ```
+
+Let's count the number of big money and non-big money movies:
 
 ```{r}
 movies %>% 
@@ -326,7 +332,7 @@ movies %>%
   tally()
 ```
 
-What if you want to recode a numeric variable into a categorical variable with more than 2 levels?   One way is to use the cut() command. 
+What if instead you want to recode a numeric variable into a categorical variable with more than 2 levels? One way is to use the `cut()` command. 
 
 For instance, below, we `cut` the `score` variable, to recode it into 4 categories:
 
@@ -335,13 +341,13 @@ For instance, below, we `cut` the `score` variable, to recode it into 4 categori
 1. 60.1 - 80 = good
 1. 80.1+ = great. 
 
-We set the breaking points for cutting the numeric variable with the `c(0,40,60,80,100)` part, and set the labels for each of these bins with the `labels = c("bad", "so-so", "good", "great")` part. All this action happens inside the `mutate()` command, so the new categorical variable `scorecats` is added to the data frame. 
+We set the breaking points for cutting the numeric variable with the `c(0, 40, 60, 80, 100)` part, and set the labels for each of these bins with the `labels = c("bad", "so-so", "good", "great")` part. All this action happens inside the `mutate()` command, so the new categorical variable `scorecats` is added to the data frame. 
 
 ```{r}
 movies <- movies %>% 
   mutate(scorecat = cut(score, 
-                        breaks = c(0,40,60,80,100),
-                        labels=c("bad","so-so","good","great")
+                        breaks = c(0, 40, 60, 80, 100),
+                        labels = c("bad", "so-so", "good", "great")
                         ) # this closes the cut parentheses
   ) # this closes the mutate parentheses
 ```
@@ -351,9 +357,8 @@ movies <- movies %>%
 * By default, if the value is exacly the upper bound of an interval, it's
 included in the lessor category (e.g. 60.0 is 'so-so' not 'good'), to 
 flip this, include the argument `right=FALSE`.
-* You could also have Rstudio equally divide the variable into a balanced
-number of groups.  For example, specifying breaks=3 would create 4 groups
-with approximately the same number of values in each group.
+* You could also have R equally divide the variable into a balanced
+number of groups.  For example, specifying `breaks = 3` instead would create 4 groups with approximately the same number of values in each group.
 
 
 
@@ -363,13 +368,13 @@ with approximately the same number of values in each group.
 
 ## Reclassify the levels of a categorical variable
 
-Sometimes categorical variables have too many levels or values for us to include in a statistical analysis. For instance, there are too many movie types (13!). We can re-classify each movie into one of five categories instead: `act_adv`, `sci_fantasy`, `funny`, `serious`, and `scary`.  We'll call the new variable `typcat`.
+Sometimes categorical variables have too many levels or values for us to include in a statistical analysis. For instance, there are 13 movie types! We can re-classify each movie into one of five categories instead: `act_adv`, `sci_fantasy`, `funny`, `serious`, and `scary`.  We'll call the new variable `type_cat`.
 
-We will use the `recode_factor()` code from the dplyr package. The recoding is illustrated below. Recall that `mutate` adds new columns. The new column we create below is called `typcat`, the column we are recoding is `type`. The the only reason the names are on separate lines is to make the code easier to read. 
+We will use the `recode_factor()` code from the dplyr package. The recoding is illustrated below. Recall that `mutate()` adds new columns. The new column we create below is called `type_cat`, the column we are recoding is `type`. The the only reason the names are on separate lines is to make the code easier to read. 
 
 ```{r}
 movies <- movies %>%
-  mutate(typcat = recode_factor(
+  mutate(type_cat = recode_factor(
     type, 
     "action" = "act_adv",
     "adventure" = "act_adv",
@@ -387,19 +392,27 @@ movies <- movies %>%
   )
 ```
 
-You can check your work like so
+Again, check your work
 
 ```{r}
 movies %>% 
-  group_by(typcat) %>% 
+  select(name, type, type_cat) %>% 
+  glimpse()
+```
+
+Let's count the number of each `type_cat` movies:
+
+```{r}
+movies %>% 
+  group_by(type_cat) %>% 
   tally()
 ```
 
 ## Re-order how categorical variables are plotted 
 
-When you make a boxplot or barplot, R may not always put the levels of the categorical variable on the x axis in the order you like. For instance, the boxplot of `millions` for each rating shows the boxes from G to R like so: 
+When you make a boxplot or barplot, R may not always put the levels of the categorical variable on the x axis in the order you like. In fact by default R arranges them in alphanumeric order. For instance, the boxplot of `millions` for each rating shows the boxes from G to R like so: 
 
-```{r fig.height=3, fig.width=5}
+```{r fig.height=9/2.5, fig.width=16/2.5}
 library(ggplot2)
 ggplot(data = movies, aes(x = rating, y = millions)) + 
   geom_boxplot(fill = c("pink", "steelblue", "sienna", "darkgreen")) + 
@@ -407,18 +420,16 @@ ggplot(data = movies, aes(x = rating, y = millions)) +
        title = "Profits for different movie ratings")
 ```
 
-To reverse the order of the factor, we can do the following:
+To define our own order for the categorical variable, we can do the following:
+
 ```{r}
 movies <- movies %>%
-  mutate(rating = factor(rating, levels = c("R", "PG-13", "PG", "G")))
+  mutate(rating = factor(rating, levels = c("G", "PG", "PG-13", "R")))
 ```
 
-This mutates or makes a new column that holds the same variable name, but tells R that we want the levels orderd from R to G. 
+This mutates or makes a new column that holds the same variable name, but tells R that we want the levels ordered `c("G", "PG", "PG-13", "R")`. The new boxplot reflects this:
 
-The new plotting reflects this!
-
-```{r fig.height=3, fig.width=5}
-library(ggplot2)
+```{r fig.height=9/2.5, fig.width=16/2.5}
 ggplot(data = movies, aes(x = rating, y = millions)) + 
  geom_boxplot(fill = c("pink", "steelblue", "sienna", "darkgreen")) + 
   labs(x = "rating", y = "profit in millions of USD $", 
@@ -427,9 +438,11 @@ ggplot(data = movies, aes(x = rating, y = millions)) +
 
 # Formatting
 
-## How do I show money on an axis plot?
+## Plotting dollar values on an axis
 
-```{r fig.height=3, fig.width=5}
+Observe the y-axis on the following plot:
+
+```{r fig.height=9/2.5, fig.width=16/2.5}
 movies <- movies %>% 
   mutate(revenue = millions * 10^6)
 
@@ -438,13 +451,14 @@ ggplot(data = movies, aes(x = rating, y = revenue)) +
   labs(x = "rating", y = "Revenue in $", title = "Profits for different movie ratings")
 ```
 
-Google "ggplot2 axis scale dollars" and click on the [first link](http://www.sthda.com/english/wiki/ggplot2-axis-scales-and-transformations) and search for the word "dollars". You'll find:
+While we might understand that `2e+08` is 2 $\times 10^8$ = 200,000,000, your audience might not. How can we change this? Googled "ggplot2 axis scale dollars", click on the [first link](http://www.sthda.com/english/wiki/ggplot2-axis-scales-and-transformations), search for the word "dollars". You'll find:
 
-```{r fig.height=3, fig.width=5}
+```{r fig.height=9/2.5, fig.width=16/2.5}
 library(scales)
 ggplot(data = movies, aes(x = rating, y = revenue)) + 
   geom_boxplot() + 
-  labs(x = "rating", y = "Profit in millions of $", title = "Profits for different movie ratings") +
+  labs(x = "rating", y = "Profit in millions of $", 
+       title = "Profits for different movie ratings") +
   scale_y_continuous(labels = dollar)
 ```
 
@@ -501,7 +515,7 @@ movies_summaries %>%
 
 Notice I also set the size of the figure that is printed
 
-```{r echo= FALSE, fig.height=3, fig.width=8}
+```{r fig.height=9/2.5, fig.width=16/2.5}
 ggplot(data = movies_summaries, aes(x = rating, y = `Average Rating Score`)) + 
   geom_bar(stat = "identity", fill = c("sienna", "steelblue", "darkgreen", "maroon")) + 
   labs(x = "Movie Rating", y = "Profit (in Millions of US $)", 
@@ -510,13 +524,13 @@ ggplot(data = movies_summaries, aes(x = rating, y = `Average Rating Score`)) +
 
 **Show the code and not the output**
 
-```{r eval = F}
+```{r eval = FALSE}
 glimpse(movies)
 ```
 
 **Show neither the code or the output**
 
-```{r include = F}
+```{r include = FALSE}
 glimpse(movies)
 ```
 

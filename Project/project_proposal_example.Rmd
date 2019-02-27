@@ -39,7 +39,7 @@ ma_schools <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSrWSNyN
 
 ## Clean variable names
 
-_Piping your data frame into the `clean_names()` function from the `janitor` package will clean your variable names, making them easier to work with._
+_Pipe your data frame into the `clean_names()` function from the `janitor` package. This will clean your variable names, making them easier to work with._
 
 ```{r}
 ma_schools <- ma_schools %>% 
@@ -48,20 +48,29 @@ ma_schools <- ma_schools %>%
 
 ## Data wrangling
 
-Complete your data wrangling here: 
+_Complete your data wrangling here_: 
+
+Recall from our data proposal that we didn't find a categorical variable to our liking in the original `ma_schools` data. So we create a categorical explanatory variable `school_size` with three levels (`small`, `medium`, `large`) based on the values of `total_enrollment`.
+
+Furthermore, we want to limit our analysis to only high schools as younger grades do not take the SAT. In other words, those schools with 11th and 12th grade enrollments greater than 0. 
 
 ```{r}
 # This converts the numerical variable total_enrollment into a categorical one
 # school_size by cutting it into three chunks:
 ma_schools <- ma_schools %>% 
- mutate(school_size = cut_number(total_enrollment, n=3))
+  mutate(school_size = cut_number(total_enrollment, n = 3))
 
 # For aesthetic purposes we changed the levels of the school_size variable to be
 # small, medium, and large
 ma_schools <- ma_schools %>%
-  mutate(school_size = recode_factor(school_size, "[0,341]" = "Small", "(341,541]" = "Medium", "(541,4.26e+03]" = "Large"))
+  mutate(school_size = recode_factor(school_size, 
+                                     "[0,341]" = "small", 
+                                     "(341,541]" = "medium", 
+                                     "(541,4.26e+03]" = "large"))
 
-# Next we filtered to only include schools that had 11th and 12th grade students
+# Next we filtered to only include schools that had 11th and 12th grade
+# students. We do this because students in the 11th and 12th grade take the math
+# SAT.
 ma_schools <- ma_schools %>%
   filter(x11_enrollment > 0 & x12_enrollment > 0)
 ```
@@ -77,32 +86,29 @@ ma_schools <- ma_schools %>%
 
 _`select()` the following variables **in this order** and drop all others. Eliminating all unnecessary variables will making visually exploring the raw values less taxing mentally, as we'll have less data to look at._
 
-1. _The identification variable_
-1. _The outcome variable $y$_
-1. _The numerical explanatory variable_
-1. _The categorical explanatory variable_
-1. _Optional: any other variable you find interesting_
-
-Recall that we didn't find a categorical variable to our liking in the original `ma_schools` data. So eventually we'll create a categorical explanatory variable `school_size` with three levels: `small`, `medium`, `large` based on the values of `total_enrollment`. We will do this in the next step of the project once we are more experienced with data wrangling.
+1. _First: The identification variable (if any)_
+1. _Second: The outcome variable $y$_
+1. _Third: The numerical explanatory variable_
+1. _Fourth: The categorical explanatory variable_
+1. _Rest: any other variable you find interesting_
 
 ```{r}
 ma_schools <- ma_schools %>% 
+  # Note the order in which we select
   select(school_name, average_sat_math, percent_economically_disadvantaged, school_size)
 ```
 
-## Explore your data
+## Look at your data using glimpse
 
-_Be sure to explore your data. Note that `eval=FALSE` is set so that R Markdown doesn't "evaluate" this code chunk, i.e. it will ignore it in the ultimate `.html` report. You should run this code on your own, but not in the ultimate `.html` report._
+_Look at your data using the `glimpse()` function._
 
-```{r, eval = FALSE}
+```{r}
 glimpse(ma_schools)
 ```
 
-## Preview data
+## Show a preview of your data
 
-_Display a random sample of 5 rows of your data frame by piping it into the `sample_n(5)` function from the `dplyr` package . You'll get the same 5 rows everytime you knit this document and hence replicable results because we set the seed value of the random number generator in the first code chunk above._
-
-We see we have missing values below. Some of these are missing because some of the schools are not high schools so the students don't take the Math SAT. We will address these missing values in the next step of the project once we are more experienced with data wrangling.
+_Look at your data another way by displaying a random sample of 5 rows of your data frame by piping it into the `sample_n(5)` function from the `dplyr` package._
 
 ```{r}
 ma_schools %>% 
@@ -117,65 +123,92 @@ ma_schools %>%
 
 # Exploratory data analysis
 
-## Inspect for NA values
+_Let's do an little exploratory data analysis._
+
+## Inspect for missing values
+
+_Address missing values._
+
+Using the trick in Jenny and Albert's "Become an R Data Ninja!" file, we get a sense of how many missing values we have in our data. 
 
 ```{r}
 colSums(is.na(ma_schools))
 ```
 
-## Summary statistics of outcome variable
+We see that even after removing non-high schools, we still have 58 missing values for `average_sat_math`. We'll be sure to mention this in our ultimate project resubmission, since if there is a systematic reason the schools have a missing value, then just ignoring these schools may bias our results. 
+
+```{r}
+ma_schools <- ma_schools %>%
+  filter(!is.na(average_sat_math))
+```
+
+## Summary statistics
+
+_Compute some quick summary statistics of the outcome variable and comment._
 
 ```{r}
 ma_schools %>% 
   group_by(school_size) %>% 
   summarize(n = n(), 
+            correlation = cor(average_sat_math, percent_economically_disadvantaged),
             mean = mean(average_sat_math, na.rm = TRUE), 
             median = median(average_sat_math, na.rm = TRUE), 
-            sd = sd(average_sat_math, na.rm = TRUE), 
-            min = min(average_sat_math, na.rm = TRUE), 
-            max = max(average_sat_math, na.rm = TRUE))
+            sd = sd(average_sat_math, na.rm = TRUE))
 ```
 
+It appears our data consists of mostly large high schools. In all three school size cases, we observe a very strong negative corelation between average math SAT score and percentage of economically disadvantaged students. 
 
 ## Histogram of outcome variable 
 
-```{r, fig.cap = "Figure 1. Distribution of average Math SAT scores in the State of Massachusetts in 2017", fig.align = "center"}
+_Visualize the distribution of the outcome variable using a histogram and comment._
+
+```{r, fig.cap = "Figure 1. Distribution of average math SAT scores for MA high schools in 2017", fig.align = "center", fig.width=16/2, fig.height=9/2}
 ggplot(ma_schools, aes(x = average_sat_math)) +
   geom_histogram(binwidth = 30, color = "white", fill = "steelblue") +
   labs(x = "Average Math SAT Score", y = "Number of Schools with the Score") 
 ```
 
-These data look normally distributed, with no obvious skew. There might be an outlier ~ 750 or so. 
+These data seem roughly bell-shaped, with no obvious skew. There is an outlier average Math SAT score of around 750 or so. This school is the [MA Academy for Math and Science School](https://www.massacademy.org/).
 
-## Scatterplot - outcome variable against numeric variable
 
-```{r, fig.cap = "Figure 2. Scatterplot illustrating the relationship between Percentage of Economically Disadvantaged Students and Math SAT Score in MA Schools in 2017", fig.align = "center"}
+## Scatterplot 
+
+_Visualize the relationship of the outcome variable and the numerical explanatory variable using a scatterplot and comment._
+
+```{r, fig.cap = "Figure 2. Relationship between average math SAT score and percentage of economically disadvantaged students for MA high schools in 2017", fig.align = "center", fig.width=16/2, fig.height=9/2}
 
 ggplot(ma_schools, aes(x = percent_economically_disadvantaged, y = average_sat_math))+
   geom_point() +
   geom_smooth(method = "lm", se = FALSE ) +
-  labs(y = "Math SAT Score", x = "Percentage of Economically Disadvantaged Students")
+  labs(y = "Math SAT Score", 
+       x = "Percentage of Economically Disadvantaged Students")
 ```
 
-There appears to be a reasonably strong negative relationship between percent of economically disadvanted students and Math SAT scores. When a school has more disadvantaged students, Math SAT scores tend to be lower. 
+There appears to be a reasonably strong negative relationship between average math SAT scores and percent of economically disadvanted students across all high schools in MA. In other words, as the percent of economically disadvanted students of a high school increases, there is an associated decrease in average math SAT scores. This is an unfortunate, but alas expected, relationship.
 
-## Boxplot - outcome variable by categorical variable
+## Boxplot
 
-```{r, fig.cap = "Figure 3. Boxplot showing Math SAT score for each school size category", fig.align = "center"}
-ggplot(ma_schools, aes(x = school_size, y = average_sat_math)) +
-  geom_boxplot(fill = c("sienna", "darkgreen", "steelblue")) +
+_Visualize the relationship of the outcome variable and the categorical explanatory variable using a scatterplot and comment._
+
+```{r, fig.cap = "Figure 3. Relationship between average math SAT score and school size for MA high schools in 2017", fig.align = "center", fig.width=16/2, fig.height=9/2}
+ggplot(ma_schools, aes(x = school_size, y = average_sat_math, fill = school_size)) +
+  geom_boxplot() +
   labs(y = "Math SAT Score", x = "School Size")
 ```
 
-The Math SAT scores look to be the greatest at larger schools, and the lowest at smaller schools, though the difference does not seem to be extreme. There appear to be some potential outliers in SAT scores. In particular, there is one small school with a very high average SAT score.   
+The Math SAT scores look to be the greatest at larger schools, and the lowest at smaller schools, though the differences do not seem to be extreme. There appear to be some potential outliers in SAT scores. Again, observe the outlier small school, which was the [MA Academy for Math and Science School](https://www.massacademy.org/).
 
-## Scatterplot- outcome variable against both predictors
 
-```{r, fig.cap = "Figure 4. Scatterplot illustrating the relationship between Percentage of Economically Disadvantaged Students and Math SAT Score in MA Schools of different sizes in 2017", fig.align = "center"}
+## Colored scatterplot
+
+_Visualize the relationship of the outcome variable and both explanatory variables using a colored scatterplot and comment._
+
+```{r, fig.cap = "Figure 4. Relationship between average math SAT score, percentage of economically disadvantaged students, and school size for MA high schools in 2017", fig.align = "center", fig.width=16/2, fig.height=9/2}
 ggplot(ma_schools, aes(x = percent_economically_disadvantaged, y = average_sat_math, color = school_size))+
   geom_point() +
   geom_smooth(method = "lm", se = FALSE ) +
   labs(y = "Math SAT Score", x = "Percentage of Economically Disadvantaged Students")
 ```
 
-A negative relationship between percent of economically disdvantaged students is evident for each of the different size of schools. The slopes of the lines representing each size of school appear to be fairly similar. There does not appear to be an interaction between the two explanatory variables. 
+The negative relationship between average math SAT scores and percent of economically disadvanted students across all high schools in MA we observed earlier seems to hold even when distinguishing between schools of different size using colors. There does not appear to be an interaction effect as all three slopes seem roughly equal.
+

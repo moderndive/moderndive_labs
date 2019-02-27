@@ -9,3 +9,9 @@ On Albert's original `data_proposal.Rmd`
 * I would not hide the code chunk showing the `library()` for now....that is just me. I think that might be too much at once
 * Don't forget to point them to the `Rninja` file for help (and to post that)
 * I would make it **EXTREMELY CLEAR** that not every group is going to need to take the exact steps you did in the example...or you are going to have students spending hours trying to figure out how they can use the cut_numbers function in their data
+
+
+# Next time:
+
+* Rename the 5 phases. Students got confused by difference between "data proposal"
+vs "project proposal". Perhaps name the latter "EDA"
