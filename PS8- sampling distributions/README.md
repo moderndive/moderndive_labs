@@ -1,5 +1,7 @@
 # Bert's Comments/Edits:
 
+Here is a [side-by-side](https://github.com/rudeboybert/moderndive_labs/pull/8/files?utf8=%E2%9C%93&diff=split&w=1) of the before/after view of the changes to your `.Rmd` files.
+
 ## 1. sampling dist demo
 
 `sampling_dist_demo.Rmd`. Absolutely brilliant. Yes, please hit them with this plot hard on Tue 4/2 Lab09 after they've turned in their work for PS08. I'd say this is even worth printing out in color copies and having them hand-draw 95% confidence intervals and standard errors on, in true "chalk talk"/"draw by hand" style. In other words, reinforce the 
