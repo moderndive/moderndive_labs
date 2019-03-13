@@ -34,6 +34,20 @@ For this exercise, the **population** of interest will be **ALL** 2538 individua
 
 If you get stuck as you are working through this Problem Set, we **strongly recommend** you re-read Chapter 8 in ModernDive, in particular subsections 8.3.1 on "Terminology & notation" and 8.3.2 on "Statistical definitions". These terminology, notation, and definitions related to sampling are definitely tricky at first; the best method to master them is practice, practice, practice.
 
+<br>
+
+***
+
+### Key points on symbols: 
+
+Symbol           | POPULATION PARAMETER               | SAMPLE PARAMETER
+---------------- | ---------------------------------- | --------------
+Number of cases  | $N$                                | $n$
+Proportion       | $p$                                | $\hat{p}$
+Standard error   | $SE$                               | $\widehat{SE}$
+
+***
+
 ## Setup
 
 First load the necessary packages:
@@ -81,26 +95,27 @@ gss_14  %>%
 
 ## The true population proportion $p$ of divorced people
 
-Again, for this exercise, the **population** of interest will be **ALL** 2538 individuals living in this single neighborhood in 2014.  Since we have data on **ALL** 2538 people living in the neighborhood, we can compute the **exact population proportion $p$ of divorced people directly** like so, by using **ALL** the data: 
+Again, for this exercise, the **population** of interest will be **ALL** 2538 individuals living in this single neighborhood in 2014.  Since we have data on **ALL** 2538 people living in the neighborhood, we can compute the **exact population proportion $p$ of divorced people directly** like so, using **ALL** the data: 
 
 ```{r}
 gss_14 %>% 
   summarize(divorced = sum(marital == "Divorced"), 
-            n = n()) %>% 
-  mutate(p = divorced / n)
+            N = n()) %>% 
+  mutate(p = divorced / N)
 ```
 
 <br> 
 
-***
+> Note that we use $N$ for the size of the full population of 2538 people, and $p$ because we are calculating the TRUE population proportion $p$
 
-Because this is full **Census** data we can compute the **exact population proportion $p$ of divorced people**. 
+
 
 <br> 
 
-> Note that no inference to the population is needed. We do not need to use a **sample** to try to infer something about the **true poulation proportion $p$** of divorced people in this neighborhood in 2014. We know that $p$ = 0.16 
+> Note that no inference to the population is needed. We do not need to use a **sample** to try to infer something about the **true poulation proportion $p$** of divorced people in this neighborhood in 2014. We know that $p$ = 0.16. 
 
 <br>
+
 
 In other words, this problem set is not a realistic reflection of a real life problem. However, for this problem set, we are *simulating* the act of sampling from this neighborhood population to understand and study how factors like sample size influence **sampling variation**.
 
@@ -110,9 +125,9 @@ In other words, this problem set is not a realistic reflection of a real life pr
 
 ## Demo: sampling 50 people in the neighborhood
 
-### a) A single sample
+### a) Estimating $\hat{p}$ from a single sample
 
-We are first going to use random sampling to **estimate** the true **population** proportion $p$ of the neighborhood that are divorced with only a **sample** of 50 people. 
+We are first going to use random sampling to **ESTIMATE** the true **population** proportion $p$ of the neighborhood that are divorced with only a **sample** of 50 people. 
 
 > This will represent a situation of only having the resources to knock on 50 doors to get responses from people in this neighborhood!
 
@@ -135,7 +150,7 @@ n50_1rep %>%
 ```
 
 
-This sample proportion $\hat{p}$ is an **estimate**, and our **best guess** of what the **true population** proportion $p$ of `Divorced` people is in this neighborhood, based on a sample of only 50 people. It is reasonably close to the true population proportion $p = 0.16$ we calculated from the full population. 
+This sample proportion $\hat{p}$ is an **ESTIMATE**, and our **best guess** of what the **true population** proportion $p$ of `Divorced` people is in this neighborhood, based on a sample of only 50 people. It is reasonably close to the true population proportion $p = 0.16$ we calculated from the full population. 
 
 # Question 1a
 
@@ -153,25 +168,32 @@ Ask two of your classmates what their estimate of $\hat{p}$ was. How do the $\ha
 
 ***
 
-Typically we only have the opportunity to collect **one sample** for our study, and so we have to use the amount of variability in our **single sample** as an estimate of the amount of variability we might expect in our results if we had taken a random sample of 50 different people. The **standard error of $\hat{p}$** serves as a measure of **sampling variability** if you only have a **single sample**. The formula for calculating the standard error of $\hat{p}$ is the following:
+### b) Estimating $\widehat{SE}$ from a single sample
 
-$$SE_{\hat{p}} = \sqrt{\frac{\hat{p} \times (1-\hat{p})}{n}}$$
+Typically we only have the opportunity to collect **one sample** for our study, and so we have to use the amount of variability in our **single sample** as an estimate of the amount of variability we might expect in our results if we had taken a random sample of 50 different people. The $\widehat{SE}_{\hat{p}}$ serves as an **ESTIMATE**  of **sampling variability** if you only have a **single sample**. The formula for estimating the standard error of $\hat{p}$ is the following:
 
-The standard error of $\hat{p}$ can be computed in R like so:
+$$\widehat{SE}_{\hat{p}}  \approx  \sqrt{\frac{\hat{p} \times (1-\hat{p})}{n}}$$
+
+> Note that we use $n$ for the size of the sample, that p "wears a hat", like so: $\hat{p}$ because we are ESTIMATING a proportion based on only a sample, and that the SE "wears a hat" as well because we ESTIMATING $\widehat{SE}$ based on only a sample. 
+
+<br> 
+
+The standard error of $\hat{p}$ can be estimated in R like so:
 
 ```{r}
 n50_1rep %>% 
   summarize(divorce_count = sum(marital == "Divorced"), 
             n = n()) %>% 
   mutate(p_hat = divorce_count/ n, 
-         se = sqrt(p_hat * (1 - p_hat) / n))
+         se_hat = sqrt(p_hat * (1 - p_hat) / n))
 ```
 
 <br>
 
 ***
 
-### b) Sampling distribution of $\hat{p}$ for n = 50
+## Demo: Generating a sampling distribution of $\hat{p}$
+
 
 If you ran the code chunk that takes a random sample of 50 cases a thousand more times....and wrote down every $\hat{p}$ you got, you would have what is called a "sampling distribution". 
 
@@ -181,7 +203,9 @@ If you ran the code chunk that takes a random sample of 50 cases a thousand more
 
 <br> 
 
-Instead of running the sampling code chunk over and over, we can run 1000 samples really easily in R. The following code chunk takes 1000 **different** samples of n = 50 and stores them in the data frame `n50_1000rep`:
+### a) Sampling distribution of $\hat{p}$ for n = 50
+
+Instead of running the sampling code chunk for n = 50 over and over, we can "collect" 1000 samples of n = 50 really easily in R. The following code chunk takes 1000 **different** samples of n = 50 and stores them in the data frame `n50_1000rep`:
 
 ```{r}
 n50_1000rep <- gss_14 %>% 
@@ -228,7 +252,7 @@ p_hat_n50_1000rep %>%
   slice(1:5)
 ```
 
-### c) Visualize the sampling distribution of $\hat{p}$ for n = 50
+### b) Visualize the sampling distribution of $\hat{p}$ for n = 50
 
 We can plot the **sampling distribution** of these 1000 $\hat{p}$ estimates of divorced respondents with a histogram, like so:
 
@@ -253,14 +277,14 @@ Based on your histogram, what appeared to be a very common value of $\hat{p}$? W
 
 ***
 
-### d) Mean and standard error of the sampling distribution of $\hat{p}$ for n = 50
+### c) Mean and standard error of the sampling distribution of $\hat{p}$ for n = 50
 
-Finally we can calculate the mean of the sampling distribution by calculating the mean of all 1000 $\hat{p}$ estimates, and the standard error of the sampling distribution by calculating the standard deviation of all 1000 $\hat{p}$ values like so: 
+Finally we can estimate  the mean of the sampling distribution by calculating the mean of all 1000 $\hat{p}$ estimates, and the standard error of the sampling distribution by calculating the standard deviation of all 1000 $\hat{p}$ values like so: 
 
 ```{r}
 p_hat_n50_1000rep %>% 
-  summarize(M = mean(p_hat), 
-            SE = sd(p_hat))
+  summarize(M_p_hat = mean(p_hat), 
+            SE_p_hat = sd(p_hat))
 ```
 
 <br> 
@@ -269,7 +293,7 @@ p_hat_n50_1000rep %>%
 
 # Question 4
 
-How do these values compare to the estimates we got above of $\hat{p}$ and SE of $\hat{p}$ for `Divorced` respondents based on your **single** sample of 50 people earlier in this Problem Set?  
+How do these values compare to the estimates we got above of $\hat{p}$ and $\widehat{SE}$ of $\hat{p}$ for `Divorced` respondents based on your **single** sample of 50 people earlier in this Problem Set?  
 
 
 **Answer: They are very similar**
@@ -311,7 +335,7 @@ ggplot(p_hat_n15_1000rep, aes(x = p_hat)) +
 
 # Question 5d
 
-calculate the mean of the sampling distribution, and the standard error of your n = 15 sampling distribution 
+calculate the mean of the n = 15 sampling distribution, and the standard error of the n = 15 sampling distribution 
 
 ```{r}
 p_hat_n15_1000rep %>% 
@@ -399,17 +423,17 @@ Which sampling distribution looked more normally distributed (bell shaped and sy
  
  <br>
  
-## Estimating $\hat{p}$ and the standard error of $\hat{p}$ from a single sample 
+## Estimating $\hat{p}$ and the standard error of $\hat{p}$ from a single sample (revisited)
 
 In most instances, we do not have access to the full population as we did in this GSS data; instead we have to take a **sample** to try to say something about the **larger population**. Furthermore, in the real world, we typically only take a **single** sample from the population, due to time or money constraints. 
 
-So how do we calculate a $\hat{p}$ and a standard error of $\hat{p}$ when we only have a single sample, and not 1000 repeated samples? As demonstrated at the very beginning of the Problem Set we:
+So how do we **ESTIMATE** a $\hat{p}$ and a standard error of $\hat{p}$ when we only have a single sample, and not 1000 repeated samples? As demonstrated at the very beginning of the Problem Set we:
 
 * estimate $\hat{p}$ from the sample 
-* use the formula for the standard error of $\hat{p}$ below, to calculate SE based on a single sample 
+* use the formula for the standard error of $\hat{p}$ below, to estimate SE based on a single sample 
 
 
-$$SE_{\hat{p}} = \sqrt{\frac{\hat{p} \times (1-\hat{p})}{n}}$$
+$$\widehat{SE}_{\hat{p}}  \approx  \sqrt{\frac{\hat{p} \times (1-\hat{p})}{n}}$$
 
 <br> 
 
@@ -425,7 +449,7 @@ n15_1rep <- gss_14 %>%
 ```
 
 
-Following the example from the beginning of the Problem Set (roughly line 140), calculate the **sample proportion** $\hat{p}$ of people who identified as `Divorced` based on `n15_1rep`... AS WELL AS the **standard error of $\hat{p}$**
+Following the example from the beginning of the Problem Set (roughly line 140), estimate the **sample proportion** $\hat{p}$ of people who identified as `Divorced` based on `n15_1rep`... AS WELL AS the **standard error of $\hat{p}$**
 
 ```{r}
 n15_1rep %>% 
@@ -437,7 +461,7 @@ n15_1rep %>%
 
 <br> 
 
-> You should have gotten a value quite close to the estimate we made earlier from our sampling distribution for n = 15! Note that when you must calculate a standard error from **only a single sample**, the formula **contains the sample size, n**. The larger the sample size n, the larger the number in the denominator of the SE formula. 
+> You should have gotten a value quite close to the estimate we made earlier from our sampling distribution for n = 15! Note that when you must estimate a standard error from **only a single sample**, the formula **contains the sample size, n**. The larger the sample size n, the larger the number in the denominator of the SE formula. 
 
 <br> 
 
@@ -445,7 +469,28 @@ n15_1rep %>%
 
 # Question 10 
 
-**IF** you collected a single sample from 600 respondents, do you think the standard error will be smaller or larger than the one you just calculated for n = 15. **Explain your reasoning** (Note: if you are not sure you can collect a sample and calculate the standard error)
+Fill in the R Markdown table below with all the standard errors you computed for this problem set. In other words:
+
+1. Replace `x` with the standard error you obtained by taking the standard deviation of the n = 15 sampling distribution 
+2. Replace `a` with the standard error you obtained fora single sample of n = 15 using the mathematical formula
+3. etc. 
+
+When you are done, make sure all the `|` in the table still line up so your results print out in a table! 
+
+
+Sample size n  | SE via sd of sampling distribution | SE via one sample and formula
+-------------- | ---------------------------------- | --------------
+15             | x                                  | a
+50             | y                                  | b
+
+
+
+***
+<br> 
+
+# Question 11
+
+Based on what you observed for Question 10, **IF** you collected a single sample from 600 respondents, do you think the standard error will be smaller or larger than the one you  calculated for n = 15. **Explain your reasoning** (Note: if you are not sure you can collect a sample and calculate the standard error)
 
 **Answer: I think the standard error will be smaller, because 1) we have a larger sample, so we are representing the population better, so there is less room for variability from sample to sample, 2) we saw a smaller standard error in the sampling distribution of n = 600, 3) with a bigger number for n in the denominator of the SE formula, the SE value goes down...GRADER: answer is acceptable as long as the students answers smaller, and gives one of these reasons** 
 
@@ -453,23 +498,6 @@ n15_1rep %>%
 
 ***
 
-
-# Bert's Idea for a Question 11
-
-Compare all the standard errors you computed for this problem set in the following R Markdown table. In other words:
-
-1. Replace `x` with the standard error you obtained by taking the standard deviation of the sampling distribution you simulated for samples of size 15
-2. Replace `a` with the standard error you obtained using the mathematical formula
-3. ...
-
-Sample size n  | SE via sd of sampling distribution | SE via formula
--------------- | ---------------------------------- | --------------
-15             | x                                  | a
-50             | y                                  | b
-600            | z                                  | c
-
-
-***
 
 
 [//]: (students- please do not delete anything below this line!) 

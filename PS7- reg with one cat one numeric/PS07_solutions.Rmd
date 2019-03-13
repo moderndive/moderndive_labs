@@ -72,16 +72,15 @@ contained in the variable `urbanization`
 
 ***
 
-# Question 1
+# Exploratory data analysis
 
-Create a scatterplot showing: 
+We will start by creating a scatterplot showing: 
 
 * Median household `income` on the $y$ axis
 * Percent of adults 25 or older with a high school degree on the $x$ axis
 * The points colored by the variable `urbanization`
 * A line of best fit (regression line) for each level of the variable `urbanization` (one for "low", one for "high")
 
-Please include axis labels and and title. 
 
 ```{r}
 ggplot(data = hate_crimes, aes(y = income, x = hs, color = urbanization)) +
@@ -95,19 +94,13 @@ ggplot(data = hate_crimes, aes(y = income, x = hs, color = urbanization)) +
 
 ***
 
-# Question 2.A
+# Question 1.A
 
 Do you think the relationship between `hs` and `income` is strong or weak, linear or non-linear?
 
 **Answer:** Fairly strong, linear relationship 
 
-# Question 2.B
-
-Does the slope look fairly similar for the two levels of urbanization?
-
-**Answer:** Yes
-
-# Question 2.B
+# Question 1.B
 
 Which regression line (high `urbanization` or low `urbanization`) appears to have the larger intercept?
 
@@ -115,7 +108,22 @@ Which regression line (high `urbanization` or low `urbanization`) appears to hav
 
 ***
 
-# Question 3.A
+# Question 2.A 
+
+Does the slope look fairly similar (parallel) for the two levels of urbanization?
+
+**Answer:** Yes
+
+# Question 2.B
+
+Based on the data visualization above, and your answer to Question 2.A, do you think it would be best to run a "parallel slopes" model (i.e. a model that estimates one shared slope for the two levels of urbanization), or a more complex "interaction model" (i.e. a model that estimates a separate slope for the two levels of urbanization)?
+
+**Answer: I personally do not think an interaction model is warranted.**
+
+
+***
+
+# Question 3
 
 Create a data visualization comparing median household income at "low" and "high" levels of urbanization (you do not need to include the `hs` variable in this plot). Please include axis labels and and title. 
 
