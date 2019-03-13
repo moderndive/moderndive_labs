@@ -1,6 +1,6 @@
 
 ---
-title: "Problem Set 06"
+title: "Problem Set 07"
 author: "WRITE YOUR NAME HERE"
 date: "WRITE DATE HERE"
 output:
@@ -21,8 +21,7 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning = FALSE, fig.width = 1
 
 ## Background {-}
 
-We will again use the hate crimes data we used in Problem Set 05. The FiveThirtyEight article article about those data are in the Jan 23, 2017  ["Higher Rates Of Hate Crimes Are Tied To Income
-Inequality"](https://fivethirtyeight.com/features/higher-rates-of-hate-crimes-are-tied-to-income-inequality/). This week, we will use these data  to run regression models with a single categorical predictor (explanatory) variable **and** a single numeric predictor (explanatory) variable. 
+We will again use the hate crimes data we used in Problem Set 05. The FiveThirtyEight article article about those data are in the Jan 23, 2017 ["Higher Rates Of Hate Crimes Are Tied To Income Inequality"](https://fivethirtyeight.com/features/higher-rates-of-hate-crimes-are-tied-to-income-inequality/). This week, we will use these data  to run regression models with a single categorical predictor (explanatory) variable **and** a single numeric predictor (explanatory) variable. 
 
 Remember you can knit this file to see the instructions. You can type your answers again right into this file, knit the final draft with all your answers. Please submit the `html` file on Moodle. 
 
@@ -43,7 +42,6 @@ Copy paste and run the following in a code chunk to read in the data:
 hate_crimes <- read_csv("http://bit.ly/2ItxYg3")
 ```
 
-
 Next let's explore the `hate_crimes` data set using the `glimpse()` function from the `dplyr` package:
 
 ```{r eval = F}
@@ -56,14 +54,10 @@ You should also take a look at the data in the **data viewer**.
 
 Each case/row in these data is a state in the US. This week we will consider the response variable `income`, which is the numeric variable of median income of households in each state. 
 
-We will use the following categorical explanatory variable: 
+We will use
 
-* `urbanization`: level of urbanization in a region ()
-
-
-And we will consider the following numerical explanatory variable: 
-
-* `share_pop_hs`: the percentage of adults 25 and older with a high school degree 
+* A categorical explanatory variable `urbanization`: level of urbanization in a region
+* A numerical explanatory variable `share_pop_hs`: the percentage of adults 25 and older with a high school degree 
 
 *** 
 
@@ -92,7 +86,7 @@ Please include axis labels and and title.
 ```{r}
 ggplot(data = hate_crimes, aes(y = income, x = hs, color = urbanization)) +
   geom_point()+ 
-  geom_smooth(method = "lm", se = F) + 
+  geom_smooth(method = "lm", se = FALSE) + 
   labs(
     x = "Percent of adults with high-school degree", 
     y = "Median household income in USD $", 
@@ -136,7 +130,7 @@ ggplot(data = hate_crimes, aes(x = urbanization, y = income)) +
 
 # Question 4
 
-Run a linear regression model that examines the relationship between household `income` (as response variable), and high-school education, and `urbanization` as explanatory variables. Generate the regression table using the `get_regression_table` function from the `moderndive` package. 
+Run a linear regression model that examines the relationship between household `income` (as response variable), and high-school education, and `urbanization` as explanatory variables. Generate the regression table using the `get_regression_table()` function from the `moderndive` package. 
 
 ```{r}
 med_income_model <- lm(income ~ hs + urbanization, data = hate_crimes)
@@ -303,8 +297,7 @@ ggplot(data = vole_trapping, aes(x = veg, y = voles, color = soil)) +
   geom_smooth(method = "lm", se = F) + 
   labs(title = "Vole abundance across a soil moiture and 
        vegetation density gradient", x = "percent cover of vegetation", 
-       y = 
-        "Vole abundance")
+       y = "Vole abundance")
 ```
 
 ```{r include = F}
