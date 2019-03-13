@@ -9,7 +9,7 @@ Here is a [side-by-side](https://github.com/rudeboybert/moderndive_labs/pull/8/f
 * "Sampling terminology and notation" in [moderndive 8.3.1](https://moderndive.netlify.com/8-sampling.html#terminology-notation) and the 
 * "Statistical definitions" in [moderndive 8.3.2](https://moderndive.netlify.com/8-sampling.html#statistical-definitions)
     
-that **everyone** in the history of all-time-ever intro stats courses struggle with! 
+that **everyone** in the history of all-time-ever intro stats courses struggle with!! 
 
 My only comments are:
 
