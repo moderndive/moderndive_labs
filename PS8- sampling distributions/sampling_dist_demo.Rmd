@@ -76,14 +76,16 @@ ggplot(data = all_dat, aes(x = p_hat, fill = sample_size)) +
   geom_histogram(data = subset(all_dat, sample_size == "15"), 
                  binwidth = 0.08, color = "black") + 
   geom_histogram(data = subset(all_dat, sample_size == "50"), 
-                   binwidth = 0.04, color = "black") +
+                 binwidth = 0.04, color = "black") +
   geom_histogram(data = subset(all_dat, sample_size == "600"), 
-                   binwidth = 0.02, color = "black") + 
+                 binwidth = 0.02, color = "black") + 
   facet_wrap(~ sample_size, ncol = 1)  + 
-    labs(x = "Sample proportion of divorced respondents",
+  labs(x = "Sample proportion of divorced respondents",
        title = expression("Sampling distribution of "*hat(p)* 
-                              " under three different sample sizes")) + 
+                            " under three different sample sizes"),
+       fill = "Sample size n:") + 
   geom_vline(data = NULL, xintercept = 0.16, color = "grey") +
+  scale_x_continuous(breaks = seq(from = 0, to = 0.6, by = 0.05)) +
   scale_fill_brewer(palette = "Set2")
 
 ```
