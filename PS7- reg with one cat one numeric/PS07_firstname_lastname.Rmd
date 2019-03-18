@@ -98,13 +98,13 @@ ggplot(data = hate_crimes, aes(y = income, x = hs, color = urbanization)) +
 
 Do you think the relationship between `hs` and `income` is strong or weak, linear or non-linear?
 
-**Answer:** Fairly strong, linear relationship 
+**Answer:** 
 
 # Question 1.B
 
 Which regression line (high `urbanization` or low `urbanization`) appears to have the larger intercept?
 
-**Answer:** high urbanization
+**Answer:** 
 
 ***
 
@@ -112,13 +112,13 @@ Which regression line (high `urbanization` or low `urbanization`) appears to hav
 
 Does the slope look fairly similar (parallel) for the two levels of urbanization?
 
-**Answer:** Yes
+**Answer:** 
 
 # Question 2.B
 
 Based on the data visualization above, and your answer to Question 2.A, do you think it would be best to run a "parallel slopes" model (i.e. a model that estimates one shared slope for the two levels of urbanization), or a more complex "interaction model" (i.e. a model that estimates a separate slope for the two levels of urbanization)?
 
-**Answer: I personally do not think an interaction model is warranted.**
+**Answer:**
 
 
 ***
@@ -128,10 +128,7 @@ Based on the data visualization above, and your answer to Question 2.A, do you t
 Create a data visualization comparing median household income at "low" and "high" levels of urbanization (you do not need to include the `hs` variable in this plot). Please include axis labels and and title. 
 
 ```{r}
-ggplot(data = hate_crimes, aes(x = urbanization, y = income)) + 
-  geom_boxplot(fill = c("sienna", "darkgreen")) + 
-  labs(x = "Level of urbanization in a state", y = "Median household income in USD $", 
-       title = "Household income across an urbanization gradient in 2016")
+
 ```
 
 ***
@@ -141,8 +138,7 @@ ggplot(data = hate_crimes, aes(x = urbanization, y = income)) +
 Run a linear regression model that examines the relationship between household `income` (as response variable), and high-school education, and `urbanization` as explanatory variables. Generate the regression table using the `get_regression_table()` function from the `moderndive` package. 
 
 ```{r}
-med_income_model <- lm(income ~ hs + urbanization, data = hate_crimes)
-get_regression_table(med_income_model)
+
 ```
 
 
@@ -152,35 +148,32 @@ get_regression_table(med_income_model)
 
 Is the intercept the same for the states with a "low" and "high" level of urbanization? Is the slope the same? (look at the data visualization above to help with this!) 
 
-**Answers:** Slope is the same, intercept is not. 
+**Answer:** 
 
 # Question 5.B
 
 What is the slope for the regression line of the states with a "high" level of urbanization? What is the intercept?
 
-**Answers:** Slope is 1986.794 (rounded is OK), Intercept is -113725.193
+**Answer:** 
 
 # Question 5.C
 
 What is the slope for the regression line of the states with a "low" level of urbanization? What is the intercept?
 
-**Answers:** Slope is 1986.794 (rounded is OK), Intercept is -119929 + -7333.326 = -127262.3
+**Answer:** 
 
-```{r}
--119929 + -7333.326
-```
 
 # Question 5.D
 
 Based on your regression table output (and the data visualizations), is median household income greater in states that have lower or higher levels of urbanization? By how much?
 
-**Answer:** Median household income is **$7333 greater** in states with high levels of urbanization 
+**Answer:** 
 
 # Question 5.E
 
 For every increase in 1 percentage point of high-school educated adults, what is the associated increase in the median household income of a state?
 
-**Answer:** The associated increase is the slope: $1986
+**Answer:** 
 
 
 *** 
@@ -199,16 +192,7 @@ Solve the regression equation for a US state in which `urbanization` is "high"
 
 **Answer:**
 
-$$
-\begin{aligned} 
-\widehat{y} &= -113725 + 1986 \times hs  + -7333 \times 0 \\
-\widehat{y} &= -113725 + 1986 \times hs + 0\\
-\widehat{y} &= -111739
-\end{aligned} 
-$$
 
-
-**Note to grader: They do not need to do this in fancy formatting...but so long as they either got the right answer give credit. (I rounded, if they did not round, that is OK. )**
 
 ***
 
@@ -216,18 +200,8 @@ $$
 
 What would you predict as the median household income for a state with a **high** level of urbanization, in which 85% of the share of adults have a high school degree?
 
-**Answer:** Note to grader...the values can be very different depending on if the student rounds or does not round the coefficients. 
+**Answer:** 
 
-```{r}
-# urbanization high - if they round
--113725 + (1986* 85) + (-7333 * 0)
-```
-
-
-```{r}
-# urbanization high - if they don't round
--113725.193	 + (1986.794 * 85) + (-7333.326 * 0)
-```
 
 ***
 
@@ -235,18 +209,8 @@ What would you predict as the median household income for a state with a **high*
 
 What would you predict as the median household income for a state with a **low** level of urbanization, in which 85% of the share of adults have a high school degree?
 
-**Answer:** Note to grader...the values can be very different depending on if the student rounds or does not round the coefficients. 
+**Answer:** 
 
-```{r}
-# urbanization high - if they round
--113725 + (1986* 85) + (-7333 * 1)
-```
-
-
-```{r}
-# urbanization high - if they don't round
--113725.193	 + (1986.794 * 85) + (-7333.326 * 1)
-```
 
 ***
 
@@ -254,7 +218,7 @@ What would you predict as the median household income for a state with a **low**
 
 What would you predict as the median household income for a state with a **low** level of urbanization, in which 30%  of adults have a high school degree?
 
-**Answer:** I wouldn't make that prediction. The lowest percentage in our data set was ~ 70, so extrapolating like this would not be a good idea.
+**Answer:** 
 
 ***
 
@@ -264,17 +228,7 @@ What was the observed `income` value for Maine (row 2)? What was the prediction 
 
 **Answer:** 
 
-observed: 51710
 
-predicted: 57752.93
-
-this was an over prediction 
-
-the residual was -6042.926
-
-```{r eval = F}
-get_regression_points(med_income_model)
-```
 
 ***
 
@@ -301,24 +255,8 @@ The data contains the variables:
 * `veg` for the percent cover of vegetation at each site
 * `soil` identifying a site as "moist" or "dry"
 
+
 Generate a regression model with `voles` as the response variable `y` and `veg` and `soil` as explanatory variables. Use the results of the model to answer the following questions **based on the available data**. A data visualization will probably also help you: 
-
-**Note to grader. They do not need to make this exact plot...the point is just that they realize to use regression to answer an applied question, and do not just use their opinion on the matter to answer**
-
-```{r include = F}
-ggplot(data = vole_trapping, aes(x = veg, y = voles, color = soil)) + 
-  geom_point() + 
-  geom_smooth(method = "lm", se = F) + 
-  labs(title = "Vole abundance across a soil moiture and 
-       vegetation density gradient", x = "percent cover of vegetation", 
-       y = "Vole abundance")
-```
-
-```{r include = F}
-mod <- lm(voles ~ soil + veg, data = vole_trapping)
-get_regression_table(mod)
-```
-
 
 ***
 
@@ -326,7 +264,7 @@ get_regression_table(mod)
 
 Would you recommend to a manager that they try to protect sites with high or low vegetation cover? Why?
 
-**Answer:** high vegetation cover...greater vegetation cover is associated with more moles 
+**Answer:** 
 
 ***
 
@@ -334,7 +272,7 @@ Would you recommend to a manager that they try to protect sites with high or low
 
 Dry sites are typically a lot less money to purchase and maintain for conservation organizations. Thus, if a conservation organization decides to purchase a few dry sites, roughly what percent cover of vegetation do they need to maintain on these sites (at a minimum) to support a population of about 30 voles at the site? 
 
-**Answer** Eyeballing it from the graph, ~ 55% **[Note to grader...they can solve this other ways too...so long as they get something in this range through looking at the data, they should recieve credit. ]**
+**Answer** 
 
 ***
 
@@ -342,12 +280,9 @@ Dry sites are typically a lot less money to purchase and maintain for conservati
 
 The Nature Conservancy is looking at purchasing a site for this species (in the same study area) that has moist soil and 40% vegetation cover. **Using the regression equation** what would you predict as the possible vole population the site might be able to support?
 
-```{r}
-15.46 + (0.259 * 40) + (9.1 *1)
-```
 
 
-**Answer:** 34 or 35 critters
+**Answer:** 
 
 
 ***

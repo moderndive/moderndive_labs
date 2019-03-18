@@ -291,112 +291,59 @@ library(readr)</code></pre>
 <div id="question-1.a" class="section level1">
 <h1>Question 1.A</h1>
 <p>Do you think the relationship between <code>hs</code> and <code>income</code> is strong or weak, linear or non-linear?</p>
-<p><strong>Answer:</strong> Fairly strong, linear relationship</p>
+<p><strong>Answer:</strong></p>
 </div>
 <div id="question-1.b" class="section level1">
 <h1>Question 1.B</h1>
 <p>Which regression line (high <code>urbanization</code> or low <code>urbanization</code>) appears to have the larger intercept?</p>
-<p><strong>Answer:</strong> high urbanization</p>
+<p><strong>Answer:</strong></p>
 <hr />
 </div>
 <div id="question-2.a" class="section level1">
 <h1>Question 2.A</h1>
 <p>Does the slope look fairly similar (parallel) for the two levels of urbanization?</p>
-<p><strong>Answer:</strong> Yes</p>
+<p><strong>Answer:</strong></p>
 </div>
 <div id="question-2.b" class="section level1">
 <h1>Question 2.B</h1>
 <p>Based on the data visualization above, and your answer to Question 2.A, do you think it would be best to run a “parallel slopes” model (i.e. a model that estimates one shared slope for the two levels of urbanization), or a more complex “interaction model” (i.e. a model that estimates a separate slope for the two levels of urbanization)?</p>
-<p><strong>Answer: I personally do not think an interaction model is warranted.</strong></p>
+<p><strong>Answer:</strong></p>
 <hr />
 </div>
 <div id="question-3" class="section level1">
 <h1>Question 3</h1>
 <p>Create a data visualization comparing median household income at “low” and “high” levels of urbanization (you do not need to include the <code>hs</code> variable in this plot). Please include axis labels and and title.</p>
-<pre class="r"><code>ggplot(data = hate_crimes, aes(x = urbanization, y = income)) + 
-  geom_boxplot(fill = c(&quot;sienna&quot;, &quot;darkgreen&quot;)) + 
-  labs(x = &quot;Level of urbanization in a state&quot;, y = &quot;Median household income in USD $&quot;, 
-       title = &quot;Household income across an urbanization gradient in 2016&quot;)</code></pre>
-<p><img src="data:image/png;base64,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" width="768" /></p>
 <hr />
 </div>
 <div id="question-4" class="section level1">
 <h1>Question 4</h1>
 <p>Run a linear regression model that examines the relationship between household <code>income</code> (as response variable), and high-school education, and <code>urbanization</code> as explanatory variables. Generate the regression table using the <code>get_regression_table()</code> function from the <code>moderndive</code> package.</p>
-<pre class="r"><code>med_income_model &lt;- lm(income ~ hs + urbanization, data = hate_crimes)
-get_regression_table(med_income_model)</code></pre>
-<div class="kable-table">
-<table>
-<thead>
-<tr class="header">
-<th align="left">term</th>
-<th align="right">estimate</th>
-<th align="right">std_error</th>
-<th align="right">statistic</th>
-<th align="right">p_value</th>
-<th align="right">lower_ci</th>
-<th align="right">upper_ci</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">intercept</td>
-<td align="right">-113725.193</td>
-<td align="right">23552.919</td>
-<td align="right">-4.828</td>
-<td align="right">0</td>
-<td align="right">-161163.206</td>
-<td align="right">-66287.180</td>
-</tr>
-<tr class="even">
-<td align="left">hs</td>
-<td align="right">1986.794</td>
-<td align="right">272.930</td>
-<td align="right">7.279</td>
-<td align="right">0</td>
-<td align="right">1437.084</td>
-<td align="right">2536.504</td>
-</tr>
-<tr class="odd">
-<td align="left">urbanizationlow</td>
-<td align="right">-7333.326</td>
-<td align="right">1857.659</td>
-<td align="right">-3.948</td>
-<td align="right">0</td>
-<td align="right">-11074.843</td>
-<td align="right">-3591.808</td>
-</tr>
-</tbody>
-</table>
-</div>
 <hr />
 </div>
 <div id="question-5.a" class="section level1">
 <h1>Question 5.A</h1>
 <p>Is the intercept the same for the states with a “low” and “high” level of urbanization? Is the slope the same? (look at the data visualization above to help with this!)</p>
-<p><strong>Answers:</strong> Slope is the same, intercept is not.</p>
+<p><strong>Answer:</strong></p>
 </div>
 <div id="question-5.b" class="section level1">
 <h1>Question 5.B</h1>
 <p>What is the slope for the regression line of the states with a “high” level of urbanization? What is the intercept?</p>
-<p><strong>Answers:</strong> Slope is 1986.794 (rounded is OK), Intercept is -113725.193</p>
+<p><strong>Answer:</strong></p>
 </div>
 <div id="question-5.c" class="section level1">
 <h1>Question 5.C</h1>
 <p>What is the slope for the regression line of the states with a “low” level of urbanization? What is the intercept?</p>
-<p><strong>Answers:</strong> Slope is 1986.794 (rounded is OK), Intercept is -119929 + -7333.326 = -127262.3</p>
-<pre class="r"><code>-119929 + -7333.326</code></pre>
-<pre><code>## [1] -127262.3</code></pre>
+<p><strong>Answer:</strong></p>
 </div>
 <div id="question-5.d" class="section level1">
 <h1>Question 5.D</h1>
 <p>Based on your regression table output (and the data visualizations), is median household income greater in states that have lower or higher levels of urbanization? By how much?</p>
-<p><strong>Answer:</strong> Median household income is <strong>$7333 greater</strong> in states with high levels of urbanization</p>
+<p><strong>Answer:</strong></p>
 </div>
 <div id="question-5.e" class="section level1">
 <h1>Question 5.E</h1>
 <p>For every increase in 1 percentage point of high-school educated adults, what is the associated increase in the median household income of a state?</p>
-<p><strong>Answer:</strong> The associated increase is the slope: $1986</p>
+<p><strong>Answer:</strong></p>
 <hr />
 </div>
 <div id="question-6" class="section level1">
@@ -407,55 +354,30 @@ get_regression_table(med_income_model)</code></pre>
 \]</span></p>
 <p>Solve the regression equation for a US state in which <code>urbanization</code> is “high”</p>
 <p><strong>Answer:</strong></p>
-<p><span class="math display">\[
-\begin{aligned} 
-\widehat{y} &amp;= -113725 + 1986 \times hs  + -7333 \times 0 \\
-\widehat{y} &amp;= -113725 + 1986 \times hs + 0\\
-\widehat{y} &amp;= -111739
-\end{aligned} 
-\]</span></p>
-<p><strong>Note to grader: They do not need to do this in fancy formatting…but so long as they either got the right answer give credit. (I rounded, if they did not round, that is OK. )</strong></p>
 <hr />
 </div>
 <div id="question-7" class="section level1">
 <h1>Question 7</h1>
 <p>What would you predict as the median household income for a state with a <strong>high</strong> level of urbanization, in which 85% of the share of adults have a high school degree?</p>
-<p><strong>Answer:</strong> Note to grader…the values can be very different depending on if the student rounds or does not round the coefficients.</p>
-<pre class="r"><code># urbanization high - if they round
--113725 + (1986* 85) + (-7333 * 0)</code></pre>
-<pre><code>## [1] 55085</code></pre>
-<pre class="r"><code># urbanization high - if they don't round
--113725.193  + (1986.794 * 85) + (-7333.326 * 0)</code></pre>
-<pre><code>## [1] 55152.3</code></pre>
+<p><strong>Answer:</strong></p>
 <hr />
 </div>
 <div id="question-8" class="section level1">
 <h1>Question 8</h1>
 <p>What would you predict as the median household income for a state with a <strong>low</strong> level of urbanization, in which 85% of the share of adults have a high school degree?</p>
-<p><strong>Answer:</strong> Note to grader…the values can be very different depending on if the student rounds or does not round the coefficients.</p>
-<pre class="r"><code># urbanization high - if they round
--113725 + (1986* 85) + (-7333 * 1)</code></pre>
-<pre><code>## [1] 47752</code></pre>
-<pre class="r"><code># urbanization high - if they don't round
--113725.193  + (1986.794 * 85) + (-7333.326 * 1)</code></pre>
-<pre><code>## [1] 47818.97</code></pre>
+<p><strong>Answer:</strong></p>
 <hr />
 </div>
 <div id="question-9" class="section level1">
 <h1>Question 9</h1>
 <p>What would you predict as the median household income for a state with a <strong>low</strong> level of urbanization, in which 30% of adults have a high school degree?</p>
-<p><strong>Answer:</strong> I wouldn’t make that prediction. The lowest percentage in our data set was ~ 70, so extrapolating like this would not be a good idea.</p>
+<p><strong>Answer:</strong></p>
 <hr />
 </div>
 <div id="question-10" class="section level1">
 <h1>Question 10</h1>
 <p>What was the observed <code>income</code> value for Maine (row 2)? What was the prediction for Maine according to our model? What is the residual? Did our model over or underestimate the median income for this state?</p>
 <p><strong>Answer:</strong></p>
-<p>observed: 51710</p>
-<p>predicted: 57752.93</p>
-<p>this was an over prediction</p>
-<p>the residual was -6042.926</p>
-<pre class="r"><code>get_regression_points(med_income_model)</code></pre>
 <hr />
 <div id="independent-analysis" class="section level2">
 <h2>Independent analysis</h2>
@@ -476,28 +398,25 @@ get_regression_table(med_income_model)</code></pre>
 <li><code>soil</code> identifying a site as “moist” or “dry”</li>
 </ul>
 <p>Generate a regression model with <code>voles</code> as the response variable <code>y</code> and <code>veg</code> and <code>soil</code> as explanatory variables. Use the results of the model to answer the following questions <strong>based on the available data</strong>. A data visualization will probably also help you:</p>
-<p><strong>Note to grader. They do not need to make this exact plot…the point is just that they realize to use regression to answer an applied question, and do not just use their opinion on the matter to answer</strong></p>
 <hr />
 </div>
 </div>
 <div id="question-11" class="section level1">
 <h1>Question 11</h1>
 <p>Would you recommend to a manager that they try to protect sites with high or low vegetation cover? Why?</p>
-<p><strong>Answer:</strong> high vegetation cover…greater vegetation cover is associated with more moles</p>
+<p><strong>Answer:</strong></p>
 <hr />
 </div>
 <div id="question-12" class="section level1">
 <h1>Question 12</h1>
 <p>Dry sites are typically a lot less money to purchase and maintain for conservation organizations. Thus, if a conservation organization decides to purchase a few dry sites, roughly what percent cover of vegetation do they need to maintain on these sites (at a minimum) to support a population of about 30 voles at the site?</p>
-<p><strong>Answer</strong> Eyeballing it from the graph, ~ 55% <strong>[Note to grader…they can solve this other ways too…so long as they get something in this range through looking at the data, they should recieve credit. ]</strong></p>
+<p><strong>Answer</strong></p>
 <hr />
 </div>
 <div id="question-13" class="section level1">
 <h1>Question 13</h1>
 <p>The Nature Conservancy is looking at purchasing a site for this species (in the same study area) that has moist soil and 40% vegetation cover. <strong>Using the regression equation</strong> what would you predict as the possible vole population the site might be able to support?</p>
-<pre class="r"><code>15.46 + (0.259 * 40) + (9.1 *1)</code></pre>
-<pre><code>## [1] 34.92</code></pre>
-<p><strong>Answer:</strong> 34 or 35 critters</p>
+<p><strong>Answer:</strong></p>
 <hr />
 <style type="text/css">
 h1 { /* Header 1 */
