@@ -194,32 +194,86 @@ get_regression_table(math_model)
 The regression equation for Math SAT score is the following:
 
 $$
-\begin{aligned}\widehat {score} =& \beta_{0} + \beta_{prct} \cdot prct + \beta_{med} \cdot 1_{is\ med}(x_2) + \beta_{large} \cdot 1_{is\ large}(x_2) \\
- =& 588.190 - 2.777 \cdot prct - 11.913 \cdot 1_{is\ med}(x_2) - 6.362 \cdot 1_{is\ large}(x_2)
+\begin{aligned}\widehat {score} =& \beta_ {0} + \beta_{prct} \cdot prct + \beta_{med} \cdot 1_{is\ med}(x_2) + \beta_{large} \cdot 1_{is\ large}(x_2) \\
+ =& 588.190 - 2.777 \cdot prct - 11.913 \cdot 1_{is\ med}(x_2) - 6.362 \cdot 1_ {is\ large}(x_2)
 \end{aligned} 
 $$
 
 * The intercept ($\beta_0$ = 588.190) represents the Math SAT score when zero percent of the students are said to be economically disadvantaged and the school size is small (Table 2).
-* The estimate for the slope for percent economically disadvantaged ($\beta_{prct}$ = -2.777) is the associated change in average Math SAT score depending on the percentage of economically disadvantaged students. Based on this estimate, for every one percentage point increase in the percent of economically disadvantaged students in a school, there was an associted decrease in Math SAT scores of on average 2.777 points.
-* The estimate for sizeMedium ($\beta_{med}$ = -11.913) and sizeLarge ($\beta_{large}$ = -6.36) are the offsets in intercept relative to the baseline group's, sizeSmall, intercept (Table 2). In other words, on average medium schools score 11.913 points lower than small schools while large schools scored on average 6.362 lower.
+* The estimate for the slope for percent economically disadvantaged ($\beta_{prct}$ = -2.777) is the associated change in score depending on the percentage of economically disadvantaged students. Based on this estimate, for every 1% increase in the percent of economically disadvantaged students in a school, MATH SAT scores went down on average by 2.78 points. 
+* The estimate for sizeMedium ($\beta_{med}$ = -11.913) and sizeLarge ($\beta_{large}$ = -6.36) are the offsets in intercept relative to the baseline group's, sizeSmall, intercept (Table 2). 
 
-Thus the three regression lines have equations:
 
-$$
-\begin{aligned}
-\text{Small schools (in red)}: \widehat {score} =& 588.190 - 2.777 \cdot prct\\
-\text{Medium schools (in green)}: \widehat {score} =& 576.277 - 2.777 \cdot prct\\
-\text{Large schools (in blue)}: \widehat {score} =& 581.828 - 2.777 \cdot prct
-\end{aligned} 
-$$
 
 ## 3.4 Inference for multiple regression
 
+Using the output of our regression table we'll test two different null hypotheses.  The first null hypothesis is that there is no relationship between the percentage of economically disadvantaged students and Math SAT score at the population level (the population slope is zero).
 
+$$\begin{aligned} H_0:&\beta_{prct} = 0 \\\ \mbox{vs }H_A:& \beta_{prct} \neq 0 \end{aligned}$$
+
+The second null hypothesis that we are testing is that there is no relationship between school size and Math SAT score at the population level. 
+
+$$\begin{aligned} H_0:&\mu_{small} = \mu_{med} = \mu_{large} \\\ \mbox{vs }H_A:& \mu_{small} \neq \mu_{med} \neq \mu_{large}  \end{aligned}$$
+
+There was a significant negative relationship between the percent of economically disadvantaged students and mean SAT score for schools ($\beta_{prct}$ = -2.77, $p < 0.001)$, Table 2). Reflecting this, the 
+95% confidence interval for $\beta_{prct}$  (-2.99, -2.57) did not include zero. 
+
+SAT scores were lower in medium schools compared to small schools; however, this difference was not statistically significant ($\beta_{med}$ = -11.91, $p = 0.12$, Table 2). Reflecting this, the 95% confidence interval for $\beta_{med}$ overlaps zero (-26.74, 2.91). SAT scores were also lower in large schools compared to small schools; however, this difference was not statistically significant ($\beta_{lg}$ = -6.36, $p = 0.36$, Table 2). Reflecting this, the 95% confidence interval for $\beta_{large}$ overlaps zero (-19.98,	7.26, Table 2). 
 
 ## 3.5 Residual Analysis
 
+We conducted a residual analysis to see if there was any systematic pattern of residuals for the statistical model we ran.  
 
+```{r, fig.cap = "Figure 5. Histogram of residuals for statistical model", fig.align = "center"}
+regression_points <- get_regression_points(math_model)
+ggplot(regression_points, aes(x = residual)) +
+  geom_histogram(binwidth = 20, color = "white", fill = "steelblue")+
+  labs(x = "Residual")
+```
+
+<br> 
+
+```{r, fig.cap = "Figure 6. Scatterplots of residuals against the numeric explanatory variable.", fig.align = "center"}
+ggplot(regression_points, aes(x = percent_economically_disadvantaged, y = residual)) +
+  geom_point() +
+  labs(x = "Percentage of Economically Disadvantaged Students", y = "Residual") +
+  geom_hline(yintercept = 0, col = "blue", size = 1)
+```
+
+<br> 
+
+```{r, fig.cap = "Figure 7. Scatterplots of residuals against the fitted values.", fig.align = "center"}
+ggplot(regression_points, aes(x = average_sat_math_hat, y = residual)) +
+  geom_point() +
+  labs(x = "Fitted Values", y = "Residual") +
+  geom_hline(yintercept = 0, col = "blue", size = 1)
+```
+
+<br> 
+
+```{r, fig.cap = "Figure 8. Boxplot of residuals for each school size.", fig.align = "center"}
+ggplot(regression_points, aes(x = school_size, y = residual)) +
+  geom_boxplot(fill = c("sienna", "darkgreen", "steelblue")) +
+  labs(x = "School size", y = "Residual") +
+  geom_hline(yintercept = 0, col = "blue", size = 1)
+```
+
+The model residuals were normally distributed, though there was one potential outlier (Fig. 5). There are not any systematic patterns to either of the scatterplots (Fig 6 & 7). There is, however, one clear outlier around 5% in Figure 6 and at a very high mean SAT score in Figure 7. The boxplots show a very even spread of residuals at each school size, and similar values across the different school sizes. However, there is again, one particularly extreme outlier in the small school group (Fig. 8). We conclude that the assumptions for inference in multiple linear regression are well met. However, it might be worthwhile to look at whether the outlier with the very high scoring small school (MA Academy for Math and Science School) had a very large influence on the conclusions. 
+
+We quickly re-ran the model with the very high scoring small school removed (Table 3). We would again reject the first null hypothesis, and not reject the second. The data again supports a significant negative relationship between the percent of economically disadvantaged students and Math SAT scores. Thus we assumed that this outlier did not have an extreme influence on our results. 
+
+
+***
+
+Table 3. Parallel slopes model relating Math SAT score to school size, and percentage of economically disadvantaged students, with the outlier of the MA Academy for Math and Science School removed. 
+
+```{r}
+data_subset <- ma_schools %>% 
+  filter(average_sat_math != 741)
+
+math_model2 <- lm(average_sat_math ~ percent_economically_disadvantaged + school_size, data = data_subset)
+get_regression_table(math_model2)
+```
 
 ***
 
@@ -229,13 +283,21 @@ $$
 
 ## 4.1 Conclusions
 
+We found that there was no significant difference in Math SAT scores at different sized schools, but that as the percentage of economically disadvantaged students increased, the scores decreased significantly. On average, Math SAT scores decreased by approximately 3 points for every one unit increase in the percentage of economically disadvantaged students. This however does not necessarily mean that economic disadvantage *causes* lower test scores. We were surprised to find that school size did not have a significant influence on SAT scores. We expected to see higher SAT scores in small schools, assuming that students could get more one-on-one attention from teachers. 
+
+Overall, these results suggest that the economic well being of families is a factor in academic success. Our findings are consistent with previous studies showing that found wealth is correlated to SAT scores in the US^[Goldfarb, Zacchary. _These four charts show how the SAT favors rich, educated families_. Washington Post. March 2014. https://www.washingtonpost.com/news/wonk/wp/2014/03/05/these-four-charts-show-how-the-sat-favors-the-rich-educated-families/?noredirect=on&utm_term=.aac2fb6c0f32].  In order to mitigate this, we believe that there should be more support systems in schools with higher percentages of economically disadvantaged students. These could include free SAT prep courses or college readiness programs. Furthermore, programs that help remove barriers to education (transportation, hunger, etc.) may benefit overall student learning, and outcomes. The trends found in this analysis are important because SAT scores are a factor for college acceptances, which in our current society is a often a prerequisite for higher paying jobs.
 
 ## 4.2 Limitations
 
+There were several limitations to this data set. For one, 58 out of the 390 high schools were missing SAT score data. A close inspection revealed that these were mostly small schools in which less than five students took the SAT.  Furthermore, these data only for the state of Massachusetts in 2017. As such, our scope of inference is limited to Massachusetts; it may not be appropriate to generalize the results found to the country as a whole. Massachusetts has been ranked #1 for public school systems by multiple sources including Forbes, and this may affect the trends seen in the data relative to other states^[Morad, Renee. _States With The Best Public School Systems_ Forbes, Forbes Magazine, August 2018, https://www.forbes.com/sites/reneemorad/2018/07/31/states-with-the-best-public-school-systems/#649330883897]. Additionally, a low score on the Math subsection is not necessarily indicative of a low total SAT score. However, since total SAT scores were not included in this data set, this was not a measure we could look at. Finally, standardized test results and graduation rates were the only measures of student success in this data set. We chose SAT scores as our outcome variable for this study due to this limitation. However, we recognize that standardized testing is not likely the best indicator of student success and intelligence. Not every school requires their students to take the SAT and these tests are expensive, which can act as a barrier for some students. 
 
 ## 4.3 Further questions
 
+If we were to continue researching this topic, we would like to work with a data set that includes total SAT score instead of just the sub-type scores. This would give us a better idea of the students' performance. It would be ideal to use a data set also includes several years worth of data so that we can see if the trends shown persist from year to year. Finally, it would be interesting to incorporate other explanatory variables, particularly ones that policy makers could address through funding programs or laws. The results from this sort of study could be given to the state of Massachusetts so they can make more informed decisions about their schools.
 
+Since our results strongly suggest that money is correlated to success on the SAT, it would be interesting to investigate the distribution of federal and state funding to public and charter schools in the state of Massachusetts. 
+
+We would also like to expand from just Massachusetts to other states across the country to get a broader view of the United States public education system. Massachusetts is a leader in education^[Reis, Jacqueline. _Massachusetts Students Score among World Leaders on PISA Reading, Science and Math Tests_. Department of Education News, December 2016. http://www.doe.mass.edu/news/news.aspx?id=24050]. Many states are very different from Massachusetts and therefore could yield different results than what we found in this project. 
 
 
 
