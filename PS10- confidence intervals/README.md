@@ -1,6 +1,6 @@
 # Bert's Comments/Edits:
 
-Here is a [side-by-side](https://github.com/rudeboybert/moderndive_labs/pull/8/files?utf8=%E2%9C%93&diff=split&w=1) of the before/after view of the changes to your `.Rmd` files.
+Here is a [side-by-side](https://github.com/rudeboybert/moderndive_labs/pull/10/files?utf8=%E2%9C%93&diff=split&w=1) of the before/after view of the changes to your `.Rmd` files.
 
 * Background
     + Could you comment on who the study population is?
