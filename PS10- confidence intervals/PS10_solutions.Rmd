@@ -28,7 +28,7 @@ Please indicate who you collaborated with on this problem set:
 
 ## Background {-}
 
-In this problem set  we will use a small **sample** of data from the [general social survey](http://gss.norc.org/). The survey is designed to monitor changes in both social characteristics and attitudes. You will work with a **sample** from one neighborhood. Here we do **not** know the **true population parameters** for any of the variables, because we do not have data on every person in the neighborhood. 
+In this problem set we will use a small **sample** of data from the [General Social Survey](http://gss.norc.org/). The survey is designed to monitor changes in both social characteristics and attitudes. You will work with a **sample** from one neighborhood. Here we do **not** know the **true population parameters** for any of the variables, because we do not have data on every person in the neighborhood. 
 
 ## Setup
 
@@ -68,16 +68,14 @@ set.seed(45)
 
 If your data are reasonably normally distributed you can generate a 95% confidence interval using the following formula: 
 
-$$\widehat{statistic}  1.96 * \widehat{SE}$$
+$$\widehat{statistic} \pm 1.96 \cdot \widehat{SE}$$
 
+So, for instance if we wanted to calculate the 95% confidence interval for the population mean number of `tvhours` $\mu_{tv}$ that respondents watched: 
 
-So, for instance if we wanted to calculate the 95% Confidence Interval for the mean number of `tvhours` that respondents watched: 
+* the **sample statistic** (also called **point estimate**) in this case would be the sample mean number of `tvhours` from the sample: $\bar{x}$
+* We would estimate the standard error using the formula: where $s$ is the sample standard deviation of the sample:
 
-* the **sample statistic** in this case would be the mean number of `tvhours` from the sample: $\bar{x}$
-
-* we would estimate the standard error using the formula: 
-
-$$\widehat{SE} \approx \frac{sd}{\sqrt(n)}$$
+$$\widehat{SE} \approx \frac{s}{\sqrt{n}}$$
 
 We can make these calculations in R like so: 
 
@@ -105,12 +103,12 @@ If you are concerned that your data do not meet the normality assumptions well e
 
 ***
 
-#  Confidence intervals from a bootstrap sample
+#  Confidence intervals from a bootstrap resample
 
 
-### Step 1: Take 1000 bootstrap samples
+### Step 1: Take 1000 bootstrap resamples
 
-The following code tells R to take 1000 bootstrap samples from the `gss_sample` data. You can set the seed to whatever value you like! 
+The following code tells R to take 1000 bootstrap resamples from the `gss_sample` data. You can set the seed to whatever value you like! 
 
 ```{r}
 set.seed(42)
@@ -121,25 +119,22 @@ boot_samp_1000 <- gss_sample %>%
 
 Note a few important details about the `rep_sample_n` function, and bootstrap sampling in general:
 
-* `size = 100` tells R that each bootstrap sample we take has 100 cases...the size of the original sample
-
-* `reps = 1000` tells R to take 1000 bootstrap samples (each of size 100)
-
-* The `replace = TRUE` argument tells R that in each bootstrap sample, we can include a row from `gss_sample` multiple times. So if for instance, respondent # 12 is the first random sample taken here, respondent 12 is still available to be sampled **again** at random. Thus, some people may appear **multiple times** in our bootstrap sample, and some people from the original data set may not appear at all. 
-
-* we saved the results in `boot_samp_1000`
+* `size = 100` tells R that each bootstrap resample we take has 100 cases... the size of the original sample
+* `reps = 1000` tells R to take 1000 bootstrap resamples (each of size 100).
+* The `replace = TRUE` argument tells R that in each bootstrap resample, we can include a row from `gss_sample` multiple times. So if for instance, respondent # 12 is the first random resample taken here, respondent 12 is still available to be resampled **again** at random. Thus, some people may appear **multiple times** in our bootstrap resample, and some people from the original data set may not appear at all. 
+* We save the results in a data frame `boot_samp_1000`. 
 
 <br> 
 
 *** 
 
-Take a look at the `boot_samp_1000` we just generated in the data viewer. Note that the `replicate` column labels each bootstrap sample (the first 100 rows are labeled 1, the next 100 rows are labeled 2, etc.)
+Take a look at the `boot_samp_1000` data frame we just generated in RStudio's data viewer. Note that the `replicate` column labels each bootstrap resample (the first 100 rows are labeled 1, the next 100 rows are labeled 2, etc.)
 
 # Question 1
 
 How many rows does `boot_samp_1000` have? **Why?** 
 
-**Answer: 100,000. Because we took 1000 samples of 100 cases each, which is 100,000 One hundred thousand. **
+**Answer: 100,000. Because we took 1000 samples of 100 cases each, which is 100,000  = One hundred thousand.**
 
 <br> 
 
@@ -147,7 +142,7 @@ How many rows does `boot_samp_1000` have? **Why?**
 
 ### Step 2: Calculate the bootstrap statistic
 
-Let's say we want to use the bootstrap sample that we just generated to calculate a confidence interval for the mean of the variable `tvhours`. To do so, we need to know the mean of `tvhours` **for each of the 1000 bootstrap samples**. In this case, the mean of `tvhours` for **each bootstrap sample** is our **BOOTSTRAP STATISTIC**.  We can calculate that with two lines of code, like so: 
+Let's say we want to use the bootstrap resample that we just generated to calculate a confidence interval for the population mean $\mu_{tv}$ of `tvhours`. To do so, we need to know the sample mean $\bar{x}$ of `tvhours` **for each of the 1000 bootstrap resamples**. In this case, the sample mean $\bar{x}$ of `tvhours` for **each bootstrap resample** is our **BOOTSTRAP STATISTIC**.  We can calculate that with two lines of code, like so: 
 
 ```{r}
 boot_distrib_tv <- boot_samp_1000 %>% 
@@ -157,9 +152,9 @@ boot_distrib_tv <- boot_samp_1000 %>%
 
 Note that:
 
--  the `group_by` argument tells R to take the mean of `tvhours`  **separately** for each different `replicate` in the bootstrap sample. 
+- The `group_by()` argument tells R to take the sample mean of `tvhours` **separately** for each different `replicate` in the bootstrap resample. 
+- We put the sample mean for each bootstrap resample in a column called `boot_stat`
 
-- we put the mean for each bootstrap sample in a column called `boot_stat`
 
 <br> 
 
@@ -169,29 +164,28 @@ Note that:
 
 *** 
 
-Take a look at the `boot_distrib_tv` we just created in the data viewer. 
+Take a look at the `boot_distrib_tv` we just created in RStudio's data viewer. 
 
 # Question 2
 
-How many values of the bootstrap statistic (`boot_stat`) are there?  Please explain **why** there are this many values of the bootstrap statistic. 
+How many values of the bootstrap statistic `boot_stat` are there?  Please explain **why** there are this many values of the bootstrap statistic. 
 
-**Answer: there are 1000 boot_stat values, because we took 1000 bootstrap samples, and calculated the mean for each sample. This equtaes to 1000 bootstrap statsitics**
+**Answer: there are 1000 boot_stat values, because we took 1000 bootstrap resamples, and calculated the sample mean for each sample. This equates to 1000 bootstrap statistics**.
 
 <br> 
 
 *** 
 
-### Step 3: CI from a bootstrap sample 
+### Step 3: CI from a bootstrap resample 
 
 ### a) CI using the 95% rule 
 
-We can now use the bootstrap distribution for mean `tvhours` to calculate a 95% confidence interval, using the "95% rule", which states that a 95% CI is 
+We can now use the bootstrap distribution for the sample mean `tvhours` $\bar{x}$ to calculate a 95% confidence interval for the population mean `tvhours` $\mu_{tv}$, using the "95% rule for bell shaped distributions", which states that the middle 95% of values of a bell/normal shaped distribution are between
 
-$statistic ? 1.96 \times \widehat{SE}$
+$$\text{mean} \pm 1.96 \cdot SD$$
 
-* the statistic here would be the mean of the bootstrap distribution 
-
-* the SE can be estimated by the $SD$ of the bootstrap distribution
+* the mean here would be the mean of the bootstrap distribution 
+* the SD here is the standard deviation of the bootstrap distribution, which recall has a special name: the **standard error**.
 
 We can thus apply the 95% rule, like so: 
 
@@ -207,13 +201,15 @@ boot_distrib_tv %>%
 
 ### b) CI using percentile method
 
-You can also calculate a 95% confidence interval using the percentile method.  
+You can also calculate a 95% confidence interval using the percentile method. The logic goes like this: 
 
-The logic goes like this: 
+Since our bootstrap resample had 1000 values of `boot_stat`:
 
-Since our bootstrap sample had 1000 values of `boot_stat` in it, 950 of the `boot_stat` values fall **inside** this 95% confidence interval, 25 values fall **below** it, and 25 values fall **above** it. 
+1. 950 of the `boot_stat` values fall **inside** this 95% confidence interval, i.e. 95%
+1. 25 values fall **below** it. i.e. the lower 2.5%
+1. 25 values fall **above** it. i.e. the higher 2.5%
 
-We can use **the quantiles** of the bootstrap distribution to find these values like so:
+totaling 100%. We can use **the quantiles** of the bootstrap distribution to find these values like so:
 
 ```{r}
 prct_ci_tv <- boot_distrib_tv %>% 
@@ -225,17 +221,15 @@ prct_ci_tv
 
 This method 
 
-* Asks R to identify the 0.025 quantile of the bootstrap means...this is the value **below** which **2.5% of the values of `boot_stat`** fall (or 25 cases in this example... 25/1000 = 0.025)
-
-* Asks R to identify the 0.975 quantile for the bootstrap means...this is the value **above** which the other **2.5% of the values of `boot_stat`** fall (or 25 cases in this example  975/1000 = 0.975)
-
+* Asks R to identify the 0.025 quantile of the bootstrap sample means... this is the value **below** which **2.5% of the values of `boot_stat`** fall (or 25 cases in this example... 25/1000 = 0.025)
+* Asks R to identify the 0.975 quantile for the bootstrap sample means... this is the value **above** which the other **2.5% of the values of `boot_stat`** fall (or 25 cases in this example  975/1000 = 0.975)
 * The middle 95% of the values fall between these two quantiles
 
-Based on these results, we are 95% confident that the **true mean hours of TV watched $\mu$ in the population** is between the upper and lower CI we just calculated. 
+Based on these results, we are 95% confident that the **true mean hours of TV watched $\mu_{tv}$ in the population** is between the upper and lower CI we just calculated. 
 
 ### Visualizing the Confidence interval 
 
-The bootstrap distribution and the 95% confidence intervals we just calculated are shown in the figure below. This is a histogram of the `boot_stat` values from `boot_distrib_tv`. The green line is the lower bound of the 95% CI, and the blue line is the upper bound. 950 of the 1000 bootstrap samples had a mean for `tvhours` that fell **between** the green and blue lines...25 of the samples had a mean above the blue line, and 25 of the samples had a mean below the green line. 
+The bootstrap distribution and the 95% confidence intervals we just calculated are shown in the figure below. This is a histogram of the `boot_stat` values from `boot_distrib_tv`. The green line is the lower bound of the 95% CI, and the blue line is the upper bound. 950 of the 1000 bootstrap resamples had a mean for `tvhours` that fell **between** the green and blue lines...25 of the samples had a mean above the blue line, and 25 of the samples had a mean below the green line. 
 
 ```{r echo=F, fig.height=3, fig.width=5}
 ggplot(data = boot_distrib_tv, aes(x = boot_stat)) + 
@@ -243,7 +237,7 @@ ggplot(data = boot_distrib_tv, aes(x = boot_stat)) +
   labs(title = "Bootstrap distribution with 95% CI", 
        x = "boostrap statistic (mean tvhours)") +
   geom_vline(data = prct_ci_tv, aes(xintercept = lower_ci), color = "green", lwd = 2) + 
-    geom_vline(data = prct_ci_tv, aes(xintercept = upper_ci), color = "blue", lwd = 2) 
+  geom_vline(data = prct_ci_tv, aes(xintercept = upper_ci), color = "blue", lwd = 2) 
 ```
 
 <br> 
@@ -252,7 +246,7 @@ ggplot(data = boot_distrib_tv, aes(x = boot_stat)) +
 
 # Question 3
 
-**If** we calculated a **90% confidence interval** for the mean of `tvhours` using this same bootstrap sample and the percentile method, roughly how many of the 1000 values of `tv_mean` would fall between the green and blue lines?
+**If** we calculated a **90% confidence interval** for the mean of `tvhours` using this same bootstrap resample and the percentile method, roughly how many of the 1000 values of `tv_mean` would fall between the green and blue lines?
 
 **Answer: 900**
 
@@ -262,7 +256,7 @@ ggplot(data = boot_distrib_tv, aes(x = boot_stat)) +
 
 # Question 4 
 
-Use the bootstrap sampling distribution for `tvhours` generated above (`boot_distrib_tv`),  and the **percentile** method to calculate a 99% confidence interval for the mean `tvhours`.
+Use the bootstrap resampling distribution for `tvhours` generated above (`boot_distrib_tv`)  and the **percentile** method to calculate a 99% confidence interval for the mean `tvhours`.
 
 ```{r}
 boot_distrib_tv %>%  
@@ -278,10 +272,9 @@ boot_distrib_tv %>%
 
 # Question 5
 
-Which confidence interval is **WIDER** the 95% CI for the mean `tvhours` or the 99% confidence interval for the mean `tvhours`? Why?
+Which confidence interval is **WIDER**: the 95% confidence interval or the 99% confidence interval for the population mean `tvhours` $\mu_{tv}$? Why?
 
 **Answer: Conceptually, the 99% CI is wider, because we are casting a wider net. Also, more of the boot_stat values are included in a 99% CI (990) as compared to a 95% CI (950)** 
-
 
 <br> 
 
@@ -289,7 +282,7 @@ Which confidence interval is **WIDER** the 95% CI for the mean `tvhours` or the 
 
 # Question 6a
 
-Use the bootstrap sample we generated above (`boot_samp_1000`), to generate a **bootstrap distribution** for the mean respondent `age`. 
+Use the bootstrap resample we generated above (`boot_samp_1000`), to generate a **bootstrap distribution** for the sample mean respondent `age` $\bar{x}$ instead of `tvhours`. 
 
 ```{r}
 boot_distb_age <- boot_samp_1000 %>% 
@@ -300,8 +293,7 @@ boot_distb_age <- boot_samp_1000 %>%
 
 # Question 6b 
 
-Calculate a 95% confidence interval for the mean respondent `age` using  the **95% rule** method. 
-
+Calculate a 95% confidence interval for the population mean respondent `age` $\mu_{age}$ using the **95% rule** method. 
 
 ```{r}
 boot_distb_age %>% 
@@ -309,25 +301,23 @@ boot_distb_age %>%
             se = sd(boot_stat), 
             upper_ci = mean + (1.96 * se), 
             lower_ci = mean - (1.96 * se))
-
 ```
 
 
 # Question 6c
 
-Calculate a 95% confidence interval for the mean respondent `age` using  the **percentile** method. 
+Calculate a 95% confidence interval for the population mean respondent `age` $\mu_{age}$ using the **percentile** method. 
 
 ```{r}
 boot_distb_age %>% 
   summarize(lower_ci = quantile(boot_stat, 0.025), 
             upper_ci = quantile(boot_stat, 0.975))
-
 ```
     
     
 # Question 6d
 
-How do the 95% confidence intervals you calculated in 6b and 6c compare? (i.e. are the 95% CI values similar or are they pretty different)
+How do the 95% confidence intervals you calculated in 6b and 6c compare? i.e. are the 95% CI values similar or are they pretty different?
 
 
 **Answer: they are very similar!** 
@@ -338,13 +328,12 @@ How do the 95% confidence intervals you calculated in 6b and 6c compare? (i.e. a
 
 # Question 7
 
-Use the **bootstrap distribution** for the mean respondent `age`, and the percentile method to calculate an 80% confidence interval for the mean respondent age.
+Use the **bootstrap resampling distribution** for the sample mean respondent `age` and the percentile method to calculate an 80% confidence interval for the population mean respondent age $\mu_{age}$.
 
 ```{r}
 boot_distb_age %>% 
   summarize(lower_ci = quantile(boot_stat, 0.1), 
             upper_ci = quantile(boot_stat, 0.9))
-
 ```
 
 
@@ -354,11 +343,11 @@ boot_distb_age %>%
 
 ![](https://ecologyofeducation.net/wsite/wp-content/uploads/2011/09/Boots-with-Laces-border.jpg)
 
-#  Bootstrap sampling distribution & confidence intervals with categorical variables
+# Bootstrap sampling distribution & confidence intervals with categorical variables
 
 The procedure for generating a bootstrap sampling distribution is VERY similar for categorical data. As an example we will generate a bootstrap sampling distribution for the proportion of respondents that identified as a Person of Color. 
 
-### Step 1: Take 1000 bootstrap samples
+### Step 1: Take 1000 bootstrap resamples
 
 We already did this above! We can use the same `boot_samp_1000` as before. 
 
@@ -372,12 +361,11 @@ boot_distrib_POC <- boot_samp_1000 %>%
             boot_stat = POC_count/n)
 ```
 
-
 Note that with a categorical variable, the code differs in two important respects now:  
 
-* the statistic that we calculate with the summarize command is now a **proportion** $\widehat{p}$ rather than a mean
-
-* to get our proportion $\hat{p}$ of **ONE** of the race categories (POC), we need to **first** calculate the total sample size for each replicate, and the count of how many cases are `race == "POC"` in each replicate
+* the population parameter that we don't know, but are infering about via sampling, is now the population proportion $p$ that identify as a POC. 
+* the sample statistic AKA point estimate that we calculate with the summarize command is now the **sample proportion** $\widehat{p}$ rather than a sample mean $\bar{x}$
+* To get our proportion $\widehat{p}$ of **ONE** of the race categories (POC), we need to **first** calculate the total sample size for each replicate and the count of how many cases are `race == "POC"` in each replicate.
 
 ### Step 3: Generate the 95% Confidence Interval
 
@@ -402,14 +390,12 @@ The following will calculate the 95% confidence interval for the proportion of p
 boot_distrib_POC %>% 
   summarize(lower_ci = quantile(boot_stat, 0.025), 
             upper_ci = quantile(boot_stat, 0.975))
-
 ```
 
 
 # Question 8 
 
-Calculate a 95% CI for the **proportion** of respondents that identified as **White** using EITHER the percentile or 95% rule method. Note that you will first need to generate the bootstrap distribution for the proportion of respondents that identified as `White`. 
-
+Calculate a 95% CI for the **population proportion** of respondents $p$ that identified as **White** using EITHER the percentile or 95% rule method. Note that you will first need to generate the bootstrap distribution for the proportion of respondents that identified as `White`. 
 
 ```{r}
 boot_distrib_wh <- boot_samp_1000 %>% 
@@ -434,8 +420,8 @@ boot_distrib_wh %>%
 boot_distrib_wh %>% 
   summarize(lower_ci = quantile(boot_stat, 0.025), 
             upper_ci = quantile(boot_stat, 0.975))
-
 ```
+
 
 ***
 
