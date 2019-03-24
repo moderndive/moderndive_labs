@@ -68,7 +68,7 @@ set.seed(45)
 
 If your data are reasonably normally distributed you can generate a 95% confidence interval using the following formula: 
 
-$$ \widehat{statistic} ± 1.96 * \widehat{SE}$$
+$$\widehat{statistic}  1.96 * \widehat{SE}$$
 
 
 So, for instance if we wanted to calculate the 95% Confidence Interval for the mean number of `tvhours` that respondents watched: 
@@ -187,7 +187,7 @@ How many values of the bootstrap statistic (`boot_stat`) are there?  Please expl
 
 We can now use the bootstrap distribution for mean `tvhours` to calculate a 95% confidence interval, using the "95% rule", which states that a 95% CI is 
 
-$statistic ± 1.96 \times \widehat{SE}$
+$statistic ? 1.96 \times \widehat{SE}$
 
 * the statistic here would be the mean of the bootstrap distribution 
 
