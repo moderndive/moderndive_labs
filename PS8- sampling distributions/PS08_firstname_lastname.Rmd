@@ -61,7 +61,7 @@ library(moderndive)
 
 You can load and take a `glimpse()` of the  `gss_cat` data set in the `forcats` package like so: 
 
-```{r message = F}
+```{r message = F, results = "hide"}
 data(gss_cat)
 glimpse(gss_cat)
 ```
@@ -93,6 +93,7 @@ gss_14  %>%
 
 ***
 
+### Setting a seed
 
 **Setting a seed:** We will take some random samples in this Problem Set. In order to make sure R takes the same random sample every time you run your code, you can do what is called "setting a seed". Do this in any code chunk that you take a random sample! 
 
@@ -101,6 +102,9 @@ You can set a seed like so. Any number will do. (You do not need to run this rig
 set.seed(45)
 ```
 
+<br>
+
+***
 
 ## The true population proportion $p$ of divorced people
 
@@ -167,13 +171,13 @@ This sample proportion $\hat{p}$ is an **ESTIMATE**, and our **best guess** of w
 
 Ask two of your classmates what their estimate of $\hat{p}$ was. How do the $\hat{p}$ estimates from different samples compare? 
 
-**Answer:  0.08, 0.12, and 0.21. The p_hat estimates are different from different samples. GRADER: Students will obviously report this differently, just looking for basic comprehension that their is some difference **
+**Answer:**
 
 # Question 1b
 
 **Why** did everyone get a different estimate?
 
-**Answer: because every person took a different random sample with different people in it. In other words, sampling variation was at play.** 
+**Answer:** 
 
 <br>
 
@@ -236,13 +240,13 @@ Be sure to look at `n50_rep1000` in the data viewer to get a sense of these 1000
 
 What is the name of the column that identifies which of the 1000 samples each row is from?
 
-**Answer: replicate**
+**Answer: **
 
 # Question 2b
 
 What is the sample size n for each of the 1000 samples we took? (i.e. how many humans are sampled in each replicate)?
 
-**Answer: 50**
+**Answer: **
 
 <br> 
 
@@ -284,7 +288,7 @@ ggplot(p_hat_n50_1000rep, aes(x = p_hat)) +
 
 Based on your histogram, what appeared to be a very common value of $\hat{p}$? What was a very uncommon value?
 
-**Answer: 0.18 appeared to be a very common value...there was a really high value around 0.4. GREADER: this will differ from student to student obviously...looking for comprehension that the CENTER of the distribution has more common values, and the tails of the distribution are less common values**
+**Answer:**
 
 <br> 
 
@@ -309,7 +313,7 @@ p_hat_n50_1000rep %>%
 How do these values compare to the estimates we got above of $\hat{p}$ and $\widehat{SE}$ of $\hat{p}$ for `Divorced` respondents based on your **single** sample of 50 people earlier in this Problem Set?  
 
 
-**Answer: They are very similar**
+**Answer: **
 
 
 # Question 5a
@@ -319,8 +323,7 @@ Use the `rep_sample_n` function to collect 1000 virtual samples of size *n* = 15
 ```{r}
 set.seed(910)
 
-n15_1000rep <- gss_14 %>% 
-  rep_sample_n(size = 15, reps = 1000)
+  
 ```
 
 
@@ -330,11 +333,7 @@ Calculate sample proportion $\hat{p}$ of people who reported they were `Divorced
 
 
 ```{r}
-p_hat_n15_1000rep <- n15_1000rep %>% 
-  group_by(replicate) %>% 
-  summarize(divorce_count = sum(marital == "Divorced"), 
-            n = n()) %>% 
-  mutate(p_hat = divorce_count / n)
+
 ```
 
 # Question 5c
@@ -342,10 +341,7 @@ p_hat_n15_1000rep <- n15_1000rep %>%
 Visualize the sampling distribution of $\hat{p}$ from your n = 15 sampling with a histogram 
 
 ```{r}
-ggplot(p_hat_n15_1000rep, aes(x = p_hat)) +
-  geom_histogram(binwidth = 0.07, color = "black", fill = "sienna3") +
-  labs(x = "Sample proportion of divorced respondents",
-       title = "Sampling distribution of p-hat  based on n = 15")
+
 ```
 
 # Question 5d
@@ -353,9 +349,7 @@ ggplot(p_hat_n15_1000rep, aes(x = p_hat)) +
 calculate the mean of the n = 15 sampling distribution, and the standard error of the n = 15 sampling distribution 
 
 ```{r}
-p_hat_n15_1000rep %>% 
-  summarize(M = mean(p_hat), 
-            SE = sd(p_hat))
+
 ```
 
 <br> 
@@ -366,13 +360,13 @@ p_hat_n15_1000rep %>%
 
 How does the standard error of the n= 15 sampling distribution compare to the standard error of the n = 50 sampling distribution?
 
-**Answer: The standard error is much larger at n = 15. It is nearly has nearly double the value of the SE of the n= 50 sampling distribution.** 
+**Answer:** 
 
 # Question 6b
 
 Explain any observed differences from Question 6a
 
-**Answer: At a sample size of 15 we have less data to represent the population on each "resampling", and less information about the population on each "resampling". As such, the variability in the sampling distribution from one sampling event to the next is larger than at n = 50. Thinking about it in the EXTREME...if we "RESAMPLED" the entire population in every resample, we would get the EXACT same value each time...if we resampled only like 5 people in the pop every time we could get RADICALLY different values from sample to sample.**
+**Answer:**
 
 <br>
 
@@ -385,8 +379,6 @@ Use the `rep_sample_n` function to collect 1000 virtual samples of size *n* = 60
 ```{r}
 set.seed(84)
 
-n600_1000rep <- gss_14 %>% 
-  rep_sample_n(size = 600, reps = 1000)
 ```
 
 # Question 7b
@@ -394,11 +386,7 @@ n600_1000rep <- gss_14 %>%
 Calculate the proportion $\hat{p}$ of people who reported they were `Divorced`for each replicate of your n = 600 sampling
 
 ```{r}
-p_hat_n600_1000rep <- n600_1000rep %>% 
-  group_by(replicate) %>% 
-  summarize(n = n(), 
-            divorce_count = sum(marital == "Divorced")) %>% 
-  mutate(p_hat = divorce_count / n)
+
 ```
 
 # Question 7c
@@ -406,9 +394,7 @@ p_hat_n600_1000rep <- n600_1000rep %>%
 calculate the mean of the n = 600 sampling distribution, and the standard error of the n = 600 sampling distribution.
 
 ```{r}
-p_hat_n600_1000rep %>% 
-  summarize(M = mean(p_hat), 
-            SE = sd(p_hat))
+
 ```
 
 
@@ -416,7 +402,7 @@ p_hat_n600_1000rep %>%
 
 Was there more **variability** from sample to sample when we took a sample size of 600 or a sample size of 50? **Explain what evidence you have for assessing this**
 
-**Answer: the standard error of the sampling distribution for n = 600 was much smaller than the standard error of the sampling distribution for n = 50....indicating that we had more variability from sample to sample when only collecting 50 samples.**
+**Answer:**
 
 
 <br> 
@@ -428,7 +414,7 @@ Was there more **variability** from sample to sample when we took a sample size 
 
 Which sampling distribution looked more normally distributed (bell shaped and symmetrical); the one built on n = 15, 50 or 600? **Why?**
 
-**Answer: The sampling distribution for n = 600 looked more normally distributed. This is a key tenet of the central limit theorem: as your sample size increases, your sampling distribution becomes more normally distributed, and narrower (i.e. smaller spread) though the n = 50 one also looked pretty bell-shaped and symmetrical**
+**Answer:**
 
 
 <br> 
@@ -471,11 +457,7 @@ n15_1rep <- gss_14 %>%
 Following the example from the beginning of the Problem Set (roughly line 140), estimate the **sample proportion** $\hat{p}$ of people who identified as `Divorced` based on `n15_1rep`... AS WELL AS the **standard error of $\hat{p}$**
 
 ```{r}
-n15_1rep %>% 
-  summarize(divorce_count = sum(marital == "Divorced"), 
-            n = n()) %>% 
-  mutate(p_hat = divorce_count/ n, 
-         se = sqrt(p_hat * (1 - p_hat) / n))
+
 ```
 
 <br> 
@@ -511,7 +493,7 @@ Sample size n  | SE via sd of sampling distribution | SE via one sample and form
 
 Based on what you observed for Question 10, **IF** you collected a single sample from 600 respondents, do you think the standard error will be smaller or larger than the one you  calculated for n = 15. **Explain your reasoning** (Note: if you are not sure you can collect a sample and calculate the standard error)
 
-**Answer: I think the standard error will be smaller, because 1) we have a larger sample, so we are representing the population better, so there is less room for variability from sample to sample, 2) we saw a smaller standard error in the sampling distribution of n = 600, 3) with a bigger number for n in the denominator of the SE formula, the SE value goes down...GRADER: answer is acceptable as long as the students answers smaller, and gives one of these reasons** 
+**Answer:** 
 
 
 

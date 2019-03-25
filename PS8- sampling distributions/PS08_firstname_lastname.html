@@ -285,17 +285,6 @@ library(moderndive)</code></pre>
 <p>You can load and take a <code>glimpse()</code> of the <code>gss_cat</code> data set in the <code>forcats</code> package like so:</p>
 <pre class="r"><code>data(gss_cat)
 glimpse(gss_cat)</code></pre>
-<pre><code>## Observations: 21,483
-## Variables: 9
-## $ year    &lt;int&gt; 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, ...
-## $ marital &lt;fct&gt; Never married, Divorced, Widowed, Never married, Divor...
-## $ age     &lt;int&gt; 26, 48, 67, 39, 25, 25, 36, 44, 44, 47, 53, 52, 52, 51...
-## $ race    &lt;fct&gt; White, White, White, White, White, White, White, White...
-## $ rincome &lt;fct&gt; $8000 to 9999, $8000 to 9999, Not applicable, Not appl...
-## $ partyid &lt;fct&gt; Ind,near rep, Not str republican, Independent, Ind,nea...
-## $ relig   &lt;fct&gt; Protestant, Protestant, Protestant, Orthodox-christian...
-## $ denom   &lt;fct&gt; Southern baptist, Baptist-dk which, No denomination, N...
-## $ tvhours &lt;int&gt; 12, NA, 2, 4, 1, NA, 3, NA, 0, 3, 2, NA, 1, NA, 1, 7, ...</code></pre>
 <p>Be sure to take a look at the data in the <strong>viewer</strong>. And type <code>?gss_cat</code> into the <strong>console</strong> to see a description of the variables in this data set.</p>
 <p><br></p>
 <hr />
@@ -340,9 +329,14 @@ glimpse(gss_cat)</code></pre>
 </div>
 <p><br></p>
 <hr />
+<div id="setting-a-seed" class="section level3">
+<h3>Setting a seed</h3>
 <p><strong>Setting a seed:</strong> We will take some random samples in this Problem Set. In order to make sure R takes the same random sample every time you run your code, you can do what is called “setting a seed”. Do this in any code chunk that you take a random sample!</p>
 <p>You can set a seed like so. Any number will do. (You do not need to run this right now…just showing you how)</p>
 <pre class="r"><code>set.seed(45)</code></pre>
+<p><br></p>
+<hr />
+</div>
 </div>
 <div id="the-true-population-proportion-p-of-divorced-people" class="section level2">
 <h2>The true population proportion <span class="math inline">\(p\)</span> of divorced people</h2>
@@ -427,12 +421,12 @@ n50_1rep &lt;- gss_14 %&gt;%
 <div id="question-1a" class="section level1">
 <h1>Question 1a</h1>
 <p>Ask two of your classmates what their estimate of <span class="math inline">\(\hat{p}\)</span> was. How do the <span class="math inline">\(\hat{p}\)</span> estimates from different samples compare?</p>
-<p><strong>Answer: 0.08, 0.12, and 0.21. The p_hat estimates are different from different samples. GRADER: Students will obviously report this differently, just looking for basic comprehension that their is some difference </strong></p>
+<p><strong>Answer:</strong></p>
 </div>
 <div id="question-1b" class="section level1">
 <h1>Question 1b</h1>
 <p><strong>Why</strong> did everyone get a different estimate?</p>
-<p><strong>Answer: because every person took a different random sample with different people in it. In other words, sampling variation was at play.</strong></p>
+<p><strong>Answer:</strong></p>
 <p><br></p>
 <hr />
 <div id="b-estimating-widehatse-from-a-single-sample" class="section level3">
@@ -498,12 +492,12 @@ n50_1000rep &lt;- gss_14 %&gt;%
 <div id="question-2a" class="section level1">
 <h1>Question 2a</h1>
 <p>What is the name of the column that identifies which of the 1000 samples each row is from?</p>
-<p><strong>Answer: replicate</strong></p>
+<p><strong>Answer: </strong></p>
 </div>
 <div id="question-2b" class="section level1">
 <h1>Question 2b</h1>
 <p>What is the sample size n for each of the 1000 samples we took? (i.e. how many humans are sampled in each replicate)?</p>
-<p><strong>Answer: 50</strong></p>
+<p><strong>Answer: </strong></p>
 <p><br></p>
 <hr />
 <p>The following code chunk calculates the sample proportion <span class="math inline">\(\hat{p}\)</span> of people who reported they were divorced for each of the <strong>1000 samples</strong></p>
@@ -574,7 +568,7 @@ n50_1000rep &lt;- gss_14 %&gt;%
 <div id="question-3" class="section level1">
 <h1>Question 3</h1>
 <p>Based on your histogram, what appeared to be a very common value of <span class="math inline">\(\hat{p}\)</span>? What was a very uncommon value?</p>
-<p><strong>Answer: 0.18 appeared to be a very common value…there was a really high value around 0.4. GREADER: this will differ from student to student obviously…looking for comprehension that the CENTER of the distribution has more common values, and the tails of the distribution are less common values</strong></p>
+<p><strong>Answer:</strong></p>
 <p><br></p>
 <hr />
 <div id="c-mean-and-standard-error-of-the-sampling-distribution-of-hatp-for-n-50" class="section level3">
@@ -606,122 +600,63 @@ n50_1000rep &lt;- gss_14 %&gt;%
 <div id="question-4" class="section level1">
 <h1>Question 4</h1>
 <p>How do these values compare to the estimates we got above of <span class="math inline">\(\hat{p}\)</span> and <span class="math inline">\(\widehat{SE}\)</span> of <span class="math inline">\(\hat{p}\)</span> for <code>Divorced</code> respondents based on your <strong>single</strong> sample of 50 people earlier in this Problem Set?</p>
-<p><strong>Answer: They are very similar</strong></p>
+<p><strong>Answer: </strong></p>
 </div>
 <div id="question-5a" class="section level1">
 <h1>Question 5a</h1>
 <p>Use the <code>rep_sample_n</code> function to collect 1000 virtual samples of size <em>n</em> = 15. <strong>BE SURE TO NAME YOUR SAMPLE SOMETHING NEW, TO ENSURE YOU CAN DISTINGUISH IT FROM THE n = 50 SAMPLE ABOVE!</strong></p>
-<pre class="r"><code>set.seed(910)
-
-n15_1000rep &lt;- gss_14 %&gt;% 
-  rep_sample_n(size = 15, reps = 1000)</code></pre>
+<pre class="r"><code>set.seed(910)</code></pre>
 </div>
 <div id="question-5b" class="section level1">
 <h1>Question 5b</h1>
 <p>Calculate sample proportion <span class="math inline">\(\hat{p}\)</span> of people who reported they were <code>Divorced</code> for each replicate of your n = 15 sampling</p>
-<pre class="r"><code>p_hat_n15_1000rep &lt;- n15_1000rep %&gt;% 
-  group_by(replicate) %&gt;% 
-  summarize(divorce_count = sum(marital == &quot;Divorced&quot;), 
-            n = n()) %&gt;% 
-  mutate(p_hat = divorce_count / n)</code></pre>
 </div>
 <div id="question-5c" class="section level1">
 <h1>Question 5c</h1>
 <p>Visualize the sampling distribution of <span class="math inline">\(\hat{p}\)</span> from your n = 15 sampling with a histogram</p>
-<pre class="r"><code>ggplot(p_hat_n15_1000rep, aes(x = p_hat)) +
-  geom_histogram(binwidth = 0.07, color = &quot;black&quot;, fill = &quot;sienna3&quot;) +
-  labs(x = &quot;Sample proportion of divorced respondents&quot;,
-       title = &quot;Sampling distribution of p-hat  based on n = 15&quot;)</code></pre>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgAAAANgCAMAAADd/FOkAAABWVBMVEUAAAAAACsAAFUAKysAK1UAK4AAVYAAVaorAAArACsrKwArKysrK1UrK4ArVVUrVYArVaorgIArgKorgNQzMzNNTU1NTWtNTYhNa2tNa4hNa6ZNiMRVAABVKwBVKytVVQBVVStVVVVVVYBVgIBVgKpVgNRVqqpVqtRVqv9rTU1ra01ra4hriKZriMRrpuGAKwCAVQCAVSuAVVWAgCuAgFWAgKqAqqqAqtSAqv+A1NSA1P+ITU2Ia02Ia2uIpqaIxOGIxP+ma02miGumxOGm4f+qVQCqVSuqVVWqgCuqgFWqgICqqoCqqqqqqtSq1NSq1P+q///EiE3EiGvEpmvE4f/E///NaDnUgCvUgFXUqlXUqoDUqqrU1KrU1NTU1P/U/6rU/9TU///hpmvhxIjhxKbh///r6+v/qlX/xIj/1ID/1Kr/1NT/4ab/4cT//6r//8T//9T//+H///+GtqjvAAAACXBIWXMAAB2HAAAdhwGP5fFlAAAgAElEQVR4nO29a4OkxZlYmc3FtEEW7KBCKySNxUpaNbuyWGTPaC3W60GeZqVdW1JrkdswDLvgwc1VNPX/P7jyWu8t832jIiri9JPnfIHqyso6T0ZHnKq89epSRETOklVrARERaYMBEBE5UwyAiMiZYgBERM4UAyAicqYYABGRM8UAiIicKQZARORMMQAiImeKARAROVMMgIjImWIARETOFAMgInKmGAARkTPFAIiInClVA/D4//7ru6vV6ulv/+qjYtf5lx+s7vz68J8c7q9WL18mX9Pu4o/fWK3uJXyzAr4H3nthfaP+74svvxs0g9RpF5Gvlc/D1bPXfzWvhPYUWysRFBUD8Pidzob6aalrrRqA9/969JnUAOyuomAA3kk9ohaetBPD7okagM/udgKwHtIASGzqBaC7n654ttAvARUDcDXB+DNpAThcRbkAPNrenk/9cfFXLDppJ4ftfDJiAK4WpfP3cv2RAZDY1AvA+hfqb23u+/ni/R+uim32cifp7AF06lstPBJL3vOz4+HV8fSrpK9YdNKeNI0ZgM9/0PvBpPfrgEhIqgXgajtd7+/H94v9UHX2AbjSfi75KwzAmPfu9n8zfZR8w4o8aVQLwMPevT7rE6TMbjcAybekAZjg8zevTv/nu39JH7b+jUTk1qkZgJf7H5b58coAGIACrH9BXb38qBOAW5lRhEXNABw58d9/c/Pc0J98uP3w/vrg+Xz9Z9/a3LX9/l+vHzz4/eZz2035eedPhg8C399cYP3VT//k+vkc6ydK3nnpo8kz5vH6G3Q+eX3yff7m82uxF7ffaXNE7B4PvBrm3uN37q7ufOvXvQeBP1hf1e7yvRNtO33nKjrn6wfr58beefEP1181nqBD7+L7a+w9BjxxK/XYeI2+Q28ZusNOMDXt8CrGt+Duj3rTjm//E9PO3DinPtl9RHfqMfOrgZ/5w2U3ALfQahEa1QKwfrLKzyb+/PMfHp5psf15ax2Ah7s/evn6uaObs2Fz8Oye9rJ6cbNVJwKw/5L9/t1/izu/njhjRp/cX1PnWavPrM+fYQDubz/oBuBhz2xZAK6fHPXS4atGE1wzuPjxAPRvpR5rr/fudkYbL8OSAAymHa/k8Bbs/dFLg6+aXJy0G+fUJ2cD8M/Xfzm7AVg/Bvz/v/d8v1YisagWgM1efmb0CrDxc+2uAvBvDn/0s/u9T66v5Mf7M2+7V8cBeGHVu0DnWzz1L0dnzOEEPXyyc02942IQgBd236ETgNcG33hJALrzH75qOMH0zbX+3NEADG6lHidvo+2ACwIwnHZqJfu3YP+pwM8duf1PTDtz45z65FwAtnQDcPX/z+yT5mMBEpR6TwPdbcE73/7bDzt/un460M+u9tzj3+2fJbQ5NtY/dL2//l1+89nHv90dGNsD5JnfX15+sH8m6TgA26/e/GR5b3+F6x8gtz/09vfy5gpfuhLaPDO1e4Xrk2n9icsvfrv/qus7BTY//P7VR5dffNh9HcDV6bH/xvtJ+gHoXEXXd637QferhhP0bq7BxSfuOZm4lUZXMr6NBssw+xjAxLT9q5i4BR/ubu0v3tn9ycTtf3La2Rvn6CcX0Q3A/hccCyCBqflK4DcP++nF/RPX11XY7dT95rt/2G/rezF2h9D97Sc358Vzmy26fibp+se4iQC8fLjq/Tm0ve9p8zzv/la+/uTmqjsB6DxmMTq9N4fDy4cJDgHYfsHebEkArp8c2/2qwQR93cHFjwWgfyv1GH+HiWWYD0B/2vFVjG/B/mX2v1YNbv+T0566cU5/chHdAGxet/L79QNId2+YExE8Vd8L6IvfHX7hf2abgM6Ou9q0+wDsjqzONn50HYD9ebY7TcYB2F9g9wT5zjn0aHTGdJ5Evz9urgPwzODk7AVgfzp2AjAwWxKA+7359181mKCnO7z4kQAMXQbXMvgOE8swG4DBdxhfxfgW7D4RYPOI7dTtf3LaUzfO6U8uoj9Ep/G+JExiUvvdQB+//8vnp3+rvtpm+x/ynjv8yf7wujod1p/svXxge/KNA9D/sbP7bL7RD4a9p/r1HwTePIjav7uqF4DOQbEPwMBsQQCG3/+5qQmO6z7X+WaDiw1dupz4DtfLMBuA499hdxXjW/B+R//R5iH+idv/5LQn1U9+chGPpk/6q799PiFIQtLi7aA3T/zr/WD6+B//n1/eHd1x0jmDOgE4fNl2k48D8PLU57cMz5jeJx/2AnB4vPJbfzN+YmDnfJl6L6CHh9NqJgC97787fSa+alK3c5fZRAD6LtcPvq5vxaPfobsMy18H0LuOzlWMbsHBu0FdfdXU7X9y2hM3zswnF3EkAL4kQKLS6N8DWD9Mt9tqH7z5fPd0mgtA70xYFoDrO8EnAnD9yUeDp4FeH1e7+6tmAjA0axmAgcuCAAyXYS4Ao2nHVzG8BYcB2DyFanT7n5z2xgFIfxbQkWsWiUStAAx35P636usnjycHYPFvADcLwO7dATr3Vy0OQPvfAAYuswEYL8PyAOyuY3wVw1vQAIjAqBWAR4M9d31ur3nh2z/+T//fD1B3AW35YvtP2Byes3+bdwEd/6pjuiceA5i+g2Z0K3SenjNYhtS7gCauYngLju9JWX4X0PyNc8sB8C4giUitAKyf49HdQ9fPtdk8efyy9yDwyQDMPgjcPwS6p87oLehOPAjcudD+aexzATjxIPD96QAceZzz2DFW7kHgwXeYWIbUB4EnruL64rtbcORykweBKz0G4LtCyDlQKwDr3dz94erh6N6IRwsfBN5fy+5OpLkAnH4a6MPx8/6mj+YlARiYdZ6Vsv7s5NNAH04+0/HoMTZx8SMBGLp0GX+HiWWYDcDgO4yuYuIW7L4j7MPhn4yfu59445QNQPeGe5j07+2IPDlUfS+gZw9vqrJ+le9zvZ8kP1v6LKD9a4N2Z9BsAK5fa/SX6ReCXb/WaPA6gP1ZsLecC8DArHNurF84lvBCsKPHWMILwQYuXSZ/Sxouw2wA+t9h4irGt2Dnqf6783Xi9j85bb0AdG658SsURIJQ918EW734+4/2TwPdb+jNHQeb9wZYGIDrdwe4d7kgAJtvvH4riPl3G+ge8+tdv33rovWnDs9qebl31Zf9AFy/qcHmR9918575t/uHQjdfcLiKju/43Q5OnnFL3wqidysNr2T8G8BwGU7+iw0T046vYuIWXOuv36Ji83YRh8Xp3/4np634NNBHXVd/AZCYVPw3ge/3HoXbHu3X7wV2+LO5AFy/31f3JD0RgP7jf5OH5eab/6j/c/74vWB2l713LACvDb5J51kvP757HYDNVey/S1fuyFvIdRlf/EgABrdSj+nfkgbLcD3s1FqOp524iqO34Ibh28Ptb/+T09Z8HUDn76uPAEhQar4O4L3OGbF/i93DIXHnf35jeDfvkWcB7d7x985Puxc6EYDrJyi++L+Nz8P9CXTn3vBZQP/loHtnexfS7t9ff/nos4D2w+y/x1/2b3V877NdAA5XcX1f0OHZky+NDvSJY2x08WPPAurfSj0mvsN4Ga6HnWBq2omrGN+C1+8HdXiD6OHtf3Laqi8Ee2foKhKNui8Ee//NzU+mL1z/kyG7fyBk/a/Fjx6QPPY00PXdDod/dWRBALb/IMz635eZfDrfB5t/OeUP46eBfvG7je23rt/Dev328Ku/Ov400M2/bdL9x042/xLN1R8cArC/is5s76+fJ/l09988OXmMDS5+9GmgvVupx2Qkh8twPewEk9NOXMX4Frz8YPOPxnyr88/YD27/k9PWfSXw9t+z6bqKxKLRK4FvSOZr8s/kJf1nMqaI5BI/AJ2fC8/k+dwGQEQWET8AnSdxP5x4TmRADICILCJ+APZP57v84M2jD2rGwgCIyCLiB6D7dL6z+AXAAIjIMs4gAJ1/ivKlczj/DYCILOMMArB/Ot/TPz6Tp3MbABFZxJMVABERKYYBEBE5UwyAiMiZYgBERM4UAyAicqYYABGRM8UAiIicKQZARORMMQAiImeKARAROVMMgIjImWIARETOFAMgInKmVArAf2OAESlCoGFcGCquDJUbrowBCEOgYVwYKq4MFQOQDkakCIGGcWGouDJUDEA6GJEiBBrGhaHiylAxAOlgRIoQaBgXhoorQ8UApIMRKUKgYVwYKq4MFQOQDkakCIGGcWGouDJUDEA6GJEiBBrGhaHiylAxAOlgRIoQaBgXhoorQ8UApIMRKUKgYVwYKq4MFQOQDkakCIGGcWGouDJUDEA6GJEiBBrGhaHiylAxAOlgRIoQaBgXhoorQ8UApIMRKUKgYVwYKq4MFQOQDkakCIGGcWGouDJUDEA6GJEiBBrGhaHiylAxAOlgRIoQaBgXhoorQ8UApIMRKUKgYVwYKq4MFQOQDkakCIGGcWGouDJUDEA6GJEiBBrGhaHiylAxAOlgRIoQaBgXhoorQ8UApIMRKUKgYVwYKq4MFQOQDkakCIGGcWGouDJUDEA6GJEiBBrGhaHiylAxAOlgRIoQaBgXhoorQ8UApIMRKUKgYVwYKq4MFQOQDkakCIGGcWGouDJUDEA6GJEiBBrGhaHiylAxAOlgRIoQaBgXhoorQ8UApIMRKUKgYVwYKq4MFQOQDkakCIGGcWGouDJUDEA6GJEiXA+zYnGDUYIuzJOPK0PFAKSDESnCYZjWB/6I9FFiLkwAXBkqBiAdjEgROgH4zyQMQGuBgrgyVAxAOhiRIhgAKJGGcWWoGIB0MCJFMABQIg3jylAxAOlgRIpgAKBEGsaVoWIA0sGIFMEAQIk0jCtDxQCkgxEpggGAEmkYV4aKAUgHI1IEAwAl0jCuDBUDkA5GpAgGAEqkYVwZKgYgHYxIEQwAlEjDuDJUDEA6GJEiGAAokYZxZagYgHQwIkUwAFAiDePKUDEA6WBEimAAoEQaxpWhYgDSwYgUwQBAiTSMK0PFAKSDESmCAYASaRhXhooBSAcjUgQDACXSMK4MFQOQDkakCAYASqRhXBkqBiAdjEgRDACUSMO4MlQMQDoYkSIYACiRhnFlqBiAdDAiRTAAUCIN48pQMQDpYESKYACgRBrGlaFiANLBiBTBAECJNIwrQ8UApIMRKYIBgBJpGFeGigFIByNSBAMAJdIwrgwVA5AORqQIBgBKpGFcGSoGIB2MSBEMAJRIw7gyVAxAOhiRIhgAKJGGcWWoGIB0MCJFMABQIg3jylAxAOlgRIpgAKBEGsaVoWIA0sGIFMEAQIk0jCtDxQCkgxEpggGAEmkYV4aKAUgHI1IEAwAl0jCuDBUDkA5GpAgGAEqkYVwZKgYgHYxIEQwAlEjDuDJUDEA6GJEiGAAokYZxZagYgHQwIkUwAFAiDePKUDEA6WBEimAAoEQaxpWhYgDSwYgUwQBAiTSMK0PFAKSDESmCAYASaRhXhooBSAcjUgQDACXSMK4MFQOQDkakCAYASqRhXBkqBiAdjEgRDACUSMO4MlQMQDoYkSIYACiRhnFlqBiAdDAiRTAAUCIN48pQMQDpYESKYACgRBrGlaFiANLBiBTBAECJNIwrQ8UApIMRKYIBgBJpGFeGigFIByNSBAMAJdIwrgwVA5AORqQIBgBKpGFcGSoGIB2MSBEMAJRIw7gyVAxAOhiRIhgAKJGGcWWoGIB0MCJFMABQIg3jylAxAOlgRIpgAKBEGsaVoWIA0sGIFMEAQIk0jCtDxQCkgxEpggGAEmkYV4aKAUgHI1IEAwAl0jCuDBUDkA5GpAgGAEqkYVwZKgYgHYxIEQwAlEjDuDJUDEA6GJEiGAAokYZxZagYgHQwIkUwAFAiDePKUDEA6WBEimAAoEQaxpWhYgDSwYgUwQBAiTSMK0PFAKSDESmCAYASaRhXhooBSAcjUgQDACXSMK4MFQOQDkakCAYASqRhXBkqBiAdjEgRDACUSMO4MlSeqADIbYILQOsbREQW4W8ATy7+BgAl0jCuDJUn6jeAwrPfFIxIEQwAlEjDuDJUDEA6GJEiGAAokYZxZagYgHQwIkUwAFAiDePKUDEA6WBEimAAoEQaxpWhYgDSwYgUwQBAiTSMK0PFAKSDESmCAYASaRhXhooBSAcjUgQDACXSMK4MFQOQDkakCAYASqRhXBkqBiAdjEgRDACUSMO4MlQMQDoYkSIYACiRhnFlqBiAdDAiRTAAUCIN48pQMQDpYESKYACgRBrGlaFiANLBiBTBAECJNIwrQ8UApIMRKYIBgBJpGFeGigFIByNSBAMAJdIwrgwVA5AORqQIBgBKpGFcGSoGIB2MSBEMAJRIw7gyVAxAOhiRIhgAKJGGcWWoGIB0MCJFMABQIg3jylAxAOlgRIpgAKBEGsaVoWIA0sGIFMEAQIk0jCtDxQCkgxEpggGAEmkYV4aKAUgHI1IEAwAl0jCuDBUDkA5GpAgGAEqkYVwZKgYgHYxIEQwAlEjDuDJUDEA6GJEiGAAokYZxZagYgHQwIkUwAFAiDePKUDEA6WBEimAAoEQaxpWhYgDSwYgUwQBAiTSMK0PFAKSDESmCAYASaRhXhooBSAcjUgQDACXSMK4MFQOQDkakCAYASqRhXBkqBiAdjEgRDACUSMO4MlQMQDoYkSIYACiRhnFlqBiAdDAiRTAAUCIN48pQMQDpYESKYACgRBrGlaFiANLBiBTBAECJNIwrQ8UApIMRKQI3ADCaLUwAgm6ZABiAdDAiRTAAS2m1MAEIumUCYADSwYgUgRuA1gZ9DEAGQbdMAAxAOhiRIhiAZRiADIJumQAYgHQwIkUwAMswABkE3TIBMADpYESKYACWYQAyCLplAmAA0sGIFMEALMMAZBB0ywTAAKSDESmCAViGAcgg6JYJgAFIByNSBAOwDAOQQdAtEwADkA5GpAgGYBkGIIOgWyYABiAdjEgRDMAyDEAGQbdMAAxAOhiRIhiAZRiADIJumQAYgHQwIkUwAMswABkE3TIBMADpYESKYACWYQAyCLplAmAA0sGIFMEALMMAZBB0ywTAAKSDESmCAViGAcgg6JYJgAFIByNSBAOwDAOQQdAtEwADkA5GpAgGYBkGIIOgWyYABiAdjEgRDMAyDEAGQbdMAAxAOhiRIhiAZRiADIJumQAYgHQwIkUwAMswABkE3TIBMADpYESKYACWYQAyCLplAmAA0sGIFMEALMMAZBB0ywTAAKSDESmCAViGAcgg6JYJgAFIByNSBAOwDAOQQdAtEwADkA5GpAgGYBkGIIOgWyYABiAdjEgRDMAyDEAGQbdMAAxAOhiRIhiAZRiADIJumQAYgHQwIkUwAMswABkE3TIBMADpYESKYACWYQAyCLplAmAA0sGIFMEALMMAZBB0ywTAAKSDESmCAViGAcgg6JYJgAFIByNSBAOwDAOQQdAtEwADkA5GpAgGYBkGIIOgWyYABiAdjEgRDMAyDEAGQbdMAAxAOhiRIhiAZRiADIJumQAYgHQwIkUwAMswABkE3TIBMADpYESKYACWYQAyCLplAmAA0sGIFMEALMMAZBB0ywTAAKSDESmCAViGAcgg6JYJgAFIByNSBAOwDAOQQdAtEwADkA5GpAgGYBkGIIOgWyYABiAdjEgRDMAyDEAGQbdMAAxAOhiRIhiAZRiADIJumQAYgHQwIkUwAMswABkE3TIBMADpYESKYACWYQAyCLplAmAA0sGIFMEALMMAZBB0ywTAAKSDESmCAViGAcgg6JYJgAFIByNSBAOwDAOQQdAtEwADkA5GpAgGYBkGIIOgWyYABiAdjEgRDMAyDEAGQbdMAAxAOhiRIhiAZRiADIJumQAYgHQwIkUwAMswABkE3TIBMADpYESKYACWYQAyCLplAmAA0sGIFMEALMMAZBB0ywTAAKSDESmCAViGAcgg6JYJgAFIByNSBAOwDAOQQdAtEwADkA5GpAgGYBkGIIOgWyYABiAdjEgRDMAyDEAGQbdMAAxAOhiRIhiAZRiADIJumQAYgHQwIkUwAMswABkE3TIBMADpYESKYACWYQAyCLplAmAA0sGIFMEALMMAZBB0ywTAAKSDESmCAViGAcgg6JYJgAFIByNSBAOwDAOQQdAtEwADkA5GpAgGYBkGIIOgWyYABiAdjEgRDMAyDEAGQbdMAAxAOhiRIhiAZRiADIJumQAYgHQwIkUwAMswABkE3TIBMADpYESKYACWYQAyCLplAmAA0sGIFMEALMMAZBB0ywSgYQD+6d9dXLzy83e3H3zzm9cvLiY/MAC3iwFYhgHIIOiWCUC7APzpYsMrf7/+4Ou3Nh9898+jDwzALWMAlmEAMgi6ZQLQLACfXrzy7y8vv3p7e84/uHj13fUHr34y/MAA3DIGYBkGIIOgWyYArQLwzdsXf7f+79VP+1f//fL1TQa+fmv9+0DvAwNw2xiAZRiADIJumQC0CsDXb+3u4Xlw8YvLy48vvr/54OPRBwbgtjEAyzAAGQTdMgFo/iygTQAebH8duPx0ffb3PjAAt40BWIYByCDolglA6wBs7uj55u3dvT1fvv7qJ70Pthf6zo4bfxdZAOzEhelc+bReIBEoN98bm/t7DAAB2IkL0zEAIse48d74dPM00M6Z/90/9z7oX7rwbz83BSNSBO8CWoZ3AWUQdMsEoO1dQJ++/sr6/v653wAMwC1iAJZhADIIumUC0DQAH+9eBmYAGmIAlmEAMgi6ZQLQMgB/utg/099nAbXDACzDAGQQdMsEoF0Avnlw8b39ffz7p/zvXgfwi94fGoBbxQAswwBkEHTLBKBdAB503urBVwK3wwAswwBkEHTLBKBZAD7uvtXPN29ffO/w9j+9DwzAbWMAlmEAMgi6ZQLQ7q0gLvas7+n/qvsGoF/5bqAVMQDLMAAZBN0yAWgVgE8vegG4/Oo3V//3892P/L0PDMDtYgCWYQAyCLplAtD6rSCSKDz7TcGIFMEALMMAZBB0ywTAAKSDESmCAViGAcgg6JYJgAFIByNSBAOwDAOQQdAtEwADkA5GpAgGYBkGIIOgWyYABiAdjEgRDMAyDEAGQbdMAAxAOhiRIhiAZRiADIJumQAYgHQwIkUwAMswABkE3TIBMADpYESKYACWYQAyCLplAmAA0sGIFMEALMMAZBB0ywTAAKSDESmCAViGAcgg6JYJgAFIp5TIikbrM7YHTMcA5IDZu0WINIwBSKeQSOvjfkzrM7YHTMcA5IDZu0WINIwBSKdYAFqfaX1gPjAdA5ADZu8WIdIwBiAdA1ADmI4ByAGzd4sQaRgDkI4BqAFMxwDkgNm7RYg0jAFIxwDUAKZjAHLA7N0iRBrGAKRjAGoA0zEAOWD2bhEiDWMA0jEANYDpGIAcMHu3CJGGMQDpGIAawHQMQA6YvVuESMMYgHQMQA1gOgYgB8zeLUKkYQxAOgagBjAdA5ADZu8WIdIwBiAdA1ADmI4ByAGzd4sQaRgDkI4BqAFMxwDkgNm7RYg0jAFIxwDUAKZjAHLA7N0iRBrGAKRjAGoA0zEAOWD2bhEiDWMA0jEANYDpGIAcMHu3CJGGMQDpGIAawHQMQA6YvVuESMMYgHQMQA1gOgYgB8zeLUKkYQxAOgagBjAdA5ADZu8WIdIwBiAdA1ADmI4ByAGzd4sQaRgDkI4BqAFMxwDkgNm7RYg0jAFIxwDUAKZjAHLA7N0iRBrGAKRjAGoA0zEAOWD2bhEiDWMA0jEANYDpGIAcMHu3CJGGMQDpGIAawHQMQA6YvVuESMMYgHQMQA1gOgYgB8zeLUKkYQxAOgagBjAdA5ADZu8WIdIwBiAdA1ADmI4ByAGzd4sQaRgDkI4BqAFMxwDkgNm7RYg0jAFIxwDUAKZjAHLA7N0iRBrGAKRjAGoA0zEAOWD2bhEiDWMA0jEANYDpGIAcMHu3CJGGMQDpGIAawHQMQA6YvVuESMMYgHQMQA1gOgYgB8zeLUKkYQxAOgagBjAdA5ADZu8WIdIwBiAdA1ADmI4ByAGzd4sQaRgDkI4BqAFMxwDkgNm7RYg0jAFIxwDUAKZjAHLA7N0iRBrGAKRjAGoA0zEAOWD2bhEiDWMA0jEANYDpGIAcMHu3CJGGMQDpGIAawHQMQA6YvVuESMMYgHQMQA1gOgYgB8zeLUKkYQxAOgagBjAdA5ADZu8WIdIwBiAdA1ADmI4ByAGzd4sQaRgDkI4BqAFMxwDkgNm7RYg0jAFIxwDUAKZjAHLA7N0iRBrGAKRjAGoA0zEAOWD2bhEiDWMA0jEANYDpGIAcMHu3CJGGMQDpGIAawHQMQA6YvVuESMMYgHQMQA1gOgYgB8zeLUKkYQxAOgagBjAdA5ADZu8WIdIwBiAdA1ADmI4ByAGzd4sQaRgDkI4BqAFMxwDkgNm7RYg0jAFIxwDUAKZjAHLA7N0iRBrGAKRjAGoA0zEAOWD2bhEiDWMA0jEANYDpGIAcMHu3CJGGMQDpGIAawHQMQA6YvVuESMMYgHQMQA1gOgYgB8zeLUKkYQxAOgagBjAdA5ADZu8WIdIwBiAdA1ADmI4ByAGzd4sQaRgDkI4BqAFMxwDkgNm7RYg0jAFIxwDUAKZjAHLA7N0iRBrGAKRjAGoA0zEAOWD2bhEiDWMA0jEANYDpGIAcMHu3CJGGMQDpGIAawHQMQA6YvVuESMMYgHQMQA1gOgYgB8zeLUKkYQxAOgagBjAdA5ADZu8WIdIwBiAdA1ADmI4ByAGzd4sQaRgDkI4BqAFMxwDkgNm7RYg0jAFIxwDUAKZjAHLA7N0iRBrGAKRjAGoA0zEAOWD2bhEiDWMA0jEANYDpGIAcMHu3CJGGMQDpGIAawHQMQA6YvVuESMMYgHQMQA1gOgYgB8zeLUKkYQxAOgagBjAdA5ADZu8WIdIwBiAdA1ADmI4ByAGzd4sQaRgDkI4BqAFMxwDkgNm7RYg0jAFIxwDUAKZjAHLA7N0iRBrGAKRjAGoA0zEAOWD2bhEiDWMA0jEANYDpGB7rUzIAACAASURBVIAcMHu3CJGGMQDpGIAawHQMQA6YvVuESMMYgHQMQA1gOgYgB8zeLUKkYQxAOgagBjAdA5ADZu8WIdIwBiAdA1ADmI4ByAGzd4sQaRgDkI4BqAFMxwDkgNm7RYg0jAFIxwDUAKZjAHLA7N0iRBrGAKRjAGoA0zEAOWD2bhEiDWMA0jEANYDpGIAcMHu3CJGGuc0APP7l//TR4YPPfvQvPpq8lAGAAPOB6RiAHDB7twiRhrnNAPzlB0/9cfoDA/DfDMAMMB0DkANm7xYh0jDVAvDZXQPQh3fCtTboAdMxADlg9m4RIg1zSwH4yw9WI571LqAevBOutUEPmI4ByAGzd4sQaZjb+g3g0TgA93LPf8rtbgBqANMxADlg9m4RIg1zWwF4/H+99tqP7t759mt7fvz77POfcrsbgBrAdAxADpi9W4RIw1R7DKAEhWe/KQagBjAdA5ADZu8WIdIw1Z4GagCG8E641gY9YDoGIAfM3i1CpGF8IVg6BqAGMB0DkANm7xYh0jC3H4B/3PPhbbbhCYR3wrU26AHTufJp/RdGBMqxvfH5m51nAfk6gD68E661QQ+Yjr8B5IDZu0WINMyt/gbQfzWAAejDO+FaG/SA6RiAHDB7twiRhrnVADxcrZ758X/c8598IVgP3gnX2qAHTMcA5IDZu0WINMytPgvojdVzuWe+AagGzAemYwBywOzdIkQa5nZfB3Dn1wbgKLwTrrVBD5iOAcgBs3eLEGkYXwiWjgGoAUzHAOSA2btFiDTM7d4F5G8AJ+CdcK0NesB0DEAOmL1bhEjD3PKDwC8bgKPwTrjWBj1gOgYgB8zeLUKkYW41AFe/AvzMAByDd8K1NugB0zEAOWD2bhEiDXO77wX0o9Xq+g1B898YqPDsN8UA1ACmYwBywOzdIkQa5nYfBF75QrDj8E641gY9YDoGIAfM3i1CpGEMQDoGoAYwHQOQA2bvFiHSML4baDoGoAYwHQOQA2bvFiHSMAYgHQNQA5iOAcgBs3eLEGkYA5COAagBTMcA5IDZu0WINMytBuCLf+yS/+8BFJ79phiAGsB0DEAOmL1bhEjD+CBwOgagBjAdA5ADZu8WIdIwBiAdA1ADmI4ByAGzd4sQaZhbfSHYP+z/KYB/88PVnb/13wPowzvhWhv0gOkYgBwwe7cIkYap9SDwZ3efzT7/Kbe7AagBTMcA5IDZu0WINEy1ZwGVeGO4wrPfFANQA5iOAcgBs3eLEGmYagEo8StA4dlvigGoAUzHAOSA2btFiDRMtQCU+NdhCs9+UwxADWA6BiAHzN4tQqRhKv4GYAD68E641gY9YDoGIAfM3i1CpGFqBeDx/ZV3AfXhnXCtDXrAdAxADpi9W4RIw9zuvwew/6cAXvvR3ZUPAg/gnXCtDXrAdAxADpi9W4RIw9R7IZhPAx3AO+FaG/SA6fznFYwifwdrgdm7RYg0TK0APP2T/POfcrsbgBrAdHABeKIKgNm7RYg0jO8Gmo4BqAFMh+ZjANoRaRgDkI4BqAFMh+ZjANoRaRgDkI4BqAFMh+ZjANoRaZjbDsAXv3thtbrzwk/y/zEAA3DLwHxgOjQfA9COSMPccgAeHh6yyn8SKOYvkQGoAUyH5mMA2hFpmNsNwPr8f/rbr/3o+TIFKDz7TTEANYDp0HwMQDsiDXOrAfjs7urZP2z+7/M3Vnd+bQB6wE4U3gnX2qAPzMcAtCPSMLcagM7bPzx+Y/WcAegBO1F4J1xrgz4wHwPQjkjD3OpbQbzR+anft4MeAjtReCdca4M+MB8D0I5Iw9zuK4E7bwDq20EPgZ0ovBOutUEfmI8BaEekYQxAOgagBjAdmo8BaEekYW73LqDVvcMHj3w76AGwE4V3wrU26APzMQDtiDSMDwKnYwBqANOh+RiAdkQa5rafBvrM7zf/98EPfRroENiJwjvhWhv0gfkYgHZEGub2Xwi2euGFFwq9FLjw7DfFANQApkPzMQDtiDTMLb8VxHt3d+8Ecedn+ec/5XY3ADWA6dB8DEA7Ig1z228G9/j9H139BvDtXxX452Awf4kMQA1gOjQfA9COSMP4dtDpGIAawHRoPgagHZGGMQDpGIAawHRoPgagHZGGqROAfzQAY2AnCu+Ea23QB+ZjANoRaZhbDsDj333rj5t/Hf7FPxiAAbAThXfCtTboA/MxAO2INMztBuDR3dVT2wCs7tw7chkDAAHmA9Oh+RiAdkQa5rZfCLZ9LfA/vHnXF4INgZ0ovBOutUEfmI8BaEekYW75rSCe2d/z41tBjICdKLwTrrVBH5iPAWhHpGFu991Ae/8egO8G2gd2ovBOuNYGfWA+BqAdkYbx7aDTMQA1gOnQfAxAOyIN428A6RiAGsB0aD4GoB2RhrnlxwCem/x/A7AGdqLwTrjWBn1gPgagHZGGudUAPFqtXvxw839fvLNa5T8PtPDsN8UA1ACmQ/MxAO2INMztvg7g/vp9QF944YX1e4Lm/wJAud0NQA1gOjQfA9COSMPcbgAe/3a1fzvon+af/5Tb3QDUAKZD8zEA7Yg0TKW3g/4b3w56BOxE4Z1wrQ36wHwMQDsiDeO7gaZjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBrGAKRjAGoA06H5GIB2RBqmbQC+fuv7u//75jevX1z8/N2JDwxAJWA+MB2ajwFoR6Rh2gbgwcX39yW4WPPdP48+MAC1gPnAdGg+BqAdkYZpGYBvHlzsA/Dg4tV3L796++LVT4YfGIBawHxgOjQfA9COSMM0DMA//R8X+wB8+frmx/2v33rl7wcfGIBqwHxgOjQfA9COSMO0C8DHFxf/6r/uAvDx4b+/GHxgAKoB84Hp0HwMQDsiDdMwAN/7D5ef7s76Bxd/t/nv5uPeBwagGjAfmA7NxwC0I9IwbR8E3p3x37y9u7fny9df/aT3wfZi39lxw+8CBXai8E641gZ9YD6rSk+9FpnHANwA2InCO+FaG/SB+RgA4VAuAN/9c++D/sUL//ZzU7wLqAYwHZqPdwG1I9IwT8RdQAagBjAfmA7NxwC0I9IwBiAdA1ADmA7NxwC0I9IwiAD4LCACMB+YDs3HALQj0jCMAOyf8r97HcAven9oAOoA84Hp0HwMQDsiDcMIgK8EBgDzgenQfAxAOyINwwjAN29ffO/w9j+9DwxANWA+MB2ajwFoR6RhGAG4/Kr7BqBf+W6gLYD5wHRoPgagHZGGgQTg8qvfXB35P/9k4gMDUAmYD0yH5mMA2hFpGP9FsHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMMYgHQMQA1gOjQfA9COSMOcVQBWMFofIn1gPjAdmo8BaEekYc4pAK3P+xGtD5E+MB+YDs3HALQj0jDnFYDWu7YHTIfmA9Oh+RiAdkQaxgA0A6ZD84Hp0HwMQDsiDWMAmgHTofnAdGg+BqAdkYYxAM2A6dB8YDo0HwPQjkjDGIBmwHRoPjAdmo8BaEekYQxAM2A6NB+YDs3HALQj0jAGoBkwHZoPTIfmYwDaEWkYA9AMmA7NB6ZD8zEA7Yg0jAFoBkyH5gPTofkYgHZEGsYANAOmQ/OB6dB8DEA7Ig1jAJoB06H5wHRoPgagHZGGMQDNgOnQfGA6NB8D0I5IwxiAZsB0aD4wHZqPAWhHpGEMQDNgOjQfmA7NxwC0I9IwBqAZMB2aD0yH5mMA2hFpGAPQDJgOzQemQ/MxAO2INIwBaAZMh+YD06H5GIB2RBrGADQDpkPzgenQfAxAOyINYwCaAdOh+cB0aD4GoB2RhjEAzYDp0HxgOjQfA9COSMMYgGbAdGg+MB2ajwFoR6RhDEAzYDo0H5gOzccAtCPSMAagGTAdmg9Mh+ZjANoRaRgD0AyYDs0HpkPzMQDtiDSMAWgGTIfmA9Oh+RiAdkQaxgA0A6ZD84Hp0HwMQDsiDWMAmgHTofnAdGg+BqAdkYYxAM2A6dB8YDo0HwPQjkjDGIBmwHRoPjAdmo8BaEekYQxAM2A6NB+YDs3HALQj0jAGoBkwHZoPTIfmYwDaEWkYA9AMmA7NB6ZD8zEA7Yg0jAFoBkyH5gPTofkYgHZEGsYANAOmQ/OB6dB8DEA7Ig1jAJoB06H5wHRoPgagHZGGMQDNgOnQfGA6NB8D0I5IwxiAZsB0aD4wHZqPAWhHpGEMQDNgOjQfmA7NxwC0I9IwBqAZMB2aD0yH5mMA2hFpGAPQDJgOzQemQ/MxAO2INIwBaAZMh+YD06H5GIB2RBrGADQDpkPzgenQfAxAOyINYwCaAdOh+cB0aD4rGHPnRebeRRFpGAPQDJgOzQemQ/NpfeCPmDkvMvcuikjDGIBmwHRoPjAdmg9OZ+a8yNy7KCINYwCaAdOh+cB0aD44nZnzInPvoog0jAFoBkyH5gPTofngdGbOi8y9iyLSMAagGTAdmg9Mh+aD05k5LzL3LopIwxiAZsB0aD4wHZoPTmfmvMjcuygiDWMAmgHTofnAdGg+OJ2Z8yJz76KINIwBaAZMh+YD06H54HRmzovMvYsi0jAGoBkwHZoPTIfmg9OZOS8y9y6KSMMYgGbAdGg+MB2aD05n5rzI3LsoIg1jAJoB06H5wHRoPjidmfMic++iiDSMAWgGTIfmA9Oh+eB0Zs6LzL2LItIwBqAZMB2aD0yH5oPTmTkvMvcuikjDGIBmwHRoPjAdmg9OZ+a8yNy7KCINYwCaAdOh+cB0aD44nZnzInPvoog0jAFoBkyH5gPTofngdGbOi8y9iyLSMAagGTAdmg9Mh+aD05k5LzL3LopIwxiAZsB0aD4wHZoPTmfmvMjcuygiDWMAmgHTofnAdGg+OJ2Z8yJz76KINIwBaAZMh+YD06H54HRmzovMvYsi0jAGoBkwHZoPTIfmg9OZOS8y9y6KSMMYgGbAdGg+MB2aD05n5rzI3LsoIg1jAJoB06H5wHRoPjidmfMic++iiDSMAWgGTIfmA9Oh+eB0Zs6LzL2LItIwT1QAMsHtmdYGfWA+MB2aD06n9e6WhvgbwA2A6dB8YDo0H5zOzA+MmXsXRaRhnqjfADJnxe2Z1gZ9YD4wHZoPTmfmvMjcuygiDWMAmgHTofnAdGg+OJ2Z8yJz76KINIwBaAZMh+YD06H54HRmzovMvYsi0jAGoBkwHZoPTIfmg9OZOS8y9y6KSMMYgGbAdGg+MB2aD05n5rzI3LsoIg1jAJoB06H5wHRoPjidmfMic++iiDSMAWgGTIfmA9Oh+eB0Zs6LzL2LItIwBqAZMB2aD0yH5oPTmTkvMvcuikjDGIBmwHRoPjAdmg9OZ+a8yNy7KCINYwCaAdOh+cB0aD44nZnzInPvoog0jAFoBkyH5gPTofngdGbOi8y9iyLSMAagGTAdmg9Mh+aD05k5LzL3LopIwxiAZsB0aD4wHZoPTmfmvMjcuygiDWMAmgHTofnAdGg+OJ2Z8yJz76KINIwBaAZMh+YD06H54HRmzovMvYsi0jAGoBkwHZoPTIfmg9OZOS8y9y6KSMMYgGbAdGg+MB2aD05n5rzI3LsoIg1jAJoB06H5wHRoPjidmfMic++iiDSMAWgGTIfmA9Oh+eB0Zs6LzL2LItIwBqAZMB2aD0yH5oPTmTkvMvcuikjDGIBmwHRoPjAdmg9OZ+a8yNy7KCINYwCaAdOh+cB0aD44nZnzInPvoog0jAFoBkyH5gPTofngdGbOi8y9iyLSMAagGTAdmg9Mh+aD05k5LzL3LopIwxiAZsB0aD4wHZoPTmfmvMjcuygiDWMAmgHTofnAdGg+OJ2Z8yJz76KINIwBaAZMh+YD06H54HRmzovMvYsi0jAGoBkwHZoPTIfmg9OZOS8y9y6KSMMYgGbAdGg+MB2aD05n5rzI3LsoIg1jAJoB06H5wHRoPjidmfMic++iiDSMAWgGTIfmA9Oh+eB0Zs6LzL2LItIwBqAZMB2aD0yH5oPTmTkvMvcuikjDGIBmwHRoPjAdmg9OZ+a8yNy7KCINYwCaAdOh+cB0aD44nZnzInPvoog0jAFoBkyH5gPTofngdGbOi8y9iyLSMAagGTAdmg9Mh+aD05k5LzL3LopIwxiAZsB0aD4wHZoPTmfmvMjcuygiDWMAmgHTofnAdGg+OJ2Z8yJz76KINIwBaAZMh+YD06H54HRmzovMvYsi0jAGoBkwHZoPTIfmg9OZOS8y9y6KSMMYgGbAdGg+MB2aD05n5rzI3LsoIg1jAJoB06H5wHRoPjidmfMic++iiDSMAWgGTIfmA9Oh+eB0Zs6LzL2LItIwBqAZMB2aD0yH5oPTmTkvMvcuikjDGIBmwHRoPjAdmg9OZ+a8yNy7KCINYwCaAdOh+cB0aD44nZnzInPvoog0jAFoBkyH5gPTofngdGbOi8y9iyLSMAagGTAdmg9Mh+aD05k5LzL3LopIwxiAZsB0aD4wHZoPTmfmvMjcuygiDWMAmgHTofnAdGg+OJ2Z8yJz76KINIwBaAZMh+YD06H54HRmzovMvYsi0jAGoBkwHZoPTIfmg9OZOS8y9y6KSMMYgGbAdGg+MB2aD05n5rzI3LsoIg1jAJoB06H5wHRoPjidmfMic++iiDSMAWgGTIfmA9Oh+eB0Zs6LzL2LItIwBqAZMB2aD0yH5oPTmTkvMvcuikjDGIBmwHRoPjAdmg9OZ+a8yNy7KCINYwCaAdOh+cB0aD44nZnzInPvoog0jAFoBkyH5gPTofngdGbOi8y9iyLSMAagGTAdmg9Mh+aD05k5LzL3LopIwxiAZsB0aD4wHZoPTmfmvMjcuygiDWMAmgHTofnAdGg+OJ2Z8yJz76KINIwBaAZMh+YD06H54HRmzovMvYsi0jAGoBkwHZoPTIfmg9OZOS8y9y6KSMMYgGbAdGg+MB2aD05n5rzI3LsoIg1jAJoB06H5wHRoPjidmfMic++iiDSMAWgGTIfmA9Oh+eB0Zs6LzL2LItIwBqAZMB2aD0yH5oPTmTkvMvcuikjDGIBmwHRoPjAdmg9OZ+a8yNy7KCINYwCaAdOh+cB0aD44nZnzInPvoog0jAFoBkyH5gPTofngdGbOi8y9iyLSMAagGTAdmg9Mh+aD05k5LzL3LopIwxiAZsB0aD4wHZoPTmfmvMjcuygiDWMAmgHTofnAdGg+OJ2Z8yJz76KINIwBaAZMh+YD06H54HRgZJ4VJzEABqAAMB2aD0yH5oPToZF5WJzCABiAAsB0aD4wHZqPOicxAAsxAM2A6dB8YDo0H3VOYgAWYgCaAdOh+cB0aD7qnMQALMQANAOmQ/OB6dB81DmJAViIAWgGTIfmA9Oh+ahzEgOwEAPQDJgOzQemQ/NR5yQGYCEGoBkwHZoPTIfmo85JDMBCDEAzYDo0H5gOzUedkxiAhRiAZsB0aD4wHZqPOicxAAsxAM2A6dB8YDo0H3VOYgAWYgCaAdOh+cB0aD7qnMQALMQANAOmQ/OB6dB81DmJAViIAWgGTIfmA9Oh+ahzEgOwEAPQDJgOzQemQ/NR5yQGYCEGoBkwHZoPTIfmo85JDMBCDEAzYDo0H5gOzUedkxiAhRiAZsB0aD4wHZqPOicxAAsxAM2A6dB8YDo0H3VOYgAWYgCaAdOh+cB0aD7qnMQALMQANAOmQ/OB6dB81DmJAViIAWgGTIfmA9Oh+ahzEgOwEAPQDJgOzQemQ/NR5yQGYCEGoBkwHZoPTIfmo85JDMBCDEAzYDo0H5gOzUedkxiAhRiAZsB0aD4wHZqPOicxAAsxAM2A6dB8YDo0H3VOYgAWYgCaAdOh+cB0aD7qnMQALMQANAOmQ/OB6dB81DmJAViIAWgGTIfmA9Oh+ahzEgOwEAPQDJgOzQemQ/NR5yQGYCEGoBkwHZoPTIfmo85JDMBCDEAzYDo0H5gOzUedk6xgZB5dtwcyAN/85vWLi5+/awCqAvOB6dB81DlJ6wN/RObZdWsQA/D1WxdrvvtnA1ATmA9Mh+ajzklgPgYghQcXr757+dXbF69+YgAqAvOB6dB81DkJzMcAJPDl65uf/b9+65W/NwAVgfnAdGg+6pwE5mMAEvj44vu7//7CAFQE5gPTofmocxKYT+tHIIagA/Dg4u82//10FwIDUAeYD0yH5qPOSWA+rQ/8EeAAfPP27q6fL1/fPwjwnR2Z19z6RhcRIZB5lI6O1oLXdXsBsAAiIk9KAIZPBM28C6gUGJEiBBrGhaHiylB5Iu4CMgC3SKBhXBgqrgwVA5AORqQIgYZxYai4MlR4Abi9ZwGVAiNShEDDuDBUXBkqwADsn/9f/HUApcCIFCHQMC4MFVeGCjAAt/ZK4FJgRIoQaBgXhoorQwUYgG/evvjerbwXUCkwIkUINIwLQ8WVoQIMwOVXt/RuoKXAiBQh0DAuDBVXhgoxAJdf/ebq/P/58Od/zF8ijEgRAg3jwlBxZaggA3CMwrPfFIxIEQIN48JQcWWoGIB0MCJFCDSMC0PFlaFiANLBiBQh0DAuDBVXhooBSAcjUoRAw7gwVFwZKgYgHYxIEQIN48JQcWWoGIB0MCJFCDSMC0PFlaFiANLBiBQh0DAuDBVXhooBSAcjUoRAw7gwVFwZKgYgHYxIEQIN48JQcWWoGIB0MCJFCDSMC0PFlaFiANLBiBQh0DAuDBVXhooBSAcjUoRAw7gwVFwZKgYgHYxIEQIN48JQcWWoGIB0MCJFCDSMC0PFlaFiANLBiBQh0DAuDBVXhooBSAcjUoRAw7gwVFwZKgYgHYxIEQIN48JQcWWoGIB0MCJFCDSMC0PFlaFiANLBiBQh0DAuDBVXhooBSAcjUoRAw7gwVFwZKgYgHYxIEQIN48JQcWWoGIB0MCJFCDSMC0PFlaHyRAUAwne+09pAJnFhqLgyVMqsjAEQAC4MFVeGigFIx7/NUFwYKq4MFQOQjn+bobgwVFwZKgYgHf82Q3FhqLgyVAxAOv5thuLCUHFlqBiAdPzbDMWFoeLKUDEA6fi3GYoLQ8WVoWIAREQkAwMgInKmGAARkTPFAIiInCkGQETkTDEAIiJnigEQETlTDICIyJkSPwDf/Ob1i4ufvzvzR1KdiVX4p393cfGKC9OaI/vjy9df/aSFjhyYOsz+dPVH/+O/v+k1hg/A129drPnun0/+kVRnYhX+tPmTi1f+vp2VHN0f37x9YQDaMrEyX23/6OJf3fAqwwfgwcWr715+1fu7O/FHUp3xKnx68crVDzJXf2Sam3Jkf3x84Y5pzHhlrqr8vXcvv/l/b/xTU/QAfPn65jT5+q3rG2jij6Q641W4+rv8d5ebP9r+V9pwZH98+boBaMzEyny6+2np44vv3+w6owdgf8N8TEt3nQAACvBJREFUfPGLE38k1Rmvwtdv7X7yf+DCtGR6f1zl+f/0MYC2jFdm/0PTzYkegAe7G+jT60JO/JFU58QqGICmTK/Mg4vv+yBwY8Yrc/ih6cYED8A3b+9+W7r+yzvxR1KdE6vgfXNNmV6ZTy9e/cQN05aJlVn/33/9Xy4uvvcfbnqlBkBacGIVbnx3ppRgcmU2UXbDtGU6AL/ZPgvopr80n08A9r8rTfyRVOf4Knzq00CbMrkym3vlDEBbJlbm0/UTQD+5/OZPPgtoGn8DgHJ0FT59/RWfA9SSqZX5ePP8HzdMWyZW5tP9j/4PfBbQJAYAyrFV+Nif/xszeUfD5o/cMG05vjIZaxM8AD4LiMr0Ktz8V1kpxXhlPr444L2mDRmvzOHOoBvfnx09APunzPZeBzD6I6nO1Cp88+Diex4wrRmvjAFgMF6Zwy8Fn970RXrRA+ArgaFMrcIDX2oK4Oj+8C6gxkyszP6+/xu/diZ6ALbvlTHx9hm+F1BbJlbhY1eEwNH9YQAaM7EyX76+fnNQnwV0nK86b6C3e8jkK98NFMBoYXZvdbjGB2daMrFlNhiA1kyszKevb99B96ZPnQsfgMuv1q+U+Pnmb+7+b3Pnj6QZw4X59MIAMJjYMtv/NwCNmTzMrhLwv97439CIHwAREZnEAIiInCkGQETkTDEAIiJnigEQETlTDICIyJliAEREzhQDICJyphgAEZEzxQCIiJwpBkBE5EwxACIiZ4oBEBE5UwyAiMiZYgDkCB+8+fxqtXr6x3/IvaL7q2c/KiHU4Fs//t3d1eqpX4/+/OHqqT8WuPppdldej+rfUDAYAJnk8RurPS9lHnItAvDev/ioxLe+v55/4nQ8zwDsblQJhAGQKTrn/yr3lGsQgP23zPzWn91d/bPJrz/LADT8TU5uCwMgUzxcre787MOr//lifSfIvazrahiATB4dG/1Wz2gDINUwADLB1S8AT+3v+7/6MTj3fpQnNwB3xvf/rzEAEgMDIBP85Qer5w4f3M88kAxAGgZAqmEAZIKr3wCeG//pB2/eXa1WL/zko8NF3v/hanVn/SDx+3999ZkXN780XMXj5c2zZ5751fbLDgfH5+uvv/Ni/2lFw4tfXe+99dU+/evhV4yuePD5w1f+aPvQxcvHvvX2ip6/uuRPhida93IPt1fTa8B6zquBu48BHPp49f03321a6jDOt6btR1d+vRRHbo/dh/srnLt5JqYefsNTl394uFH731aeaAyATHG13f9qcDg+fmf/oPAz6+Pi6mD6Z/e3Hz/1x3c6Z+XVwfFXb3QfPd6fwg8PTyvqXu3w4lfX+9r+uTf7r7jz06lLDj9/+Mp/PQrA6Ir+hx92RumNfX25cQD2D40/9WYnAIcHCj67uzkej0h1xnmp/812Hw+v/Pp7jq5g9xXv9RZk7uYZTT36hv2rH1z+OgD9bytPNAZAprja/avVt//2w84fPdw+IfTzq0Nh/dvB5vi4+oN1F55evfjh5ePfbk+ezZeuP35ne8H9Kfxw+yvCF+/0CzC8+Pp6r87cz3+1+Ypnfn/1i8cPt0fs6IoHn+985eBZQBNXdOenH11+/sb2J9ruiN3Lje4Cun+YuBOAw91lDzeXPi519Zln/7D56pcvJ26P4ZXv6F9B9yvWD85cfbi+3Z9bcPOMph5+w8HVT1x+c2MOvq080RgAmWT/4+ELP9lF4HDOXf3P+iB4vD8X1gfF9jPbO0O6H2/Oz+3BcXVu7M6Lh71jdXjx9fXe636j7UPSE1c8/Pz1Vw4CMHVF93Yfd+/WHl5uGIDdj/ibo7LzNND7h19dtjk4IrX/zO4Tw9tjdOWdhTj8htH7isM9N9O3+9zUw284vPrRrXSoae/byhONAZAjbO/xX/+mv7lP+HAYXp9sh4Ng95nDwbH7xK4Z24Pj+p7t/gMMw4tfX+91KLZn1fCSw89ff+UgABNXtDv3+2fY8HLDANzvfP9OAHaXuvqae6ekDncVPeof37vbY3Tll4fPHm6P/lf0Qzp78wynHn7D4dWPbqVDAI48Mi5PIAZAjvP4H375/Go13PD39wEYnqKP9gF47nDJw0/I3VO/93SS4cUnrnd3meElh5/v/DzfD8DxK+o/3jq83CAAnRF6R+LVhe8druu41Oix3d7tMb7y6wsefpDv34KP1g/Y/v7oDTkz9fAbjq5+dCvtbtTBt5UnGgMgp1nf13s4kL744D+uk7ALwO58GAdgf8f6/kfN7XHSoXPCDS9+uN7OeX64d6V7ydHne0daJwAnrqh3KI8uNwhA54TtH4n3r8/XE1L9Z1EOb4/xlV9bPTf5FZeX24fen97dSTd38wymHn7D0dWPbqX9AP1vK080BkDmeLi77+K957unz6kA3Dt85aIA9C7eDcDoR9LuJUefPxGA0RUdCcDgl5RRAPYn7PBn4quPHu0fwTgmNRuAwZUPrSZuwc2Tb1e7J37O3TzjAPS+4fIA9L+tPNEYAJng/vhn9O2jwi+89jcf3p8NwPRvANPPGQnwG8BffnB1sfv7h8YX/wbQuz0W/QYw9dqMzZ1066M//zeA/tUfD0Dv28oTjQGQCR529/b2McTds0AvO48BLAhA9zGA6deRDi8+cb3Xd2L3Ljlxd/tkAE5cUZHHANb/fXl/ncelui8Ye250e5x6DGAUxD6759/O3TyDqSceA+hf/ckAXH9beaIxADLB1Zl/eC+g9fPF73XOh92TRk4F4PqSL19en8L7w7R/1Awvfn291xV6tOo/jWV7yeHnjwZg4oomAzC83PBZQA87R3jvSHy0eva93UWPS3VfMHZvfHuMrvzy8NnD7dz7iuEJPnfzDKcefsOh0JEAHC2VPIkYAJli/RrfzVM9Hq/fhqD3E/zD+ccAdifH8HUAuyvov8fm8OLX1zv1RPbuJSeecj8dgIkrmgzAgtcB7F/y1Q/AX37w1L/sv0piQurwmfv7p933bo/Rle+4voLhVxyej3k4sE/ePMOph99wePXHfgMYfFt5ojEAMkXvIcHNht/dBbR+XengoJ4IwPp9JD5/s/8K0ofbRw2H9xwML945xjsvZX154pLDz/e+8s6vH3/Y+9b9K5oMwPByo1cCb18rO3gl8HbEQ9SOSz0avRK4d3sMr3zH4PbofMXVGHd+tn5t9hv7A/vkzTOaevgNx1c/vPzmRh18W3miMQAyyePrfxHmmc0h+Jfd+8KsXvztZuOfCsC3dy8h2/9A+mz/vYB6PzcOL9599srozWz6Vzx+253OWbvavrqq/60PVzQdgMHlxu8GunvPo2f+9SAAjzqH9lGpo+8FtLuSwZVfL8ToCnZf8dnd/ccvL7h5xlMPv2H/6keX39+o/W8rTzQGQI7w+S9fWB8ehzd93Lwz5PolQEcf3bx+EHj9U+hq/6aVnbfkXD91ZPAuksOL914nvH17ypc+nLzk8PPdr3zv6s+f+6j7rQdXtL3Y6I2Qe5ebeDvoD8bvBtq/xlNS43cD7d8eHxx5N9DuFfS+4vHv1kv09PZbzd08E1MPv2Hv6seX392o/W8rTzQGQArTOwxLXjzxis8Nbx5JxwBIYQxAG7x5JB0DIIUxAG3w5pF0DIAUxgC0wZtH0jEAUhgD0AZvHknHAEhhDEAbvHkkHQMgInKmGAARkTPFAIiInCkGQETkTDEAIiJnigEQETlTDICIyJliAEREzhQDICJyphgAEZEzxQCIiJwpBkBE5EwxACIiZ4oBEBE5U/47DJyvljD5WV8AAAAASUVORK5CYII=" width="768" /></p>
 </div>
 <div id="question-5d" class="section level1">
 <h1>Question 5d</h1>
 <p>calculate the mean of the n = 15 sampling distribution, and the standard error of the n = 15 sampling distribution</p>
-<pre class="r"><code>p_hat_n15_1000rep %&gt;% 
-  summarize(M = mean(p_hat), 
-            SE = sd(p_hat))</code></pre>
-<div class="kable-table">
-<table>
-<thead>
-<tr class="header">
-<th align="right">M</th>
-<th align="right">SE</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">0.1619333</td>
-<td align="right">0.0950554</td>
-</tr>
-</tbody>
-</table>
-</div>
 <p><br></p>
 <hr />
 </div>
 <div id="question-6a" class="section level1">
 <h1>Question 6a</h1>
 <p>How does the standard error of the n= 15 sampling distribution compare to the standard error of the n = 50 sampling distribution?</p>
-<p><strong>Answer: The standard error is much larger at n = 15. It is nearly has nearly double the value of the SE of the n= 50 sampling distribution.</strong></p>
+<p><strong>Answer:</strong></p>
 </div>
 <div id="question-6b" class="section level1">
 <h1>Question 6b</h1>
 <p>Explain any observed differences from Question 6a</p>
-<p><strong>Answer: At a sample size of 15 we have less data to represent the population on each “resampling”, and less information about the population on each “resampling”. As such, the variability in the sampling distribution from one sampling event to the next is larger than at n = 50. Thinking about it in the EXTREME…if we “RESAMPLED” the entire population in every resample, we would get the EXACT same value each time…if we resampled only like 5 people in the pop every time we could get RADICALLY different values from sample to sample.</strong></p>
+<p><strong>Answer:</strong></p>
 <p><br></p>
 <hr />
 </div>
 <div id="question-7a" class="section level1">
 <h1>Question 7a</h1>
 <p>Use the <code>rep_sample_n</code> function to collect 1000 virtual samples of size <em>n</em> = 600. <strong>Note: BE SURE TO NAME YOUR SAMPLE SOMETHING NEW, TO ENSURE YOU CAN DISTINGUISH IT FROM THE n = 50, and n = 15 SAMPLES ABOVE!</strong></p>
-<pre class="r"><code>set.seed(84)
-
-n600_1000rep &lt;- gss_14 %&gt;% 
-  rep_sample_n(size = 600, reps = 1000)</code></pre>
+<pre class="r"><code>set.seed(84)</code></pre>
 </div>
 <div id="question-7b" class="section level1">
 <h1>Question 7b</h1>
 <p>Calculate the proportion <span class="math inline">\(\hat{p}\)</span> of people who reported they were <code>Divorced</code>for each replicate of your n = 600 sampling</p>
-<pre class="r"><code>p_hat_n600_1000rep &lt;- n600_1000rep %&gt;% 
-  group_by(replicate) %&gt;% 
-  summarize(n = n(), 
-            divorce_count = sum(marital == &quot;Divorced&quot;)) %&gt;% 
-  mutate(p_hat = divorce_count / n)</code></pre>
 </div>
 <div id="question-7c" class="section level1">
 <h1>Question 7c</h1>
 <p>calculate the mean of the n = 600 sampling distribution, and the standard error of the n = 600 sampling distribution.</p>
-<pre class="r"><code>p_hat_n600_1000rep %&gt;% 
-  summarize(M = mean(p_hat), 
-            SE = sd(p_hat))</code></pre>
-<div class="kable-table">
-<table>
-<thead>
-<tr class="header">
-<th align="right">M</th>
-<th align="right">SE</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">0.1620667</td>
-<td align="right">0.0137546</td>
-</tr>
-</tbody>
-</table>
-</div>
 </div>
 <div id="question-7d" class="section level1">
 <h1>Question 7d</h1>
 <p>Was there more <strong>variability</strong> from sample to sample when we took a sample size of 600 or a sample size of 50? <strong>Explain what evidence you have for assessing this</strong></p>
-<p><strong>Answer: the standard error of the sampling distribution for n = 600 was much smaller than the standard error of the sampling distribution for n = 50….indicating that we had more variability from sample to sample when only collecting 50 samples.</strong></p>
+<p><strong>Answer:</strong></p>
 <p><br></p>
 <hr />
 </div>
 <div id="question-8" class="section level1">
 <h1>Question 8</h1>
 <p>Which sampling distribution looked more normally distributed (bell shaped and symmetrical); the one built on n = 15, 50 or 600? <strong>Why?</strong></p>
-<p><strong>Answer: The sampling distribution for n = 600 looked more normally distributed. This is a key tenet of the central limit theorem: as your sample size increases, your sampling distribution becomes more normally distributed, and narrower (i.e. smaller spread) though the n = 50 one also looked pretty bell-shaped and symmetrical</strong></p>
+<p><strong>Answer:</strong></p>
 <p><br></p>
 <hr />
 <div class="figure">
@@ -750,33 +685,6 @@ n600_1000rep &lt;- gss_14 %&gt;%
 n15_1rep &lt;- gss_14 %&gt;% 
   rep_sample_n(size = 15, reps = 1)</code></pre>
 <p>Following the example from the beginning of the Problem Set (roughly line 140), estimate the <strong>sample proportion</strong> <span class="math inline">\(\hat{p}\)</span> of people who identified as <code>Divorced</code> based on <code>n15_1rep</code>… AS WELL AS the <strong>standard error of <span class="math inline">\(\hat{p}\)</span></strong></p>
-<pre class="r"><code>n15_1rep %&gt;% 
-  summarize(divorce_count = sum(marital == &quot;Divorced&quot;), 
-            n = n()) %&gt;% 
-  mutate(p_hat = divorce_count/ n, 
-         se = sqrt(p_hat * (1 - p_hat) / n))</code></pre>
-<div class="kable-table">
-<table>
-<thead>
-<tr class="header">
-<th align="right">replicate</th>
-<th align="right">divorce_count</th>
-<th align="right">n</th>
-<th align="right">p_hat</th>
-<th align="right">se</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">15</td>
-<td align="right">0.1333333</td>
-<td align="right">0.0877707</td>
-</tr>
-</tbody>
-</table>
-</div>
 <p><br></p>
 <blockquote>
 <p>You should have gotten a value reasonably close to the estimate we made earlier from our sampling distribution for n = 15! Note that when you must estimate a standard error from <strong>only a single sample</strong>, the formula <strong>contains the sample size, n</strong>. The larger the sample size n, the larger the number in the denominator of the SE formula.</p>
@@ -825,7 +733,7 @@ n15_1rep &lt;- gss_14 %&gt;%
 <div id="question-11" class="section level1">
 <h1>Question 11</h1>
 <p>Based on what you observed for Question 10, <strong>IF</strong> you collected a single sample from 600 respondents, do you think the standard error will be smaller or larger than the one you calculated for n = 15. <strong>Explain your reasoning</strong> (Note: if you are not sure you can collect a sample and calculate the standard error)</p>
-<p><strong>Answer: I think the standard error will be smaller, because 1) we have a larger sample, so we are representing the population better, so there is less room for variability from sample to sample, 2) we saw a smaller standard error in the sampling distribution of n = 600, 3) with a bigger number for n in the denominator of the SE formula, the SE value goes down…GRADER: answer is acceptable as long as the students answers smaller, and gives one of these reasons</strong></p>
+<p><strong>Answer:</strong></p>
 <hr />
 <style type="text/css">
 h1 { /* Header 1 */

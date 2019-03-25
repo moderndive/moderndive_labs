@@ -14,3 +14,17 @@ Here is a [side-by-side](https://github.com/rudeboybert/moderndive_labs/pull/10/
 * Overall
     + I was extra pedantic about distinguishing between sample vs population mean in my edits. 
     + I changed all instances of "bootstrap sample" to "bootstrap resample" to really emphasize the resampling aspect.
+    
+## Response Jenny
+
+* thanks for changing wordings to match what you use in SDS220 more accurately. I wrote this for Miles' class, and matched the wording to his lecture notes. I did not make any subsequent adjustments before posting to `moderndive`. PSY words things totally differently too, all using different books...sometimes I forget and don't keep them all straight! :) 
+
+* Re Background study population: done
+
+* Re packages: Sure, do I need to do something different with the package loading part of the PS? IF so please clarify what you want me to change...or in this type of instance, rather than going back and forth on something, it might be easier for you to just make the change? [maybe you did, the side by side never loads for me]
+
+* RE skewed sample = yes, CLT. This is a large sample (n = 100) and so we get nearly exactly the same estimates as when we do the bootstrap resampling. In my hasty addition I  definitely worded this poorly/unclearly!!!! I think that generating the histogram will be confusing for students, so I deleted it! 
+
+* great idea...I added a histogram with just boostrap dist before the CI and then left in the histogram with CI added below the calculation of CI
+
+* Great! Thanks for clarifying that! Consistency = super good. 

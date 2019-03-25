@@ -28,7 +28,7 @@ Please indicate who you collaborated with on this problem set:
 
 ## Background {-}
 
-In this problem set we will use a small **sample** of data from the [General Social Survey](http://gss.norc.org/). The survey is designed to monitor changes in both social characteristics and attitudes. You will work with a **sample** from one neighborhood. Here we do **not** know the **true population parameters** for any of the variables, because we do not have data on every person in the neighborhood. 
+In this problem set we will use a small **sample** of data from the [General Social Survey](http://gss.norc.org/). The survey is designed to monitor changes in both social characteristics and attitudes. You will work with a **sample** from one neighborhood. The full neighborhood of **ALL individuals** is the population. For this problem set we do **not** know the **true population parameters** for any of the variables, because we do not have data on every person in the neighborhood. 
 
 ## Setup
 
@@ -52,7 +52,7 @@ Be sure to take a look at the data in the **viewer**. Each row in the data set i
 
 <br> 
 
-<div id="boxedtext">
+
 **Setting a seed:** We will take some random samples and build sampling distributions in this lab. In order to make sure R takes the same random sample every time you run your code, you can do what is called "setting a seed". Do this in any code chunk that you take a random sample! 
 
 You can set a seed like so. Any number will do. (You do not need to run this right now...just showing you how)
@@ -60,17 +60,19 @@ You can set a seed like so. Any number will do. (You do not need to run this rig
 set.seed(45)
 ```
 
+
+
 <br> 
 
 ***
 
 # Confidence intervals based on the theoretical normal distribution  
 
-If your data are reasonably normally distributed you can generate a 95% confidence interval using the following formula: 
+To generate  a 95% confidence interval based on the theoretical normal distribution, we can use the following formula: 
 
 $$\widehat{statistic} \pm 1.96 \cdot \widehat{SE}$$
 
-So, for instance if we wanted to calculate the 95% confidence interval for the population mean number of `tvhours` $\mu_{tv}$ that respondents watched: 
+So, for instance if we wanted to calculate the 95% confidence interval for the population mean of `tvhours` $\mu_{tv}$ that respondents watched: 
 
 * the **sample statistic** (also called **point estimate**) in this case would be the sample mean number of `tvhours` from the sample: $\bar{x}$
 * We would estimate the standard error using the formula: where $s$ is the sample standard deviation of the sample:
@@ -89,15 +91,6 @@ gss_sample %>%
             upper_ci = x_bar + (1.96 * se))
 ```
 
-However, if we plot `tvhours` we can see that it is not perfectly normally distributed. 
-
-```{r}
-ggplot(data = gss_sample, aes(x = tvhours)) + 
-  geom_histogram(binwidth = 1, fill = "aquamarine4", color = "black") + 
-                 labs(x = "hours of television per day")
-```
-
-If you are concerned that your data do not meet the normality assumptions well enough, you can calculate confidence intervals by generating a bootstrap sampling distribution. 
 
 <br> 
 
@@ -175,6 +168,17 @@ How many values of the bootstrap statistic `boot_stat` are there?  Please explai
 <br> 
 
 *** 
+
+### Visualizing the bootstrap distribution  
+
+The bootstrap distribution is shown in the figure below. This is a histogram of the `boot_stat` values from `boot_distrib_tv`. 
+
+```{r echo=F, fig.height=3, fig.width=5}
+ggplot(data = boot_distrib_tv, aes(x = boot_stat)) + 
+  geom_histogram(color = "white", binwidth = 0.25) + 
+  labs(title = "Bootstrap distribution", 
+       x = "boostrap statistic (mean tvhours)")
+```
 
 ### Step 3: CI from a bootstrap resample 
 

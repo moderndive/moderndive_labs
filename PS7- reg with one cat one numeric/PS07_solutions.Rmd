@@ -6,10 +6,6 @@ date: "WRITE DATE HERE"
 output:
   html_document:
     theme: lumen
-    toc: yes
-    toc_depth: 2
-    toc_float:
-      collapsed: false
     df_print: kable
 ---
 
@@ -203,12 +199,11 @@ $$
 \begin{aligned} 
 \widehat{y} &= -113725 + 1986 \times hs  + -7333 \times 0 \\
 \widehat{y} &= -113725 + 1986 \times hs + 0\\
-\widehat{y} &= -111739
 \end{aligned} 
 $$
 
 
-**Note to grader: They do not need to do this in fancy formatting...but so long as they either got the right answer give credit. (I rounded, if they did not round, that is OK. )**
+**Note to grader: 1) fancy formatting not required here. 2) A bunch of the students were unclear about the questioon here, and picked a value to plug in for HS. I told them this is fine....so...as long as they understood to plug in 0 for low urbanization, that is fine**
 
 ***
 
