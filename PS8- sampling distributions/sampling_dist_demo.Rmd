@@ -95,7 +95,7 @@ ggplot(data = all_dat, aes(x = p_hat, fill = sample_size)) +
 
 <br> 
 
-### 1. On each histogram above, please draw two vertical lines, so that the ROUGHLY the middle 95% of the values in each histogram are encompassed by the two vertical lines. You will need to "eyeball" this.  
+### 1. On each histogram above, please draw two vertical lines, so that ROUGHLY the middle 95% of the values in each histogram are encompassed by the two vertical lines. You will need to "eyeball" this.  
 
 <br> 
 

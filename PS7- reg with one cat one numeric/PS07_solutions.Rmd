@@ -160,10 +160,10 @@ What is the slope for the regression line of the states with a "high" level of u
 
 What is the slope for the regression line of the states with a "low" level of urbanization? What is the intercept?
 
-**Answers:** Slope is 1986.794 (rounded is OK), Intercept is -119929 + -7333.326 = -127262.3
+**Answers:** Slope is 1986.794 (rounded is OK), Intercept is -113725.193 + -7333.326 = -121058.5
 
 ```{r}
--119929 + -7333.326
+-113725.193+ -7333.326
 ```
 
 # Question 5.D
@@ -203,7 +203,7 @@ $$
 $$
 
 
-**Note to grader: 1) fancy formatting not required here. 2) A bunch of the students were unclear about the questioon here, and picked a value to plug in for HS. I told them this is fine....so...as long as they understood to plug in 0 for low urbanization, that is fine**
+**Note to grader: 1) fancy formatting not required here. 2) A bunch of the students were unclear about the question here, and picked a value to plug in for HS. I told them this is fine....so...as long as they understood to plug in 0 for low urbanization, that is fine. I saw a number of students in lab interpret this as choose a state with high urbanization, then find its hs value, then plug that into the equation. For next year, change the word "solve" to simplify**
 
 ***
 
