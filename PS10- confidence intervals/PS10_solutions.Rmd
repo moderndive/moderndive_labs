@@ -36,9 +36,9 @@ First load the necessary packages
  
 
 ```{r message=FALSE}
-library(dplyr)
-library(ggplot2)
-library(readr)
+# Recall that loading the tidyverse "umbrella" package loads ggplot2, dplyr, and
+# readr all at once. Feel free to load these packages any way you choose.
+library(tidyverse)
 library(moderndive)
 ```
 
@@ -66,38 +66,7 @@ set.seed(45)
 
 ***
 
-# Confidence intervals based on the theoretical normal distribution  
-
-To generate  a 95% confidence interval based on the theoretical normal distribution, we can use the following formula: 
-
-$$\widehat{statistic} \pm 1.96 \cdot \widehat{SE}$$
-
-So, for instance if we wanted to calculate the 95% confidence interval for the population mean of `tvhours` $\mu_{tv}$ that respondents watched: 
-
-* the **sample statistic** (also called **point estimate**) in this case would be the sample mean number of `tvhours` from the sample: $\bar{x}$
-* We would estimate the standard error using the formula: where $s$ is the sample standard deviation of the sample:
-
-$$\widehat{SE} \approx \frac{s}{\sqrt{n}}$$
-
-We can make these calculations in R like so: 
-
-```{r}
-gss_sample %>% 
-  summarize(x_bar = mean(tvhours), 
-            sd = sd(tvhours), 
-            n = n(), 
-            se = sd/sqrt(n), 
-            lower_ci = x_bar - (1.96 * se), 
-            upper_ci = x_bar + (1.96 * se))
-```
-
-
-<br> 
-
-***
-
-#  Confidence intervals from a bootstrap resample
-
+# Confidence intervals from a bootstrap resample
 
 ### Step 1: Take 1000 bootstrap resamples
 
@@ -425,6 +394,74 @@ boot_distrib_wh %>%
   summarize(lower_ci = quantile(boot_stat, 0.025), 
             upper_ci = quantile(boot_stat, 0.975))
 ```
+
+
+***
+
+
+
+# Confidence intervals based on the theoretical normal distribution  
+
+As described in [moderndive chapter 9.8.2](https://moderndive.netlify.com/9-confidence-intervals.html#theory-ci), not only can we generate confidence intervals using a computer/resampling as we've been doing until, in many cases there also exists a mathematical formula! This however necessitates a little mathematical/probability theory; a topic we leave to a more advanced statistics class.
+
+To generate a 95% confidence interval based on the theoretical normal distribution, we can use the following formula: 
+
+$$\widehat{\text{point estimate}} \pm 1.96 \cdot \widehat{SE}$$
+
+So, for instance if we wanted to calculate the 95% confidence interval for the population mean of `tvhours` $\mu_{tv}$ that respondents watched based on our sample: 
+
+* the **point estimate** AKA **sample statistic** in this case would be the sample mean number of `tvhours` from the sample: $\bar{x}$
+* We would estimate the standard error using the formula: where $s$ is the **sample standard deviation**, which is a point estimate of the **population standard deviation** $\sigma$:
+
+$$\widehat{SE} \approx \frac{s}{\sqrt{n}}$$
+
+and thus a 95% CI would be
+
+$$
+\bar{x} \pm 1.96 \cdot \widehat{SE} =  \bar{x} \pm 1.96 \cdot \frac{s}{\sqrt{n}}
+$$
+
+We can make these calculations in R like so: 
+
+```{r}
+gss_sample %>% 
+  summarize(x_bar = mean(tvhours), 
+            sd = sd(tvhours), 
+            n = n(), 
+            se = sd/sqrt(n), 
+            lower_ci = x_bar - 1.96 * se, 
+            upper_ci = x_bar + 1.96 * se)
+```
+
+
+# Question 9 
+
+Write down the three 95% confidence intervals for the population mean of `tvhours` $\mu_{tv}$ you've computed in this problem set. Do this by replacing
+X, Y, A, B, P, and Q with the appropriate values you've computed. 
+
+CI construction method          | lower value   | upper value
+------------------------------- | ------------- | -------------  
+Using boostrap: 95% rule        | X             | Y
+Using boostrap: percentile rule | A             | B
+Using mathematical formula      | P             | Q
+
+
+## Solution
+
+Using our answers from Question 2.a), 2.b)
+
+CI construction method          | lower value   | upper value
+------------------------------- | ------------- | -------------  
+Using boostrap: 95% rule        | 2.463025      | 3.837715
+Using boostrap: percentile rule | 2.53975       | 3.9
+Using mathematical formula      | 2.435776      | 3.844224
+
+
+
+# Question 10 
+
+**In your opinion**: would you say these three confidence intervals are similar?
+
 
 
 ***

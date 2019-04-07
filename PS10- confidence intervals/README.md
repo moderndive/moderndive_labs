@@ -17,14 +17,22 @@ Here is a [side-by-side](https://github.com/rudeboybert/moderndive_labs/pull/10/
     
 ## Response Jenny
 
-* thanks for changing wordings to match what you use in SDS220 more accurately. I wrote this for Miles' class, and matched the wording to his lecture notes. I did not make any subsequent adjustments before posting to `moderndive`. PSY words things totally differently too, all using different books...sometimes I forget and don't keep them all straight! :) 
+1. thanks for changing wordings to match what you use in SDS220 more accurately. I wrote this for Miles' class, and matched the wording to his lecture notes. I did not make any subsequent adjustments before posting to `moderndive`. PSY words things totally differently too, all using different books...sometimes I forget and don't keep them all straight! :) 
+1. Re Background study population: done
+1. Re packages: Sure, do I need to do something different with the package loading part of the PS? IF so please clarify what you want me to change...or in this type of instance, rather than going back and forth on something, it might be easier for you to just make the change? [maybe you did, the side by side never loads for me]
+1. RE skewed sample = yes, CLT. This is a large sample (n = 100) and so we get nearly exactly the same estimates as when we do the bootstrap resampling. In my hasty addition I  definitely worded this poorly/unclearly!!!! I think that generating the histogram will be confusing for students, so I deleted it! 
+1. great idea...I added a histogram with just boostrap dist before the CI and then left in the histogram with CI added below the calculation of CI
+1. Great! Thanks for clarifying that! Consistency = super good. 
+    
+## Bert's response to Jenny's response
 
-* Re Background study population: done
+1. :)
+1. thanks
+1. Done. I added a note that: "Recall that loading the tidyverse "umbrella" package loads ggplot2, dplyr, and readr all at once. Feel free to load packages any way you choose." 
+1. :)
+1. :)
+1. :)
 
-* Re packages: Sure, do I need to do something different with the package loading part of the PS? IF so please clarify what you want me to change...or in this type of instance, rather than going back and forth on something, it might be easier for you to just make the change? [maybe you did, the side by side never loads for me]
+New notes:
 
-* RE skewed sample = yes, CLT. This is a large sample (n = 100) and so we get nearly exactly the same estimates as when we do the bootstrap resampling. In my hasty addition I  definitely worded this poorly/unclearly!!!! I think that generating the histogram will be confusing for students, so I deleted it! 
-
-* great idea...I added a histogram with just boostrap dist before the CI and then left in the histogram with CI added below the calculation of CI
-
-* Great! Thanks for clarifying that! Consistency = super good. 
+1. I moved the "Confidence intervals based on the theoretical normal distribution" se = s/sqrt(n) section to the end of the PS. I think it might trip them up to have them in the beginning. but I beefed it up by adding Q9 and Q10. Could you take a look and let me know if you have questions?
