@@ -4,10 +4,10 @@ title: "Problem Set 08"
 author: "WRITE YOUR NAME HERE"
 date: "WRITE DATE HERE"
 output:
-  pdf_document: default
   html_document:
     df_print: kable
     theme: lumen
+  pdf_document: default
 ---
 
 ```{r, include=FALSE}

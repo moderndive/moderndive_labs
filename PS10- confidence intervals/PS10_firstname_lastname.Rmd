@@ -6,8 +6,14 @@ date: "WRITE DATE HERE"
 output:
   html_document:
     theme: lumen
+    toc: yes
+    toc_depth: 2
+    toc_float:
+      collapsed: false
     df_print: kable
 ---
+
+![](https://i.pinimg.com/originals/8b/a5/6d/8ba56d685c24a243836ace7332f553f7.jpg)
 
 
 ```{r, include=FALSE}
@@ -90,7 +96,7 @@ Take a look at the `boot_samp_1000` data frame we just generated in RStudio's da
 
 How many rows does `boot_samp_1000` have? **Why?** 
 
-**Answer: 100,000. Because we took 1000 samples of 100 cases each, which is 100,000  = One hundred thousand.**
+**Answer:**
 
 <br> 
 
@@ -126,7 +132,7 @@ Take a look at the `boot_distrib_tv` we just created in RStudio's data viewer.
 
 How many values of the bootstrap statistic `boot_stat` are there?  Please explain **why** there are this many values of the bootstrap statistic. 
 
-**Answer: there are 1000 boot_stat values, because we took 1000 bootstrap resamples, and calculated the sample mean for each sample. This equates to 1000 bootstrap statistics**.
+**Answer:**.
 
 <br> 
 
@@ -215,7 +221,7 @@ ggplot(data = boot_distrib_tv, aes(x = boot_stat)) +
 
 **If** we calculated a **90% confidence interval** for the mean of `tvhours` using this same bootstrap resample and the percentile method, roughly how many of the 1000 values of `tv_mean` would fall between the green and blue lines?
 
-**Answer: 900**
+**Answer:**
 
 <br> 
 
@@ -226,9 +232,7 @@ ggplot(data = boot_distrib_tv, aes(x = boot_stat)) +
 Use the bootstrap resampling distribution for `tvhours` generated above (`boot_distrib_tv`)  and the **percentile** method to calculate a 99% confidence interval for the mean `tvhours`.
 
 ```{r}
-boot_distrib_tv %>%  
-  summarize(lower_ci = quantile(boot_stat, 0.005), 
-            upper_ci = quantile(boot_stat, 0.995))
+
 
 ```
 
@@ -241,7 +245,7 @@ boot_distrib_tv %>%
 
 Which confidence interval is **WIDER**: the 95% confidence interval or the 99% confidence interval for the population mean `tvhours` $\mu_{tv}$? Why?
 
-**Answer: Conceptually, the 99% CI is wider, because we are casting a wider net. Also, more of the boot_stat values are included in a 99% CI (990) as compared to a 95% CI (950)** 
+**Answer:** 
 
 <br> 
 
@@ -252,9 +256,7 @@ Which confidence interval is **WIDER**: the 95% confidence interval or the 99% c
 Use the bootstrap resample we generated above (`boot_samp_1000`), to generate a **bootstrap distribution** for the sample mean respondent `age` $\bar{x}$ instead of `tvhours`. Please be sure to **name it something different** than the bootstrap distribution for the sample mean of `tvhours`
 
 ```{r}
-boot_distb_age <- boot_samp_1000 %>% 
-  group_by(replicate) %>% 
-  summarize(boot_stat = mean(age)) 
+
 ```
 
 
@@ -263,11 +265,7 @@ boot_distb_age <- boot_samp_1000 %>%
 Calculate a 95% confidence interval for the population mean respondent `age` $\mu_{age}$ using the **95% rule** method. 
 
 ```{r}
-boot_distb_age %>% 
-  summarize(mean = mean(boot_stat), 
-            se = sd(boot_stat), 
-            upper_ci = mean + (1.96 * se), 
-            lower_ci = mean - (1.96 * se))
+
 ```
 
 
@@ -276,9 +274,7 @@ boot_distb_age %>%
 Calculate a 95% confidence interval for the population mean respondent `age` $\mu_{age}$ using the **percentile** method. 
 
 ```{r}
-boot_distb_age %>% 
-  summarize(lower_ci = quantile(boot_stat, 0.025), 
-            upper_ci = quantile(boot_stat, 0.975))
+
 ```
     
     
@@ -287,7 +283,7 @@ boot_distb_age %>%
 How do the 95% confidence intervals you calculated in 6b and 6c compare? i.e. are the 95% CI values similar or are they pretty different?
 
 
-**Answer: they are very similar!** 
+**Answer:** 
 
 <br> 
 
@@ -298,9 +294,7 @@ How do the 95% confidence intervals you calculated in 6b and 6c compare? i.e. ar
 Use the **bootstrap resampling distribution** for the sample mean respondent `age` and the percentile method to calculate an 80% confidence interval for the population mean respondent age $\mu_{age}$.
 
 ```{r}
-boot_distb_age %>% 
-  summarize(lower_ci = quantile(boot_stat, 0.1), 
-            upper_ci = quantile(boot_stat, 0.9))
+
 ```
 
 
@@ -308,6 +302,7 @@ boot_distb_age %>%
 
 ***
 
+![](https://ecologyofeducation.net/wsite/wp-content/uploads/2011/09/Boots-with-Laces-border.jpg)
 
 # Bootstrap sampling distribution & confidence intervals with categorical variables
 
@@ -364,28 +359,12 @@ boot_distrib_POC %>%
 Calculate a 95% CI for the **population proportion** of respondents $p$ that identified as **White** using EITHER the percentile or 95% rule method. Note that you will first need to generate the bootstrap distribution for the proportion of respondents that identified as `White`. 
 
 ```{r}
-boot_distrib_wh <- boot_samp_1000 %>% 
-  group_by(replicate) %>% 
-  summarize(n = n(), 
-            wh_count = sum(race == "White"), 
-            boot_stat = wh_count/n)
+
 ```
 
 
 ```{r}
-# 95% rule
-boot_distrib_wh %>% 
-  summarize(mean = mean(boot_stat), 
-            se = sd(boot_stat), 
-            lower_ci = mean - (1.96 * se), 
-            upper_ci = mean + (1.96 * se))
-```
 
-```{r}
-# percentile
-boot_distrib_wh %>% 
-  summarize(lower_ci = quantile(boot_stat, 0.025), 
-            upper_ci = quantile(boot_stat, 0.975))
 ```
 
 
@@ -434,6 +413,7 @@ X, Y, A, B, P, and Q with the appropriate values you've computed.
 
 When you are done, make sure all the `|` in the table still line up so your results print out in a table! 
 
+
 CI construction method          | lower value   | upper value
 ------------------------------- | ------------- | -------------  
 Using boostrap: 95% rule        | X             | Y
@@ -441,22 +421,14 @@ Using boostrap: percentile rule | A             | B
 Using mathematical formula      | P             | Q
 
 
-## Solution
-
-Using our answers from Question 2.a), 2.b)
-
-CI construction method          | lower value   | upper value
-------------------------------- | ------------- | -------------  
-Using boostrap: 95% rule        | 2.463025      | 3.837715
-Using boostrap: percentile rule | 2.53975       | 3.9
-Using mathematical formula      | 2.435776      | 3.844224
-
 
 
 # Question 10 
 
 **In your opinion**: would you say these three confidence intervals are similar?
 
+
+**Answer:**
 
 
 ***

@@ -36,3 +36,11 @@ Here is a [side-by-side](https://github.com/rudeboybert/moderndive_labs/pull/10/
 New notes:
 
 1. I moved the "Confidence intervals based on the theoretical normal distribution" se = s/sqrt(n) section to the end of the PS. I think it might trip them up to have them in the beginning. but I beefed it up by adding Q9 and Q10. Could you take a look and let me know if you have questions?
+
+## Jenny's responses
+- AAAAh! So annoyed that I put SD instead of s (and did that for Miles' class too). PSY201 = *SD*....the rest of the world *s*. Thank you for fixing! 
+
+- Q9 & 10 totally clear
+
+- fixed a few typos...added a few things to help them out (reminders to give things new names, and how to fill in the table)
+
