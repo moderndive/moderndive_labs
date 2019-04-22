@@ -194,14 +194,14 @@ get_regression_table(math_model)
 The regression equation for Math SAT score is the following:
 
 $$
-\begin{aligned}\widehat {score} =& \beta_{0} + \beta_{prct} \cdot prct + \beta_{med} \cdot 1_{is\ med}(x_2) + \beta_{large} \cdot 1_{is\ large}(x_2) \\
+\begin{aligned}\widehat {score} =& b_{0} + b_{prct} \cdot prct + b_{med} \cdot 1_{is\ med}(x_2) + b_{large} \cdot 1_{is\ large}(x_2) \\
  =& 588.190 - 2.777 \cdot prct - 11.913 \cdot 1_{is\ med}(x_2) - 6.362 \cdot 1_{is\ large}(x_2)
 \end{aligned} 
 $$
 
-* The intercept ($\beta_0$ = 588.190) represents the Math SAT score when zero percent of the students are said to be economically disadvantaged and the school size is small (Table 2).
-* The estimate for the slope for percent economically disadvantaged ($\beta_{prct}$ = -2.777) is the associated change in average Math SAT score depending on the percentage of economically disadvantaged students. Based on this estimate, for every one percentage point increase in the percent of economically disadvantaged students in a school, there was an associted decrease in Math SAT scores of on average 2.777 points.
-* The estimate for sizeMedium ($\beta_{med}$ = -11.913) and sizeLarge ($\beta_{large}$ = -6.36) are the offsets in intercept relative to the baseline group's, sizeSmall, intercept (Table 2). In other words, on average medium schools score 11.913 points lower than small schools while large schools scored on average 6.362 lower.
+* The intercept ($b_0$ = 588.190) represents the Math SAT score when zero percent of the students are said to be economically disadvantaged and the school size is small (Table 2).
+* The estimate for the slope for percent economically disadvantaged ($b_{prct}$ = -2.777) is the associated change in average Math SAT score depending on the percentage of economically disadvantaged students. Based on this estimate, for every one percentage point increase in the percent of economically disadvantaged students in a school, there was an associted decrease in Math SAT scores of on average 2.777 points.
+* The estimate for sizeMedium ($b_{med}$ = -11.913) and sizeLarge ($b_{large}$ = -6.36) are the offsets in intercept relative to the baseline group's, sizeSmall, intercept (Table 2). In other words, on average medium schools score 11.913 points lower than small schools while large schools scored on average 6.362 lower.
 
 Thus the three regression lines have equations:
 
