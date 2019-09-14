@@ -1,0 +1,145 @@
+
+---
+title: "SDS/MTH 220 Project Data Proposal"
+author: "WRITE YOUR GROUP NAME HERE"
+date: "Last updated on `r Sys.Date()`"
+output:
+  html_document:
+    fig_caption: yes
+    theme: lumen
+    toc: yes
+    toc_depth: 2
+    df_print: kable
+    toc_float:
+      collapsed: no
+---
+
+```{r, message=FALSE}
+# Load all packages here:
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(janitor)
+
+# Set seed value of random number generator to get "replicable" random numbers.
+# The choice of seed value of 76 was an arbitrary one on my part.
+set.seed(76)
+```
+
+
+# Big-picture
+
+## Research question
+
+_What is your research question?_
+
+
+## Description of data
+
+_Please give a very short description of the data set along with it's original source._
+
+
+## Load data into R
+
+_Include the code to load your data here. If your data is not confidential nor is it private in nature, consider publishing it as a `.csv` file on Google Sheets as in the code chunk below; instructions on how to do this are in Steps 1-6 [here](https://twitter.com/rudeboybert/status/1055821846539591680). If the data shouldn't be published online, then please submit the spreadsheet file on Moodle._
+
+```{r, message=FALSE}
+
+```
+
+
+## Clean variable names
+
+_Piping your data frame into the `clean_names()` function from the `janitor` package will clean your variable names, making them easier to work with._
+
+```{r}
+
+```
+
+
+## Explore your data
+
+_Be sure to explore your data. Note that `eval=FALSE` is set so that R Markdown doesn't "evaluate" this code chunk, i.e. it will ignore it in the ultimate `.html` report. You should run this code on your own, but not in the ultimate `.html` report._
+
+```{r, eval = FALSE}
+glimpse()
+```
+
+
+
+***
+
+
+
+# Variables
+
+## Identification variable
+
+_What is your identification (ID) variable (if you have one)?_
+
+
+## Outcome variable
+
+_What is your outcome variable $y$? What are its units of measurement?_
+
+
+## Numerical explantory variable
+
+_What is your numeric explanatory variable? What are its units of measurement?_
+
+
+## Categorical explantory variable
+
+_What is your categorical explanatory variable? Does it have between 3 and 5 levels. Please list the different levels._
+
+
+
+***
+
+
+# Rows/observations
+
+## Observational units
+
+_What is the observational unit of your data? In other words, what does each row in your data represent?_
+
+
+## Sample size
+
+_How many rows/cases are in the data i.e. what is the sample size? Is the sample size at least 50?_
+
+
+
+***
+
+
+# Preview of data
+
+## Pare down variables
+
+_`select()` the following variables **in this order** and drop all others. Eliminating all unnecessary variables will making visually exploring the raw values less taxing mentally, as we'll have less data to look at._
+
+1. _The identification variable_
+1. _The outcome variable $y$_
+1. _The numerical explanatory variable_
+1. _The categorical explanatory variable_
+1. _Optional: any other variable you find interesting_
+
+
+```{r}
+
+```
+
+
+## Preview data
+
+_Display a random sample of 5 rows of your data frame by piping it into the `sample_n(5)` function from the `dplyr` package . You'll get the same 5 rows everytime you knit this document and hence replicable results because we set the seed value of the random number generator in the first code chunk above._
+
+```{r}
+
+```
+
+
+
+
+

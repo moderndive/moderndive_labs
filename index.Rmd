@@ -1,0 +1,55 @@
+---
+title: "ModernDive Labs/Problem Sets"
+author: "Jenny Smetzer, Albert Y. Kim, and Chester Ismay"
+date: "Last updated on `r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    df_print: kable
+---
+
+<style>
+h1{font-weight: 400;}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, message=FALSE, warning = FALSE, eval = TRUE, 
+  fig.width = 16/2, fig.height = 9/2
+)
+
+# CRAN R packages:
+library(tidyverse)
+library(stringr)
+library(knitr)
+library(lubridate)
+library(forcats)
+library(fivethirtyeight)
+library(nycflights13)
+library(gapminder)
+library(babynames)
+library(scales)
+library(moderndive)
+
+# Install emo package from GitHub for emoji functionality:
+# devtools::install_github("hadley/emo")
+library(emo)
+
+# Install patchwork package from GitHub for composing ggplots:
+# devtools::install_github("thomasp85/patchwork")
+library(patchwork)
+
+# Set seed value of random number generator to get "replicable" random numbers.
+# Why 76? Because of https://www.youtube.com/watch?v=xjJ7FheCkCU
+set.seed(76)
+```
+
+<style>
+h1{font-weight: 400;}
+</style>
+
+***
+
+# Welcome

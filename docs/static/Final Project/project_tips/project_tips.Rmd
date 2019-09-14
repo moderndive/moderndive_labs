@@ -1,0 +1,544 @@
+---
+title: "Become an R Data Ninja!"
+author: "Jenny Smetzer & Albert Y. Kim"
+date: "Last updated on `r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+
+![](figures/data_ninja1.png){width=30%}      
+
+Let's load all the packages we're going to need on your journey to becoming an R ninja!
+
+```{r message = FALSE}
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(knitr)
+library(scales)
+```
+
+
+***
+
+
+
+# Reading data into R
+
+You will need to bring your project data into R. So far all the data we have used in class has mostly been built into packages. Your project data will likely be in an Excel spreadsheet. For your project, instead of submitting this Excel spreadsheet, you can publish (non-sensitive and non-private) data to the web so it can be easily read into R. The advantage to this approach for your project is that 
+
+* It is an easy way to share the data with very person in your group and the instructor without having to pass around the Excel file. 
+* If **one person** in the group makes a change to the data file, **everyone else** in the group will have those changes updated when they bring the data into R. 
+
+Here are [instructions](https://twitter.com/rudeboybert/status/1055821833512071168){target="_blank"} on how to do this; follow through "Step 5: Copy the URL to the published CSV." The next step is to copy, paste, and adapt the code block below: 
+
+```{r eval = FALSE}
+library(readr)
+my_data <- read_csv("paste_the_url_here")
+```
+
+1. Put the URL of your published CSV file where it says `paste_the_url_here`. Be sure you include the **quotation marks**!
+1. Name the data frame whatever you want it to be called. Here we named it `my_data`
+
+Only one person in the group should do this step. However, once the google sheet is published, make sure to **share** the original Google Sheet with everyone else in your project, so anyone in your group can make changes to the data. 
+
+For example, take a look at the following [Google Sheet](https://docs.google.com/spreadsheets/d/1JIeADfp3ky3xExXWQz5lxbB0Tx5bTo0BA0sH6bzAqAA/edit?ts=5c75a9a5#gid=1970549377){target="_blank"} of movie data. Following the above mentioned [instructions](https://twitter.com/rudeboybert/status/1055821833512071168){target="_blank"}, we "published" the Google Sheet as a CSV, and thus anyone in the world can load into R as follows: 
+
+```{r message = FALSE}
+movies <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSw7gf9uPFvUBpk5NoL1oX-S6g-eWBYVThEDPLPXqYzkYXtNyYtVrcf2cSpnNpZLdGWsk-WunvYYN27/pub?gid=1970549377&single=true&output=csv")
+```
+
+Let's preview the first 10 rows of `movies` using the `slice()` function from the `dplyr` package:
+
+```{r eval = TRUE}
+library(dplyr)
+movies %>% 
+  slice(1:10)
+```
+
+
+
+***
+
+
+
+# Common data wrangling
+
+Here are some commonly performed data wrangling operations.
+
+## Dealing with missing values
+
+Looking at our preview above, you see the revenue in `millions` value for the movie "2 Fast 2 Furious" is `NA` i.e. missing. It is always good to check for missing values in your data set. The following takes a sum of all the missing values in the data set for each column. 
+
+```{r}
+colSums(is.na(movies))
+```
+
+Since there is at least one missing value in `millions`, the following occurs when computing the median:
+
+```{r}
+movies %>% 
+  summarize(mean_profit = mean(millions))
+```
+
+You should always think about why a data value might be missing and what that missingness may mean. For example, imagine you are conducting a study on the effects of smoking on lung cancer and a lot of your patients' data is missing because they died of lung cancer. If you just "sweep these patients under the rug" and ignore them, you are clearly biasing the results. 
+
+While there are statistical methods to deal with missing data they are beyond the reach of this class. The easiest thing to do is to remove all missing cases, but **you should always at the very least report to the reader if you do so, as by removing the missing values you may be biasing your results.**
+
+You can do this with a `na.rm = TRUE` argument like so:
+
+```{r}
+movies %>% 
+  summarize(mean_profit = mean(millions, na.rm = TRUE))
+```
+
+If you decide you want to remove rows with missing values for `millions`, you can use the `filter()` function like so:
+
+```{r}
+movies <- movies %>%
+  filter(!is.na(millions))
+
+movies %>% 
+  slice(1:10)
+```
+
+We see "2 Fast 2 Furious" is now gone. The `filter()` code says keep only rows in this data set in which the variable `millions` is not NA; `!` means NOT in computer programming. 
+
+## log10 transformations
+
+You might find that you need to create a new variable and add it to your data frame. For instance, suppose we wanted to log base 10 transform the `millions` variable in the movies data. (`millions` is the amount of $ each movie made). For example, since one million is 10^6^, `log10(1000000)` is equal to 6.
+
+The following code adds the variable `log10_mill` to the movies data, which is the log 10 of the millions variable: 
+
+```{r}
+movies <- movies %>%
+  mutate(log10_mill = log10(millions))
+movies
+```
+
+The following code does the same thing, but rounds the output to 2 decimal points. 
+
+```{r}
+movies <- movies %>%
+  mutate(
+    log10_mill = log10(millions),
+    log10_mill = round(log10_mill, 2)
+  )
+```
+
+
+## Computing proportions
+
+How do I compute proportions? By using a `group_by()`, but not followed by a `summarize()` as is often the case, but rather a `mutate()`. So say we compute the total revenue millions for each movie rating and type:
+
+```{r}
+rating_by_type_millions <- movies %>% 
+  group_by(rating, type) %>% 
+  summarize(millions = sum(millions)) %>% 
+  arrange(rating, type)
+
+rating_by_type_millions
+```
+
+Say within each movie `rating` (G, PG, PG-13, R), we want to know the proportion of `total_millions` that made by each movie `type` (animated, action, comedy, etc). We can:
+
+```{r}
+rating_by_type_millions %>% 
+  group_by(rating) %>% 
+  mutate(
+    # Compute a new column of the sum of millions split by rating:
+    total_millions = sum(millions),
+    # Compute the proportion within each rating:
+    prop = millions/total_millions
+    )
+```
+
+So for example:
+
+* For `rating` equals G there is only one `type` of movie (animated), the proportion of `total_millions` is 1. 
+* For `rating` equals PG there are 7 `type` of movies (action, adventure, animated, comedy, drama, fantasy, and musical), so the 7 proportions are 0.0349 + 0.0817 + 0.0480 + 0.606 + 0.118 + 0.108 + 0.0036 = 1.
+
+
+## How do I deal with %, commas, and \$? {#numerical}
+
+Often time variables that are in theory numerical are saved as text data because of the presence of perctage signs, commas, and dollar signs. How do you convert these to numerical values? Using `parse_number()` from the `readr` package inside a `mutate()`! Shout out to [Stack Overflow](https://stackoverflow.com/a/52965808/3674500){target="_blank"}
+
+```{r}
+library(readr)
+parse_number("10.5%")
+parse_number("145,897")
+parse_number("$1,234.5")
+```
+
+What about converting the other way around? Use the `scales` package!
+
+```{r}
+library(scales)
+percent(0.105)
+comma(145897)
+dollar(1234.5)
+```
+
+
+<!--
+## Changing values inside cells?
+
+`dplyr::rename()` renames column/variable names. To "rename" values inside cells of a particular column, you need to `mutate()` the column using one of the three functins below. There might be other ones too, but these are the three I've seen the most. In these examples, we'll change values in the variable `type`.
+
+1. `ifelse()`
+1. `recode()`
+1. `case_when()`
+
+### `ifelse()`
+
+Switch all instances of `rom comedy` with `romantic comedy` using `ifelse()`. If a particular row has `type == "rom comedy"`, then return `"romantic comedy"`, else return whatever was originally in `type`. Save everything in a new variable `type_new`:
+
+```{r}
+movies %>% 
+  mutate(type_new = ifelse(type == "rom comedy", "romantic comedy", type)) %>% 
+  slice(1:10)
+```
+
+Do the same here, but return `"not romantic comedy"` if `type` is not `"rom comedy"` and this time overwrite the original `type` variable
+
+```{r}
+movies %>% 
+  mutate(type = ifelse(type == "rom comedy", "romantic comedy", "not romantic comedy")) %>% 
+  slice(1:10)
+```
+
+### `recode()`
+
+`ifelse()` is rather limited however. What if we want to "rename" all `type` so that they start with uppercase? Use `recode()`:
+
+```{r}
+movies %>% 
+  mutate(type_new = recode(type, 
+                           "action" = "Action",
+                           "animated" = "Animated",
+                           "comedy" = "Comedy",
+                           "drama" = "Drama",
+                           "fantasy" = "Fantasy",
+                           "rom comedy" = "Romantic Comedy"
+  )) %>% 
+  slice(1:10)
+```
+
+### `case_when()`
+
+`case_when()` is a little trickier, but allows you to evaluate boolean operations using `==`, `>`, `>=`, `&`, `|`, etc:
+
+```{r}
+movies %>% 
+  mutate(type_new = 
+           case_when(
+             type == "action" & millions > 40 ~ "Big budget action",
+             type == "rom comedy" & millions < 40 ~ "Small budget romcom",
+             # Need this for everything else that aren't the two cases above:
+             TRUE ~ "Rest"
+           ))
+```
+-->
+
+
+
+
+***
+
+
+
+# Categorical variables
+
+Working with categorical variables in R can be tricky. However it is an essential tool given that so much of the world's data is categorical in nature.
+
+## Inspecting levels of a categorical variable 
+
+Sometimes it is useful to find out what all the *levels* are for a categorical variable (in other words the variable's possible categories) and to count how many cases are in each of the levels. The following code gives us a count of each level of the `rating` categorical variable:
+
+```{r}
+movies %>% 
+  group_by(rating) %>% 
+  tally()
+```
+
+The following code tells us all the distinct types of movies in the `type` column:
+
+```{r}
+movies %>%
+  distinct(type)
+```
+
+
+<!--
+## Converting between numerical/categorical
+
+Another good thing to do is look at your variable types using the `glimpse()` function. 
+
+```{r} 
+glimpse(movies)
+```
+
+We see here that the `over200` variable is `int` for integer i.e. a whole number. What if we wanted it to be a categorical variable? The following will accomplish this!
+
+```{r, eval = FALSE}
+movies <- movies %>%
+  mutate(over200 = as.factor(over200))
+```
+
+It is always good to check that what you did worked! 
+
+```{r}
+glimpse(movies)
+```
+
+Notice that now `over200` is `fct` for "factor", which is R speak for "categorical variable." What if you decide later that you actually needed this variable to be a number? The following will change a factor or character to a numeric:
+
+```{r, eval = FALSE}
+movies <- movies %>%
+  mutate(over200 = as.numeric(over200))
+```
+-->
+
+
+
+## Create a categorical variable from a numerical one
+
+Sometimes we want to turn a numerical variable into a categorical variable. For instance, what if we wanted to have a variable that tells us if a movie made ten million dollars or more? We can again use the `mutate()` function, like so:
+
+```{r}
+movies <- movies %>% 
+  mutate(big_money = as.factor(millions > 100))
+```
+
+Here we create a new column called `big_money` and fill it with `TRUE` or `FALSE` values based on whether the values in the column `millions` are greater than 100 or not. We use the `as.factor()` to ensure the output is a factor, R's way of saving categorical variables. 
+
+Again, check your work
+
+```{r}
+movies %>% 
+  select(name, millions, big_money) %>% 
+  glimpse()
+```
+
+Let's count the number of big money and non-big money movies:
+
+```{r}
+movies %>% 
+  group_by(big_money) %>% 
+  tally()
+```
+
+What if instead you want to recode a numeric variable into a categorical variable with more than 2 levels? One way is to use the `cut()` command. 
+
+For instance, below, we `cut` the `score` variable, to recode it into 4 categories:
+
+1. 0-40 = bad
+1. 40.1-60 = so-so
+1. 60.1 - 80 = good
+1. 80.1+ = great. 
+
+We set the breaking points for cutting the numeric variable with the `c(0, 40, 60, 80, 100)` part, and set the labels for each of these bins with the `labels = c("bad", "so-so", "good", "great")` part. All this action happens inside the `mutate()` command, so the new categorical variable `scorecats` is added to the data frame. 
+
+```{r}
+movies <- movies %>% 
+  mutate(scorecat = cut(score, 
+                        breaks = c(0, 40, 60, 80, 100),
+                        labels = c("bad", "so-so", "good", "great")
+                        ) # this closes the cut parentheses
+  ) # this closes the mutate parentheses
+```
+
+**Other options with the `cut()` function**
+
+* By default, if the value is exacly the upper bound of an interval, it's
+included in the lessor category (e.g. 60.0 is 'so-so' not 'good'), to 
+flip this, include the argument `right=FALSE`.
+* You could also have R equally divide the variable into a balanced
+number of groups.  For example, specifying `breaks = 3` instead would create 4 groups with approximately the same number of values in each group.
+
+
+
+***
+
+
+
+## Reclassify the levels of a categorical variable
+
+Sometimes categorical variables have too many levels or values for us to include in a statistical analysis. For instance, there are 13 movie types! We can re-classify each movie into one of five categories instead: `act_adv`, `sci_fantasy`, `funny`, `serious`, and `scary`.  We'll call the new variable `type_cat`.
+
+We will use the `recode_factor()` code from the dplyr package. The recoding is illustrated below. Recall that `mutate()` adds new columns. The new column we create below is called `type_cat`, the column we are recoding is `type`. The the only reason the names are on separate lines is to make the code easier to read. 
+
+```{r}
+movies <- movies %>%
+  mutate(type_cat = recode_factor(
+    type, 
+    "action" = "act_adv",
+    "adventure" = "act_adv",
+    "horror" = "scary", 
+    "suspense" = "scary",
+    "drama" = "serious",
+    "western" = "serious", 
+    "documentary" = "serious",
+    "rom comedy" = "funny",
+    "comedy" = "funny", 
+    "animated" = "funny",
+    "musical" = "funny",
+    "fantasy" = "sci_fantasy", 
+    "sci-fi" = "sci_fantasy")
+  )
+```
+
+Again, check your work
+
+```{r}
+movies %>% 
+  select(name, type, type_cat) %>% 
+  glimpse()
+```
+
+Let's count the number of each `type_cat` movies:
+
+```{r}
+movies %>% 
+  group_by(type_cat) %>% 
+  tally()
+```
+
+## Re-order how categorical variables are plotted 
+
+When you make a boxplot or barplot, R may not always put the levels of the categorical variable on the x axis in the order you like. In fact by default R arranges them in alphanumeric order. For instance, the boxplot of `millions` for each rating shows the boxes from G to R like so: 
+
+```{r fig.height=9/2.5, fig.width=16/2.5}
+library(ggplot2)
+ggplot(data = movies, aes(x = rating, y = millions)) + 
+  geom_boxplot(fill = c("pink", "steelblue", "sienna", "darkgreen")) + 
+  labs(x = "rating", y = "profit in millions of USD $", 
+       title = "Profits for different movie ratings")
+```
+
+To define our own order for the categorical variable, we can do the following:
+
+```{r}
+movies <- movies %>%
+  mutate(rating = factor(rating, levels = c("G", "PG", "PG-13", "R")))
+```
+
+This mutates or makes a new column that holds the same variable name, but tells R that we want the levels ordered `c("G", "PG", "PG-13", "R")`. The new boxplot reflects this:
+
+```{r fig.height=9/2.5, fig.width=16/2.5}
+ggplot(data = movies, aes(x = rating, y = millions)) + 
+ geom_boxplot(fill = c("pink", "steelblue", "sienna", "darkgreen")) + 
+  labs(x = "rating", y = "profit in millions of USD $", 
+       title = "Profits for different movie ratings")
+```
+
+# Formatting
+
+## Plotting dollar values on an axis
+
+Observe the y-axis on the following plot:
+
+```{r fig.height=9/2.5, fig.width=16/2.5}
+movies <- movies %>% 
+  mutate(revenue = millions * 10^6)
+
+ggplot(data = movies, aes(x = rating, y = revenue)) + 
+  geom_boxplot() + 
+  labs(x = "rating", y = "Revenue in $", title = "Profits for different movie ratings")
+```
+
+While we might understand that `2e+08` is 2 $\times 10^8$ = 200,000,000, your audience might not. How can we change this? Googled "ggplot2 axis scale dollars", click on the [first link](http://www.sthda.com/english/wiki/ggplot2-axis-scales-and-transformations), search for the word "dollars". You'll find:
+
+```{r fig.height=9/2.5, fig.width=16/2.5}
+library(scales)
+ggplot(data = movies, aes(x = rating, y = revenue)) + 
+  geom_boxplot() + 
+  labs(x = "rating", y = "Profit in millions of $", 
+       title = "Profits for different movie ratings") +
+  scale_y_continuous(labels = dollar)
+```
+
+
+
+## R Markdwon formatting 
+
+Here are some ways to format text in R Markdown:
+
+*italicize*
+
+**bold**
+
+> Emphasis blocks! You can spell check in R!!!! Go to the edit tab at the upper left part of the screen...the Check spelling option is near the bottom. Also, check out in the knitted file what putting the > before this text accomplished!
+
+
+Here are some common mathematical symbols:
+
+$\mu$
+
+$\sqrt(x)$
+
+$\beta_{1}$
+
+$\hat{y}$
+
+$\alpha = 0.05$
+
+
+## Code chunk outputs
+
+We can format how the code chunks show up in RMarkdown documents by adding arguments inside the `{r}` section. A few examples are below
+
+**Show the code output, but not the code**
+
+```{r echo = FALSE}
+movies_summaries <- movies %>% 
+  group_by(rating) %>%
+  summarize("Average Rating Score" = mean(score), "Sample Size" = n()) 
+movies_summaries
+```
+
+**Show the code output, but not the code...and make a table look really nice when you knit**
+
+You must install the `knitr` package and open it. The `digits = 2` argument signifies we round to two decimal places. 
+
+```{r echo = FALSE}
+library(knitr)
+movies_summaries %>% 
+  kable(digits = 2)
+```
+
+**Run some code, but don't include it in the output when you knit**
+
+Notice I also set the size of the figure that is printed
+
+```{r fig.height=9/2.5, fig.width=16/2.5}
+ggplot(data = movies_summaries, aes(x = rating, y = `Average Rating Score`)) + 
+  geom_bar(stat = "identity", fill = c("sienna", "steelblue", "darkgreen", "maroon")) + 
+  labs(x = "Movie Rating", y = "Profit (in Millions of US $)", 
+       title = "Blockbuster Profits are driven by Kid's movies: Who knew?")
+```
+
+**Show the code and not the output**
+
+```{r eval = FALSE}
+glimpse(movies)
+```
+
+**Show neither the code or the output**
+
+```{r include = FALSE}
+glimpse(movies)
+```
+
+
+
+# Congratulations!
+
+You are now an R Ninja!!
+
+
+![](figures/Rninja.png){width=40%}  

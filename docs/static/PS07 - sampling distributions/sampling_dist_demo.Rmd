@@ -1,0 +1,110 @@
+---
+title: "Sampling Distributions: a recap"
+output:
+  html_document:
+    theme: lumen
+    df_print: kable
+---
+
+<br> 
+<br> 
+
+[//]: (Bert- I was thinking it might be good to show the students the resulting graph here as follow up after the lab is turned in. Take it or leave it... I wasn't intending to put this in the problem set though. my reasoning was that last semester, they missed the detail that the axes were not the same scale, and did not see from making the histograms that the larger the n the narrower the histogram. This shows that...and could be a nice short follow up in lecture to remind them)
+
+
+```{r include = F}
+library(ggplot2)
+library(dplyr)
+library(forcats)
+library(moderndive)
+
+data(gss_cat)
+glimpse(gss_cat)
+```
+
+
+```{r include = F}
+gss_14 <- gss_cat %>% 
+  filter(year == 2014) %>% 
+  select(marital)
+```
+
+```{r include = F}
+n50_1000rep <- gss_14 %>% 
+  rep_sample_n(size = 50, reps = 1000)
+
+p_hat_n50_1000rep <- n50_1000rep %>% 
+  group_by(replicate) %>% 
+  summarize(divorce_count = sum(marital == "Divorced"), 
+            n = n()) %>% 
+  mutate(p_hat = divorce_count / n)
+
+
+n15_1000rep <- gss_14 %>% 
+  rep_sample_n(size = 15, reps = 1000)
+
+
+p_hat_n15_1000rep <- n15_1000rep %>% 
+  group_by(replicate) %>% 
+  summarize(divorce_count = sum(marital == "Divorced"), 
+            n = n()) %>% 
+  mutate(p_hat = divorce_count / n)
+
+
+n600_1000rep <- gss_14 %>% 
+  rep_sample_n(size = 600, reps = 1000)
+
+
+p_hat_n600_1000rep <- n600_1000rep %>% 
+  group_by(replicate) %>% 
+  summarize(n = n(), 
+            divorce_count = sum(marital == "Divorced")) %>% 
+  mutate(p_hat = divorce_count / n)
+```
+
+
+```{r include = F}
+p_hat_n15_1000rep <-  p_hat_n15_1000rep %>% mutate(sample_size = "15")
+p_hat_n50_1000rep <-  p_hat_n50_1000rep %>% mutate(sample_size = "50")
+p_hat_n600_1000rep <-  p_hat_n600_1000rep %>% mutate(sample_size = "600")
+
+all_dat <- rbind(p_hat_n15_1000rep, p_hat_n50_1000rep, p_hat_n600_1000rep)
+```
+
+```{r echo=F, fig.height=6, fig.width=11, fig.cap= "True population proportion p is shown by vertical red line"}
+ggplot(data = all_dat, aes(x = p_hat, fill = sample_size)) + 
+  geom_histogram(data = subset(all_dat, sample_size == "15"), 
+                 binwidth = 0.08, color = "black") + 
+  geom_histogram(data = subset(all_dat, sample_size == "50"), 
+                 binwidth = 0.04, color = "black") +
+  geom_histogram(data = subset(all_dat, sample_size == "600"), 
+                 binwidth = 0.02, color = "black") + 
+  facet_wrap(~ sample_size, ncol = 1)  + 
+  labs(x = "Sample proportion of divorced respondents",
+       title = expression("Sampling distribution of "*hat(p)* 
+                            " under three different sample sizes"),
+       fill = "Sample size n:") + 
+  geom_vline(data = NULL, xintercept = 0.16, color = "red", lwd = 1.5) +
+  scale_x_continuous(breaks = seq(from = 0, to = 0.6, by = 0.05)) +
+  scale_fill_brewer(palette = "Set2")
+
+```
+
+
+<br> 
+
+<br> 
+
+### 1. On each histogram above, please draw two vertical lines, so that ROUGHLY the middle 95% of the values in each histogram are encompassed by the two vertical lines. You will need to "eyeball" this.  
+
+<br> 
+
+### 2. Based on your drawing, please VISUALLY guess what the 95% CI is for each of the above histograms. Fill your answers in below 
+
+Histogram        | lower bound             | upper bound
+---------------- | ----------------------- | ---------------- 
+n = 15           |                         | 
+n = 50           |                         | 
+n = 600          |                         | 
+
+

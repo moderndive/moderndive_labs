@@ -1,0 +1,398 @@
+
+---
+title: 'Independent (un-paired) t-tests'
+output:
+  html_document:
+    css: lab.css
+    theme: lumen
+    df_print: kable
+---
+
+```{r include=FALSE}
+knitr::opts_current$set(eval = FALSE)
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(effsize)
+library(mosaic)
+```
+
+<br>
+![](newborn1.jpg){width=45%}  ![](newborn2.jpg){width=42%}  
+<br>
+
+In this lab we will learn about t-tests, using some data on newborn babies. This is a statistical analysis that can be used when you have a **continuous numeric outcome variable and a discrete (categorical) preditor with <u>TWO</u> values**. For instance, we could use a t-test to analyze whether mean weight in pounds differed between male and female bears. Here bear weight would be the **continuous numeric outcome** variable and sex of bears would be the **categorical predictor with two values: male and female**. 
+
+## Getting Started
+
+### Load packages
+
+In this lab we will explore the data using the `dplyr` package and visualize it  using the `ggplot2` package for data visualization. The data can be read in using the `readr` package. 
+
+This week we will load two new packages that contain functions for running t-tests:  `effsize` and the `moasic` package. 
+
+```{r load-packages, message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(effsize)
+library(mosaic)
+```
+
+### The data
+
+In 2004, the state of North Carolina released a large data set containing  information on births recorded in this state. Each case in this data set is a birth.  We will work with a random sample of observations from this data set.
+
+Copy, paste and run the code below to load the data from where it is published on the web. 
+
+```{r, message = F}
+nc <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTm2WZwNBoQdZhMgot7urbtu8eG7tzAq-60ZJsQ_nupykCAcW0OXebVpHksPWyR4x8xJTVQ8KAulAFS/pub?gid=202410847&single=true&output=csv")
+```
+
+Remember that you can view the data in the data viewer and by using the following command:
+
+```{r glimpse, eval = F}
+glimpse(nc)
+```
+
+
+Note that these are the same data we used in the visualization lab. The variable names are `fage`, `mage`, `mature`, etc. 
+
+
+*** 
+# An example analysis
+
+For an example, we will test whether the birth weight for babies in lbs (stored in the variable `weight`) differs by maternal smoking `habit`. Before formal inference, an exploratory data analysis can be helpful for shedding light on the data and understanding relationships. 
+
+## Exploratory data analysis: summary statistics
+
+Our first step will be to calculate some summary statistics. 
+
+```{r eval = F}
+nc %>%
+  group_by(habit) %>%
+  summarise(sample_size = n(), 
+            mean_w = mean(weight))
+```
+
+This code says
+
+-  take the `nc` data **then**
+-  `group_by` the `habit` variable (smoker and non-smoker) **then**
+-  calculate the sample size for each group (smoker and non-smoker)
+-  and calculate the mean `weight` for each group
+
+Note that because we added a `group_by` command before the `summarize` command, our output  shows a mean birth `weight` and sample size for smokers **and** nonsmokers.
+
+
+## Exploratory data analysis:  data visualization
+The next step is to use graphs to look at the mean and 95% confidence intervals of birth `weight`for babies. Plotting the data helps us quickly visualize trends.
+
+To make a bar (column) graph with smoking habit on the x-axis and mean weight on the y-axis we need to make and save a data frame with summary statistics about birth `weight` by smoking habit, like so:
+
+```{r}
+summary_df <- nc %>%
+  group_by(habit) %>%
+  summarize(sample_size = n(), 
+            mean_w = mean(weight, na.rm = T), 
+            sd_w = sd(weight, na.rm = T), 
+            se = sd(weight)/sqrt(sample_size), 
+            lower_ci = mean_w - (se * 1.96),
+            upper_ci = mean_w + (se * 1.96))
+
+summary_df
+```
+
+
+This is similar to our calculation of summary stats above, by habit, but now we are storing the results in a data frame called `summary_df`. In addition, this time we **also** calculated the standard deviation and standard error of `weight` for nonsmokers and smokers, as well as the  95% confidence interval for the mean `weight` of smokers and nonsmokers. This will allow us to put 95% confidence interval error bars on our barplot. 
+
+<br>
+ 
+Now we can use the `summary_df` shown above to make a  bar graph with smoking habit on the x-axis and weight on the y-axis. Note that the `summary_df` is the data set used in this plot, and the y axis is the mean weight (`mean_w`) we just calculated!
+
+```{r fig.height=3, fig.width=2, eval = F}
+ggplot(data = summary_df, aes(x = habit, y = mean_w)) + 
+  geom_bar(stat = "identity") + 
+  geom_errorbar(aes(ymin = lower_ci, 
+                      ymax = upper_ci), 
+                      width = 0.2) + 
+  labs(x = "Smoking habit", y = "Birth weight of newborns (lbs)", 
+       title = "Newborn weight by 
+       maternal smoking habit")
+```
+
+
+<br>
+
+2. Based on the barplot:
+
+    **A.** do nonsmoking or smoking mothers tend to give birth to heavier newborns?
+    
+    **B.** Inspect the 95% confidence interval bars. When we run a t-test to do you think we are going to find a statistically significant difference between mean weight of newborns for smoking and nonsmoking mothers? 
+
+<br>
+
+
+
+## Null and Alternative Hypotheses
+
+We saw from the barplots, that there appears to be a difference in birth `weight` between smokers and non smokers. But is the difference statistically significant? In other words, is the the difference that we saw in this **SAMPLE** something we might expect **by chance alone**, if in reality, there is no difference in birth `weight`  between smokers and non smokers in the **POPULATION**?
+
+<br>
+
+We can test this with the following Null and Alternative Hypotheses: 
+
+$Ho: \mu_{smoker} = \mu_{nonsmoker}$
+
+$Ha: \mu_{nonsmoker} \neq mu_{nonsmoker}$
+
+
+where $\mu$ is the birth weight of babies
+
+<br> 
+
+Note I wrote these by typing the following into the white part of the R Markdown file.  
+
+`$Ho: \mu_{smoker} = \mu_{nonsmoker}$`
+
+`$Ha: \mu_{nonsmoker} \neq \mu_{nonsmoker}$`
+
+
+Also, note that I defined what $\mu$ is!
+
+`$\mu$` will give you $\mu$
+
+
+<br> 
+
+
+1. Why do we use $\mu$ when stating the Null and Alternative hypotheses, and not $M$?
+
+
+## Formal inference: t-tests
+
+We will use the function, `t.test` for this analysis:
+
+```{r eval = F}
+t.test(weight ~ habit, data = nc, 
+       alternative = "two.sided", 
+       paired = FALSE, 
+       mu = 0, 
+       var.equal = TRUE,  
+       conf.level = 0.95)
+```
+
+<br> 
+
+Let's go through the arguments:
+
+
+- `weight ~ habit` is a formula of the form **numeric outcome y ~ categorical predictor x**
+
+- `data = nc`, indicates the data frame these variables are in
+
+- `alternative = "two.sided"` indicates to run a **two-tailed** test 
+
+- `paired = FALSE` indicates to run an **independent**, unpaired t-test 
+
+- `mu = 0` indicates we are testing the **null hypothesis** that the difference between the two groups is zero (i.e. that $\mu_{smoker} = \mu_{nonsmoker}$)
+
+- `var.equal = TRUE` indicates we are going to run a test that assumes the **spread** (standard deviation) of birth weights in our sample is fairly similar for smokers and non-smokers 
+
+- `conf.level = 0.95` tells R we are using an $\alpha$ of 0.05
+
+<br> 
+
+
+<div id="license">
+For more information on the function see the help file by typing `?t.test` into the console. Note: 
+
+ + we could change alternative to `"less"` or `"greater"` for a **one-sided** test 
+
+ + we can change `paired` to `TRUE` to run a dependent  or **paired** samples t-test
+
+ + we can change `var.equal`  to `FALSE` if we have very **unequal spread** (*SD*) between groups 
+
+ + we can change `conf.level` based on **the $\alpha$ you choose** for the test 
+</div>
+
+
+## Cohen's d
+
+We can use the `cohen.d` function in the `effsize` library to calculate Cohen's *d*. Note you use the same formula `weight ~ habit` as in the `t.test`. Note below we run  `paired = FALSE` for an independent, unpaired t-test, but this could be changed to `TRUE` for a dependent, paired t-test. 
+
+```{r eval = F}
+cohen.d(weight ~ habit, data = nc,  paired = FALSE)
+```
+
+
+<div id="license">
+As a rule of thumb, Cohen suggested that a *d* of **0.2 is a "small"** effect, **0.5 is a "moderate"** effect, and a **0.8 or greater is a "large"** effect. Note that R will give you positive and negative values for *d*. Thus, -0.2 is also a "small" effect, -0.5 is a "moderate" effect, and so on.
+</div>
+
+
+## Reporting results
+```{r eval = F}
+t.test(weight ~ habit, data = nc,  alternative = "two.sided", 
+       paired = FALSE,  mu = 0, var.equal = TRUE,  
+       conf.level = 0.95)
+```
+
+
+Let's re-run the `t.test` results, and inspect them. The following is how you would report these results: 
+
+<div id="license">
+I used a two-tailed independent (unpaired) t test to test the Null Hypothesis that there was no effect of smoking habit on the birth weight of newborns **at the population level**. Birth weight of newborns was greater for nonsmoker mothers  (*M* = 7.25, *SD* = 1.45) than for smoking mothers (*M* = 6.89, *SD* = 1.31). The difference between means was moderate (Cohen's *d* = 0.25), and was statically significant at $\alpha$ = 0.05 (*t* = 2.17, *df* = 798, *p* = 0.03). There was enough evidence to reject the Null Hypothesis. I conclude from this study that nonsmoking mothers give birth to significantly heavier babies at the population level than smoking mothers.
+</div>
+
+
+> Please be sure you can figure out where I got all these values. Most of them are from the `t.test()` output, but the *SD* values are from the summary statistics we calculated earlier, and the Cohen's *d* are from the `cohens.d()` output. 
+
+
+# Independent Practice 
+
+You will first investigate whether maternal weight gain differs between full term pregnancies and premature births. 
+
+* `y` is `gained`: the **numeric variable** for maternal weight gain 
+* `x` is `premie`: the **categorical variable** describing whether a birth was "full term" or "premie"
+
+The code below calculates all the necessry  summary stats and the 95% confidence intervals for weight `gained` for full term and premie births. 
+
+```{r}
+premie_summary <- nc %>% 
+  group_by(premie) %>%
+  summarize(sample_size = n(), 
+            mean_g = mean(gained), 
+            sd_g = sd(gained), 
+            se = sd_g/sqrt(sample_size), 
+            lower_ci = mean_g - (se * 1.96), 
+            upper_ci = mean_g + (se * 1.96))
+
+premie_summary
+```
+
+1. Use the `premie_summary` data frame to generate a bar plot showing the mean weight gained (and 95% confidence interval error bars) for full term and premie births. 
+
+
+
+
+1. Write out the Null and Alternative hypotheses for testing whether there is a significant difference between the maternal weight gain for full term and premie births at the population level. **Please use statistical symbols (see the example above in the "Null and Alternative Hypotheses" section), and be sure to define what $\mu$ is in this case.**
+
+1. Run a two-tailed independent (unpaired) t-test to test whether there is a significant difference between the maternal weight gain for full term and premie births at the population level. You can set `var.equal = TRUE`. **Note:** when interpreting the results, that the p-value of  7.259e-05 means 7.259 x 10 ^-5^   or 0.00007259 (a **very small** number)
+
+```{r include = F}
+t.test(gained ~ premie, data = nc, alternative = "two.sided", 
+       paired = FALSE,  mu = 0, var.equal = TRUE,  
+       conf.level = 0.95)
+```
+
+1. Please find and report the value of each of these items in the R printout:
+
+    **A.** the test statistic *t*
+
+    **B.** the degrees of freedom (*df*)
+    
+    **C.** the p-value 
+
+
+1. Would you reject the Null Hypothesis at an $\alpha$ of 0.05? (a simple YES or NO will suffice)
+
+
+1. Calculate Cohen's *d* for the difference in maternal weight gain between full term and premie births. 
+
+    **A.** Does the Cohen's d indicate a small, moderate, or large effect size?
+
+```{r include  = F}
+cohen.d(weeks ~ premie, data = nc,  paired = FALSE)
+```
+
+
+<br> 
+
+***
+
+
+You will now independently investigate whether the average duration of a pregnancy in weeks differs between mature and young mothers. 
+
+* `y` is `weeks`: the **numeric variable** for pregnancy duration 
+* `x` is `mature`: the **categorical variable** describing whether a woman was a "younger mom" or a "mature mom"
+
+<br>
+
+1. Generate a table of summary statistics that includes the sample size (*n*) ,  standard deviation (*SD*), standard error, and mean (*M*) of the duration of pregnancy for "younger moms" and "mature moms". Also calculate the a95% confidence intervals around the mean duration of pregnancy for "younger moms" and "mature moms". **Be sure to save the summary stats you calculate, so you can use them to make a barplot in the next Exercise!**
+
+```{r include = F}
+summary_df2 <- nc %>%
+  group_by(mature) %>%
+  summarize(sample_size = n(), 
+            mean_w = mean(weeks), 
+            sd_w = sd(weight), 
+            se = sd(weight)/sqrt(sample_size), 
+            upper_ci = mean_w + (se * 1.96), 
+            lower_ci = mean_w - (se * 1.96))
+
+summary_df2
+```
+
+
+1. Generate a barplot to show the mean pregnancy duration for "younger moms" and "mature moms". Please be sure to include 95% confidence interval error bars. 
+
+
+
+1. Run an independent, two-tailed t-test to to test whether there is a significant difference between the pregnancy duration of younger and mature moms at the population level. You can set `var.equal = TRUE`. 
+
+    Note in this test:
+    
+    $Ho: \mu_{younger} = \mu_{older}$
+    
+    $Ha:  \mu_{younger} \neq \mu_{older}$
+    
+    $\mu$ is pregnancy duration in weeks
+
+```{r include = F}
+t.test(weeks ~ mature, data = nc, paired = FALSE, alternative = "two.sided", var.equal = T)
+```
+
+1. Calculate Cohen's *d* for the difference between pregnancy duration between mature and younger moms. 
+
+```{r include = F}
+cohen.d(weeks ~ mature, data = nc,  paired = FALSE)
+```
+
+1. Write up your results in complete sentences, following the example I provided above in the "**reporting results**" section. I highly suggest you copy and paste the text below, and fill in the blanks. No flowery creativity is required; concise writing is required. As in my example you must report: 
+
+    **(1)** what type of test you used (two-tailed or one-tailed, independent or dependent)
+    
+    **(2)** the Null hypothesis in words
+   
+    **(3)** which level of the categorical variable has a greater average for the response variable
+    
+    **(4)** the mean and SD of the response variable for each group
+    
+    **(5)** the effect size and an interpretation
+    
+    **(6)** whether the difference was or was not statistically significant
+    
+    **(7)** an $\alpha$ (type `$\alpha$` to get $\alpha$) 
+    
+    **(8)** t, df, p
+    
+    **(9)** whether or not you reject the Null Hypothesis 
+    
+    **(10)** a concise conclusion about what this means at the **population level**
+
+
+I used a _______  t test to test the null hypothesis that there was no effect of _________ on __________ at the population level. The mean ___________ was greater for __________ (M = ____, SD = ______) than for __________ (M = ______, SD = ______). The difference between means was ______ (Cohen's d = _______), and **(was /was not)** statically significant at $\alpha$ = ______ (t = ______, df = ______, p = ______). There **(was/ was not)** sufficient evidence to reject the Null hypothesis. I conclude from this study that ______________ at the population level.
+
+
+
+
+
+<br> 
+
+***
+<div id="license">
+This lab was adapted from OpenIntro [Creative Commons  Attribution-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-sa/3.0) by J Smetzer.
+</div>
+
+

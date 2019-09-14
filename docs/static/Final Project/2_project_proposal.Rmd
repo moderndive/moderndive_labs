@@ -1,0 +1,156 @@
+
+---
+title: "SDS/MTH 220 Project Proposal Example"
+author: "WRITE YOUR GROUP NAME HERE"
+date: "Last updated on `r Sys.Date()`"
+output:
+  html_document:
+    fig_caption: yes
+    theme: lumen
+    toc: yes
+    toc_depth: 2
+    df_print: kable
+    toc_float:
+      collapsed: no
+---
+
+```{r, message=FALSE}
+# Load all packages here:
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(janitor)
+
+# Set seed value of random number generator to get "replicable" random numbers.
+# The choice of seed value of 76 was an arbitrary one on my part.
+set.seed(76)
+```
+
+
+# Data
+
+## Load data into R
+
+_Include the code to load your data here. If your data is not confidential nor is it private in nature, consider publishing it as a `.csv` file on Google Sheets as in the code chunk below; instructions on how to do this are in Steps 1-6 [here](https://twitter.com/rudeboybert/status/1055821846539591680). If the data shouldn't be published online, then please submit the spreadsheet file on Moodle._
+
+```{r, message=FALSE}
+
+```
+
+## Clean variable names
+
+_Pipe your data frame into the `clean_names()` function from the `janitor` package. This will clean your variable names, making them easier to work with._
+
+```{r}
+
+```
+
+## Data wrangling
+
+_Complete your data wrangling here_: 
+
+```{r}
+
+```
+
+
+
+***
+
+
+# Preview of data
+
+## Pare down variables
+
+_`select()` the following variables **in this order** and drop all others. Eliminating all unnecessary variables will making visually exploring the raw values less taxing mentally, as we'll have less data to look at._
+
+1. _First: The identification variable (if any)_
+1. _Second: The outcome variable $y$_
+1. _Third: The numerical explanatory variable_
+1. _Fourth: The categorical explanatory variable_
+1. _Rest: any other variable you find interesting_
+
+```{r}
+
+```
+
+## Look at your data using glimpse
+
+_Look at your data using the `glimpse()` function._
+
+```{r}
+
+```
+
+## Show a preview of your data
+
+_Look at your data another way by displaying a random sample of 5 rows of your data frame by piping it into the `sample_n(5)` function from the `dplyr` package._
+
+```{r}
+
+```
+
+
+
+***
+
+
+
+# Exploratory data analysis
+
+_Let's do an little exploratory data analysis._
+
+## Inspect for missing values
+
+_Address missing values._
+
+
+```{r}
+
+```
+
+
+## Summary statistics
+
+_Compute some quick summary statistics of the outcome variable and comment._
+
+```{r}
+
+```
+
+
+## Histogram of outcome variable 
+
+_Visualize the distribution of the outcome variable using a histogram and comment._
+
+```{r, fig.cap = "Figure 1. WRITE A TITLE HERE", fig.align = "center", fig.width=16/2, fig.height=9/2}
+```
+
+
+
+## Scatterplot 
+
+_Visualize the relationship of the outcome variable and the numerical explanatory variable using a scatterplot and comment._
+
+```{r, fig.cap = "Figure 2. WRITE A TITLE HERE", fig.align = "center", fig.width=16/2, fig.height=9/2}
+
+```
+
+
+## Boxplot
+
+_Visualize the relationship of the outcome variable and the categorical explanatory variable using a scatterplot and comment._
+
+```{r, fig.cap = "Figure 3. WRITE A TITLE HERE", fig.align = "center", fig.width=16/2, fig.height=9/2}
+
+```
+
+## Colored scatterplot
+
+_Visualize the relationship of the outcome variable and both explanatory variables using a colored scatterplot and comment._
+
+```{r, fig.cap = "Figure 4. WRITE A TITLE HERE", fig.align = "center", fig.width=16/2, fig.height=9/2}
+
+```
+
+
