@@ -1,0 +1,48 @@
+---
+title: "Problem Sets"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 2
+    toc_float: true
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, message=FALSE, warning = FALSE, eval = TRUE, 
+  fig.width = 16/2, fig.height = 9/2
+)
+
+# Set seed value of random number generator to get "replicable" random numbers.
+# Why 76? Because of https://www.youtube.com/watch?v=xjJ7FheCkCU
+set.seed(76)
+```
+
+<!--
+{target="_blank"}
+-->
+
+<style>
+h1{font-weight: 400;}
+</style>
+
+
+
+***
+
+
+
+# Problem sets
+
+Dr. Jenny Smetzer has written labs/problems sets that accompany ModernDive:
+
+1. PS01: Introduction to R
+1. PS02: Data visualization with `ggplot2`
+1. PS03: Data wrangling with `dplyr`
+1. PS04: Regression with one numerical variable
+1. PS05: Regression with one categorical variable
+1. PS06: Regression with one numerical and one categorical variable
+1. PS07: Sampling distributions
+1. PS08: Confidence intervals and the bootstrap
+1. PS09: Hypothesis testing
+1. PS10: Inference for regression (coming soon!)

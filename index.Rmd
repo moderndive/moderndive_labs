@@ -22,15 +22,7 @@ knitr::opts_chunk$set(
 
 # CRAN R packages:
 library(tidyverse)
-library(stringr)
-library(knitr)
-library(lubridate)
-library(forcats)
-library(fivethirtyeight)
-library(nycflights13)
-library(gapminder)
-library(babynames)
-library(scales)
+library(infer)
 library(moderndive)
 
 # Install emo package from GitHub for emoji functionality:
@@ -50,6 +42,13 @@ set.seed(76)
 h1{font-weight: 400;}
 </style>
 
+<!--
+{target="_blank"}
+-->
+
 ***
 
 # Welcome
+
+
+[Sign up for solutions here](https://docs.google.com/forms/d/e/1FAIpQLSf68Je_Q3ggRJ-74UtL0xG5-IuuKkSTIpEQZWro-8QbO7nmdA/viewform){target="_blank"}

@@ -16,9 +16,14 @@ output:
 navbar:
   title: ModernDive Labs
   left:
-  - text: ModernDive
-    href: https://moderndive.com/
+  - text: Problem Sets
+    href: PS.html
+  - text: Final Project
+    href: final_project.html
   right:
+  - text: Book
+    href: https://moderndive.com/
   - icon: fa-github fa-lg
-    href: https://github.com/moderndive/moderndive_labs
-
+    href: https://github.com/moderndive/
+  - icon: fa-twitter fa-lg
+    href: http://twitter.com/moderndive/
