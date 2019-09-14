@@ -1,0 +1,228 @@
+
+---
+title: "Problem Set 03: Data Wrangling"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: yes
+    df_print: kable
+    
+---
+
+In this problem set we will practice some of the key data manipulation tasks for describing, summarizing, and working with data. We will specifically review the following functions from the `dplyr` package: 
+
+-  `select`
+-  `mutate`
+-  `summarize`
+-  `arrange`
+-  `filter`
+-  `group_by`
+-  `%>%`
+
+In addition we will review how to save objects using the `<-` assignment operator. 
+
+# Set up
+
+For this problem set, you are being given a R Markdown file to fill your answers into!  Go to the course page and download the PS3 R Markdown file. Put it somewhere on your computer where you can **find it**. You will next need to upload PS3 R Markdown file to the server.
+
+To upload the file, click on the R Studio Server **introstatsR** folder **once**, and click the upload button, like so: 
+
+<br>
+![](figures/upload.png){width=50%}
+
+<br>
+In the window that opens, browse to where you stored the file on your computer, click on the  file, then click OK. Open the introstatsR folder in R Studio Server, to make sure the R Markdown file is in there. When you click on the R Markdown file, it will open. Fill in the answers below the corresponding Question headers. Be sure to include text and code where necessary. 
+
+
+### R Packages
+Run the following to load the necessary packages for this problem set:
+```{r warning = F, message = F}
+library(ggplot2)
+library(dplyr)
+```
+
+### The data
+Run the following to load and take a `glimpse` of the data:
+```{r eval = F}
+data(txhousing)
+glimpse(txhousing)
+```
+
+These data are about housing in Texas. Each row is monthly data for a given city in Texas in a given year. There are multiple years of data for each city. 
+
+## Question 1
+Take a look at the data in the data viewer. You can accomplish this two different ways: A) click on the name of the data in the Environment pane, or b) type `View(txhousing)` in the **console**. What is the last city listed in the data set (in row 8602)?
+
+
+## Question 2
+Take a look at the variable descriptions by typing ?txhousing into the **console**. What is the `listings` variable in this data set?
+
+***
+# DATA WRANGLING REVIEW
+
+## select
+Sometimes we want to pull out or extract just one or two columns of data. The following code will extract only the column in the data set for the variables `sales` and `volume`. 
+```{r eval = F}
+txhousing %>% select(sales, volume)
+```
+
+The `%>%` symbol is called the **piping**  operator. Here, it takes the `txhousing` **data frame** and "pipes" or feeds it into the `select` function. You can think of the `%>%` symbol as the word "then". 
+
+Note that we did not use an assignment operator `<-` so we did not save these extracted, selected values. In the following code, we **save** the results, in a data frame **ASLO** called txhousing. By putting - in front of the `date` variable we tell R to select all **except** the `date` variable. 
+Run the following code:
+
+```{r }
+txhousing <- txhousing %>% select(-date)
+```
+
+If you look at txhousing in the data viewer, the `date` variable is no longer included. 
+
+## filter
+
+The filter function allows you to pull out just the **rows** (cases or observations) you want, based on some criteria in **one of the columns**.   
+
+Imagine for instance that we wanted to reduce the data set include data for only 2012, in Austin. This code chunk takes the txhousing data, then filters it to only include rows in which the year is 2012, **and** the city is Austin. The results are saved in a new data frame called `austin_12` that shows up in the **workspace**. 
+
+```{r }
+austin_12 <- txhousing %>% filter(year == 2012, city == "Austin")
+```
+ 
+> Note that we use `==` to identify the desired criteria. 
+
+What if we wanted to restrict our data set to only years before 2004 and the City of Austin? Below we use the `<` symbol to accomplish this. Note we did not **SAVE** these results in a new data frame...so no new data frame showed up in our Environment pane, but the results print out immediately below the code chunk. 
+
+```{r eval = F}
+txhousing %>% filter(year < 2004, city == "Austin")
+```
+
+What if we wanted to use multiple cities?  Below we use the  `|` symbol to indicate that the city could be Austin **OR** Abilene. In this case, we **saved** these results as a new data frame called `aust_ab` that appears in your Environment pane.  
+
+```{r }
+aust_ab <- txhousing %>% filter(city == "Austin" | city == "Abilene")
+```
+
+
+## mutate
+The mutate function can add new columns (variables) to a data frame. For instance, the following will add a new column to the data called `vol_100k` that expresses volume in units of $100000. 
+```{r}
+txhousing <- txhousing %>%
+  mutate(vol_100k = volume/100000)
+```
+
+Note that we **SAVED** these results in new data frame called `txhousing`. This therefore **overwrote** the old `txhousing` data frame with a new version that contains this column. You can open the `txhousing` data frame in the viewer to confirm that it now contains this new column. 
+
+## summarize
+One of the first tasks in data analysis is often to get descriptive statistics that help to understand the central tendency and variability in the data. The `summarize()` command can take a column of data, and reduce it to a summary statistic. 
+
+For instance, the code below uses the `austin_12` data set made earlier to calculate the mean monthly number of `sales` in Austin in 2012. 
+
+```{r eval = F}
+austin_12 %>% summarize(x_bar_sales = mean(sales))
+```
+This code tells R to calculate the `mean` of the variable `sales`, and to save the results in a variable called `x_bar_sales`. 
+
+You can also calculate multiple summary statistics at once, and even for multiple variables. Below we also calculate a standard deviation `sd()` of `sales`, a minimum `min()` of the `volume` variable, a maximum `max()` of the `volume` variable, etc. The `n()` calculates sample size...or the number of rows/ cases in the data frame. 
+
+```{r }
+austin_12 %>% summarize(x_bar_sales = mean(sales), 
+                        sd_sales = sd(sales), 
+                        min_vol = min(volume), 
+                        max_vol = max(volume), 
+                        mdn_list = median(listings), 
+                        iqr_list = IQR(listings),
+                        sample_size = n())
+```
+
+Note that the names of the elements you calculate are  user defined, like `xbar_sales`, `min_vol`, and `mdn_list`. You could customize these names as you like (but don't use spaces in your names). 
+
+## arrange
+You just determined that the maximum volume of monthly sales in Austin in 2012 was a total of $791,281,075 ....but what if you wanted to know **WHAT MONTH** that occurred in? Copy paste, and run the following into a new code chunk: 
+
+```{r eval = F}
+austin_12 %>%
+  arrange(desc(volume))
+```
+
+This tells R to `arrange` the rows in the data set based on the `volume` column, and to do so in `desc`ending order. So the row with the $791,281,075 in sales is shown at the top! We can see that this `volume` occurred in the sixth month (June). 
+
+## group_by
+Sometimes we also want to calculate summary statistics across different levels of another variable. For instance, here we find the average number of monthly sales that occurred in Abilene and Austin across all years in the data set. Note that we **use the `aust_ab` data frame** we created earlier, to restrict our analysis to those two cities. 
+
+```{r}
+aust_ab %>% group_by(city) %>% 
+  summarize(x_bar_sales = mean(sales))
+```
+
+From the results we can see that there were an average of 150 sales per month in Abilene, and 1996 in Austin. 
+
+We can give R multiple variables to group by. For instance, this code gives us the mean sales for each month in each city, averaged across all the years. So for instance the mean number of sales in January, in Abilene was 96 homes. 
+```{r eval = F}
+aust_ab %>% group_by(city, month) %>% 
+  summarize(x_bar_sales = mean(sales))
+```
+
+***
+# Independent practice 
+
+## Basic syntax
+This first set of questions will help you practice basic syntax. All you need to include is a Question header, and code for each. 
+
+## Question 3
+Write a code chunk to remove the inventory variable. Save the results in a data frame called `txhousing`. Confirm in the data viewer that the variable has been removed. 
+
+
+## Question 4
+Make a data set called `dallas_sub` that includes data only from the city of Dallas in 2012 & 2013. 
+
+
+## Question 5
+Add a column **to the `dallas_sub` data set** called `prct_sold` that calculates the percentage of `listings` that were `sold` (`sales/listings * 100`). Be sure to **save** the results also as a data frame called `dallas_sub`. 
+
+
+## Question 6
+Calculate the **average** percentage of listings that were sold in Dallas **in each month of the year** based on your `dallas_sub` data set. Save the results of the calculation in an data frame called `dallas_summary`. 
+
+
+## Question 7
+Arrange the `dallas_summary` in `desc`ending order based on the average percentage of listings that were sold in Dallas in 2012, so you can see **which month** had the greatest percentage of houses sold in Dallas on average from 2012-2013.  You do not need to save the results. 
+
+
+***
+## More advanced wrangling
+
+Please answer the following questions with text and/or code where appropriate. You may have to use multiple `dplyr` functions to answer each question. Think through the steps of how to get to the answer you are trying to find. 
+
+## Question 8
+Run the following code chunk. Study the code, and the output. Explain in your own words what this code chunk calculated. 
+```{r eval = F}
+txhousing %>% 
+  filter(year == 2012 | year == 2013, city == "Dallas") %>%
+  mutate(prct_sold = sales/listings *100) %>%
+  group_by(month) %>%
+  summarize(mean_prct_sold = mean(prct_sold)) %>% 
+  arrange(desc(mean_prct_sold))
+```
+
+
+## Question 9
+In January of 2015, what city had the fewest houses listed for sale? (show code and text please)
+
+
+
+## Question 10
+In 2012, in which month were the most houses sold in Texas? (show code and text please)
+
+
+```{r include = F}
+txhousing %>% 
+  filter(year == 2012) %>%
+  group_by(month) %>%
+  summarize(top_sales = max(sales)) %>%
+  arrange(desc(top_sales))
+```
+
+## Question 11
+Generate a single table that shows the total number of houses sold in **Austin** in **2000 and 2001** (total over the entire period), & the total number of houses sold in **Dallas** in **2000 and 2001** (total over the entire period). This calculation requires a number of steps, so it might help you to first write out on paper the different steps you will need to take. That will help you set out a "blueprint" for tackling the problem. **Hint**: recall the `sum()` function can add values. 
+
+
