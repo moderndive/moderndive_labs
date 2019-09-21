@@ -74,7 +74,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -373,6 +372,16 @@ h1{font-weight: 400;}
 <center>
 <img src="static/images/pipeline.png" width="600" />
 </center>
+<p>In a nutshell, the final project is in five-stages. By spreading out the work over the semester, pressure is taken off the end when the final submission is due. In particular, finding data should be done early.</p>
+<ol style="list-style-type: decimal">
+<li>Forming groups</li>
+<li><a href="static/Final%20Project/1_data_proposal_example.html" target="_blank">Proposing data</a></li>
+<li><a href="static/Final%20Project/2_project_proposal_example.html" target="_blank">Proposing project</a></li>
+<li><a href="static/Final%20Project/3_submission_example.html" target="_blank">Making an initial submission</a></li>
+<li><a href="static/Final%20Project/4_resubmission_example.html" target="_blank">Making a resubmission</a></li>
+</ol>
+<p>More detail on how we presented the project are below.</p>
+<p>We would like to thank Smith College students Alexis Cohen, Andrianne Dao, Isabel Gomez for allowing us to use their final project as the template.</p>
 <hr />
 <div id="groups" class="section level1">
 <h1>1. Groups due</h1>
@@ -578,135 +587,7 @@ h1{font-weight: 400;}
 <li>The <code>project_resubmission.html</code> HTML report file.</li>
 <li>Only if you didn’t publish your data as a <code>.csv</code> on Google Sheets because it has confidential/private information, then include the <code>.csv</code> or <code>.xlsx</code> spreadsheet file.</li>
 </ol></li>
-<li>All group members individually must:
-<ul>
-<li>Complete the “SDS/MTH 220 Exit Survey” Google Form. There are four sections:
-<ol style="list-style-type: decimal">
-<li>Questions about you.</li>
-<li>Peer evaluations for term project.</li>
-<li>Questions about the use of Slack.</li>
-<li>General questions about the course.</li>
-</ol></li>
-<li>You can find the exit survey <a href="https://docs.google.com/forms/d/e/1FAIpQLSfgQk0Fq-Ft5id9XEqXKFlRd8Yf_1OazoaMjyCrw2oLA8ZkmA/viewform" target="_blank">here</a>.</li>
-</ul></li>
 </ul>
-</div>
-<div id="rubric" class="section level2">
-<h2>Rubric</h2>
-<p>You term project is worth 30% of your final grade. The 30% is distributed as follows:</p>
-<ol style="list-style-type: decimal">
-<li>2.5%: Are all necessary files submitted and did you complete the “SDS/MTH 220 Exit Survey” Google Form?</li>
-<li>27.5%: Based on this <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRGs5tNHneQX7mKfQWEMEpxRm9iu79b63KBO0LnfB10KIphB0Igq_p2_yw-sRRjdhhB9Vck4LRU3vV3/pubhtml?gid=227075812&amp;single=true" target="_blank">guideline criteria</a>.</li>
-</ol>
-<!--
-
-1. Revise your work based on delivered feedback. 
-1. Complete remaining sections.
-1. Complete "Inference for multiple regression" and "Conclusion" sections.
-    + While you only need to present the results of one model in this term project, in this section make a brief mention why you chose one model over another.
-    + Perform a residual analysis.
-    + **Added on 12/10**: You do not need to perform any simulations of sampling/bootstrap/null distributions. You only need interpret the p-value and confidence interval columns of your regression table. 
-    + **Added on 12/10**: Use R Markdown footnotes for citations. For example, adding `^[Here is an example footnote.]` will add an automatically numbered footnote as seen here^[Here is an example footnote] and here^[Here is another example footnote]. Please use [MLA citation format](https://owl.purdue.edu/owl/research_and_citation/mla_style/mla_style_introduction.html){target="_blank"}.
-1. Group leader: Once the resubmission is complete
-    + Knit `Term_Project.Rmd` one final time.
-    + Republish to Rpubs.com
-    + **Added on 12/13** Post `Term_Project.Rmd` and all other necessary files on Moddle.
-1. **After your group has resubmitted the project** complete this Google Forms [survey](https://docs.google.com/forms/d/e/1FAIpQLSeEmiXTB6qIszAC5r3gLGmDuLQEYvrgRW-bRMezx6te7_7jpQ/viewform){target="_blank"}. 5% of your term project grade is based on completion of this survey. 
-
-
-### 1. log10 transformations
-
-If you have skewed explanatory and/or outcome variables, you should be `log10()`-transforming them and using the transformed variables in your regression and not just visually displaying them with transformed axes. See below:
-
-
-```r
-library(ggplot2)
-library(dplyr)
-library(moderndive)
-
-# log10() transform the skewed variables
-house_prices <- house_prices %>%
-  mutate(
-    log10_price = log10(price),
-    log10_size = log10(sqft_living)
-  )
-
-# Plot price with re-scaled axes:
-ggplot(house_prices, aes(x = price)) +
-  geom_histogram() +
-  scale_x_log10() + 
-  labs(x = "House price (log10-scale)", title = "Seattle house prices") 
-
-# Plot log10-transformed price with regular axes:
-ggplot(house_prices, aes(x = log10_price)) +
-  geom_histogram() +
-  labs(x = "log10(House price)", title = "Seattle house prices") 
-```
-
-<img src="final_project_files/figure-html/unnamed-chunk-3-1.png" width="672" />
-
-
-### 2. Feedback from previous projects.
-
-1. Jarring hyperlink/code output:
-    + In EDA, show a preview of first 6 rows of data using `head()`; this is better than using `glimpse()` as computer code output is jarring to read.
-    + Correlations code output is ok, since they don’t take up a lot of space
-    + Raw hyperlinks in the body of text or citation section should be converted to text links. See RStudio Menu Bar -> Help -> Markdown Quick Reference -> Links.
-1. EDA
-    + Make sure you are explicit about what your observational unit is. In other words:
-        a) what each row in your dataset represents
-        a) what each point in your scatterplots represent
-    + Minimize redundancy: Many had a colored scatterplot in Section 2 EDA, then the same plot with fitted lines in Section 3. Put only the latter in Section 2.
-    + Main visualization: toy around with using facets. Pick what you think is best and own it.
-1. Formatting. Once finished writing your project:
-    + Remove any instructions text. Ex: "Discuss the research question you will be addressing with your multiple regression model."
-    + Fix typos using the ABC-check button in R Markdown panel (next to magnifying glass buttom).
-1. Statistical comments
-    + Look at histogram of your numerical variables, in particular the outcome variable. Are they really right skewed? Is a log base 10 (or log base e) transformation worth considering (like in DataCamp or the Seattle House prices example in ModernDive Chapter 12)
-    + In all your conclusions, watch out for making statements that too strongly suggest causation (unless you are sure the data was collected in a way that allows for this). Recall that we should set tone to only more conservatively suggest associations. 
-1. Non-statistical interpretation:
-    + Meant for a non-technical audience
-    + Think of this as the overall executive summary, the take-home message meant for a broad audience.
-1. Interpretations. Say your categorical explanatory variable has $k$ levels:
-    + Instead of intrepreting all intercept/slope coefficients individually, write out fitted regression line equations for $\widehat{y}$ for all $k$ possible levels. Example: if using x = `gender` from evals, write out one equation for male and another for female.
-    + ~~Then of your $k$ fitted regression line equations, interpret just the slope coefficient for 2-3 of the resulting equations~~ **Clarifications**: Then of all the rows in your regression table, for 2-3 of them interpret the coefficient estimate and its inferential significance. Try to pick a slope or interaction effect coefficient, since these speak to the relationship between your outcome and explanatory variable. Use your judgement as to which to choose (most interesting, most relevant).
-
-
-### 3. Evaluation criteria {#evaluationcriteria}
-
-You will be evaluated on the following criteria, which not only emphasizes the data, statistics, and modeling, but also the **communication**, an often neglected criteria:
-
-1. The honor code
-    + Your project must adhere to the Smith College Academic Honor Code
-    Statement. In particular all external sources must be cited in your
-    submissions.
-1. The report
-    + Is the grammar correct and are there no misspellings? (Click the ABC
-    spell-check button to the left of the "Knit" button)
-    + Is the writing crisp and concise or is it unnecessarily verbose and wordy? Is the writing clear or is it sloppy?
-    + Did you make use of Markdown formatting tools to format the document (bold, italics, url links, etc)?  
-    See RStudio Menu Bar -> Help -> Markdown Quick Reference for all formatting options.
-    + Is the final project document clean and easy to read?
-1. The science and the data
-    + Is the data's context/source clearly discussed/given? Recall: *Numbers are numbers, but data
-    has context.*
-    + Are all limitations and issues with the data addressed?
-    + Is the research question of interest clearly stated?   
-    + Are the plots/tables polished? Titles, axes labels, legends?
-    + Are the plots/tables truly informative or are they included merely for their own sake?
-1. The statistics and the analysis
-    + Are all statistical/modeling and analyses interpretations valid?
-    + Are limitations of the analysis (if any) clearly stated?
-    + Are the non-statistical interpretations accessible to an audience not well-versed in statistics?
-1. The code
-    + Is your code legible and understandable to someone not in your group? Could someone else look at the code in your `.Rmd` file, understand it, and use it for themselves? In other words, is the research easily [reproducible](https://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970){target="_blank"}?
-    + Is your code cleanly formatted? Are you using indentations, spaces, and line breaks effectively?
-    + Some examples of good coding style can be found [here](http://style.tidyverse.org/){target="_blank"}
-1. The rest
-    + Did you demonstrate effort and engagement during the semester long process?
-
-
--->
 </div>
 </div>
 

@@ -40,6 +40,7 @@ Either we:
 Thoughts?
 
 # Jenny's comments/responses
+
 I think reading in the data from google sheets is the simplest solution. I will adapt the code to this. It will be a shame that they cannot access the help files for the data though....we will need to make sure we show them how to access those in the future. 
 
 I did not realize some of the students would be working on their desktop...so did not think `oilabs` would be a problem. I would have chosen a different data set had I known. That said, I had the PSY students install the `oilabs` on desktop last semester, and it actually went fine!

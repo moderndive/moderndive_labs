@@ -1,10 +1,10 @@
 ---
-title: "ModernDive Labs/Problem Sets"
+title: "ModernDive Labs and Problem Sets"
 author: "Jenny Smetzer, Albert Y. Kim, and Chester Ismay"
 date: "Last updated on `r Sys.Date()`"
 output:
   html_document:
-    toc: true
+    toc: false
     toc_depth: 2
     toc_float: true
     df_print: kable
@@ -34,7 +34,6 @@ library(emo)
 library(patchwork)
 
 # Set seed value of random number generator to get "replicable" random numbers.
-# Why 76? Because of https://www.youtube.com/watch?v=xjJ7FheCkCU
 set.seed(76)
 ```
 
@@ -50,5 +49,10 @@ h1{font-weight: 400;}
 
 # Welcome
 
+You can find:
 
-[Sign up for solutions here](https://docs.google.com/forms/d/e/1FAIpQLSf68Je_Q3ggRJ-74UtL0xG5-IuuKkSTIpEQZWro-8QbO7nmdA/viewform){target="_blank"}
+1. Example labs and problem sets by clicking on "Problem Sets" in the above menu bar.
+1. A template for a final project by clicking on "Final Project" in the above menu bar.
+
+
+

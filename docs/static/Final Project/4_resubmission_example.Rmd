@@ -1,7 +1,7 @@
 
 ---
 title: "Predictive Factors of Math SAT Score in Massachusetts Public and Charter High Schools"
-author: "Jenny Smetzer & Albert Y. Kim"
+author: "Alexis Cohen, Andrianne Dao, Isabel Gomez, Jenny Smetzer, and Albert Y. Kim"
 date: "Last updated on `r Sys.Date()`"
 output:
   html_document:

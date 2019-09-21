@@ -8,7 +8,6 @@ output:
     toc_float: yes
     df_print: kable
     css: lab.css
-    
 ---
 
 ```{r, include = FALSE, message = FALSE}

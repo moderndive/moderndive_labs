@@ -23,6 +23,7 @@ glimpse(nc)
 ```
 
 # Exercise 1
+
 What type of variable is R considering the variable `habit` to be? What variable type is `visits`? (answer with text)
 
 **Answer: habit is listed as <chr> (character), and visits is an integer <int>**
