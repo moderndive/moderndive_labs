@@ -20,6 +20,8 @@ navbar:
     href: PS.html
   - text: Final Project
     href: final_project.html
+  - text: Data Wrangling Tips
+    href: tips_and_tricks.html
   right:
   - text: Book
     href: https://moderndive.com/
