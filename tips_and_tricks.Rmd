@@ -24,7 +24,7 @@ Let's load a movies dataset, pare down the rows and columns a bit, and then show
 
 ```{r}
 library(tidyverse)
-movies <- read_csv("https://rudeboybert.github.io/SDS192/static/movies.csv") %>% 
+movies <- read_csv("https://moderndive.github.io/moderndive_labs/static/movies.csv") %>% 
   filter(type %in% c("action", "comedy", "drama", "animated", "fantasy", "rom comedy")) %>% 
   select(-over200)
 
