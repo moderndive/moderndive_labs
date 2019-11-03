@@ -7,7 +7,7 @@ output:
     toc_float: true
 ---
 
-> Massive shout out to [Dr. Jenny Smetzer](https://www.smith.edu/academics/faculty/jennifer-smetzer){target="_blank"}, Lecturer in Statistical & Data Sciences, for her work setting this up!
+> Massive shout out to [Dr. Jenny Smetzer](https://www.smith.edu/academics/faculty/jennifer-smetzer){target="_blank"} at Smith College for her work setting this up!
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning = FALSE, eval = TRUE, 
