@@ -1,1 +1,1 @@
-Problem sets and labs for ModernDive by Jenny Smetzer, Albert Y. Kim and Chester Ismay. 
+Problem sets and labs for ModernDive by Jenny Smetzer, Albert Y. Kim, and Chester Ismay. 
