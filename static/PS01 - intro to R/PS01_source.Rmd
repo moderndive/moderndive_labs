@@ -14,7 +14,7 @@ output:
 library(knitr) 
 ```
 
-![](figures/cbrown.jpg)
+![](figures/cbrown.jpg){width=100%}
 
 
 The goal this week is to introduce you to R and RStudio which you'll be using throughout the course both to review the statistical concepts discussed in the  course and to analyze real data and come to informed conclusions. To clarify which is which: R is the name of the programming language itself and RStudio is a convenient interface. 
@@ -269,6 +269,6 @@ There are a lot of stats classes and students using the Server. To keep it as fa
 - When the browser refreshes, you can click on the icon of your name in the top right. 
 - You are signed out! 
 
-![](charlie_brown_1.jpg){width=41%}![](charlie_brown_2.jpg){width=17%}
+![](figures/charlie_brown_1.jpg){width=41%}![](figures/charlie_brown_2.jpg){width=17%}
 
 * * *
