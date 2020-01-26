@@ -2,6 +2,8 @@
 ---
 title: 'Problem Set 01: Intro to R and RStudio'
 output:
+  pdf_document:
+    toc: yes
   html_document:
     css: lab.css
     df_print: kable
@@ -246,7 +248,7 @@ Each week you will submit a **PDF** file with all your code and text on Moodle. 
 - Locate the PDF file on your computer's hard drive. It should be found in the same folder as the R Markdown document where you did your work.
 - Submit the file
 
-![](https://ih0.redbubble.net/image.383394350.6935/mp,550x550,gloss,ffffff,t.3u1.jpg){width=41%}     ![](https://m.media-amazon.com/images/M/MV5BMTg2NTIwOWEtMDY1Yi00MTY0LWIwOGQtZTBmODNhZDdmYTkwXkEyXkFqcGdeQXVyODUyMjAzMDc@._V1_SY1000_CR0,0,587,1000_AL_.jpg){width=17%}    
+![](charlie_brown_1.jpg){width=41%}![](charlie_brown_2.jpg){width=17%}    
 
 
 * * *

@@ -269,6 +269,6 @@ There are a lot of stats classes and students using the Server. To keep it as fa
 - When the browser refreshes, you can click on the icon of your name in the top right. 
 - You are signed out! 
 
-![](https://ih0.redbubble.net/image.383394350.6935/mp,550x550,gloss,ffffff,t.3u1.jpg){width=41%}     ![](https://m.media-amazon.com/images/M/MV5BMTg2NTIwOWEtMDY1Yi00MTY0LWIwOGQtZTBmODNhZDdmYTkwXkEyXkFqcGdeQXVyODUyMjAzMDc@._V1_SY1000_CR0,0,587,1000_AL_.jpg){width=17%}          ![](http://dfwenterprisesinc.com/wp-content/uploads/2018/01/Charlie-Brown-Goodbye-January.jpg){width=31%}      
+![](charlie_brown_1.jpg){width=41%}![](charlie_brown_2.jpg){width=17%}
 
 * * *
