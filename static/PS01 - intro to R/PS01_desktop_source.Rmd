@@ -241,12 +241,13 @@ A superscript: R^2^
 
 # Turning in your work
 
-Each week you will submit a **PDF** file with all your code and text on Moodle. The steps to do this are as follows: 
+Each week you will submit a **PDF** file with all your code and text on Gradscope. The steps to do this are as follows: 
 
 - Knit a final copy with all your changes and work, **making sure to choose "Knit to PDF" from the drop-down menu**.
 - Look at your final PDF file to make sure it contains the work you expect, and is formatted properly (e.g. 11-12 Exercise headers, each with answers for this week)
 - Locate the PDF file on your computer's hard drive. It should be found in the same folder as the R Markdown document where you did your work.
-- Submit the file
+- Upload the file to the corresponding assignment on Gradescope. If you haven't joined the couse on Gradesceope, click the "Add Course" button on the home page after you login, and enter the enrollment code posted on the Moodle page.
+- In Gradescope, be sure to annotate the pages where your responses to each question are. You can find a helpful video on submitting an assignment on Gradescope [here](https://www.youtube.com/watch?v=KMPoby5g_nE).
 
 ![](figures/charlie_brown_1.jpg){width=41%}![](figures/charlie_brown_2.jpg){width=17%}    
 
