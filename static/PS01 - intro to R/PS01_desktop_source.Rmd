@@ -2,14 +2,14 @@
 ---
 title: 'Problem Set 01: Intro to R and RStudio'
 output:
-  pdf_document:
-    toc: yes
   html_document:
     css: lab.css
     df_print: kable
     theme: lumen
     toc: yes
     toc_float: yes
+  pdf_document:
+    toc: yes
 ---
 
 ```{r include = F}
@@ -174,7 +174,7 @@ v * 3
 
 # Practice on your own!
 
-To complete this problem set you will next run through some Exercises, and submit a knitted `.html` file with answers all the Exercises. Please make a **header** for each of these Exercises. If you need to answer an Exercise with text, type the text **below** the header, on the next line, in the white part, and if you need to answer an Exercise with some code, insert a code chunk **below** the header, and put the code in the greyed out box. 
+To complete this problem set you will next run through some Exercises, and submit a knitted PDF file with answers all the Exercises. Please make a **header** for each of these Exercises. If you need to answer an Exercise with text, type the text **below** the header, on the next line, in the white part, and if you need to answer an Exercise with some code, insert a code chunk **below** the header, and put the code in the greyed out box. 
 
 <div id="license">
 Remember to save your work as you go along! Click the save button in the upper left hand corner of the R Markdown window. 
@@ -196,7 +196,7 @@ Remember to save your work as you go along! Click the save button in the upper l
 
 
 <div id="license">
-It is a good idea to try kitting your document from time to time as you go along! Go ahead, and make sure your document is knitting, and that your html file includes Exercise headers, text, and code. Note that knitting automatically saves your Rmd file too!
+It is a good idea to try kitting your document from time to time as you go along! Go ahead, and make sure your document is knitting, and that your PDF file includes Exercise headers, text, and code. Note that knitting automatically saves your Rmd file too!
 </div>
 
 
@@ -211,10 +211,6 @@ It is a good idea to try kitting your document from time to time as you go along
 
 1.   - Go to the **Run** button at the top right of the R Markdown pane, and choose **Run All** (the last option)
      - What happened? (please answer with **text**)
-     
-<div id="license">
-It is a good idea to try kitting your document from time to time as you go along! Go ahead, and make sure your document is knitting, and that your html file includes Exercise headers, text, and code. Note that knitting automatically saves your Rmd file too!
-</div>
    
 1.  Recall the vector `v` we created earlier. Copy, paste and run the following in a code chunk. What does this code accomplish? (please answer with **text**)
 ```{r eval = F}
