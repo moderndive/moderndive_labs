@@ -75,7 +75,7 @@ Calculate the **average** percentage of listings that were sold in Dallas **in e
 ```
 
 # Question 7
-Arrange the `dallas_summary` data frame in `desc`ending order based on the **average** percentage of listings sold, so you can see **which month** had the greatest **average** percentage of listings sold.  You do not need to save the results.  You do not need to save the results. 
+Arrange the `dallas_summary` data frame in `desc`ending order based on the **average** percentage of listings sold, so you can see **which month** had the greatest **average** percentage of listings sold.  You do not need to save the results.
 
 ```{r }
 
