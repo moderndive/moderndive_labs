@@ -1,15 +1,15 @@
 
 ---
-title: "Problem Set 03: Data Wrangling"
+title: 'Problem Set 03: Data Wrangling'
 author: "WRITE YOUR NAME HERE"
 date: "WRITE DATE HERE"
 output:
+  pdf_document: default
   html_document:
-    theme: lumen
     df_print: kable
+    theme: lumen
 ---
 
-![](http://www.tworvgypsies.us/!USA-2012-trip-5/30-Amarillo_Texas/tx-sign.jpg)
 
 # HOW TO USE THIS RMD FILE
 For the rest of the semester you will be given a `.Rmd` file like this to type your problem set answers into. Make sure to save this file somewhere you can find it. 
