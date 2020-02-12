@@ -11,6 +11,9 @@ output:
     toc_float:
       collapsed: false
     df_print: kable
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
 ---
 
 ```{r, include=FALSE}
@@ -59,7 +62,7 @@ We will use
 * A categorical explanatory variable `urbanization`: level of urbanization in a region
 * A numerical explanatory variable `share_pop_hs`: the percentage of adults 25 and older with a high school degree 
 
-*** 
+ 
 
 ## Income, education and urbanization 
 
@@ -70,7 +73,7 @@ We will start by modeling the relationship between:
 * $x_2$: categorical variable level of urbanization in a state: `low`,  or `high`, as
 contained in the variable `urbanization`
 
-***
+
 
 # Exploratory data analysis
 
@@ -92,7 +95,7 @@ ggplot(data = hate_crimes, aes(y = income, x = hs, color = urbanization)) +
     title = "Education and income in states with differing levels of urbanization")
 ```
 
-***
+
 
 # Question 1.A
 
@@ -106,7 +109,7 @@ Which regression line (high `urbanization` or low `urbanization`) appears to hav
 
 **Answer:** 
 
-***
+
 
 # Question 2.A 
 
@@ -121,7 +124,7 @@ Based on the data visualization above, and your answer to Question 2.A, do you t
 **Answer:**
 
 
-***
+
 
 # Question 3
 
@@ -131,7 +134,7 @@ Create a data visualization comparing median household income at "low" and "high
 
 ```
 
-***
+
 
 # Question 4
 
@@ -142,7 +145,7 @@ Run a linear regression model that examines the relationship between household `
 ```
 
 
-***
+
 
 # Question 5.A
 
@@ -176,7 +179,7 @@ For every increase in 1 percentage point of high-school educated adults, what is
 **Answer:** 
 
 
-*** 
+ 
 
 # Question 6
 
@@ -194,7 +197,7 @@ Solve the regression equation for a US state in which `urbanization` is "high"
 
 
 
-***
+
 
 # Question 7
 
@@ -203,7 +206,7 @@ What would you predict as the median household income for a state with a **high*
 **Answer:** 
 
 
-***
+
 
 # Question 8
 
@@ -212,7 +215,7 @@ What would you predict as the median household income for a state with a **low**
 **Answer:** 
 
 
-***
+
 
 # Question 9
 
@@ -220,7 +223,7 @@ What would you predict as the median household income for a state with a **low**
 
 **Answer:** 
 
-***
+
 
 # Question 10
 
@@ -230,11 +233,11 @@ What was the observed `income` value for Maine (row 2)? What was the prediction 
 
 
 
-***
+
 
 ## Independent analysis 
 
-![](https://ptes.org/wp-content/uploads/2017/11/water-vole-credit-Iain-Green-www.wildwonder.co_.uk-2_cropped.jpg){width=50%}
+<img src="https://ptes.org/wp-content/uploads/2017/11/water-vole-credit-Iain-Green-www.wildwonder.co_.uk-2_cropped.jpg"){width=50%}">
 
 <br> 
 
@@ -258,7 +261,7 @@ The data contains the variables:
 
 Generate a regression model with `voles` as the response variable `y` and `veg` and `soil` as explanatory variables. Use the results of the model to answer the following questions **based on the available data**. A data visualization will probably also help you: 
 
-***
+
 
 # Question 11
 
@@ -266,7 +269,7 @@ Would you recommend to a manager that they try to protect sites with high or low
 
 **Answer:** 
 
-***
+
 
 # Question 12 
 
@@ -274,7 +277,7 @@ Dry sites are typically a lot less money to purchase and maintain for conservati
 
 **Answer** 
 
-***
+
 
 # Question 13
 
@@ -285,7 +288,7 @@ The Nature Conservancy is looking at purchasing a site for this species (in the 
 **Answer:** 
 
 
-***
+
 
 [//]: (students- please do not delete anything below this line!) 
 

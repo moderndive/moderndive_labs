@@ -4,6 +4,9 @@ title: "Problem Set 07"
 author: "WRITE YOUR NAME HERE"
 date: "WRITE DATE HERE"
 output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
   html_document:
     theme: lumen
     toc: yes
@@ -36,7 +39,7 @@ If you get stuck as you are working through this Problem Set, we **strongly reco
 
 <br>
 
-***
+
 
 ### Key points on symbols: 
 
@@ -46,7 +49,7 @@ Number of cases  | $N$                                | $n$
 Proportion       | $p$                                | $\hat{p}$
 Standard error   | $SE$                               | $\widehat{SE}$
 
-***
+
 
 ## Setup
 
@@ -70,7 +73,7 @@ Be sure to take a look at the data in the **viewer**. And type `?gss_cat` into t
 
 <br> 
 
-***
+
 
 ## Exploratory data wrangling
 
@@ -91,7 +94,7 @@ gss_14  %>%
 
 <br>
 
-***
+
 
 ### Setting a seed
 
@@ -104,7 +107,7 @@ set.seed(45)
 
 <br>
 
-***
+
 
 ## The true population proportion $p$ of divorced people
 
@@ -132,7 +135,7 @@ gss_14 %>%
 
 In other words, this problem set is not a realistic reflection of a real life problem. However, for this problem set, we are *simulating* the act of sampling from this neighborhood population to understand and study how factors like sample size influence **sampling variation**.
 
-***
+
 
 <br>
 
@@ -181,7 +184,7 @@ Ask two of your classmates what their estimate of $\hat{p}$ was. How do the $\ha
 
 <br>
 
-***
+
 
 ### b) Estimating $\widehat{SE}$ from a single sample
 
@@ -205,7 +208,7 @@ n50_1rep %>%
 
 <br>
 
-***
+
 
 ## Demo: Generating a sampling distribution of $\hat{p}$
 
@@ -234,7 +237,7 @@ Be sure to look at `n50_rep1000` in the data viewer to get a sense of these 1000
 
 <br>
 
-***
+
 
 # Question 2a
 
@@ -250,7 +253,7 @@ What is the sample size n for each of the 1000 samples we took? (i.e. how many h
 
 <br> 
 
-*** 
+ 
 
 The following code chunk calculates the sample proportion $\hat{p}$ of people who reported they were divorced for each of the **1000 samples** 
 
@@ -282,7 +285,7 @@ ggplot(p_hat_n50_1000rep, aes(x = p_hat)) +
 
 <br> 
 
-***
+
 
 # Question 3 
 
@@ -292,7 +295,7 @@ Based on your histogram, what appeared to be a very common value of $\hat{p}$? W
 
 <br> 
 
-***
+
 
 ### c) Mean and standard error of the sampling distribution of $\hat{p}$ for n = 50
 
@@ -306,7 +309,7 @@ p_hat_n50_1000rep %>%
 
 <br> 
 
-*** 
+ 
 
 # Question 4
 
@@ -354,7 +357,7 @@ calculate the mean of the n = 15 sampling distribution, and the standard error o
 
 <br> 
 
-***
+
 
 # Question 6a
 
@@ -370,7 +373,7 @@ Explain any observed differences from Question 6a
 
 <br>
 
-***
+
 
 # Question 7a
 
@@ -407,7 +410,7 @@ Was there more **variability** from sample to sample when we took a sample size 
 
 <br> 
 
-***
+
 
 
 # Question 8
@@ -419,12 +422,9 @@ Which sampling distribution looked more normally distributed (bell shaped and sy
 
 <br> 
 
-***
-
-
-![](http://digital-desert.com/victor-valley/599-bell-mountain-r6760.jpg)
+<img src="http://digital-desert.com/victor-valley/599-bell-mountain-r6760.jpg">
  
- <br>
+<br>
  
 ## Estimating $\hat{p}$ and the standard error of $\hat{p}$ from a single sample (revisited)
 
@@ -440,7 +440,7 @@ $$\widehat{SE}_{\hat{p}}  \approx  \sqrt{\frac{\hat{p} \times (1-\hat{p})}{n}}$$
 
 <br> 
 
-*** 
+ 
 
 # Question 9
 
@@ -466,7 +466,7 @@ Following the example from the beginning of the Problem Set (roughly line 140), 
 
 <br> 
 
-***
+
 
 # Question 10 
 
@@ -486,7 +486,7 @@ Sample size n  | SE via sd of sampling distribution | SE via one sample and form
 
 
 
-***
+
 <br> 
 
 # Question 11
@@ -497,7 +497,7 @@ Based on what you observed for Question 10, **IF** you collected a single sample
 
 
 
-***
+
 
 
 

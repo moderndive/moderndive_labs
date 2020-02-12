@@ -11,6 +11,9 @@ output:
     toc_float:
       collapsed: false
     df_print: kable
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
 ---
 
 ```{r, include=FALSE}
@@ -139,7 +142,7 @@ gpas_in_null_world <- sat_gpa %>%
 **Answer:**
 
 1. 
-1. 
+1.
 
 
 ### Step 3. Calculate the differences between male and females under the null

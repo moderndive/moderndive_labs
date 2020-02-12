@@ -5,15 +5,18 @@ author: "WRITE YOUR NAME HERE"
 date: "WRITE DATE HERE"
 output:
   html_document:
+    df_print: kable
     theme: lumen
     toc: yes
     toc_depth: 2
     toc_float:
-      collapsed: false
-    df_print: kable
+      collapsed: no
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
 ---
 
-![](https://i.pinimg.com/originals/8b/a5/6d/8ba56d685c24a243836ace7332f553f7.jpg)
+<img src="https://i.pinimg.com/originals/8b/a5/6d/8ba56d685c24a243836ace7332f553f7.jpg">
 
 
 ```{r, include=FALSE}
@@ -64,7 +67,7 @@ set.seed(45)
 
 <br> 
 
-***
+
 
 # Confidence intervals from a bootstrap resample
 
@@ -88,7 +91,7 @@ Note a few important details about the `rep_sample_n` function, and bootstrap sa
 
 <br> 
 
-*** 
+ 
 
 Take a look at the `boot_samp_1000` data frame we just generated in RStudio's data viewer. Note that the `replicate` column labels each bootstrap resample (the first 100 rows are labeled 1, the next 100 rows are labeled 2, etc.)
 
@@ -100,7 +103,7 @@ How many rows does `boot_samp_1000` have? **Why?**
 
 <br> 
 
-***
+
 
 ### Step 2: Calculate the bootstrap statistic
 
@@ -124,7 +127,7 @@ Note that:
 
 <br> 
 
-*** 
+ 
 
 Take a look at the `boot_distrib_tv` we just created in RStudio's data viewer. 
 
@@ -136,7 +139,7 @@ How many values of the bootstrap statistic `boot_stat` are there?  Please explai
 
 <br> 
 
-*** 
+ 
 
 ### Visualizing the bootstrap distribution  
 
@@ -215,7 +218,7 @@ ggplot(data = boot_distrib_tv, aes(x = boot_stat)) +
 
 <br> 
 
-***
+
 
 # Question 3
 
@@ -225,7 +228,7 @@ ggplot(data = boot_distrib_tv, aes(x = boot_stat)) +
 
 <br> 
 
-***
+
 
 # Question 4 
 
@@ -239,7 +242,7 @@ Use the bootstrap resampling distribution for `tvhours` generated above (`boot_d
 
 <br> 
 
-***
+
 
 # Question 5
 
@@ -249,7 +252,7 @@ Which confidence interval is **WIDER**: the 95% confidence interval or the 99% c
 
 <br> 
 
-***
+
 
 # Question 6a
 
@@ -287,7 +290,7 @@ How do the 95% confidence intervals you calculated in 6b and 6c compare? i.e. ar
 
 <br> 
 
-***
+
 
 # Question 7
 
@@ -300,9 +303,9 @@ Use the **bootstrap resampling distribution** for the sample mean respondent `ag
 
 <br> 
 
-***
 
-![](https://ecologyofeducation.net/wsite/wp-content/uploads/2011/09/Boots-with-Laces-border.jpg)
+
+<img src="https://ecologyofeducation.net/wsite/wp-content/uploads/2011/09/Boots-with-Laces-border.jpg">
 
 # Bootstrap sampling distribution & confidence intervals with categorical variables
 
@@ -368,7 +371,7 @@ Calculate a 95% CI for the **population proportion** of respondents $p$ that ide
 ```
 
 
-***
+
 
 
 
@@ -431,7 +434,7 @@ Using mathematical formula      | P             | Q
 **Answer:**
 
 
-***
+
 
 
 

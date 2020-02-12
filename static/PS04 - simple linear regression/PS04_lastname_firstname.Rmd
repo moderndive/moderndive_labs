@@ -11,6 +11,9 @@ output:
     toc_float:
       collapsed: false
     df_print: kable
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
 ---
 
 ```{r, include=FALSE}
@@ -22,7 +25,7 @@ knitr::opts_chunk$set(
 ```
 
 
-![](http://az616578.vo.msecnd.net/files/2016/08/11/636065411486445932-684327553_vote.jpg){width=30%}![](https://media.boingboing.net/wp-content/uploads/2018/09/letmevote2018.png){width=30%}
+<img src="https://media.boingboing.net/wp-content/uploads/2018/09/letmevote2018.png" width=50%>
 
 ## Background 
 
@@ -30,7 +33,7 @@ For this problem set you will first run through an example of a simple linear re
 
 We will look at some demographic data from the `fivethirtyeight` package recorded for 48 voting areas in the US states just after the 2016 presidential election. We will investigate what variables within those regions might be tied to the percentage of US voters that supported Donald Trump, and in turn, which variables might be useful to predict Trump support in other regions (i.e. to a wider US population). 
 
-***
+
 
 ## Setup
 
@@ -63,7 +66,7 @@ The outcome variable `trump_support` is the percentage of votes for Trump in 201
 
 Observe that all percentages are expressed as values between 0 and 100, and not 0 and 1.
 
-***
+
 
 ## An Example/Demo 
 
@@ -89,7 +92,7 @@ Does the relationship appear to be positive or negative? Does it look to be reas
 
 **Answer:**
 
-***
+
 
 ## The correlation coefficient (r)
 
@@ -100,7 +103,7 @@ trump %>%
   summarise(r = cor(trump_support, poverty))
 ```
 
-***
+
 
 ## Running a linear regression model
 
@@ -119,7 +122,7 @@ Note that:
 
 This object `poverty_mod` contains all of the information we need about the linear model that was just fit and we'll be accessing this information again later.
 
-***
+
 
 ## Get the regression table
 
@@ -154,7 +157,7 @@ We found a positive correlation coefficient. Is it reasonable for us to conclude
 
 **Answer:**
 
-***
+
 
 ## Making predictions
 
@@ -184,7 +187,7 @@ Do you think it is a good idea to predict Trump support at 85% white poverty, ba
 
 **Answer:** 
 
-***
+
 
 ## Residuals 
 
@@ -215,7 +218,7 @@ get_regression_points(poverty_mod)
 
 <br>
 
-***
+
 
 ## Put your skills to practice independently! 
 
@@ -284,7 +287,7 @@ If Representative Ocasio-Cortez saw the regression line and not the actual data:
 **Answers:** 
 
 
-***
+
 
 [//]: (students- please do not delete anything below this line!) 
 

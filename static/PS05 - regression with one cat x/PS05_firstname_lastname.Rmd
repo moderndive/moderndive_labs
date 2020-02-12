@@ -11,6 +11,9 @@ output:
     toc_float:
       collapsed: false
     df_print: kable
+  pdf_document:
+    toc: yes
+    toc_depth: '2'    
 ---
 
 ```{r, include=FALSE}
@@ -66,8 +69,6 @@ This week we will use three categorical explanatory variables in this data set:
 * `median_house_inc`: median household income in the state (low or high - split below or above mean)
 
 
-
-*** 
 
 
 
@@ -153,8 +154,6 @@ group_by(trump_support) %>%
 **Answer:** 
 
 
-*** 
-
 
 
 ## The regression equation
@@ -168,7 +167,6 @@ $$
 
 So for instance, in a state in which `trump_support` is "low" you would plug in 1 for $1_{\mbox{low support}}(x)$, and 0 in for  $1_{\mbox{med support}}(x)$ and solve like so:
 
-***
 
 $$
 \begin{aligned} 
@@ -179,7 +177,6 @@ $$
 $$
 
 
-***
 
 
 # Question 4
@@ -204,7 +201,6 @@ Do these results surprise you? (There is no right answer to this question.)
 
 
 
-*** 
 
 
 
@@ -273,7 +269,6 @@ Use the `get_regression_points()` function to generate a table showing the fitte
 
 
 
-***
 
 
 
@@ -310,7 +305,6 @@ Take a look at data for Maine (row 2). Did the model **overpredict** or **underp
 **Answer:** 
 
 
-***
 
 [//]: (students- please do not delete anything below this line!) 
 

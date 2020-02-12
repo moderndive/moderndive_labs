@@ -4,10 +4,16 @@ title: 'Problem Set 03: Data Wrangling'
 author: "WRITE YOUR NAME HERE"
 date: "WRITE DATE HERE"
 output:
-  pdf_document: default
   html_document:
-    df_print: kable
     theme: lumen
+    toc: yes
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+    df_print: kable
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
 ---
 
 
@@ -18,7 +24,6 @@ For the rest of the semester you will be given a `.Rmd` file like this to type y
 
 Please be sure to type your name above where it says `WRITE YOUR NAME HERE` and fill in the date too. 
 
-***
 
 ## R Packages and Data
 ```{r warning = F, message = F}
@@ -81,7 +86,6 @@ Arrange the `dallas_summary` data frame in `desc`ending order based on the **ave
 
 ```
 
-***
 ## More advanced wrangling
 
 Please answer the following questions with text and/or code where appropriate. You may have to use multiple `dplyr` functions to answer each question. Think through the steps of how to get to the answer you are trying to find. 
@@ -127,7 +131,6 @@ Generate a single table that shows the total number of houses sold in **Austin**
 
 ```
 
-***
 [//]: (students- please do not delete anything below this line!) 
 
 <style type="text/css">
