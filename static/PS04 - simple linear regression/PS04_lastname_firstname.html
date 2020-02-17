@@ -1581,7 +1581,7 @@ library(moderndive)</code></pre>
 <div id="visualization" class="section level3">
 <h3>Visualization</h3>
 <p>We will start by investigating the relationship between white poverty levels and support for Trump.</p>
-<p>We’ll do this by creating a scatterplot with <code>trump_support</code> as the outcome variable on the y-axis and <code>poverty</code> as the explanatory variable on the x-axis. Note the use of the <code>geom_smooth()</code> function, that tells R to add a regression line. While the points do scatter/vary around the blue regression line, of all possible lines we can draw in this point of clouds, the blue line is the “best-fitting” line in the sense that it minimizes the sum of the squared residuals (see <a href="https://moderndive.netlify.com/5-regression.html#leastsquares">moderndive 5.3.2</a> for a fuller explanation).</p>
+<p>We’ll do this by creating a scatterplot with <code>trump_support</code> as the outcome variable on the y-axis and <code>poverty</code> as the explanatory variable on the x-axis. Note the use of the <code>geom_smooth()</code> function, that tells R to add a regression line. While the points do scatter/vary around the blue regression line, of all possible lines we can draw in this point of clouds, the blue line is the “best-fitting” line in the sense that it minimizes the sum of the squared residuals (see moderndive 5.3.2 for a fuller explanation).</p>
 <pre class="r"><code>ggplot(data = trump, aes(y = trump_support, x = poverty)) + 
   geom_point() + 
   geom_smooth(method = &quot;lm&quot;, se = FALSE) +

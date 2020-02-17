@@ -74,7 +74,7 @@ Observe that all percentages are expressed as values between 0 and 100, and not 
 
 We will start by investigating the relationship between white poverty levels and support for Trump. 
 
-We'll do this by creating a scatterplot with `trump_support` as the outcome variable on the y-axis and `poverty` as the explanatory variable on the x-axis. Note the use of the `geom_smooth()` function, that tells R to add a regression line. While the points do scatter/vary around the blue regression line, of all possible lines we can draw in this point of clouds, the blue line is the "best-fitting" line in the sense that it minimizes the sum of the squared residuals (see [moderndive 5.3.2](https://moderndive.netlify.com/5-regression.html#leastsquares) for a fuller explanation). 
+We'll do this by creating a scatterplot with `trump_support` as the outcome variable on the y-axis and `poverty` as the explanatory variable on the x-axis. Note the use of the `geom_smooth()` function, that tells R to add a regression line. While the points do scatter/vary around the blue regression line, of all possible lines we can draw in this point of clouds, the blue line is the "best-fitting" line in the sense that it minimizes the sum of the squared residuals (see moderndive 5.3.2 for a fuller explanation). 
 
 ```{r fig.height=3, fig.width=5}
 ggplot(data = trump, aes(y = trump_support, x = poverty)) + 
