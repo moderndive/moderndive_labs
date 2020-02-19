@@ -29,7 +29,7 @@ knitr::opts_chunk$set(
 
 ## Background 
 
-For this problem set you will first run through an example of a simple linear regression, answering a few questions on the way. Then you will work through a regression analysis independently. Knit this file...and you can read through all the instructions. You can do your work in this `.Rmd` file....simply insert your answers below each Question, knit your final copy, and turn in the `.html` file.
+For this problem set you will first run through an example of a simple linear regression, answering a few questions on the way. Then you will work through a regression analysis independently. Knit this file...and you can read through all the instructions. You can do your work in this `.Rmd` file; simply insert your answers below each Question, knit your final copy, and turn in the PDF file.
 
 We will look at some demographic data from the `fivethirtyeight` package recorded for 48 voting areas in the US states just after the 2016 presidential election. We will investigate what variables within those regions might be tied to the percentage of US voters that supported Donald Trump, and in turn, which variables might be useful to predict Trump support in other regions (i.e. to a wider US population). 
 
