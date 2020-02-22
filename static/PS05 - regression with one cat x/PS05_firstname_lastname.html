@@ -1548,12 +1548,12 @@ div.tocify {
 
 <div id="collaboration" class="section level2 unnumbered">
 <h2>Collaboration</h2>
-<p>Please indicate who you collaborated with on this problem set:</p>
+<p>Please indicate who, if anyone, you collaborated with on this problem set:</p>
 </div>
 <div id="background" class="section level2 unnumbered">
 <h2>Background</h2>
-<p>In this problem set we will work with some hate crimes data from the US. The FiveThirtyEight article article about those data are in the Jan 23, 2017 <a href="https://fivethirtyeight.com/features/higher-rates-of-hate-crimes-are-tied-to-income-inequality/">“Higher Rates Of Hate Crimes Are Tied To Income Inequality”</a></p>
-<p>We will use these data in this Problem Set to run regression models with a single categorical predictor (explanatory) variable.</p>
+<p>In this problem set we will work with a data set concerning hate crimes occurring in the US. For more context about these data, you can read a FiveThirtyEight article about these data that appeared in January of 2017: <a href="https://fivethirtyeight.com/features/higher-rates-of-hate-crimes-are-tied-to-income-inequality/">“Higher Rates Of Hate Crimes Are Tied To Income Inequality”</a></p>
+<p>In this problem set, we will model these data using regression models with a single categorical predictor variable (i.e., explanatory variable).</p>
 </div>
 <div id="setup" class="section level2">
 <h2>Setup</h2>
@@ -1562,18 +1562,20 @@ div.tocify {
 library(dplyr)
 library(moderndive)
 library(readr)</code></pre>
-<p>Next load the data set, from where it is stored on the web:</p>
+<p>Next, load the data set from where it is stored on the web:</p>
 <pre class="r"><code>hate_crimes &lt;- read_csv(&quot;http://bit.ly/2ItxYg3&quot;)</code></pre>
 <p>You can take a glimpse at the data like so:</p>
 <pre class="r"><code>glimpse(hate_crimes)</code></pre>
-<p>Be sure to <strong>ALSO</strong> take a look at the data in the viewer.</p>
-<p><br></p>
-<p>Each case/row in these data is a state in the US. The response variable we will consider is <code>hate_crimes</code>, which is the number of hate crimes per 100k individuals in the 10 days after the 2016 US election as measured by the Southern Poverty Law Center (SPLC).</p>
-<p>This week we will use three categorical explanatory variables in this data set:</p>
+<p>Be sure to also examine the data in the RStudio data viewer.</p>
+</div>
+<div id="about-the-data-set" class="section level2">
+<h2>About the data set</h2>
+<p>Each case/row in these data represents a state in the US. The response variable we will consider is <code>hate_crimes</code>, which is the number of hate crimes per 100k individuals in the 10 days after the 2016 US election as measured by the Southern Poverty Law Center (SPLC).</p>
+<p>This week we will examine the explanatory strength of three categorical variables in the data set:</p>
 <ul>
-<li><code>trump_support</code>: level of Trump support in 2016 election (low, medium or high - split into roughly equal number of cases)</li>
-<li><code>unemployment</code>: level of unemployment in a state (low or high - split below or above mean)</li>
-<li><code>median_house_inc</code>: median household income in the state (low or high - split below or above mean)</li>
+<li><code>trump_support</code>: level of Trump support in 2016 election (low, medium or high; roughly equal number of observation at each category level)</li>
+<li><code>unemployment</code>: level of unemployment in a state (low or high; split below or above mean)</li>
+<li><code>median_house_inc</code>: median household income in the state (low or high; split below or above mean)</li>
 </ul>
 </div>
 <div id="hate-crimes-and-trump-support" class="section level2">
@@ -1583,11 +1585,10 @@ library(readr)</code></pre>
 <li><span class="math inline">\(y\)</span>: <code>hate_crimes</code> per 100K individuals</li>
 <li><span class="math inline">\(x\)</span>: Level of <code>trump_support</code> in the state: <code>low</code>, <code>medium</code>, or <code>high</code></li>
 </ul>
-<p><br></p>
 </div>
 <div id="question-1.a" class="section level1">
 <h1>Question 1.A</h1>
-<p>Create a visual model of these data (a graph) that will allow you to conduct an “eyeball test” of the relationship between hate crimes per 100K and level of Trump support. Include appropriate axes labels and a title. Please note that because of alphanumeric ordering, the levels of <code>trump_support</code> are ordered <code>high</code>, <code>low</code>, <code>medium</code>, and hence the baseline group is <code>high</code>. Also note, that we could “reorder” the levels to <code>low</code>, <code>medium</code>, <code>high</code>….though we will leave them as is for this Problem Set.</p>
+<p>Create a visualization that will allow you to conduct an “eyeball test” of the relationship between hate crimes per 100K and level of Trump support. Include appropriate axes labels and a title. Please note that because of alphanumeric ordering, the levels of <code>trump_support</code> are alphabetically ordered <code>high</code>, <code>low</code>, <code>medium</code>, and hence the baseline group is <code>high</code>. Although this default ordering is counter-intuitive, we will use the ordering as-is for this problem set.</p>
 </div>
 <div id="question-1.b" class="section level1">
 <h1>Question 1.B</h1>
@@ -1605,7 +1606,7 @@ library(readr)</code></pre>
 </div>
 <div id="question-3.b" class="section level1">
 <h1>Question 3.B</h1>
-<p>What does the model estimate as the number of hate crimes per 100,000 people in states with “low” Trump support?</p>
+<p>What value does the model estimate for the number of hate crimes per 100,000 people in states with “low” Trump support?</p>
 <p><strong>Answer:</strong></p>
 </div>
 <div id="question-3.c" class="section level1">
@@ -1656,7 +1657,7 @@ group_by(trump_support) %&gt;%
 <p><strong>Answer:</strong></p>
 <div id="the-regression-equation" class="section level2">
 <h2>The regression equation</h2>
-<p>The regression equation for this model is the following (knit it to look at output!)</p>
+<p>The regression equation for this model is the following:</p>
 <p><span class="math display">\[
 \widehat{y} = 0.191 + 0.269 \times 1_{\mbox{low support}}(x) + 0.031 \times 1_{\mbox{med support}}(x)
 \]</span></p>
@@ -1691,7 +1692,7 @@ group_by(trump_support) %&gt;%
 </div>
 <div id="question-6" class="section level1">
 <h1>Question 6</h1>
-<p>Create a visual model of this data (a graph) that will allow you to conduct an “eyeball test” of the relationship between hate crimes per 100K and unemployment level. Include appropriate axes labels and a title.</p>
+<p>Create a visualization that will allow you to conduct an “eyeball test” of the relationship between hate crimes per 100K and unemployment level. Include appropriate axes labels and a title.</p>
 </div>
 <div id="question-7.a" class="section level1">
 <h1>Question 7.A</h1>
@@ -1699,7 +1700,7 @@ group_by(trump_support) %&gt;%
 </div>
 <div id="question-7.b" class="section level1">
 <h1>Question 7.B</h1>
-<p>Write out the regression equation for this model.</p>
+<p>Write out the regression equation for the above model. Try writing out the equation using the same LaTeX formatting used to write the equation for the first hate crime ~ Trump support model. You can copy the example LaTeX code that appears just after “The regression equation for this model is the following:” in this document, and edit it to describe the hate crime ~ unemployment model you just fit. You don’t <em>have</em> to write the equation using LaTeX, but this is a great statistical communication skill to practice!</p>
 <p><strong>Answer:</strong></p>
 </div>
 <div id="question-7.c" class="section level1">
@@ -1729,18 +1730,14 @@ group_by(trump_support) %&gt;%
 <h1>Question 9A</h1>
 <p>Now run a model that examines the relationship between <code>hate_crimes</code> and median household income in the state <code>median_house_inc</code>.</p>
 </div>
-<div id="question-9.b" class="section level1">
-<h1>Question 9.B</h1>
+<div id="question-9b" class="section level1">
+<h1>Question 9B</h1>
 <p>Were there more hate crimes in areas with high or low median household incomes? How large was the difference between states with “low” and “high” levels of household income?</p>
 <p><strong>Answer:</strong></p>
 </div>
-<div id="question-10.a" class="section level1">
-<h1>Question 10.A</h1>
-<p>Run the <code>get_regression_points()</code> function for the <code>hate_crimes</code> and <code>median_house_inc</code> model.</p>
-</div>
-<div id="question-10.b" class="section level1">
-<h1>Question 10.B</h1>
-<p>Take a look at data for Maine (row 2). Did the model <strong>overpredict</strong> or <strong>underpredict</strong> the <code>hate_crimes</code> level, compared to what was observed in the data?</p>
+<div id="question-10" class="section level1">
+<h1>Question 10</h1>
+<p>Run the <code>get_regression_points()</code> function for the <code>hate_crimes</code> and <code>median_house_inc</code> model, and examine the data for Maine (row 2). Did the model <strong>overpredict</strong> or <strong>underpredict</strong> the <code>hate_crimes</code> level, compared to what was observed in the data?</p>
 <p><strong>Answer:</strong></p>
 <style type="text/css">
 h1 { /* Header 1 */
