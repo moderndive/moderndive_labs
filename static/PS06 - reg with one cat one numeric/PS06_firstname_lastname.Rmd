@@ -4,6 +4,9 @@ title: "Problem Set 06"
 author: "WRITE YOUR NAME HERE"
 date: "WRITE DATE HERE"
 output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
   html_document:
     theme: lumen
     toc: yes
@@ -11,9 +14,6 @@ output:
     toc_float:
       collapsed: false
     df_print: kable
-  pdf_document:
-    toc: yes
-    toc_depth: '2'
 ---
 
 ```{r, include=FALSE}
@@ -24,9 +24,9 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning = FALSE, fig.width = 1
 
 ## Background {-}
 
-We will again use the hate crimes data we used in Problem Set 05. The FiveThirtyEight article article about those data are in the Jan 23, 2017 ["Higher Rates Of Hate Crimes Are Tied To Income Inequality"](https://fivethirtyeight.com/features/higher-rates-of-hate-crimes-are-tied-to-income-inequality/). This week, we will use these data  to run regression models with a single categorical predictor (explanatory) variable **and** a single numeric predictor (explanatory) variable. 
+We will again use the hate crimes data we used in Problem Set 05. The FiveThirtyEight article article about those data are in the Jan. 23, 2017 article ["Higher Rates Of Hate Crimes Are Tied To Income Inequality"](https://fivethirtyeight.com/features/higher-rates-of-hate-crimes-are-tied-to-income-inequality/). This week, we will use these data  to run regression models with a single **categorical** predictor (explanatory) variable **and** a single **numeric** predictor (explanatory) variable. 
 
-Remember you can knit this file to see the instructions. You can type your answers again right into this file, knit the final draft with all your answers. Please submit the `html` file on Moodle. 
+Remember you can knit this file to see the instructions. You can type your answers again right into this file, knit the final draft with all your answers. Please submit the `pdf` file on gradescope. 
 
 ## Setup
 
@@ -62,9 +62,8 @@ We will use
 * A categorical explanatory variable `urbanization`: level of urbanization in a region
 * A numerical explanatory variable `share_pop_hs`: the percentage of adults 25 and older with a high school degree 
 
- 
 
-## Income, education and urbanization 
+# Income, education and urbanization 
 
 We will start by modeling the relationship between:
 
@@ -75,95 +74,112 @@ contained in the variable `urbanization`
 
 
 
-# Exploratory data analysis
+# Question 1
 
-We will start by creating a scatterplot showing: 
+Create a data visualization comparing median household `income` at "low" and "high" levels of urbanization (you do not need to include the `hs` variable in this plot). Please include axis labels and title.
+
+**Answer:**
+
+```{r}
+
+```
+
+
+# Question 2.A
+
+Next, let's add the high-school degree variable into the mix by creating a scatterplot showing: 
 
 * Median household `income` on the $y$ axis
 * Percent of adults 25 or older with a high school degree on the $x$ axis
 * The points colored by the variable `urbanization`
 * A line of best fit (regression line) for each level of the variable `urbanization` (one for "low", one for "high")
 
+For this question, add the regression lines to the plot using the `geom_parallel_slopes` function from the `moderndive` package. This function will draw the regression lines based on fitting a regression model with parallel slopes (i.e., with no interaction between `hs` and `urbanization`).
+
 
 ```{r}
-ggplot(data = hate_crimes, aes(y = income, x = hs, color = urbanization)) +
-  geom_point()+ 
-  geom_smooth(method = "lm", se = FALSE) + 
-  labs(
-    x = "Percent of adults with high-school degree", 
-    y = "Median household income in USD $", 
-    title = "Education and income in states with differing levels of urbanization")
+
 ```
 
+# Question 2.B
 
-
-# Question 1.A
-
-Do you think the relationship between `hs` and `income` is strong or weak, linear or non-linear?
+Do you think the relationship between `hs` and `income` is strong or weak? linear or non-linear?
 
 **Answer:** 
 
-# Question 1.B
+# Question 2.C
 
 Which regression line (high `urbanization` or low `urbanization`) appears to have the larger intercept?
 
 **Answer:** 
 
+# Question 3.A
+Now let's create a second scatterplot using the same variables, but this time draw the regression lines using `geom_smooth`, which will allow for separate, non-parallel slopes for each urbanization group.
 
+```{r}
 
-# Question 2.A 
+```
 
-Does the slope look fairly similar (parallel) for the two levels of urbanization?
+# Question 3.B
 
-**Answer:** 
+How do the slopes show in the plot above compare to the slopes in Question 2? Are the two slopes fairly similar (parallel) for the two levels of urbanization, or do they differ now?
 
-# Question 2.B
+**Answer:**
 
-Based on the data visualization above, and your answer to Question 2.A, do you think it would be best to run a "parallel slopes" model (i.e. a model that estimates one shared slope for the two levels of urbanization), or a more complex "interaction model" (i.e. a model that estimates a separate slope for the two levels of urbanization)?
+# Question 3.C
+
+Based on visually comparing the two models shown in Question 2 and Question 3, do you think it would be best to run a "parallel slopes" model (i.e. a model that estimates one shared slope for the two levels of urbanization), or a more complex "interaction model" (i.e. a model that estimates a separate slope for the two levels of urbanization)?
 
 **Answer:**
 
 
+# Question 4.A
+Fit the following two regression models that examine the relationship between household `income` (as response variable), and high-school education (`hs`) and `urbanization` as explanatory variables:
 
+1. A parallel slopes model (i.e., no interaction between `hs` and `urbanization`)
+2. A non-parallel slopes model (i.e., allow `hs` and `urbanization` to interact in your model)
 
-# Question 3
-
-Create a data visualization comparing median household income at "low" and "high" levels of urbanization (you do not need to include the `hs` variable in this plot). Please include axis labels and and title. 
-
-```{r}
-
-```
-
-
-
-# Question 4
-
-Run a linear regression model that examines the relationship between household `income` (as response variable), and high-school education, and `urbanization` as explanatory variables. Generate the regression table using the `get_regression_table()` function from the `moderndive` package. 
+Be sure to save the output from the `lm` function for each model.
 
 ```{r}
 
 ```
 
+# Question 4.B
+Use the `get_regression_summaries` function to find the unadjusted proportion of variance in `income` accounted for by each model, and report the value for each model
 
+```{r}
+
+```
+
+**Answer:**
+
+# Question 4.C
+Compare the **adjusted** proportion of variance account for each model. Based on this comparison, which model do you prefer? Does your preference here agree or disagree with your earlier preference based on visualizing the predictions of each model?
+
+**Answer:**
+
+
+**For Questions 5 though 10, base your answers on the model you've selected using visual and quantitative comparisons in Question 3 and 4.**
 
 
 # Question 5.A
 
-Is the intercept the same for the states with a "low" and "high" level of urbanization? Is the slope the same? (look at the data visualization above to help with this!) 
+Generate the regression table for your preferred model using the `get_regression_table()` function from the `moderndive` package. Is the intercept the same for the states with a "low" and "high" level of urbanization? Is the slope the same?
 
-**Answer:** 
+**Answer:**
 
 # Question 5.B
 
 What is the slope for the regression line of the states with a "high" level of urbanization? What is the intercept?
 
-**Answer:** 
+**Answer:**
 
 # Question 5.C
 
 What is the slope for the regression line of the states with a "low" level of urbanization? What is the intercept?
 
-**Answer:** 
+**Answer:**
 
 
 # Question 5.D
@@ -174,78 +190,51 @@ Based on your regression table output (and the data visualizations), is median h
 
 # Question 5.E
 
-For every increase in 1 percentage point of high-school educated adults, what is the associated increase in the median household income of a state?
+For every 1 percentage point increase of high-school educated adults in a state, what is the associated increase in the median household income?
 
 **Answer:** 
 
 
- 
-
 # Question 6
 
-The regression equation for this model is the following (knit it to look at output!)
+What would you predict as the median household income for a state with a **high** level of urbanization, in which 85% of adults have a high school degree? Careful with rounding!
+
+**Answer:**
 
 
-$$
-\widehat{y} = -113725 + 1986 \times hs  + -7333 \times 1_{\mbox{low urbanization}}(x)
-$$
+# Question 7
+
+What would you predict as the median household income for a state with a **low** level of urbanization, in which 85% of the adults have a high school degree?
+
+**Answer:**
 
 
-Solve the regression equation for a US state in which `urbanization` is "high"
+# Question 8
+
+What would you predict as the median household income for a state with a **low** level of urbanization in which 30% of adults have a high school degree?
 
 **Answer:**
 
 
 
-
-
-# Question 7
-
-What would you predict as the median household income for a state with a **high** level of urbanization, in which 85% of the share of adults have a high school degree?
-
-**Answer:** 
-
-
-
-
-# Question 8
-
-What would you predict as the median household income for a state with a **low** level of urbanization, in which 85% of the share of adults have a high school degree?
-
-**Answer:** 
-
-
-
-
 # Question 9
 
-What would you predict as the median household income for a state with a **low** level of urbanization, in which 30%  of adults have a high school degree?
+What was the observed `income` value for Maine (row 2)? What was the prediction for Maine according to your model? What is the residual? Did our model over or underestimate the median income for this state? 
 
 **Answer:** 
+```{r}
+
+```
 
 
 
-# Question 10
-
-What was the observed `income` value for Maine (row 2)? What was the prediction for Maine according to our model? What is the residual? Did our model over or underestimate the median income for this state? 
-
-**Answer:** 
-
-
-
-
-
-## Independent analysis 
-
-<img src="https://ptes.org/wp-content/uploads/2017/11/water-vole-credit-Iain-Green-www.wildwonder.co_.uk-2_cropped.jpg"){width=50%}">
-
-<br> 
+# Independent analysis 
 
 You will now use the tools you have learned, and a new data set to solve a conservation problem.  
 
 Wildlife biologists are interested in managing/protecting habitats for a declining species of vole, but are not sure about what habitats it prefers. Two things that biologists can easily control with management is percent cover of vegetation, and where habitat improvements occur (i.e. is it important to create/protect habitat in moist or dry sites, etc). To help inform habitat management of this vole species, the researchers in this study counted the number of `voles` at 56 random study sites. At each site, they measured percent cover of  `veg`etation, and recorded whether a site had moist or dry `soil`. 
 
-The data can be read in like so
+The data can be read in like so:
 
 ```{r}
 vole_trapping <- read_csv("http://bit.ly/2IgDF0E")
@@ -259,34 +248,30 @@ The data contains the variables:
 * `soil` identifying a site as "moist" or "dry"
 
 
-Generate a regression model with `voles` as the response variable `y` and `veg` and `soil` as explanatory variables. Use the results of the model to answer the following questions **based on the available data**. A data visualization will probably also help you: 
+Generate an appropriate regression model with `voles` as the response variable `y`, and `veg` and `soil` as explanatory variables. Use the results of the model to answer the following questions **based on the available data**. A data visualization will probably also help you.
 
+
+
+# Question 10
+
+Would protecting a site with high vegetation cover be a more effective way to preserve the vole population than a site with low vegetation cover? Why?
+
+**Answer:** 
 
 
 # Question 11
 
-Would you recommend to a manager that they try to protect sites with high or low vegetation cover? Why?
+Dry sites typically cost a lot less to purchase and maintain for conservation organizations. Thus, if a conservation organization decides to purchase a few dry sites, roughly what percent cover of vegetation do they need to maintain on these sites (at a minimum) to support a population of about 30 voles at the site? 
 
 **Answer:** 
 
 
-
-# Question 12 
-
-Dry sites are typically a lot less money to purchase and maintain for conservation organizations. Thus, if a conservation organization decides to purchase a few dry sites, roughly what percent cover of vegetation do they need to maintain on these sites (at a minimum) to support a population of about 30 voles at the site? 
-
-**Answer** 
-
-
-
-# Question 13
+# Question 12
 
 The Nature Conservancy is looking at purchasing a site for this species (in the same study area) that has moist soil and 40% vegetation cover. **Using the regression equation** what would you predict as the possible vole population the site might be able to support?
 
 
-
-**Answer:** 
-
+**Answer:**
 
 
 
