@@ -53,7 +53,7 @@ Each case/row in these data is a state in the US. This week we will consider the
 We will use
 
 * A categorical explanatory variable `urbanization`: level of urbanization in a region
-* A numerical explanatory variable `share_pop_hs`: the percentage of adults 25 and older with a high school degree 
+* A numerical explanatory variable `hs`: the percentage of adults 25 and older with a high school degree 
 
 
 # Income, education and urbanization 
