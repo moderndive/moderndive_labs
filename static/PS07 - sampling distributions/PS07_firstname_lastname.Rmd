@@ -4,9 +4,6 @@ title: "Problem Set 07"
 author: "WRITE YOUR NAME HERE"
 date: "WRITE DATE HERE"
 output:
-  pdf_document:
-    toc: yes
-    toc_depth: '2'
   html_document:
     theme: lumen
     toc: yes
@@ -14,6 +11,9 @@ output:
     toc_float:
       collapsed: false
     df_print: kable
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
 ---
 
 ```{r, include=FALSE}
@@ -412,13 +412,13 @@ Following the example from the beginning of the Problem Set (roughly line 140), 
 Fill in the R Markdown table below with all the standard errors you computed for this problem set. In other words:
 
 1. Replace `x` with the standard error you obtained by taking the standard deviation of the n = 15 sampling distribution 
-2. Replace `a` with the standard error you obtained fora single sample of n = 15 using the mathematical formula
+2. Replace `a` with the standard error you obtained for the single sample of n = 15 you obtained and using the mathematical formula
 3. etc., etc. 
 
 When you are done, make sure all the `|` in the table still line up so your results print out in a table! 
 
 
-Sample size n  | SE via sd of sampling distribution | SE via one sample and formula
+Sample size n  | SE via sd of sampling distribution | SE via the one sample you obtained and formula
 -------------- | ---------------------------------- | --------------
 15             | x                                  | a
 50             | y                                  | b
