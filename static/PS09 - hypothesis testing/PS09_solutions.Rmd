@@ -3,11 +3,14 @@ title: "Problem Set 09 Solutions"
 author: "Jenny"
 date: "2018-12-12"
 output:
-  prettydoc::html_pretty:
+  html_document:
     highlight: tango
-    theme: hpstr
+    theme: cosmo
+    toc: yes
+    toc_depth: 2
+    toc_float:
+      collapsed: false
     df_print: kable
-    toc: true
     
 ---
 
@@ -42,18 +45,19 @@ For this Problem Set you will work with some grade-point-average (GPA) data for 
 sat_gpa <- read_csv("https://rudeboybert.github.io/SDS220/static/PS/sat_gpa.csv")
 ```
 
-Use the `View()` function **in the console** to take a look at the data in the viewer. Each row or case in this data frame is a student. The data includes the (binary) gender of each student; the math, verbal and total SAT scores for each student; the GPA of each student in high school (categorized as "low" or "high"); and the GPA of each student their first year of college on a numeric scale.
+Each row or case in this data frame is a student. The data includes:
+
+ - the (binary) gender of each student
+ - the math, verbal and total SAT scores for each student
+ - the GPA range of each student in high school (categorized as "low" or "high")
+ - the GPA of each student their first year of college on a numeric scale.
 
 We will use hypothesis testing to answer the following questions:
 
 1.  Is there a difference in male and female freshman GPAs?
-1.  Is there a difference in total SAT score for students with a "low" and "high" high-school GPA?
+2.  Is there a difference in total SAT score for students with a "low" and "high" high-school GPA?
 
-Note, if you get stuck as you are working through this, it will be helpful to go back and read Chapter 10 in ModernDive.
-
-
-
-
+Note, if you get stuck as you are working through this, it will be helpful to review Chapter 9 in ModernDive.
 
 # Question 1: Gender differences in first-year GPA?
 
@@ -73,12 +77,12 @@ avg_gpa_sex
 **Questions**:
 
 1. What is the difference in sample mean GPA's?
-1. Make a guess: is this difference statistically significant?
+2. Make a guess: is this difference statistically significant?
 
 **Answers**:
 
 1. Women had a higher sample mean GPA by 2.544587 - 2.396066 = 0.148521
-1. Not sure?!?
+2. Not sure?!?
 
 #### Q1.b) 
 
@@ -103,7 +107,7 @@ $$\begin{aligned} H_0:&\mu_{male} - \mu_{female} = 0 \\\ \mbox{vs }H_A:& \mu_{ma
 
 ## Testing the hypothesis
 
-Here's how we use infer to run this hypothesis test:
+Here's how we use the `infer` package to conduct this hypothesis test:
 
 ### Step 1: Calculate the observed difference 
 
@@ -131,7 +135,7 @@ This step involves generating simulated values *as if* we lived in a world where
 gpas_in_null_world <- sat_gpa %>% 
   specify(gpa_fy ~ sex) %>% 
   hypothesize(null = "independence") %>% 
-  generate(reps = 5000)
+  generate(reps = 5000, type = "permute")
 ```
 
 #### Q1.c) 
@@ -139,7 +143,7 @@ gpas_in_null_world <- sat_gpa %>%
 **Question**:
 
 1. What was the size of the "shuffled" (permuted) sample in each run?
-1. How many times did we do a different "shuffle" (permute) here to the sample? How many rows are in the `gpas_in_null_world` data frame?
+2. How many times did we "shuffle" (permute) the sample? How many rows are in the `gpas_in_null_world` data frame?
 
 **Answer:**
 
@@ -174,14 +178,15 @@ gpa_diff_under_null %>%
 The following plots the $\delta$ values we calculated for each of the different "shuffled" replicates. This is the null distribution of $\delta$. The red line shows the observed difference between male and female scores in the data (-0.1485209) from step 1. 
 
 ```{r}
-gpa_diff_under_null %>% 
-  visualize(obs_stat = obs_diff_gpa_sex) +
+visualize(gpa_diff_under_null) +
+  shade_p_value(obs_stat = obs_diff_gpa_sex, direction = "both") +
   labs(x = "Difference in mean GPA for males and females", y = "Count",
        title = "Null distribution of differences in male and female GPAs",
-      subtitle = "Actual difference observed in the data is marked in red")
+       subtitle = "Actual difference observed in the data is marked in red"
+       )
 ```
 
-**Note that zero is the center of this null distribution.** The null hypothesis is that there is no difference between males and females in GPA score. In the permutations, zero was the most common value, because all structure was removed from the data...GPA values were sorted into male and female **at random**. Values as large as ~ 0.1 and -0.1 occurred, but much less frequently, because they are just not as likely when structure is removed from the data.  
+**Note that zero is the center of this null distribution.** The null hypothesis is that there is no difference between males and females in GPA score. In the permutations, zero was the most common difference, because observed GPA values were re-assigned to males and females **at random**. Differences as large as ~ 0.1 and -0.1 occurred, but much less frequently, because they are just not as likely when structure is removed from the data.
 
 
 ### Step 5: Calculate a p-value
@@ -191,7 +196,7 @@ gpa_diff_under_null %>%
   get_pvalue(obs_stat = obs_diff_gpa_sex, direction = "both") 
 ```
 
-This result indicates that there is a 0.1% chance that we would see a difference of 0.15 in GPA scores between males and females (or a bigger difference) if in fact there was truly no difference between the sexes in GPA scores at the population level.
+This result indicates that there is a 0.16% chance that we would see a difference of 0.15 (or more) in GPA scores between males and females if in fact there was truly no difference between the sexes in GPA scores in the population.
 
 #### Q1.e) 
 
@@ -206,9 +211,9 @@ The following will allow us to calculate a 95% confidence interval for the diffe
 ```{r}
 ci_diff_gpa_means <- sat_gpa %>% 
   specify(gpa_fy ~ sex) %>%
-  generate(reps = 5000) %>% 
+  generate(reps = 5000, type="bootstrap") %>% 
   calculate(stat = "diff in means", order = c("Female", "Male")) %>% 
-  get_ci(level = 0.95)
+  get_confidence_interval(level = 0.95)
 ci_diff_gpa_means
 ```
 
@@ -276,15 +281,17 @@ obs_diff_sat_hs_gpa <- sat_gpa %>%
   calculate(stat = "diff in means", order = c("high", "low"))
 
 obs_diff_sat_hs_gpa 
+```
 
-# # note to grader...the following are also OK or
-# obs_diff_sat_hs_gpa <- sat_gpa %>%
-#   specify(sat_total ~ gpa_hs) %>%
-#   calculate(stat = "diff in means", order = c("low", "high"))
-# # or
-# obs_diff_sat_hs_gpa <- 98.23047 - 108.67828
-# # or
-# obs_diff_sat_hs_gpa <- 108.67828 - 98.23047
+**Note to grader: The following solutions are also OK**
+```{r eval=FALSE}
+obs_diff_sat_hs_gpa <- sat_gpa %>%
+  specify(sat_total ~ gpa_hs) %>%
+  calculate(stat = "diff in means", order = c("low", "high"))
+# or
+obs_diff_sat_hs_gpa <- 98.23047 - 108.67828
+# or
+obs_diff_sat_hs_gpa <- 108.67828 - 98.23047
 ```
 
 #### Q2.c) 
@@ -295,7 +302,7 @@ Generate the null distribution of $\delta$. Here you need to generate simulated 
 sat_in_null_world <- sat_gpa %>% 
   specify(sat_total ~ gpa_hs) %>% 
   hypothesize(null = "independence") %>% 
-  generate(reps = 5000)
+  generate(reps = 5000, type = 'permute')
 ```
 
 #### Q2.d) 
@@ -318,7 +325,7 @@ Visualize how the observed difference compares to the null distribution of $\del
 sat_diff_under_null %>% 
   visualize(obs_stat = obs_diff_sat_hs_gpa ) +
   labs(x = "Difference in mean SAT for students with high and low GPA Scores", y = "Count",
-       title = "Null distribution of differences in SAT scores for studentw with differing GPAs",
+       title = "Null distribution of differences in SAT scores for students with differing GPAs",
       subtitle = "Actual difference observed in the data is marked in red")
 ```
 
@@ -346,9 +353,9 @@ Calculate a confidence interval for the difference in total SAT scores for stude
 ```{r}
 ci_diff_sat_means <- sat_gpa %>% 
   specify(sat_total ~ gpa_hs) %>%
-  generate(reps = 5000) %>% 
+  generate(reps = 5000, type="bootstrap") %>% 
   calculate(stat = "diff in means", order = c("high", "low")) %>% 
-  get_ci(level = 0.95)
+  get_confidence_interval(level = 0.95)
 ci_diff_sat_means
 ```
 
