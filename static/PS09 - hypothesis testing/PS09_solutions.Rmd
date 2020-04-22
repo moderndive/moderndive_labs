@@ -226,10 +226,7 @@ t.test(gpa_fy ~ sex, var.equal = TRUE, data = sat_gpa)
 ```
 
 
-
-
-
-# Question 2: Relationship between high-school & first-year GPA?
+# Question 2: Relationship between high-school GPA category and Total SAT score?
 
 For this analysis `sat_total` is the outcome variable, and `gpa_hs` is the predictor variable, with two levels "low" and "high". 
 
