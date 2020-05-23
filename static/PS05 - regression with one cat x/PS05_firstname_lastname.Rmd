@@ -3,10 +3,12 @@
 title: "Problem Set 05"
 author: "WRITE YOUR NAME HERE"
 date: "WRITE DATE HERE"
+mainfont: Arial
 output:
   pdf_document:
-    toc: yes
-    toc_depth: '2'
+    latex_engine: xelatex
+    toc: true
+    toc_depth: 2
   html_document:
     theme: lumen
     toc: yes

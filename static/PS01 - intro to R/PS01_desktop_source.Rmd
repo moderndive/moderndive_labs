@@ -1,15 +1,18 @@
 
 ---
 title: 'Problem Set 01: Intro to R and RStudio'
+mainfont: Arial
 output:
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+    toc_depth: 2
   html_document:
     css: lab.css
     df_print: kable
     theme: lumen
     toc: yes
     toc_float: yes
-  pdf_document:
-    toc: yes
 ---
 
 ```{r include = F}

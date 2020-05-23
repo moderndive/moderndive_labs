@@ -3,7 +3,12 @@
 title: 'Problem Set 03: Data Wrangling'
 author: "WRITE YOUR NAME HERE"
 date: "WRITE DATE HERE"
+mainfont: Arial
 output:
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+    toc_depth: 2
   html_document:
     theme: lumen
     toc: yes
@@ -11,9 +16,7 @@ output:
     toc_float:
       collapsed: false
     df_print: kable
-  pdf_document:
-    toc: yes
-    toc_depth: '2'
+
 ---
 
 

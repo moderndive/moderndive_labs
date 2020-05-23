@@ -1,14 +1,17 @@
 ---
 title: 'Problem Set 02: Data Visualization'
+mainfont: Arial
 output:
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+    toc_depth: 2
   html_document:
     css: lab.css
     df_print: kable
     theme: lumen
     toc: yes
     toc_float: yes
-  pdf_document:
-    toc: yes
 ---
 
 ```{r, include = FALSE, message = FALSE}

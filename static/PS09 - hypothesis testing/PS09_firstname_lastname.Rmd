@@ -2,10 +2,12 @@
 title: "Problem Set 09"
 author: "WRITE YOUR NAME HERE"
 date: "2018-12-12"
+mainfont: Arial
 output:
   pdf_document:
-    toc: yes
-    toc_depth: '2'
+    latex_engine: xelatex
+    toc: true
+    toc_depth: 2
   html_document:
     highlight: tango
     theme: cosmo
