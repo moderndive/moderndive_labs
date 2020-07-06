@@ -21,7 +21,7 @@ navbar:
   - text: Final Project
     href: final_project.html
   - text: Data Wrangling Tips
-    href: tips_and_tricks.html
+    href: https://moderndive.com/C-appendixC.html
   right:
   - text: Book
     href: https://moderndive.com/
