@@ -56,3 +56,25 @@ You can find:
 
 
 
+# Problem Sets
+
+Move contents of problem sets tab here, where for each problem set:
+
+* user can click link to see html preview of problem set
+* No individual .zip files, rather we'll have only single .zip file (do not worry about content of .zip file for now)
+
+
+
+
+# Final Project
+
+* Shift over final project content here, BUT
+* Update the final project content based on latest iteration of 220 based on this content here: https://github.com/SmithCollege-SDS/SDS220/blob/master/project.Rmd
+
+
+
+# Previous Versions
+
+* Move `previous_versions` from moderndive_book to here:
+    + put in `static/previous_versions/`
+    + Make webpage look like what's here: https://moderndive.com/preface.html#about-this-book
