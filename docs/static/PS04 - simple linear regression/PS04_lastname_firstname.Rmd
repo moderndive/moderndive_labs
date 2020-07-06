@@ -3,7 +3,12 @@
 title: "Problem Set 04: Linear Regression"
 author: "WRITE YOUR NAME HERE"
 date: "WRITE DATE HERE"
+mainfont: Arial
 output:
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+    toc_depth: 2
   html_document:
     theme: lumen
     toc: yes
@@ -22,15 +27,15 @@ knitr::opts_chunk$set(
 ```
 
 
-![](http://az616578.vo.msecnd.net/files/2016/08/11/636065411486445932-684327553_vote.jpg){width=30%}![](https://media.boingboing.net/wp-content/uploads/2018/09/letmevote2018.png){width=30%}
+<img src="https://media.boingboing.net/wp-content/uploads/2018/09/letmevote2018.png" width=50%>
 
 ## Background 
 
-For this problem set you will first run through an example of a simple linear regression, answering a few questions on the way. Then you will work through a regression analysis independently. Knit this file...and you can read through all the instructions. You can do your work in this `.Rmd` file....simply insert your answers below each Question, knit your final copy, and turn in the `.html` file.
+For this problem set you will first run through an example of a simple linear regression, answering a few questions on the way. Then you will work through a regression analysis independently. Knit this file...and you can read through all the instructions. You can do your work in this `.Rmd` file; simply insert your answers below each Question, knit your final copy, and turn in the PDF file.
 
 We will look at some demographic data from the `fivethirtyeight` package recorded for 48 voting areas in the US states just after the 2016 presidential election. We will investigate what variables within those regions might be tied to the percentage of US voters that supported Donald Trump, and in turn, which variables might be useful to predict Trump support in other regions (i.e. to a wider US population). 
 
-***
+
 
 ## Setup
 
@@ -63,7 +68,7 @@ The outcome variable `trump_support` is the percentage of votes for Trump in 201
 
 Observe that all percentages are expressed as values between 0 and 100, and not 0 and 1.
 
-***
+
 
 ## An Example/Demo 
 
@@ -71,7 +76,7 @@ Observe that all percentages are expressed as values between 0 and 100, and not 
 
 We will start by investigating the relationship between white poverty levels and support for Trump. 
 
-We'll do this by creating a scatterplot with `trump_support` as the outcome variable on the y-axis and `poverty` as the explanatory variable on the x-axis. Note the use of the `geom_smooth()` function, that tells R to add a regression line. While the points do scatter/vary around the blue regression line, of all possible lines we can draw in this point of clouds, the blue line is the "best-fitting" line in that in minimizes the sum of the squared residuals (see moderndive 6.3.3 for a fuller explanation). 
+We'll do this by creating a scatterplot with `trump_support` as the outcome variable on the y-axis and `poverty` as the explanatory variable on the x-axis. Note the use of the `geom_smooth()` function, that tells R to add a regression line. While the points do scatter/vary around the blue regression line, of all possible lines we can draw in this point of clouds, the blue line is the "best-fitting" line in the sense that it minimizes the sum of the squared residuals (see moderndive 5.3.2 for a fuller explanation). 
 
 ```{r fig.height=3, fig.width=5}
 ggplot(data = trump, aes(y = trump_support, x = poverty)) + 
@@ -89,7 +94,7 @@ Does the relationship appear to be positive or negative? Does it look to be reas
 
 **Answer:**
 
-***
+
 
 ## The correlation coefficient (r)
 
@@ -100,7 +105,7 @@ trump %>%
   summarise(r = cor(trump_support, poverty))
 ```
 
-***
+
 
 ## Running a linear regression model
 
@@ -119,7 +124,7 @@ Note that:
 
 This object `poverty_mod` contains all of the information we need about the linear model that was just fit and we'll be accessing this information again later.
 
-***
+
 
 ## Get the regression table
 
@@ -154,7 +159,7 @@ We found a positive correlation coefficient. Is it reasonable for us to conclude
 
 **Answer:**
 
-***
+
 
 ## Making predictions
 
@@ -184,7 +189,7 @@ Do you think it is a good idea to predict Trump support at 85% white poverty, ba
 
 **Answer:** 
 
-***
+
 
 ## Residuals 
 
@@ -192,7 +197,7 @@ Recall that model residuals are the difference between the **observed values in 
 
 $\text{residual} = y - \hat{y}$
 
-For instance, below, one data point is highlighted in blue...the residual is the difference between the y value of the **data point** (here 69), and the y value **predicted** by the line (roughly 59). Here the residual is roughly 10 ($69 - 59 = 10$). The regression equation has under-estimated Trump support, compared to this data point. 
+For instance, below, one data point is highlighted in blue...the residual is the difference between the y value of the **data point** (here 69), and the y value **predicted** by the line (roughly 59). Here the residual is roughly 10 ($69 - 59 = 10$). The regression equation has under-estimated Trump support in this voting area. 
 
 ```{r fig.height=3, fig.width=5, echo = F}
 ggplot(data = trump, aes(y = trump_support, x = poverty))+ 
@@ -205,7 +210,7 @@ ggplot(data = trump, aes(y = trump_support, x = poverty))+
   geom_smooth(method = "lm", se = F, col = "red", lwd = 2 ) 
 ```
 
-The following function `get_regression_points()` gives you the **fitted** also known as **predicted** value for every data point, and the **residual** for every data point. The first row in the output is the first data point...you see that Trump support was 30%, white poverty was 7% the regression equation predicted 45.22 % Trump support, and the residual was -15.22 ($30 - 45.22$).
+The following function `get_regression_points()` gives you the **fitted** (also known as **predicted**) value for every data point, and the **residual** for every data point. The first row in the output is the first data point. You can see that in this voting area Trump support was 30%, white poverty was 7%, the regression equation predicted 45.22% Trump support, and the residual was -15.22 ($30 - 45.22$).
 
 ```{r eval = F}
 get_regression_points(poverty_mod)
@@ -215,7 +220,7 @@ get_regression_points(poverty_mod)
 
 <br>
 
-***
+
 
 ## Put your skills to practice independently! 
 
@@ -232,7 +237,7 @@ Generate a scatterplot with a best-fitting line with `non_white` as the explanat
 
 # QUESTION 6
 
-Do you expect the correlation coefficient (for `non_white` and `trump_support`) to be positive or negative? Write code chunk testing your prediction (it is OK if your expectation was wrong!). 
+Do you expect the correlation coefficient (for `non_white` and `trump_support`) to be positive or negative? Test your prediction using R (it is OK if your expectation was wrong!). 
 
 **Answer:** 
 
@@ -284,7 +289,7 @@ If Representative Ocasio-Cortez saw the regression line and not the actual data:
 **Answers:** 
 
 
-***
+
 
 [//]: (students- please do not delete anything below this line!) 
 

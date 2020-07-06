@@ -3,17 +3,21 @@
 title: "Problem Set 08"
 author: "WRITE YOUR NAME HERE"
 date: "WRITE DATE HERE"
+mainfont: Arial
 output:
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+    toc_depth: 2
   html_document:
+    df_print: kable
     theme: lumen
     toc: yes
     toc_depth: 2
     toc_float:
-      collapsed: false
-    df_print: kable
+      collapsed: no
 ---
 
-![](https://i.pinimg.com/originals/8b/a5/6d/8ba56d685c24a243836ace7332f553f7.jpg)
 
 
 ```{r, include=FALSE}
@@ -33,7 +37,7 @@ In this problem set we will use a small **sample** of data from the [General Soc
 ## Setup
 
 First load the necessary packages 
- 
+
 
 ```{r message=FALSE}
 # Recall that loading the tidyverse "umbrella" package loads ggplot2, dplyr, and
@@ -50,7 +54,7 @@ gss_sample <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSypSoDC
 
 Be sure to take a look at the data in the **viewer**. Each row in the data set is a person that was surveyed (100 rows or cases in total). The variables in the data set include each respondent's `age`,  `race`, and number of hours of TV watched a day `tvhours`. 
 
-<br> 
+
 
 
 **Setting a seed:** We will take some random samples and build sampling distributions in this lab. In order to make sure R takes the same random sample every time you run your code, you can do what is called "setting a seed". Do this in any code chunk that you take a random sample! 
@@ -62,9 +66,9 @@ set.seed(45)
 
 
 
-<br> 
 
-***
+
+
 
 # Confidence intervals from a bootstrap resample
 
@@ -86,9 +90,9 @@ Note a few important details about the `rep_sample_n` function, and bootstrap sa
 * The `replace = TRUE` argument tells R that in each bootstrap resample, we can include a row from `gss_sample` multiple times. So if for instance, respondent # 12 is the first random resample taken here, respondent 12 is still available to be resampled **again** at random. Thus, some people may appear **multiple times** in our bootstrap resample, and some people from the original data set may not appear at all. 
 * We save the results in a data frame `boot_samp_1000`. 
 
-<br> 
 
-*** 
+
+
 
 Take a look at the `boot_samp_1000` data frame we just generated in RStudio's data viewer. Note that the `replicate` column labels each bootstrap resample (the first 100 rows are labeled 1, the next 100 rows are labeled 2, etc.)
 
@@ -98,9 +102,9 @@ How many rows does `boot_samp_1000` have? **Why?**
 
 **Answer:**
 
-<br> 
 
-***
+
+
 
 ### Step 2: Calculate the bootstrap statistic
 
@@ -118,13 +122,13 @@ Note that:
 - We put the sample mean for each bootstrap resample in a column called `boot_stat`
 
 
-<br> 
+
 
 > This is the bootstrap distribution for the mean of `tvhours`! 
 
-<br> 
 
-*** 
+
+
 
 Take a look at the `boot_distrib_tv` we just created in RStudio's data viewer. 
 
@@ -134,9 +138,9 @@ How many values of the bootstrap statistic `boot_stat` are there?  Please explai
 
 **Answer:**.
 
-<br> 
 
-*** 
+
+
 
 ### Visualizing the bootstrap distribution  
 
@@ -213,9 +217,9 @@ ggplot(data = boot_distrib_tv, aes(x = boot_stat)) +
   geom_vline(data = prct_ci_tv, aes(xintercept = upper_ci), color = "blue", lwd = 2) 
 ```
 
-<br> 
 
-***
+
+
 
 # Question 3
 
@@ -223,9 +227,6 @@ ggplot(data = boot_distrib_tv, aes(x = boot_stat)) +
 
 **Answer:**
 
-<br> 
-
-***
 
 # Question 4 
 
@@ -233,13 +234,12 @@ Use the bootstrap resampling distribution for `tvhours` generated above (`boot_d
 
 ```{r}
 
-
 ```
 
 
-<br> 
 
-***
+
+
 
 # Question 5
 
@@ -247,9 +247,9 @@ Which confidence interval is **WIDER**: the 95% confidence interval or the 99% c
 
 **Answer:** 
 
-<br> 
 
-***
+
+
 
 # Question 6a
 
@@ -285,9 +285,9 @@ How do the 95% confidence intervals you calculated in 6b and 6c compare? i.e. ar
 
 **Answer:** 
 
-<br> 
 
-***
+
+
 
 # Question 7
 
@@ -298,11 +298,9 @@ Use the **bootstrap resampling distribution** for the sample mean respondent `ag
 ```
 
 
-<br> 
 
-***
 
-![](https://ecologyofeducation.net/wsite/wp-content/uploads/2011/09/Boots-with-Laces-border.jpg)
+
 
 # Bootstrap sampling distribution & confidence intervals with categorical variables
 
@@ -368,26 +366,29 @@ Calculate a 95% CI for the **population proportion** of respondents $p$ that ide
 ```
 
 
-***
+
 
 
 
 # Confidence intervals based on the theoretical normal distribution  
 
-As described in [moderndive chapter 9.8.2](https://moderndive.netlify.com/9-confidence-intervals.html#theory-ci), not only can we generate confidence intervals using a computer/resampling as we've been doing until now, in many cases there also exists a mathematical formula! This however necessitates a little mathematical/probability theory; a topic we leave to a more advanced statistics class.
+As described in [moderndive chapter 8.7.2](https://moderndive-bert.netlify.com/8-confidence-intervals.html#theory-ci), not only can we generate confidence intervals using a computer/resampling as we've been doing until now, in many cases there also exists a mathematical formula! This however necessitates a little mathematical/probability theory; a topic we leave to a more advanced statistics class.
 
 To generate a 95% confidence interval based on the theoretical normal distribution, we can use the following formula: 
 
-$$\widehat{\text{point estimate}} \pm 1.96 \cdot \widehat{SE}$$
+$$ \text{point estimate} \pm 1.96 \cdot \widehat{SE}$$
 
 So, for instance if we wanted to calculate the 95% confidence interval for the population mean of `tvhours` $\mu_{tv}$ that respondents watched based on our sample: 
 
 * the **point estimate** AKA **sample statistic** in this case would be the sample mean number of `tvhours` from the sample: $\bar{x}$
-* We would estimate the standard error using the formula: where $s$ is the **sample standard deviation**, which is a point estimate of the **population standard deviation** $\sigma$:
+* We would estimate the standard error using the formula
 
 $$\widehat{SE} \approx \frac{s}{\sqrt{n}}$$
 
-and thus a 95% CI would be
+where $s$ is the **sample standard deviation**, which is a point estimate of the **population standard deviation** $\sigma$.
+
+
+Thus a 95% CI would be
 
 $$
 \bar{x} \pm 1.96 \cdot \widehat{SE} =  \bar{x} \pm 1.96 \cdot \frac{s}{\sqrt{n}}
@@ -421,24 +422,20 @@ Using boostrap: percentile rule | A             | B
 Using mathematical formula      | P             | Q
 
 
-
-
 # Question 10 
 
-**In your opinion**: would you say these three confidence intervals are similar?
+**In your opinion**, would you say these three confidence intervals are similar?
 
 
 **Answer:**
 
 
-***
+
 
 
 
 [//]: (students- please do not delete anything below this line!) 
 
 <style type="text/css">
-h1 { /* Header 1 */
-  color: Blue;
-}}
+h1 {  color: Blue;} p {font-size: 18px;}
 </style>

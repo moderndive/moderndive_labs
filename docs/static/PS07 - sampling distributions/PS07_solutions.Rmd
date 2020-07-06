@@ -8,15 +8,14 @@ output:
     df_print: kable
     theme: lumen
   pdf_document: default
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r, include=FALSE}
 # Do not edit this code block/chunk
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning = FALSE, fig.width = 16/2, fig.height = 9/2)
 ```
-
-
-<br> 
 
 ## Collaboration {-}
 
@@ -29,21 +28,16 @@ For this exercise, we will mimic the tactile sampling you did in class with virt
 
 For this exercise, the **population** of interest will be **ALL** 2538 individuals living in a single neighborhood in 2014. As an analogy to the tactile sampling you did in class, the neighborhood is the "bowl" and the 2,538 people are the little balls.
 
-If you get stuck as you are working through this Problem Set, we **strongly recommend** you re-read Chapter 8 in ModernDive, in particular subsections 8.3.1 on "Terminology & notation" and 8.3.2 on "Statistical definitions". These terminology, notation, and definitions related to sampling are definitely tricky at first; the best method to master them is practice, practice, practice.
+If you get stuck as you are working through this Problem Set, it will likely be helpful to review Chapter 7 in ModernDive, in particular subsections 7.3.1 on "Terminology & notation" and 7.3.2 on "Statistical definitions". The terminology, notation, and definitions related to sampling are definitely tricky at first; the best method to master them is practice, practice, practice.
 
-<br>
 
-***
+### Key Symbols: 
 
-### Key points on symbols: 
-
-Symbol           | POPULATION PARAMETER               | SAMPLE PARAMETER
+Symbol           | Population Parameter               | Point Estimate
 ---------------- | ---------------------------------- | --------------
 Number of cases  | $N$                                | $n$
 Proportion       | $p$                                | $\hat{p}$
 Standard error   | $SE$                               | $\widehat{SE}$
-
-***
 
 ## Setup
 
@@ -56,22 +50,19 @@ library(forcats)
 library(moderndive)
 ```
 
-You can load and take a `glimpse()` of the  `gss_cat` data set in the `forcats` package like so: 
+The GSS data we will be working with is in the `gss_cat` data frame, which comes built-in with the `forcats` package you just loaded. You can take a `glimpse()` of the `gss_cat` data set like so: 
 
-```{r message = F}
+```{r message = F, results = "hide"}
 data(gss_cat)
 glimpse(gss_cat)
 ```
 
-Be sure to take a look at the data in the **viewer**. And type `?gss_cat` into the **console** to see a description of the variables in this data set. 
+You should also explore the data in the RStudio data viewer, and type `?gss_cat` into the **console** to see a description of the variables in this data set. 
 
-<br> 
-
-***
 
 ## Exploratory data wrangling
 
-This data set includes many of years of data, and many variables. To start, we will restrict our analysis to only 2014, and to only the variable indicating the `marital` status of each respondent. 
+This data set includes many years of data, and many variables. To start, we will restrict our analysis to only 2014, and to only the variable indicating the `marital` status of each respondent. 
 
 ```{r}
 gss_14 <- gss_cat %>% 
@@ -79,21 +70,19 @@ gss_14 <- gss_cat %>%
   select(marital)
 ```
 
-The following shows the different responses for `marital` status:
+The following shows all the unique responses for `marital` status:
 
 ```{r}
 gss_14  %>% 
   distinct(marital) 
 ```
 
-<br>
 
-***
+## Setting a seed for your computer's Random Number Generator
+In this problem set, will take some random samples of data using R. In order to make sure R takes the same random sample every time you run your code (so you can reproduce your work), you can do what is called "setting a seed". Do this in any code chunk where you take a random sample! Otherwise, the answers you write down might accidentally become out of sync with the output of your code when your knit your document!
 
+You can control your computer's random number generator by providing a number to using the `set.seed` function. Any number will do - in the example below, we use 45 as our seed value.
 
-**Setting a seed:** We will take some random samples in this Problem Set. In order to make sure R takes the same random sample every time you run your code, you can do what is called "setting a seed". Do this in any code chunk that you take a random sample! 
-
-You can set a seed like so. Any number will do. (You do not need to run this right now...just showing you how)
 ```{r}
 set.seed(45)
 ```
@@ -101,7 +90,7 @@ set.seed(45)
 
 ## The true population proportion $p$ of divorced people
 
-Again, for this exercise, the **population** of interest will be **ALL** 2538 individuals living in this single neighborhood in 2014.  Since we have data on **ALL** 2538 people living in the neighborhood, we can compute the **exact population proportion $p$ of divorced people directly** like so, using **ALL** the data: 
+Again, for this exercise, the **population** of interest will be **ALL** 2,538 individuals living in this single neighborhood in 2014.  Since we have data on **ALL** 2538 people living in the neighborhood, we can compute the **exact population proportion $p$ of divorced people directly** using **ALL** the data:
 
 ```{r}
 gss_14 %>% 
@@ -110,34 +99,18 @@ gss_14 %>%
   mutate(p = divorced / N)
 ```
 
-<br> 
+> Note that we used $N$ (the size of the full population, 2,538 people) and computed $p$ (not $\hat{p}$ ). And, no inference from sample to the population is needed. This is because we're working with the **entire population** of interest. We do not need to *estimate* the true proportion, or infer something about the true population proportion of divorced people in this neighborhood in 2014, because in this case, we can compute it directly (just like counting all red balls in the bowl). Thus, we know that $p$ is exactly 0.16. In other words, this situation is not a realistic reflection of a real life problem. 
 
-> Note that we use $N$ for the size of the full population of 2538 people, and $p$ because we are calculating the TRUE population proportion $p$
-
-
-
-<br> 
-
-> Note that no inference to the population is needed. We do not need to use a **sample** to try to infer something about the **true poulation proportion $p$** of divorced people in this neighborhood in 2014. We know that $p$ = 0.16. 
-
-<br>
+For the rest of this problem set, we will be *simulating* the act of sampling from this neighborhood population to understand and study how factors like sample size influence **sampling variation**.
 
 
-In other words, this problem set is not a realistic reflection of a real life problem. However, for this problem set, we are *simulating* the act of sampling from this neighborhood population to understand and study how factors like sample size influence **sampling variation**.
+## Demo: Sampling 50 people in the neighborhood
 
-***
-
-<br>
-
-## Demo: sampling 50 people in the neighborhood
-
-### a) Estimating $\hat{p}$ from a single sample
+### Estimating $\hat{p}$ from a single sample
 
 We are first going to use random sampling to **ESTIMATE** the true **population** proportion $p$ of the neighborhood that are divorced with only a **sample** of 50 people. 
 
 > This will represent a situation of only having the resources to knock on 50 doors to get responses from people in this neighborhood!
-
-Be sure to look at the results in the viewer. Remember, you can set the seed to whatever value you like. 
 
 ```{r}
 set.seed(42)
@@ -146,7 +119,7 @@ n50_1rep <- gss_14 %>%
   rep_sample_n(size = 50, reps = 1)
 ```
 
-<br> 
+Be sure to look at the results in the viewer. And remember, you can set the seed to whatever value you like. 
 
 Next, let's calculate the **sample proportion** $\hat{p}$ of people who identified as `Divorced` in our sample of 50 people. 
 
@@ -158,33 +131,49 @@ n50_1rep %>%
 ```
 
 
-This sample proportion $\hat{p}$ is an **ESTIMATE**, and our **best guess** of what the **true population** proportion $p$ of `Divorced` people is in this neighborhood, based on a sample of only 50 people. It is reasonably close to the true population proportion $p = 0.16$ we calculated from the full population. 
+This sample proportion $\hat{p}$ is an **ESTIMATE**; it's our **best guess** of what the **true population** proportion $p$ of `Divorced` people is in this neighborhood, based on a sample of only 50 people. It is reasonably close to the true population proportion $p = 0.16$ we calculated from the full population. 
 
 # Question 1a
 
-Ask two of your classmates what their estimate of $\hat{p}$ was. How do the $\hat{p}$ estimates from different samples compare? 
+Modify the code below to take 3 samples of 50 people instead of just 1 sample, and then compute an estimate of the proportion of Divorced people in the entire population from each sample individually. 
 
-**Answer:  0.08, 0.12, and 0.21. The p_hat estimates are different from different samples. GRADER: Students will obviously report this differently, just looking for basic comprehension that their is some difference **
+```{r}
+set.seed(18)
+
+n50_3rep <- gss_14 %>% 
+  rep_sample_n(size = 50, reps = 1)
+```
+
+**Answer:**
+
+```{r}
+set.seed(18)
+
+n50_3rep <- gss_14 %>% 
+  rep_sample_n(size = 50, reps = 3)
+
+n50_3rep %>% 
+  summarize(divorce_count = sum(marital == "Divorced"), 
+            n = n()) %>% 
+  mutate(p_hat = divorce_count/ n)
+```
 
 # Question 1b
 
-**Why** did everyone get a different estimate?
+How do the $\hat{p}$ estimates from different samples compare? Why was your estimate different each time?
 
-**Answer: because every person took a different random sample with different people in it. In other words, sampling variation was at play.** 
+**Answer: Each student's answer comparing their estimates will be slightly different (such is the nature of random sampling.) In most cases, the estimates should be relatively similar to the true proportion of .16, but are unlikely to be exactly .16, and it is unlikely any two samples will produce identical estimates.**
 
-<br>
+**As to _why_ their samples differed, students should explain that each estimate was based on a random sample of people, and the people observed are likely to be different from sample to sample. In other words, the difference in estimates was due to sampling variability.**
 
-***
-
-### b) Estimating $\widehat{SE}$ from a single sample
+### Estimating $\widehat{SE}$ from a single sample
 
 Typically we only have the opportunity to collect **one sample** for our study, and so we have to use the amount of variability in our **single sample** as an estimate of the amount of variability we might expect in our results if we had taken a random sample of 50 different people. The $\widehat{SE}_{\hat{p}}$ serves as an **ESTIMATE**  of **sampling variability** if you only have a **single sample**. The formula for estimating the standard error of $\hat{p}$ is the following:
 
 $$\widehat{SE}_{\hat{p}}  \approx  \sqrt{\frac{\hat{p} \times (1-\hat{p})}{n}}$$
 
-> Note that we use $n$ for the size of the sample, that p "wears a hat", like so: $\hat{p}$ because we are ESTIMATING a proportion based on only a sample, and that the SE "wears a hat" as well because we ESTIMATING $\widehat{SE}$ based on only a sample. 
+> Note that we use $n$ to represent the size of the sample and we that use $\hat{p}$ to represent the proportion of divorced people because we are ESTIMATING a proportion based on only a sample. Likewise, the SE "wears a hat" because we are ESTIMATING the true standard error based on a sample. 
 
-<br> 
 
 The standard error of $\hat{p}$ can be estimated in R like so:
 
@@ -196,22 +185,15 @@ n50_1rep %>%
          se_hat = sqrt(p_hat * (1 - p_hat) / n))
 ```
 
-<br>
-
-***
 
 ## Demo: Generating a sampling distribution of $\hat{p}$
 
 
-If you ran the code chunk that takes a random sample of 50 cases a thousand more times....and wrote down every $\hat{p}$ you got, you would have what is called a "sampling distribution". 
+If you ran the code chunk that takes a random sample of 50 people a thousand more times, and wrote down every $\hat{p}$ you got, you would have constructed a "sampling distribution" of the proportion of divorced people.
 
-<br> 
+> A sampling distribution shows every (or nearly every!) possible value a point estimate can take on, along with how likely each value is to be observed, for samples **of a given size** from a population.
 
-> A sampling distribution shows every [or nearly every!] possible result a sampling statistic can have under every [or nearly every!] possible sample **of a given sample size** from a population.  
-
-<br> 
-
-### a) Sampling distribution of $\hat{p}$ for n = 50
+### Sampling distribution of $\hat{p}$ for n = 50
 
 Instead of running the sampling code chunk for n = 50 over and over, we can "collect" 1000 samples of n = 50 really easily in R. The following code chunk takes 1000 **different** samples of n = 50 and stores them in the data frame `n50_1000rep`:
 
@@ -225,25 +207,18 @@ n50_1000rep <- gss_14 %>%
  
 Be sure to look at `n50_rep1000` in the data viewer to get a sense of these 1000 samples look like.
 
-<br>
-
-***
 
 # Question 2a
 
-What is the name of the column that identifies which of the 1000 samples each row is from?
+What is the name of the column  in the `n50_1000rep` data frame that identifies which of the 1000 samples an observation belongs to?
 
 **Answer: replicate**
 
 # Question 2b
 
-What is the sample size n for each of the 1000 samples we took? (i.e. how many humans are sampled in each replicate)?
+What is the sample size n for each of the 1000 samples we took? (i.e. how many people are sampled each time)?
 
 **Answer: 50**
-
-<br> 
-
-*** 
 
 The following code chunk calculates the sample proportion $\hat{p}$ of people who reported they were divorced for each of the **1000 samples** 
 
@@ -262,34 +237,28 @@ p_hat_n50_1000rep %>%
   slice(1:5)
 ```
 
-### b) Visualize the sampling distribution of $\hat{p}$ for n = 50
+### Visualizing the sampling distribution of $\hat{p}$ for n = 50
 
 We can plot the **sampling distribution** of these 1000 $\hat{p}$ estimates of divorced respondents with a histogram, like so:
 
 ```{r}
 ggplot(p_hat_n50_1000rep, aes(x = p_hat)) +
-  geom_histogram(binwidth = 0.02, color = "black", fill = "aquamarine3") +
+  geom_histogram(binwidth = 0.02, color = "black", fill = "aquamarine3", boundary=0) +
   labs(x = "Sample proportion of divorced respondents", 
        title = "Sampling distribution of p-hat based on n = 50") 
 ```
 
-<br> 
-
-***
 
 # Question 3 
 
-Based on your histogram, what appeared to be a very common value of $\hat{p}$? What was a very uncommon value?
+Based on the histogram above, what appeared to be a very common (i.e., likely) value of $\hat{p}$? What was a very uncommon (i.e., unlikely) value?
 
-**Answer: 0.18 appeared to be a very common value...there was a really high value around 0.4. GREADER: this will differ from student to student obviously...looking for comprehension that the CENTER of the distribution has more common values, and the tails of the distribution are less common values**
+**Answer: 0.12 to 0.14 appeared to be the most common value, while values above .3 were very uncommon. Of course, these values will differ from student to student. When grading, look for comprehension that the CENTER of the distribution has more common values, and the tails of the distribution are less common values.**
 
-<br> 
 
-***
+### Mean and standard error of the sampling distribution of $\hat{p}$ for n = 50
 
-### c) Mean and standard error of the sampling distribution of $\hat{p}$ for n = 50
-
-Finally we can estimate  the mean of the sampling distribution by calculating the mean of all 1000 $\hat{p}$ estimates, and the standard error of the sampling distribution by calculating the standard deviation of all 1000 $\hat{p}$ values like so: 
+Finally we can estimate the mean of the sampling distribution by calculating the mean of all 1000 $\hat{p}$ estimates, and the standard error of the sampling distribution by calculating the standard deviation of all 1000 $\hat{p}$ values like so: 
 
 ```{r}
 p_hat_n50_1000rep %>% 
@@ -297,13 +266,11 @@ p_hat_n50_1000rep %>%
             SE_p_hat = sd(p_hat))
 ```
 
-<br> 
-
-*** 
+Basically, we treat the 1000 point estimates of the population proportion just like any other sample of numbers.
 
 # Question 4
 
-How do these values compare to the estimates we got above of $\hat{p}$ and $\widehat{SE}$ of $\hat{p}$ for `Divorced` respondents based on your **single** sample of 50 people earlier in this Problem Set?  
+How do the population proportion and standard error estimates computed by taking the mean and standard deviation of the 1000 simulated sample proportions  compare to the estimates of $\hat{p}$ and $\widehat{SE}$ based on your **single** sample of 50 people earlier in this Problem Set?  
 
 
 **Answer: They are very similar**
@@ -312,6 +279,8 @@ How do these values compare to the estimates we got above of $\hat{p}$ and $\wid
 # Question 5a
 
 Use the `rep_sample_n` function to collect 1000 virtual samples of size *n* = 15. **BE SURE TO NAME YOUR SAMPLE SOMETHING NEW, TO ENSURE YOU CAN DISTINGUISH IT FROM THE n = 50 SAMPLE ABOVE!**
+
+**Answer:**
 
 ```{r}
 set.seed(910)
@@ -325,6 +294,7 @@ n15_1000rep <- gss_14 %>%
 
 Calculate sample proportion $\hat{p}$ of people who reported they were `Divorced` for each replicate of your n = 15 sampling
 
+**Answer:**
 
 ```{r}
 p_hat_n15_1000rep <- n15_1000rep %>% 
@@ -338,6 +308,8 @@ p_hat_n15_1000rep <- n15_1000rep %>%
 
 Visualize the sampling distribution of $\hat{p}$ from your n = 15 sampling with a histogram 
 
+**Answer:**
+
 ```{r}
 ggplot(p_hat_n15_1000rep, aes(x = p_hat)) +
   geom_histogram(binwidth = 0.07, color = "black", fill = "sienna3") +
@@ -347,7 +319,9 @@ ggplot(p_hat_n15_1000rep, aes(x = p_hat)) +
 
 # Question 5d
 
-calculate the mean of the n = 15 sampling distribution, and the standard error of the n = 15 sampling distribution 
+Calculate the mean of the n = 15 sampling distribution, and the standard error of the n = 15 sampling distribution 
+
+**Answer:**
 
 ```{r}
 p_hat_n15_1000rep %>% 
@@ -355,9 +329,6 @@ p_hat_n15_1000rep %>%
             SE = sd(p_hat))
 ```
 
-<br> 
-
-***
 
 # Question 6a
 
@@ -371,13 +342,12 @@ Explain any observed differences from Question 6a
 
 **Answer: At a sample size of 15 we have less data to represent the population on each "resampling", and less information about the population on each "resampling". As such, the variability in the sampling distribution from one sampling event to the next is larger than at n = 50. Thinking about it in the EXTREME...if we "RESAMPLED" the entire population in every resample, we would get the EXACT same value each time...if we resampled only like 5 people in the pop every time we could get RADICALLY different values from sample to sample.**
 
-<br>
-
-***
 
 # Question 7a
 
 Use the `rep_sample_n` function to collect 1000 virtual samples of size *n* = 600. **Note: BE SURE TO NAME YOUR SAMPLE SOMETHING NEW, TO ENSURE YOU CAN DISTINGUISH IT FROM THE n = 50, and n = 15 SAMPLES ABOVE!**
+
+**Answer:**
 
 ```{r}
 set.seed(84)
@@ -390,6 +360,8 @@ n600_1000rep <- gss_14 %>%
 
 Calculate the proportion $\hat{p}$ of people who reported they were `Divorced`for each replicate of your n = 600 sampling
 
+**Answer:**
+
 ```{r}
 p_hat_n600_1000rep <- n600_1000rep %>% 
   group_by(replicate) %>% 
@@ -400,7 +372,9 @@ p_hat_n600_1000rep <- n600_1000rep %>%
 
 # Question 7c
 
-calculate the mean of the n = 600 sampling distribution, and the standard error of the n = 600 sampling distribution.
+Calculate the mean of the n = 600 sampling distribution, and the standard error of the n = 600 sampling distribution.
+
+**Answer:**
 
 ```{r}
 p_hat_n600_1000rep %>% 
@@ -411,14 +385,9 @@ p_hat_n600_1000rep %>%
 
 # Question 7d
 
-Was there more **variability** from sample to sample when we took a sample size of 600 or a sample size of 50? **Explain what evidence you have for assessing this**
+Was there more **variability** from sample to sample when we took a sample size of 600 or when we took a sample size of 50? **Explain what evidence you have for assessing this**
 
 **Answer: the standard error of the sampling distribution for n = 600 was much smaller than the standard error of the sampling distribution for n = 50....indicating that we had more variability from sample to sample when only collecting 50 samples.**
-
-
-<br> 
-
-***
 
 
 # Question 8
@@ -428,14 +397,6 @@ Which sampling distribution looked more normally distributed (bell shaped and sy
 **Answer: The sampling distribution for n = 600 looked more normally distributed. This is a key tenet of the central limit theorem: as your sample size increases, your sampling distribution becomes more normally distributed, and narrower (i.e. smaller spread) though the n = 50 one also looked pretty bell-shaped and symmetrical**
 
 
-<br> 
-
-***
-
-
-![](http://digital-desert.com/victor-valley/599-bell-mountain-r6760.jpg)
- 
- <br>
  
 ## Estimating $\hat{p}$ and the standard error of $\hat{p}$ from a single sample (revisited)
 
@@ -449,9 +410,6 @@ So how do we **ESTIMATE** a $\hat{p}$ and a standard error of $\hat{p}$ when we 
 
 $$\widehat{SE}_{\hat{p}}  \approx  \sqrt{\frac{\hat{p} \times (1-\hat{p})}{n}}$$
 
-<br> 
-
-*** 
 
 # Question 9
 
@@ -465,7 +423,10 @@ n15_1rep <- gss_14 %>%
 ```
 
 
-Following the example from the beginning of the Problem Set (roughly line 140), estimate the **sample proportion** $\hat{p}$ of people who identified as `Divorced` based on `n15_1rep`... AS WELL AS the **standard error of $\hat{p}$**
+Following the example from the beginning of the Problem Set (roughly line 140), estimate
+
+1. The sample proportion $\hat{p}$ of people who identified as `Divorced` based on `n15_1rep`.
+2. The standard error of $\hat{p}$
 
 ```{r}
 n15_1rep %>% 
@@ -475,13 +436,7 @@ n15_1rep %>%
          se = sqrt(p_hat * (1 - p_hat) / n))
 ```
 
-<br> 
-
-> You should have gotten a value reasonably close to the estimate we made earlier from our sampling distribution for n = 15! Note that when you must estimate a standard error from **only a single sample**, the formula **contains the sample size, n**. The larger the sample size n, the larger the number in the denominator of the SE formula. 
-
-<br> 
-
-***
+> You should get a value reasonably close to the estimate we made earlier from our simulated sampling distribution for n = 15! Note that when you must estimate a standard error from **only a single sample**, the formula **contains the sample size, n**. The larger the sample size n, the larger the number in the denominator of the SE formula.
 
 # Question 10 
 
@@ -489,7 +444,7 @@ Fill in the R Markdown table below with all the standard errors you computed for
 
 1. Replace `x` with the standard error you obtained by taking the standard deviation of the n = 15 sampling distribution 
 2. Replace `a` with the standard error you obtained fora single sample of n = 15 using the mathematical formula
-3. etc. 
+3. etc., etc. 
 
 When you are done, make sure all the `|` in the table still line up so your results print out in a table! 
 
@@ -501,9 +456,6 @@ Sample size n  | SE via sd of sampling distribution | SE via one sample and form
 
 
 
-***
-<br> 
-
 # Question 11
 
 Based on what you observed for Question 10, **IF** you collected a single sample from 600 respondents, do you think the standard error will be smaller or larger than the one you  calculated for n = 15. **Explain your reasoning** (Note: if you are not sure you can collect a sample and calculate the standard error)
@@ -512,14 +464,8 @@ Based on what you observed for Question 10, **IF** you collected a single sample
 
 
 
-***
-
-
-
 [//]: (students- please do not delete anything below this line!) 
 
 <style type="text/css">
-h1 { /* Header 1 */
-  color: Blue;
-}}
+h1 {color: Blue;} p{font-size: 18px;}}
 </style>
