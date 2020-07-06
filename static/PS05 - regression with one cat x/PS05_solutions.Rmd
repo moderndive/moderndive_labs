@@ -16,15 +16,15 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning = FALSE, fig.width = 1
 
 ## Collaboration {-}
 
-Please indicate who you collaborated with on this problem set: 
+Please indicate who, if anyone, you collaborated with on this problem set: 
 
 
 ## Background {-}
 
-In this problem set we will work with some hate crimes data from the US.  The FiveThirtyEight article article about those data are in the Jan 23, 2017  ["Higher Rates Of Hate Crimes Are Tied To Income
+In this problem set we will work with a data set concerning hate crimes occurring in the US. For more context about these data, you can read a FiveThirtyEight article about these data that appeared in January of 2017: ["Higher Rates Of Hate Crimes Are Tied To Income
 Inequality"](https://fivethirtyeight.com/features/higher-rates-of-hate-crimes-are-tied-to-income-inequality/)
 
-We will use these data in this Problem Set to run regression models with a single categorical predictor (explanatory) variable. 
+In this problem set, we will model these data using regression models with a single categorical predictor variable (i.e., explanatory variable).
 
 ## Setup
 
@@ -34,11 +34,10 @@ First load the necessary packages
 library(ggplot2)
 library(dplyr)
 library(moderndive)
-library(fivethirtyeight)
 library(readr)
 ```
 
-Next load the data set, from where it is stored on the web: 
+Next, load the data set from where it is stored on the web: 
 
 ```{r}
 hate_crimes <- read_csv("http://bit.ly/2ItxYg3")
@@ -50,22 +49,16 @@ You can take a glimpse at the data like so:
 glimpse(hate_crimes)
 ```
 
-Be sure to **ALSO** take a look at the data in the viewer.
+Be sure to also examine the data in the RStudio data viewer.
 
-<br> 
+## About the data set
+Each case/row in these data represents a state in the US. The response variable we will consider is `hate_crimes`, which is the number of hate crimes per 100k individuals in the 10 days after the 2016 US election as measured by the Southern Poverty Law Center (SPLC). 
 
-Each case/row in these data is a state in the US. The response variable we will consider is `hate_crimes`, which is the number of hate crimes per 100k individuals in the 10 days after the 2016 US election as measured by the Southern Poverty Law Center (SPLC). 
+This week we will examine the explanatory strength of three categorical variables in the data set: 
 
-This week we will use three categorical explanatory variables in this data set: 
-
-* `trump_support`: level of Trump support in 2016 election (low, medium or high - split into roughly equal number of cases)
-* `unemployment`: level of unemployment in a state (low or high - split below or above mean)
-* `median_house_inc`: median household income in the state (low or high - split below or above mean)
-
-
-
-*** 
-
+* `trump_support`: level of Trump support in 2016 election (low, medium or high; roughly equal number of observation at each category level)
+* `unemployment`: level of unemployment in a state (low or high; split below or above mean)
+* `median_house_inc`: median household income in the state (low or high; split below or above mean)
 
 
 ## Hate Crimes and Trump Support
@@ -75,11 +68,9 @@ Let's start by modeling the relationship between:
 * $y$: `hate_crimes` per 100K individuals 
 * $x$: Level of `trump_support` in the state: `low`, `medium`, or `high`
 
-<br> 
-
 # Question 1.A 
 
-Create a visual model of these data (a graph) that will allow you to conduct an "eyeball test" of the relationship between hate crimes per 100K and level of Trump support. Include appropriate axes labels and a title. Please note that because of alphanumeric ordering, the levels of `trump_support` are ordered `high`, `low`, `medium`, and hence the baseline group is `high`. Also note, that we could "reorder" the levels to `low`, `medium`, `high`....though we will leave them as is for this Problem Set. 
+Create a visualization that will allow you to conduct an "eyeball test" of the relationship between hate crimes per 100K and level of Trump support. Include appropriate axes labels and a title. Please note that because of alphanumeric ordering, the levels of `trump_support` are alphabetically ordered `high`, `low`, `medium`, and hence the baseline group is `high`. Although this default ordering is counter-intuitive, we will use the ordering as-is for this problem set.
 
 ```{r}
 ggplot(data = hate_crimes, aes(x = trump_support, y = hate_crimes)) + 
@@ -97,7 +88,7 @@ Comment on the relationship between these two variables. Is this what you would'
 
 # Question 2
 
-Now run a model that examines the relationship between hate crime rates and the level of Trump support. Generate a regression table. 
+Now run a model that examines the relationship between hate crime rates and the level of Trump support. Generate a regression table.
 
 ```{r}
 hate_mod <- lm(hate_crimes ~ trump_support, data = hate_crimes)
@@ -112,7 +103,7 @@ What does the intercept mean in this regression table?
 
 # Question 3.B
 
-What does the model estimate as the number of hate crimes per 100,000 people in states with  "low" Trump support?
+What value does the model estimate for the number of hate crimes per 100,000 people in states with "low" Trump support?
 
 **Answer:** 0.460
 
@@ -153,13 +144,11 @@ group_by(trump_support) %>%
 **Answer:** They are the same values. This is what the fitted values are in this model. 
 
 
-*** 
-
 
 
 ## The regression equation
 
-The regression equation for this model is the following (knit it to look at output!)
+The regression equation for this model is the following:
 
 
 $$
@@ -168,7 +157,6 @@ $$
 
 So for instance, in a state in which `trump_support` is "low" you would plug in 1 for $1_{\mbox{low support}}(x)$, and 0 in for  $1_{\mbox{med support}}(x)$ and solve like so:
 
-***
 
 $$
 \begin{aligned} 
@@ -177,9 +165,6 @@ $$
 \widehat{y} &= 0.460
 \end{aligned} 
 $$
-
-
-***
 
 
 # Question 4
@@ -229,7 +214,7 @@ We will next model the relationship between:
 
 # Question 6
 
-Create a visual model of this data (a graph) that will allow you to conduct an "eyeball test" of the relationship between hate crimes per 100K and unemployment level. Include appropriate axes labels and a title.
+Create a visualization that will allow you to conduct an "eyeball test" of the relationship between hate crimes per 100K and unemployment level. Include appropriate axes labels and a title.
 
 ```{r}
 ggplot(data = hate_crimes, aes(x = unemployment, y = hate_crimes)) + 
@@ -250,7 +235,8 @@ get_regression_table(job_mod)
 
 # Question 7.B
 
-Write out the regression equation for this model. 
+Write out the regression equation for the above model. Try writing out the equation using the same LaTeX formatting used to write the equation for the first hate crime ~ Trump support model. You can copy the example LaTeX code that appears just after "The regression equation for this model is the following:" in this document, and edit it to describe the hate crime ~ unemployment model you just fit. You don't *have* to write the equation using LaTeX, but this is a great statistical communication skill to practice!
+
 
 **Answer:** 
 $\widehat{y} = 0.289 + 0.031 \times is\_unemployment_{low}$
@@ -286,24 +272,19 @@ get_regression_points(job_mod)
 For instance, in the first row. 0.295- 0.289 = 0.006
 
 
-
-***
-
-
-
 ## Hate crimes and household income 
 
-# Question 9 
+# Question 9A
 
 Now run a model that examines the relationship between `hate_crimes` and median household income in the state `median_house_inc`. 
 
-```{r include = F}
+```{r}
 inc_mod <- lm(hate_crimes ~ median_house_inc, data = hate_crimes)
 get_regression_table(inc_mod)
 ```
 
 
-# Question 9.A 
+# Question 9B
 
 Were there more hate crimes in areas with high or low median household incomes? How large was the difference between states with "low" and "high" levels of household income?
 
@@ -311,20 +292,17 @@ Were there more hate crimes in areas with high or low median household incomes? 
 
 # Question 10
 
-Run the `get_regression_points()` function for the `hate_crimes` and `median_house_inc` model. 
+Run the `get_regression_points()` function for the `hate_crimes` and `median_house_inc` model, and examine the data for Maine (row 2). Did the model **overpredict** or **underpredict** the `hate_crimes` level, compared to what was observed in the data?
 
-```{r include = F}
-get_regression_points(inc_mod)
+```{r}
+get_regression_points(inc_mod) %>%
+  slice(2)
 ```
 
-# Question 10.A
-
-Take a look at data for Maine (row 2). Did the model **overpredict** or **underpredict** the `hate_crimes` level, compared to what was observed in the data?
 
 **Answer:** 0.229 was predicted, 0.616 was observed, so the model under predicted.
 
 
-***
 
 [//]: (students- please do not delete anything below this line!) 
 

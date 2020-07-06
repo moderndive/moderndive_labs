@@ -224,20 +224,24 @@ If Representative Ocasio-Cortez saw the regression line and not the actual data:
 
 **C.** In other words, what is the residual for this prediction? 
 
-**NOTE TO GRADER: STUDENTS CAN CALCULATE THE PREDICTION AND RESIDUAL MANUALLY, OR GET WITH THE GET REGRESSION POINTS FUNCTION AS I DID BELOW....AS LONG AS THEY COME UP WITH THE ANSWER**
+**NOTE TO GRADERS: For 10a and 10b, students can either answer using a "visual estimate" of the model's prediction and residual (based on the scatterplot with the regression line overlayed that they created to answer question 5), or precisely (by plugging 61% into the regression equation themselves, or using the `get_regression_points` function).**
+
+**Because students may answer the question in either manner, you should accept approximately correct values for 10a and 10b. So, for 10a, answers in the range of 41-43% should be considered correct, and for 10b, answers in the range of 7-10% should be considered correct.**
+
+**For 10c however, students should give their answer precisely, e.g., use the `get_regression_points` function.**
 
 ```{r}
 get_regression_points(wh_mod) %>% 
-  slice(1:5)
+  filter(non_white == 61)
 ```
 
 **Answers:** 
 
-**A** The model predicts 41.912% Trump support 
+**A** The model predicts approximately 41% Trump support (41.912% to be precise)
 
-**B** The observed value at `non_white` (ID 2) was 33% Trump support. The model thus overpredicted. 
+**B** The observed value at `non_white` (ID 2) was 33% Trump support. Thus the model overpredicted, by approximately 8%.
 
-**C** The residual is (observed - predicted)...33- 41.912, -8.912 (OK if they are a little off due to rounding)
+**C** The residual is (observed - predicted)...33 - 41.912 = -8.912 (OK if they are a little off due to rounding, and OK if they say 8.9% instead of negative 8.9%)
 
 
 ***

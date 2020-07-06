@@ -39,11 +39,12 @@ ma_schools <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSrWSNyN
 
 ## Clean variable names
 
-_Pipe your data frame into the `clean_names()` function from the `janitor` package. This will clean your variable names, making them easier to work with._
+_Pipe your data frame into the `clean_names()` function from the `janitor` package. Then be sure to overwrite the original data frame with this new data frame using the `<-` assignment operator. This will clean your variable names, making them easier to work with._
 
 ```{r}
 ma_schools <- ma_schools %>% 
   clean_names()
+ma_schools
 ```
 
 ## Data wrangling

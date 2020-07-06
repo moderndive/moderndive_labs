@@ -1,6 +1,6 @@
 ---
 title: "ModernDive Labs and Problem Sets"
-author: "Jenny Smetzer, Albert Y. Kim, and Chester Ismay"
+author: "Jenny Smetzer, William Hopper, Albert Y. Kim, and Chester Ismay"
 date: "Last updated on `r Sys.Date()`"
 output:
   html_document:

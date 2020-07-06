@@ -1,13 +1,18 @@
 
 ---
-title: "Problem Set 01: Intro to R and RStudio"
+title: 'Problem Set 01: Intro to R and RStudio'
+mainfont: Arial
 output:
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+    toc_depth: 2
   html_document:
+    css: lab.css
+    df_print: kable
     theme: lumen
     toc: yes
     toc_float: yes
-    df_print: kable
-    css: lab.css 
 ---
 
 ```{r include = F}
@@ -21,21 +26,11 @@ The goal this week is to introduce you to R and RStudio which you'll be using th
 
 Today we begin with the fundamental building blocks of R and RStudio: the interface, creating and saving files, and basic commands.
 
-
-# Opening RStudio Server 
-
-Open Smith's RStudio Server and sign in:
-<a href="https://rstudio.smith.edu/auth-sign-in" target="_blank">RStudio Server</a>
-
-Your credentials are the same as for your email. 
-
-Please **DO NOT** choose Stay signed in. 
-
 # The RStudio Interface
 
-In RStudio Server you should see a window that looks like the image below.
+In RStudio you should see a window that looks like the image below.
 
-![](figures/Studio_opening.png){width=100%}
+![](figures/Studio_desktop_opening.png){width=100%}
 
 
 <br>
@@ -45,27 +40,6 @@ The panel on the left is where the action happens. It's called the *console*.  E
 The panel in the upper right contains your *workspace*. This shows the variables and objects you define during your R session, and a history of the commands that you enter. 
 
 Any plots that you generate will show up in the panel in the lower right corner.  This is also where you can browse your files, and access help files, and upload and download files. 
-
-
-## File Management
-
-We will start by making a course folder in RStudio Server that you can use to store all your R work for the course on the web. Click on the Files tab in the lower right panel, and the New Folder tab. Enter the file name `introstatsR` in the window that opens, and click OK. You should now have a new folder! 
-
-Next, go to the course site, and **download** the data set posted for this week's lab session. Put it in a location on your computer that you will remember! I **highly** suggest you **also** make an `introstatsR` folder on your computer to store all your material for this course. Check in with the instructor if you don't know how to do this! 
-
-To have access to files stored on the **hard drive** on your computer in RStudio Server, you need to **upload them from your computer to the server**. To upload the data set  click on the RStudio Server `introstatsR` folder **once**, and click the upload button, like so: 
-
-<br>
-![](figures/upload.png){width=50%}
-<br> 
-
-<br>
-In the window that opens, browse to where you stored your data set on your computer, click on the data file, then click OK. Open the `introstatsR` folder again in RStudio Server, to make sure the data is in there. You can upload any sort of file like this. 
-
-We are not doing anything with this `toydata` file, except learning how to upload it. 
-
-![](figures/upload2.png){width=30%}
-<br>
 
 
 # Using R Markdown files
@@ -99,21 +73,23 @@ Your final result should look like this:
 
 ## Saving a file
 
-You will complete your lab work in an R Markdown file like this each week, so it is important to learn how to save these files. 
+You will complete your lab work in an R Markdown file like this each week, so it is important to learn how to save these files.
 
 -  Click File > Save As...
--  Browse to the `introstatsR` course folder you just created
--  Name the file: `PS01_lastname_firstname` (fill in your firstname and lastname)
+-  Browse to the folder where you want to store the R Markdown document and it's output.
+-  Name the file something informative, e.g., `PS01_lastname_firstname` (fill in your first name and last name). Make sure to keep the `.Rmd` file extension.
 -  Click save
 
-This is now saved in the `introstatsR` course folder **on the server**. 
+<div id="license">
+Keeping track of how you organize your folders and files, and being consistent, will help save you **a lot** of headaches as you start coding in R. It would be a good idea to create a folder where you store all your problem sets, or create one folder for each problem set. Either way, be consistent and pay attention to your organization.
+</div>
 
-## Knitting a file
+## Knitting an HTML file
 
-Click the Knit button at the top left side of the screen to "knit" the file, or in other words, produce an output document. An `.html` file will be generated. It is automatically saved in the same folder that your R Markdown file was saved in. 
+Click the Knit button at the top left side of the screen to "knit" the file, or in other words, produce an output document. An `.html` file will be generated. It is automatically saved in the same folder that your R Markdown file was saved in.
 
 <div id="license">
-Note that there is now a R Markdown file (`.Rmd`) and an html file (`.html`) in the `introstatsR` folder.
+If you see a pop-up in RStudio saying R Markdown requires updated versions of some packages, allow RStudio to upgrade those packages.
 </div>
 
 Inspect the `.html` file to see how what you typed was formatted. There are lots of tricks for controlling the formatting of the knitted html file. For instance:
@@ -121,8 +97,33 @@ Inspect the `.html` file to see how what you typed was formatted. There are lots
 *  putting `##` and a space in front of text makes it into a large header. For example, see how `## This is a header` in your R Markdown `.Rmd` file translates in the resulting `.html` output.
 *  putting `###` and a space in front of text makes it a smaller header!
 
+## Knitting a PDF file
 
-# Entering and running commands
+### LaTeX
+Unfortunately, knitting your R Markdown document to a PDF requires another piece of external software called **LaTeX**. Fortunately, it is relatively easy to install LaTeX directly from your R console!
+
+Go to your R console, and enter the command `install.packages('tinytex')`. When this package is finished installing, you should see text saying "package 'tinytex' successfully unpacked and MD5 sums checked" and "The downloaded binary packages are in...", and then the R console prompt `>` should return.
+
+Now, enter the following command `tinytex::install_tinytex()`, which should complete the LaTeX installation you need. After it finishes, close RStudio and open it again, to restart your R session that includes LaTeX.
+
+<div id="license">
+If RStudio asks you if you want to save you workspace when you close it, choose "No", and don't save your workspace.
+</div>
+
+### Knit to PDF
+Now, click the small black arrow next to the "Knit" button to open the drop-down menu, and select "Knit to PDF".
+
+![](figures/knit2pdf.png)
+
+<br>
+
+In a moment, you should see a PDF pop-up. If you don't see anything pop-up, try looking in the folder where you saved the R Markdown document.
+
+<div id="license">
+Note that if you want to knit to HTML again, you'll have to choose "Knit to HTML" in the drop-down menu again, rather than just pressing the "Knit" button directly.
+</div>
+
+# Entering and running R commands
 
 The code chunks are where you put R code in a R Markdown file. So far, your "knitted" file (your output document file) doesn't show anything, because we did not put any content in the code chunks yet! 
 
@@ -176,7 +177,7 @@ v * 3
 
 # Practice on your own!
 
-To complete this problem set you will next run through some Exercises, and submit a knitted `.html` file with answers all the Exercises. Please make a **header** for each of these Exercises. If you need to answer an Exercise with text, type the text **below** the header, on the next line, in the white part, and if you need to answer an Exercise with some code, insert a code chunk **below** the header, and put the code in the greyed out box. 
+To complete this problem set you will next run through some Exercises, and submit a knitted PDF file with answers all the Exercises. Please make a **header** for each of these Exercises. If you need to answer an Exercise with text, type the text **below** the header, on the next line, in the white part, and if you need to answer an Exercise with some code, insert a code chunk **below** the header, and put the code in the greyed out box. 
 
 <div id="license">
 Remember to save your work as you go along! Click the save button in the upper left hand corner of the R Markdown window. 
@@ -198,7 +199,7 @@ Remember to save your work as you go along! Click the save button in the upper l
 
 
 <div id="license">
-It is a good idea to try kitting your document from time to time as you go along! Go ahead, and make sure your document is knitting, and that your html file includes Exercise headers, text, and code. Note that knitting automatically saves your Rmd file too!
+It is a good idea to try kitting your document from time to time as you go along! Go ahead, and make sure your document is knitting, and that your PDF file includes Exercise headers, text, and code. Note that knitting automatically saves your Rmd file too!
 </div>
 
 
@@ -213,10 +214,6 @@ It is a good idea to try kitting your document from time to time as you go along
 
 1.   - Go to the **Run** button at the top right of the R Markdown pane, and choose **Run All** (the last option)
      - What happened? (please answer with **text**)
-     
-<div id="license">
-It is a good idea to try kitting your document from time to time as you go along! Go ahead, and make sure your document is knitting, and that your html file includes Exercise headers, text, and code. Note that knitting automatically saves your Rmd file too!
-</div>
    
 1.  Recall the vector `v` we created earlier. Copy, paste and run the following in a code chunk. What does this code accomplish? (please answer with **text**)
 ```{r eval = F}
@@ -228,9 +225,6 @@ v + 2
 ```{r}
 music <- c("bluegrass", "funk", "folk")
 ```
-
-
-
 
 1. Now let's practice some basic formatting. Using <a href="https://rmarkdown.rstudio.com/authoring_basics.html" target="_blank">this formatting tips page</a> figure out how to put the following into your lab report. These all can get typed into the white section, where text goes. **Hint:** To put  **each of these on its own line!** hit a hard return between each line of text!!!!!!!!
 
@@ -246,29 +240,15 @@ A superscript: R^2^
 
 # Turning in your work
 
-Each week you will submit the  **html** file on Moodle. This involves downloading the html file **from the RStudio Server to your personal computer**. The steps to do this are as follows: 
+Each week you will submit a **PDF** file with all your code and text on Gradscope. The steps to do this are as follows: 
 
-- Make sure you **knit a final copy with all your changes** and work
-- Look at your final html file to make sure it contains the work you expect, and is formatted properly (e.g. 11-12 Exercise headers, each with answers for this week)
-- Go to your Files pane
-- Click on your `introstatsR` folder
-- Check the little box in front of the **html** file
-- Click the little blue gear labeled **More** just a little to the upper right
-- Click export > Download
-- **Be sure to then put the downloaded file in the ``introstatsR`` folder on your machine**
-- Submit the file to Moodle
+- Knit a final copy with all your changes and work, **making sure to choose "Knit to PDF" from the drop-down menu**.
+- Look at your final PDF file to make sure it contains the work you expect, and is formatted properly (e.g. 11-12 Exercise headers, each with answers for this week)
+- Locate the PDF file on your computer's hard drive. It should be found in the same folder as the R Markdown document where you did your work.
+- Upload the file to the corresponding assignment on Gradescope. If you haven't joined the couse on Gradesceope, click the "Add Course" button on the home page after you login, and enter the enrollment code posted on the Moodle page.
+- In Gradescope, be sure to annotate the pages where your responses to each question are. You can find a helpful video on submitting an assignment on Gradescope [here](https://www.youtube.com/watch?v=KMPoby5g_nE).
 
-If you need more help, there is a video at the top of <a href="https://smithcollege-sds.github.io/sds-public/rmarkdown_problems.html" target="_blank">this page that can help</a>. 
+![](figures/charlie_brown_1.jpg){width=41%}![](figures/charlie_brown_2.jpg){width=17%}    
 
-# Logging out of the Server
-There are a lot of stats classes and students using the Server. To keep it as fast as possible, it is best if you sign out when you are done. To do so follow all the same steps for closing an R Markdown document as above: 
-
-- Save all your work. 
-- Click on the orange button in the far right corner of the screen to quit R 
-- Choose **don't save** for the **Workspace image**
-- When the browser refreshes, you can click on the icon of your name in the top right. 
-- You are signed out! 
-
-![](figures/charlie_brown_1.jpg){width=41%}![](figures/charlie_brown_2.jpg){width=17%}
 
 * * *
