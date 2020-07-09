@@ -25,17 +25,25 @@ library(tidyverse)
 library(infer)
 library(moderndive)
 library(patchwork)
+library(ggplot2)
+library(dplyr)
 
 # Install emo package from GitHub for emoji functionality:
 # devtools::install_github("hadley/emo")
 library(emo)
 
 # Set seed value of random number generator to get "replicable" random numbers.
+# Why 76? Because of https://www.youtube.com/watch?v=xjJ7FheCkCU
 set.seed(76)
 ```
 
 <style>
 h1{font-weight: 400;}
+</style>
+
+<!-- css code for styling of bullets -->
+<style>
+ul ul {margin-bottom: 10px;}
 </style>
 
 <!--
@@ -46,31 +54,58 @@ h1{font-weight: 400;}
 
 # Welcome
 
-You can find:
+On this page you can find:
 
-1. Example labs and problem sets by clicking on "Problem Sets" in the above menu bar.
-1. A template for a final project by clicking on "Final Project" in the above menu bar.
-
-
-
-# Problem Sets
-
-Move contents of problem sets tab here, where for each problem set:
-
-* user can click link to see html preview of problem set
-* No individual .zip files, rather we'll have only single .zip file (do not worry about content of .zip file for now)
+1. Example [problem sets](#problem-sets)
+1. A [Final Project](#final-project) template
+1. [Previous Versions](#previous-versions) of the ModernDive textbook
 
 
 
+## Problem Sets
 
-# Final Project
+Dr. Jenny Smetzer and Albert Y. Kim (Smith College) have produced lab materials and problem sets for ModernDive.
+
+The solutions for all lab materials are available to verified instructors by filling out this [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSf68Je_Q3ggRJ-74UtL0xG5-IuuKkSTIpEQZWro-8QbO7nmdA/viewform){target="_blank"}.
+
+
+<!-- Edit link below to add updated .zip file containing all problem sets  -->
+Download all necessary files for the problem sets here: <a href="static/PS08 - confidence intervals/PS08.zip" download>`PS.zip`</a>
+
+* **PS01: Introduction to R** - [problem set](static/PS01 - intro to R/PS01_source.html){target="_blank"}
+
+* **PS02: Data visualization with `ggplot2`** - [problem set](static/PS02 - data visualization/PS02_data_viz.html){target="_blank"}
+    + A short [pre-lecture](static/PS02 - data visualization/pre_lecture.pdf){target="_blank"} explaning the Grammar of Graphics as implemented in the `ggplot2` package
+
+* **PS03: Data wrangling with `dplyr`** - [problem set](static/PS03 - data wrangling/PS03_data_wrangling_source.html){target="_blank"}
+    + A short [pre-lecture](static/PS03 - data wrangling/pre_lecture.pdf){target="_blank"} explaning the `%>%` operator and `dplyr` wrangling verbs  
+
+* **PS04: Regression with one numerical variable** - [problem set](static/PS04 - simple linear regression/PS04_lastname_firstname.html){target="_blank"}
+
+* **PS05: Regression with one categorical variable** - [problem set](static/PS05 - regression with one cat x/PS05_firstname_lastname.html){target="_blank"}
+
+* **PS06: Regression with one numerical and one categorical variable** - [problem set](static/PS06 - reg with one cat one numeric/PS06_firstname_lastname.html){target="_blank"}
+
+* **PS07: Sampling distributions** - [problem set](static/PS07 - sampling distributions/PS07_firstname_lastname.html){target="_blank"}
+    + A [recap](static/PS07 - sampling distributions/sampling_dist_recap.html){target="_blank"} on the effect of sample size on sampling distributions
+
+* **PS08: Confidence intervals and the bootstrap** - [problem set](static/PS08 - confidence intervals/PS08_firstname_lastname.html){target="_blank"}
+
+* **PS09: Hypothesis testing** - [problem set](static/PS09 - hypothesis testing/PS09_firstname_lastname.html){target="_blank"} on
+
+* **PS10: Inference for regression** 
+We don't have one yet! If you would like to contribute one, please let us know.
+
+
+
+## Final Project
 
 * Shift over final project content here, BUT
 * Update the final project content based on latest iteration of 220 based on this content here: https://github.com/SmithCollege-SDS/SDS220/blob/master/project.Rmd
 
+    
 
-
-# Previous Versions
+## Previous Versions
 
 * Move `previous_versions` from moderndive_book to here:
     + put in `static/previous_versions/`
