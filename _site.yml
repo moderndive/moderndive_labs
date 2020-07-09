@@ -16,10 +16,6 @@ output:
 navbar:
   title: ModernDive Labs
   left:
-  - text: Problem Sets
-    href: PS.html
-  - text: Final Project
-    href: final_project.html
   - text: Data Wrangling Tips
     href: https://moderndive.com/C-appendixC.html
   right:
