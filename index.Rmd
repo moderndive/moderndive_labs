@@ -24,14 +24,11 @@ knitr::opts_chunk$set(
 library(tidyverse)
 library(infer)
 library(moderndive)
+library(patchwork)
 
 # Install emo package from GitHub for emoji functionality:
 # devtools::install_github("hadley/emo")
 library(emo)
-
-# Install patchwork package from GitHub for composing ggplots:
-# devtools::install_github("thomasp85/patchwork")
-library(patchwork)
 
 # Set seed value of random number generator to get "replicable" random numbers.
 set.seed(76)
