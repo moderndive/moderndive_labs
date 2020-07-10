@@ -23,5 +23,7 @@ navbar:
     href: https://moderndive.com/
   - icon: fa-github fa-lg
     href: https://github.com/moderndive/
+  - text: moderndive
+    href: https://CRAN.R-project.org/package=moderndive
   - icon: fa-twitter fa-lg
     href: http://twitter.com/moderndive/
