@@ -307,6 +307,15 @@ If your submission is incomplete, it can lead to delays in feedback delivery.
 
 # Previous Versions
 
-* Move `previous_versions` from moderndive_book to here:
-    + put in `static/previous_versions/`
-    + Make webpage look like what's here: https://moderndive.com/preface.html#about-this-book
+* These are the **previous online versions** of the ModernDive textbook that may be out of date:
+    + [Version 1.0.0](https://moderndive.com/previous_versions/v1.0.0/index.html) released on November 25, 2019 ([source code](https://github.com/moderndive/ModernDive_book/releases/tag/v1.0.0))
+    + [Version 0.6.1](https://moderndive.com/previous_versions/v0.6.1/index.html) released on August 28, 2019 ([source code](https://github.com/moderndive/ModernDive_book/releases/tag/v0.6.1))
+    + [Version 0.6.0](https://moderndive.com/previous_versions/v0.6.0/index.html) released on August 7, 2019 ([source code](https://github.com/moderndive/moderndive_book/releases/tag/v0.6.0))
+    + [Version 0.5.0](https://moderndive.com/previous_versions/v0.5.0/index.html) released on February 24, 2019 ([source code](https://github.com/moderndive/moderndive_book/releases/tag/v0.5.0))
+    + [Version 0.4.0](https://moderndive.com/previous_versions/v0.4.0/index.html) released on July 21, 2018 ([source code](https://github.com/moderndive/moderndive_book/releases/tag/v0.4.0))
+    + [Version 0.3.0](https://moderndive.com/previous_versions/v0.3.0/index.html) released on February 3, 2018 ([source code](https://github.com/moderndive/moderndive_book/releases/tag/v0.3.0))
+    + [Version 0.2.0](https://moderndive.com/previous_versions/v0.2.0/index.html) released on August 2, 2017 ([source code](https://github.com/moderndive/moderndive_book/releases/tag/v0.2.0))
+    + [Version 0.1.3](https://moderndive.com/previous_versions/v0.1.3/index.html) released on February 9, 2017 ([source code](https://github.com/moderndive/moderndive_book/releases/tag/v0.1.3))
+    + [Version 0.1.2](https://moderndive.com/previous_versions/v0.1.2/index.html) released on January 22, 2017 ([source code](https://github.com/moderndive/moderndive_book/releases/tag/v0.1.2))
+
+    
