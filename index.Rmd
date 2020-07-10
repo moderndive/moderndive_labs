@@ -54,7 +54,7 @@ ul ul {margin-bottom: 10px;}
 
 On this page you can find:
 
-1. Example [problem sets](#problem-sets)
+1. Example [Problem Sets](#problem-sets)
 1. A [Final Project](#final-project) template
 1. [Previous Versions](#previous-versions) of the ModernDive textbook
 
