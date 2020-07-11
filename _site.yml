@@ -15,14 +15,11 @@ output:
 # All icons were obtained from https://fontawesome.com/icons?d=gallery
 navbar:
   title: ModernDive Labs
-  left:
-  - text: Data Wrangling Tips
-    href: https://moderndive.com/C-appendixC.html
   right:
   - text: Book
     href: https://moderndive.com/
   - text: moderndive
-    href: https://CRAN.R-project.org/package=moderndive
+    href: https://moderndive.github.io/moderndive/
   - icon: fa-github fa-lg
     href: https://github.com/moderndive/
   - icon: fa-twitter fa-lg

@@ -98,6 +98,9 @@ We don't have one yet! If you would like to contribute one, please let us know.
 
 # Final Project
 
+<!-- Marium to Albert: So the data wrangling tips and tricks are explained in detail under project proposal step 3, I'm currently linking them here for a short cut. What's your take on that? -->
+* Shortcut to the [Data Wrangling "Tips & Tricks"](https://moderndive.com/C-appendixC.html){target="_blank"} appendix in the ModernDive textbook.
+
 Everything in this course builds up to the term group project, where there is
 only one learning goal: *Engage in the data/science research pipeline in as
 faithful a manner as possible while maintaining a level suitable for novices.*
