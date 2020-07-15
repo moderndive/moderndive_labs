@@ -15,12 +15,15 @@ output:
 # All icons were obtained from https://fontawesome.com/icons?d=gallery
 navbar:
   title: ModernDive Labs
+  left:
+  - text: Term Project
+    href: term_project.html
   right:
   - text: Book
     href: https://moderndive.com/
-  - text: moderndive
+  - text: R Package
     href: https://moderndive.github.io/moderndive/
   - icon: fa-github fa-lg
-    href: https://github.com/moderndive/
+    href: https://github.com/moderndive/moderndive_labs
   - icon: fa-twitter fa-lg
     href: http://twitter.com/moderndive/
