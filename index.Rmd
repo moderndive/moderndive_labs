@@ -89,7 +89,7 @@ problem sets and lab materials for ModernDive:
 
 Resources:
 
-* Download all necessary files to reproduce these problem sets here: <a href="static/ModernDive_PS.zip" download>`ModernDive_PS.zip`</a>.
+* Download all necessary files to reproduce these problem sets here: <a href="static/PS/ModernDive_PS.zip" download>`ModernDive_PS.zip`</a>.
 * Obtain solutions (verified instructors only) by filling out this [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSf68Je_Q3ggRJ-74UtL0xG5-IuuKkSTIpEQZWro-8QbO7nmdA/viewform){target="_blank"}.
 
 
