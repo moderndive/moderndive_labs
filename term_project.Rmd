@@ -91,7 +91,7 @@ We would like to thank Smith College students Alexis Cohen, Andrianne Dao, Isabe
 
 **`r hint_1`**
 
-* Get a sense for the requirements of this project phase by reading a possible [example data proposal](static/term_project/1_data_proposal.html){target="_blank"} `r submission_will_differ`: 
+* Get a sense for the requirements of this project phase by reading a possible [example data proposal](static/term_project/1_data_proposal_example.html){target="_blank"} `r submission_will_differ`: 
 * Download the following <a href="static/term_project/1_data_proposal.Rmd" download>`project_data.Rmd`</a> template R Markdown file and fill it in. 
 
 
