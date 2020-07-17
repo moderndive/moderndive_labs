@@ -170,7 +170,7 @@ You can publish your data as a CSV file on Google Sheets by following the 6 step
 
 **`r hint_2`**
 
-* Get a sense for the requirements of this project phase by reading a possible [project proposal](static/term_project/proposal_example.html){target="_blank"} `r submission_will_differ`: 
+* Get a sense for the requirements of this project phase by reading a possible [example project proposal](static/term_project/proposal_example.html){target="_blank"} `r submission_will_differ`: 
 * Download the following <a href="static/term_project/proposal.Rmd" download>`proposal.Rmd`</a> template R Markdown file and start filling it in. 
 
 
@@ -236,7 +236,7 @@ include_graphics("static/images/data_wrangling.png")
 
 # Project Resubmission {#resubmission}
 
-Get a sense for the requirements of this project phase by reading all the sections of the possible [project resubmission](static/term_project/resubmission_example.html){target="_blank"} that you read earlier. In particular the following new sections:
+Get a sense for the requirements of this project phase by re-reading all the sections of the possible [project resubmission](static/term_project/resubmission_example.html){target="_blank"} from the previous submission phase. In particular, read the following new sections:
 
 * Sections 3.4, 3.5: Inference for multiple regression
 * Section 4: Discussion.
