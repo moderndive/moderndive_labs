@@ -113,7 +113,7 @@ include_graphics("static/images/data_science_pipeline.png")
 
 Resources:
 
-* Check out an [example term project](static/term_project/4_resubmission_example.html){target="_blank"} by Alexis Cohen, Andrianne Dao, and Isabel Gomez analyzing Massachusetts high school data.
+* Check out an [example term project](static/term_project/resubmission_example.html){target="_blank"} by Alexis Cohen, Andrianne Dao, and Isabel Gomez analyzing Massachusetts high school data.
 * For more information on how we present the term project to students, see the [Term Project](term_project.html) page.
 * Be sure to look at our [data wrangling "Tips & Tricks"](https://moderndive.com/C-appendixC.html#data-wrangling){target="_blank"} ModernDive page written by Jenny Smetzer. It's based on the seven most common data wrangling questions we've encountered from students while they were working on their term projects:
 
