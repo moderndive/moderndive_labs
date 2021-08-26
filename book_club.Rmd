@@ -1,0 +1,94 @@
+---
+title: "r4ds Book Club"
+output:
+  html_document: 
+    toc: yes
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    df_print: kable
+    number_sections: yes
+---
+
+<style>
+h1{font-weight: 400;}
+</style>
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, message=FALSE, warning = FALSE, eval = TRUE, fig.align='center'
+)
+```
+
+
+
+
+
+## Videos {-}
+
+[Matt Dupree](https://twitter.com/philosohacker?lang=en){target="_blank"} ran a ModernDive book club for the [R for Data Science (r4ds) Online Learning Community](https://www.rfordatasci.com/){target="_blank"} at towards the end of 2020. He kindly agreed to share the videos! The full playlist is [here](https://www.youtube.com/playlist?list=PL3x6DOfs2NGhiZCLU0V-fRA5ZGxdkb_n9){target="_blank"} while you can view the individual videos below. 
+
+
+# Introduction {-}
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NcqceoDOdmo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+***
+
+# Chapter 5: Basic Regression {-}
+
+Video for [Chapter 5](https://moderndive.com/5-regression.html){target="_blank"} on Basic Regression:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2GaZ5WMjhfM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+***
+
+# Chapter 6: Multiple Regression {-}
+
+Video for [Chapter 6](https://moderndive.com/6-multiple-regression.html){target="_blank"} on Multiple Regression:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jt_fwC7WERA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+***
+
+# Chapter 7: Sampling Part 1 {-} 
+
+First Video for [Chapter 7](https://moderndive.com/7-sampling.html){target="_blank"} on Sampling:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KDLdraSu2dc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+***
+
+# Chapter 7: Sampling Part 2 {-}
+
+Second video for [Chapter 7](https://moderndive.com/7-sampling.html){target="_blank"} on Sampling:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pYbLd9VxNuM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+***
+
+# Chapter 8: Bootstrapping and Confidence Intervals {-}
+
+Video for [Chapter 8](https://moderndive.com/8-confidence-intervals.html){target="_blank"} on Bootstrapping and Confidence Intervals:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3H1so4zgEKw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+***
+
+# Chapter 9: Hypothesis Testing {-}
+
+Video for [Chapter 9](https://moderndive.com/9-hypothesis-testing.html){target="_blank"} on Hypothesis Testing:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9_vfVohwcB0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*** 
+
+# Chapter 10: Inference for Regression {-}
+
+Video for [Chapter 10](https://moderndive.com/10-inference-for-regression.html){target="_blank"} on Inference for Regression:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9Aid_x7RI7k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

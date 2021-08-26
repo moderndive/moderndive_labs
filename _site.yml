@@ -18,6 +18,8 @@ navbar:
   left:
   - text: Term Project
     href: term_project.html
+  - text: r4ds Book Club
+    href: book_club.html
   right:
   - text: Book
     href: https://moderndive.com/
