@@ -1,6 +1,6 @@
 ---
 title: "ModernDive Labs"
-author: "Jenny Smetzer, William Hopper, Albert Y. Kim, and Chester Ismay"
+author: "Jenny Smetzer, William Hopper, Beth Brown, Albert Y. Kim, and Chester Ismay"
 date: "Last updated on `r Sys.Date()`"
 output:
   html_document:
@@ -59,7 +59,7 @@ Welcome to the ModernDive labs page! You can find the following instructor resou
 
 # Problem Sets {#problem-sets}
 
-Jenny Smetzer, William Hopper, and Albert Y. Kim (Smith College) have produced
+Jenny Smetzer, William Hopper, [Beth Brown](https://www.gcc.mass.edu/math/faculty/){target="_blank"} and Albert Y. Kim (Smith College) have produced
 problem sets and lab materials for ModernDive:
 
 * **PS01: Introduction to R**:
@@ -83,8 +83,8 @@ problem sets and lab materials for ModernDive:
     + [Problem set](static/PS/PS08_CI_bootstrap.html){target="_blank"}
 * **PS09: Hypothesis testing**:
     + [Problem set](static/PS/PS09_hypothesis_testing.html){target="_blank"}
-* **PS10: Inference for regression**:
-    + We don't have one yet! If you would like to contribute one, please let us know by filing a [GitHub issue](https://github.com/moderndive/moderndive_labs/issues){target="_blank"}.
+* **PS10: Inference for regression**: 
+    + [Problem set](static/PS/PS10_inference_for_regression.html){target="_blank"}
 
 
 Resources:
