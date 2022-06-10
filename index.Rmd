@@ -59,8 +59,7 @@ Welcome to the ModernDive labs page! You can find the following instructor resou
 
 # Problem Sets {#problem-sets}
 
-Jenny Smetzer, William Hopper, [Beth Brown](https://www.gcc.mass.edu/math/faculty/){target="_blank"} and Albert Y. Kim (Smith College) have produced
-problem sets and lab materials for ModernDive:
+Jenny Smetzer, William Hopper, [Beth Brown](https://www.gcc.mass.edu/math/faculty/){target="_blank"} and Albert Y. Kim (Smith College) have produced problem sets and lab materials for ModernDive:
 
 * **PS01: Introduction to R**:
     + [Problem set](static/PS/PS01_intro_to_R_RStudio.html){target="_blank"}
@@ -83,7 +82,7 @@ problem sets and lab materials for ModernDive:
     + [Problem set](static/PS/PS08_CI_bootstrap.html){target="_blank"}
 * **PS09: Hypothesis testing**:
     + [Problem set](static/PS/PS09_hypothesis_testing.html){target="_blank"}
-* **PS10: Inference for regression**: 
+* **NEW - PS10: Inference for regression**: 
     + [Problem set](static/PS/PS10_inference_for_regression.html){target="_blank"}
 
 
