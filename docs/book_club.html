@@ -13,6 +13,7 @@
 
 <title>r4ds Book Club</title>
 
+<script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -32,7 +33,6 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -134,11 +134,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -167,8 +171,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -176,16 +180,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -361,60 +358,82 @@ div.tocify {
 h1{font-weight: 400;}
 </style>
 <div id="videos" class="section level2 unnumbered">
-<h2>Videos</h2>
-<p><a href="https://twitter.com/philosohacker?lang=en" target="_blank">Matt Dupree</a> ran a ModernDive book club for the <a href="https://www.rfordatasci.com/" target="_blank">R for Data Science (r4ds) Online Learning Community</a> at towards the end of 2020. He kindly agreed to share the videos! The full playlist is <a href="https://www.youtube.com/playlist?list=PL3x6DOfs2NGhiZCLU0V-fRA5ZGxdkb_n9" target="_blank">here</a> while you can view the individual videos below.</p>
+<h2 class="unnumbered">Videos</h2>
+<p><a href="https://twitter.com/philosohacker?lang=en"
+target="_blank">Matt Dupree</a> ran a ModernDive book club for the <a
+href="https://www.rfordatasci.com/" target="_blank">R for Data Science
+(r4ds) Online Learning Community</a> at towards the end of 2020. He
+kindly agreed to share the videos! The full playlist is <a
+href="https://www.youtube.com/playlist?list=PL3x6DOfs2NGhiZCLU0V-fRA5ZGxdkb_n9"
+target="_blank">here</a> while you can view the individual videos
+below.</p>
 </div>
 <div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
+<h1 class="unnumbered">Introduction</h1>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/NcqceoDOdmo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 <hr />
 </div>
 <div id="chapter-5-basic-regression" class="section level1 unnumbered">
-<h1>Chapter 5: Basic Regression</h1>
-<p>Video for <a href="https://moderndive.com/5-regression.html" target="_blank">Chapter 5</a> on Basic Regression:</p>
+<h1 class="unnumbered">Chapter 5: Basic Regression</h1>
+<p>Video for <a href="https://moderndive.com/5-regression.html"
+target="_blank">Chapter 5</a> on Basic Regression:</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/2GaZ5WMjhfM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 <hr />
 </div>
-<div id="chapter-6-multiple-regression" class="section level1 unnumbered">
-<h1>Chapter 6: Multiple Regression</h1>
-<p>Video for <a href="https://moderndive.com/6-multiple-regression.html" target="_blank">Chapter 6</a> on Multiple Regression:</p>
+<div id="chapter-6-multiple-regression"
+class="section level1 unnumbered">
+<h1 class="unnumbered">Chapter 6: Multiple Regression</h1>
+<p>Video for <a href="https://moderndive.com/6-multiple-regression.html"
+target="_blank">Chapter 6</a> on Multiple Regression:</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/jt_fwC7WERA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 <hr />
 </div>
 <div id="chapter-7-sampling-part-1" class="section level1 unnumbered">
-<h1>Chapter 7: Sampling Part 1</h1>
-<p>First Video for <a href="https://moderndive.com/7-sampling.html" target="_blank">Chapter 7</a> on Sampling:</p>
+<h1 class="unnumbered">Chapter 7: Sampling Part 1</h1>
+<p>First Video for <a href="https://moderndive.com/7-sampling.html"
+target="_blank">Chapter 7</a> on Sampling:</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/KDLdraSu2dc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 <hr />
 </div>
 <div id="chapter-7-sampling-part-2" class="section level1 unnumbered">
-<h1>Chapter 7: Sampling Part 2</h1>
-<p>Second video for <a href="https://moderndive.com/7-sampling.html" target="_blank">Chapter 7</a> on Sampling:</p>
+<h1 class="unnumbered">Chapter 7: Sampling Part 2</h1>
+<p>Second video for <a href="https://moderndive.com/7-sampling.html"
+target="_blank">Chapter 7</a> on Sampling:</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/pYbLd9VxNuM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 <hr />
 </div>
-<div id="chapter-8-bootstrapping-and-confidence-intervals" class="section level1 unnumbered">
-<h1>Chapter 8: Bootstrapping and Confidence Intervals</h1>
-<p>Video for <a href="https://moderndive.com/8-confidence-intervals.html" target="_blank">Chapter 8</a> on Bootstrapping and Confidence Intervals:</p>
+<div id="chapter-8-bootstrapping-and-confidence-intervals"
+class="section level1 unnumbered">
+<h1 class="unnumbered">Chapter 8: Bootstrapping and Confidence
+Intervals</h1>
+<p>Video for <a
+href="https://moderndive.com/8-confidence-intervals.html"
+target="_blank">Chapter 8</a> on Bootstrapping and Confidence
+Intervals:</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3H1so4zgEKw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 <hr />
 </div>
-<div id="chapter-9-hypothesis-testing" class="section level1 unnumbered">
-<h1>Chapter 9: Hypothesis Testing</h1>
-<p>Video for <a href="https://moderndive.com/9-hypothesis-testing.html" target="_blank">Chapter 9</a> on Hypothesis Testing:</p>
+<div id="chapter-9-hypothesis-testing"
+class="section level1 unnumbered">
+<h1 class="unnumbered">Chapter 9: Hypothesis Testing</h1>
+<p>Video for <a href="https://moderndive.com/9-hypothesis-testing.html"
+target="_blank">Chapter 9</a> on Hypothesis Testing:</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/9_vfVohwcB0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 <hr />
 </div>
-<div id="chapter-10-inference-for-regression" class="section level1 unnumbered">
-<h1>Chapter 10: Inference for Regression</h1>
-<p>Video for <a href="https://moderndive.com/10-inference-for-regression.html" target="_blank">Chapter 10</a> on Inference for Regression:</p>
+<div id="chapter-10-inference-for-regression"
+class="section level1 unnumbered">
+<h1 class="unnumbered">Chapter 10: Inference for Regression</h1>
+<p>Video for <a
+href="https://moderndive.com/10-inference-for-regression.html"
+target="_blank">Chapter 10</a> on Inference for Regression:</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/9Aid_x7RI7k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 </div>

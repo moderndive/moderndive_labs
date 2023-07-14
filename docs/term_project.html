@@ -13,6 +13,7 @@
 
 <title>Term Project</title>
 
+<script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -32,7 +33,6 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -134,11 +134,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -167,8 +171,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -176,16 +180,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -361,79 +358,134 @@ div.tocify {
 h1{font-weight: 400;}
 </style>
 <div id="note-to-instructors" class="section level2 unnumbered">
-<h2>Note to Instructors</h2>
-<p>This is an example of instructions for the term project. You see the source R Markdown file for this page <a href="https://github.com/moderndive/moderndive_labs/blob/master/term_project.Rmd" target="_blank">here</a>.</p>
+<h2 class="unnumbered">Note to Instructors</h2>
+<p>This is an example of instructions for the term project. You see the
+source R Markdown file for this page <a
+href="https://github.com/moderndive/moderndive_labs/blob/master/term_project.Rmd"
+target="_blank">here</a>.</p>
 <hr />
 </div>
 <div id="instructions" class="section level1 unnumbered">
-<h1>Instructions</h1>
-<p>Everything in this course builds up to the term group project, where there is only one learning goal: <em>Engage in the data/science research pipeline in as faithful a manner as possible while maintaining a level suitable for novices.</em></p>
+<h1 class="unnumbered">Instructions</h1>
+<p>Everything in this course builds up to the term group project, where
+there is only one learning goal: <em>Engage in the data/science research
+pipeline in as faithful a manner as possible while maintaining a level
+suitable for novices.</em></p>
 <p><img src="static/images/data_science_pipeline.png" width="80%" style="display: block; margin: auto;" /></p>
-<p>In order to break down the task and minimize end-of-semester stress, you’ll be working on the project in five phases:</p>
+<p>In order to break down the task and minimize end-of-semester stress,
+you’ll be working on the project in five phases:</p>
 <ol style="list-style-type: decimal">
 <li><strong>Project groups:</strong> Form groups.</li>
-<li><strong>Project data:</strong> Propose a data set for your project. This is the phase of the project that is the least straightforward. Thus, we recommend you start early and get help during office hours early and often.</li>
-<li><strong>Project proposal:</strong> Ensure you can work with your data in R by performing an exploratory data analysis. This phase may require revisions to your original choice of data and visits to the Spinelli tutoring center for help with data wrangling.</li>
-<li><strong>Project submission:</strong> Make an initial submission of your project. You will skip some of the sections for now and only complete them after we have covered inference for regression in class. After you submit your work, you will get instructor feedback.</li>
-<li><strong>Project resubmission:</strong> Incorporate your instructor feedback from the project submission phase, complete the remaining sections, and resubmit your project. You will only be graded on your project resubmission.</li>
+<li><strong>Project data:</strong> Propose a data set for your project.
+This is the phase of the project that is the least straightforward.
+Thus, we recommend you start early and get help during office hours
+early and often.</li>
+<li><strong>Project proposal:</strong> Ensure you can work with your
+data in R by performing an exploratory data analysis. This phase may
+require revisions to your original choice of data and visits to the
+Spinelli tutoring center for help with data wrangling.</li>
+<li><strong>Project submission:</strong> Make an initial submission of
+your project. You will skip some of the sections for now and only
+complete them after we have covered inference for regression in class.
+After you submit your work, you will get instructor feedback.</li>
+<li><strong>Project resubmission:</strong> Incorporate your instructor
+feedback from the project submission phase, complete the remaining
+sections, and resubmit your project. You will only be graded on your
+project resubmission.</li>
 </ol>
-<p>We would like to thank Smith College students Alexis Cohen, Andrianne Dao, Isabel Gomez for allowing us to use their term project as an example.</p>
+<p>We would like to thank Smith College students Alexis Cohen, Andrianne
+Dao, Isabel Gomez for allowing us to use their term project as an
+example.</p>
 <hr />
 </div>
-<div id="groups" class="section level1">
+<div id="groups" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Project Groups</h1>
 <ol style="list-style-type: decimal">
 <li>Form groups of 2-3 students.
 <ul>
-<li>You must all be registered for the same lab section, because certain labs will be devoted to working on the project:</li>
-<li>All groups members are expected to contribute and you will all be held accountable for your contributions in peer evaluations.</li>
+<li>You must all be registered for the same lab section, because certain
+labs will be devoted to working on the project:</li>
+<li>All groups members are expected to contribute and you will all be
+held accountable for your contributions in peer evaluations.</li>
 </ul></li>
 <li>Choose a group name.</li>
-<li>Assign a “team/group leader” who will have a few extra administrative duties at each phase. Ex: making submissions, filling out Google Forms, etc.</li>
+<li>Assign a “team/group leader” who will have a few extra
+administrative duties at each phase. Ex: making submissions, filling out
+Google Forms, etc.</li>
 <li>Only the team leader will then:
 <ul>
-<li>Create a Slack message that includes all (1) your group members, (2) your instructor, and (3) your lab instructor. To ensure everyone is on the same page, please ask all project related questions in this message.</li>
-<li>Submit your group information using the “Project groups Google Form” on Moodle.</li>
+<li>Create a Slack message that includes all (1) your group members, (2)
+your instructor, and (3) your lab instructor. To ensure everyone is on
+the same page, please ask all project related questions in this
+message.</li>
+<li>Submit your group information using the “Project groups Google Form”
+on Moodle.</li>
 </ul></li>
-<li>If you are looking for a group to join, please fill out the “Project groups Google Form” on Moodle.</li>
+<li>If you are looking for a group to join, please fill out the “Project
+groups Google Form” on Moodle.</li>
 </ol>
 <hr />
 </div>
-<div id="data" class="section level1">
+<div id="data" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Project Data</h1>
-<p><strong>This is the phase of the project that is the least straightforward. Thus, we recommend you start early and get help during office hours early and often.</strong></p>
+<p><strong>This is the phase of the project that is the least
+straightforward. Thus, we recommend you start early and get help during
+office hours early and often.</strong></p>
 <ul>
-<li>Get a sense for the requirements of this project phase by reading a possible <a href="static/term_project/data_example.html" target="_blank">example data proposal</a> (Note that your data proposal will likely differ slightly from this one):</li>
-<li>Download the following <a href="static/term_project/data.Rmd" download><code>data.Rmd</code></a> template R Markdown file and fill it in.</li>
+<li>Get a sense for the requirements of this project phase by reading a
+possible <a href="static/term_project/data_example.html"
+target="_blank">example data proposal</a> (Note that your data proposal
+will likely differ slightly from this one):</li>
+<li>Download the following
+<a href="static/term_project/data.Rmd" download><code>data.Rmd</code></a>
+template R Markdown file and fill it in.</li>
 </ul>
-<div id="find-data" class="section level2">
+<div id="find-data" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Find data</h2>
 <div id="specifications" class="section level3 unnumbered">
-<h3>Specifications</h3>
-<p>Find a data set that fits these specifications. Note your data may need a little wrangling from its original form.</p>
+<h3 class="unnumbered">Specifications</h3>
+<p>Find a data set that fits these specifications. Note your data may
+need a little wrangling from its original form.</p>
 <ol style="list-style-type: decimal">
-<li>(If available) An <a href="https://moderndive.com/1-getting-started.html#identification-vs-measurement-variables" target="_blank">identification variable</a> that uniquely identifies each observation in each row.</li>
-<li>A numerical outcome variable <span class="math inline">\(y\)</span>. Note: binary outcomes variables with 0/1 values are not technically numerical.</li>
+<li>(If available) An <a
+href="https://moderndive.com/1-getting-started.html#identification-vs-measurement-variables"
+target="_blank">identification variable</a> that uniquely identifies
+each observation in each row.</li>
+<li>A numerical outcome variable <span class="math inline">\(y\)</span>.
+Note: binary outcomes variables with 0/1 values are not technically
+numerical.</li>
 <li>Two explanatory variables:
 <ul>
-<li>A numerical explanatory variable <span class="math inline">\(x_1\)</span>. Note: this can be some notion of time.</li>
-<li>A categorical explanatory variable <span class="math inline">\(x_2\)</span> that has between 3-5 levels. Note: If your data has more than 5 levels, they can be collapsed into 5 using data wrangling later.</li>
+<li>A numerical explanatory variable <span
+class="math inline">\(x_1\)</span>. Note: this can be some notion of
+time.</li>
+<li>A categorical explanatory variable <span
+class="math inline">\(x_2\)</span> that has between 3-5 levels. Note: If
+your data has more than 5 levels, they can be collapsed into 5 using
+data wrangling later.</li>
 </ul></li>
 <li>At least 50 observations/rows.</li>
 </ol>
 </div>
 <div id="possible-sources" class="section level3 unnumbered">
-<h3>Possible sources</h3>
+<h3 class="unnumbered">Possible sources</h3>
 <p>Here are some possible data sources:</p>
 <ul>
-<li>Best option: data from your own research or other courses! The more connected you feel with your data, the more motivated you will be for this project.</li>
-<li>Next best options: Online data repositories such as (but not limited to):
+<li>Best option: data from your own research or other courses! The more
+connected you feel with your data, the more motivated you will be for
+this project.</li>
+<li>Next best options: Online data repositories such as (but not limited
+to):
 <ul>
-<li><a href="https://ipums.org/" target="_blank">IPUMS survey &amp; census data</a></li>
+<li><a href="https://ipums.org/" target="_blank">IPUMS survey &amp;
+census data</a></li>
 <li><a href="https://data.world/" target="_blank">data.world</a></li>
-<li><a href="https://public.tableau.com/en-us/s/resources" target="_blank">Tableau</a></li>
-<li><a href="https://toolbox.google.com/datasetsearch" target="_blank">Google Dataset Search</a></li>
-<li><a href="http://lib.stat.cmu.edu/datasets/">StatLib Datasets Archive</a></li>
+<li><a href="https://public.tableau.com/en-us/s/resources"
+target="_blank">Tableau</a></li>
+<li><a href="https://toolbox.google.com/datasetsearch"
+target="_blank">Google Dataset Search</a></li>
+<li><a href="http://lib.stat.cmu.edu/datasets/">StatLib Datasets
+Archive</a></li>
 </ul></li>
 </ul>
 <!--
@@ -442,40 +494,61 @@ h1{font-weight: 400;}
     + Any data from the data journalism website FiveThirtyEight.com
 -->
 </div>
-<div id="note-on-data-confidentiallity" class="section level3 unnumbered">
-<h3>Note on data confidentiallity</h3>
-<p>If your data is not confidential or sensitive in nature, then publish your data as a CSV file on Google Sheets. That way your group can all access a single copy of your data on the web. If your data is confidential or sensitive in nature, <strong>do not</strong> publish it on the web, but rather submit the Excel or CSV file as well.</p>
-<p>You can publish your data as a CSV file on Google Sheets by following the 6 steps in this Twitter thread:</p>
+<div id="note-on-data-confidentiallity"
+class="section level3 unnumbered">
+<h3 class="unnumbered">Note on data confidentiallity</h3>
+<p>If your data is not confidential or sensitive in nature, then publish
+your data as a CSV file on Google Sheets. That way your group can all
+access a single copy of your data on the web. If your data is
+confidential or sensitive in nature, <strong>do not</strong> publish it
+on the web, but rather submit the Excel or CSV file as well.</p>
+<p>You can publish your data as a CSV file on Google Sheets by following
+the 6 steps in this Twitter thread:</p>
 <blockquote class="twitter-tweet">
 <p lang="en" dir="ltr">
 <ol start="2" style="list-style-type: decimal">
-<li>Go to File -&gt; Publish to the web … <a href="https://t.co/CeM3IIemFU">pic.twitter.com/CeM3IIemFU</a>
+<li>Go to File -&gt; Publish to the web …
+<a href="https://t.co/CeM3IIemFU">pic.twitter.com/CeM3IIemFU</a>
 </p>
-— Albert Y. Kim (<span class="citation">@rudeboybert</span>) <a href="https://twitter.com/rudeboybert/status/1055821837551235073?ref_src=twsrc%5Etfw">October 26, 2018</a>
+— Albert Y. Kim (<span class="citation">@rudeboybert</span>)
+<a href="https://twitter.com/rudeboybert/status/1055821837551235073?ref_src=twsrc%5Etfw">October
+26, 2018</a>
 </blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></li>
 </ol>
 </div>
 </div>
-<div id="what-to-submit" class="section level2">
+<div id="what-to-submit" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> What to submit</h2>
-<p>Only the group leader will make a single submission on behalf of the whole group. They will submit:</p>
+<p>Only the group leader will make a single submission on behalf of the
+whole group. They will submit:</p>
 <ol style="list-style-type: decimal">
 <li>The <code>data.Rmd</code> R Markdown file</li>
 <li>The <code>data.html</code> HTML report file</li>
-<li>Only if your data is confidential or sensitive in nature, submit your Excel or CSV file as well. Otherwise you should publish your data as a CSV file on Google Sheets as described above.</li>
+<li>Only if your data is confidential or sensitive in nature, submit
+your Excel or CSV file as well. Otherwise you should publish your data
+as a CSV file on Google Sheets as described above.</li>
 </ol>
 </div>
-<div id="hints" class="section level2">
+<div id="hints" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Hints</h2>
 <ul>
-<li><strong>Where is this heading?</strong>: For the next project phase (project proposal), you will be making a visualization like this <a href="static/term_project/proposal_example.html#colored-scatterplot" target="_blank">one</a>. If you can make a visualization like this one, then your data is set for the rest of the project.</li>
+<li><strong>Where is this heading?</strong>: For the next project phase
+(project proposal), you will be making a visualization like this <a
+href="static/term_project/proposal_example.html#colored-scatterplot"
+target="_blank">one</a>. If you can make a visualization like this one,
+then your data is set for the rest of the project.</li>
 <li>When you have questions:
 <ul>
-<li>If possible, please ask questions that you think the entire class would like to know the answer to in the <code>#project</code> channel in Slack.</li>
-<li>Ask more individual questions in the group DM that includes all group members + your instructor + your lab instructor.</li>
+<li>If possible, please ask questions that you think the entire class
+would like to know the answer to in the <code>#project</code> channel in
+Slack.</li>
+<li>Ask more individual questions in the group DM that includes all
+group members + your instructor + your lab instructor.</li>
 </ul></li>
-<li>Only minimal data wrangling using the <code>dplyr</code> package is expected at this time; you will be doing more for the “project proposal” phase coming up. That being said, feel free to experiment!</li>
+<li>Only minimal data wrangling using the <code>dplyr</code> package is
+expected at this time; you will be doing more for the “project proposal”
+phase coming up. That being said, feel free to experiment!</li>
 </ul>
 <!--
 ## General feedback for all groups {#phase_I_feedback}
@@ -487,95 +560,149 @@ h1{font-weight: 400;}
 <hr />
 </div>
 </div>
-<div id="proposal" class="section level1">
+<div id="proposal" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Project Proposal</h1>
-<p><strong>This phase may require revisions to your original choice of data and visits to the Spinelli tutoring center for help with data wrangling.</strong></p>
+<p><strong>This phase may require revisions to your original choice of
+data and visits to the Spinelli tutoring center for help with data
+wrangling.</strong></p>
 <ul>
-<li>Get a sense for the requirements of this project phase by reading a possible <a href="static/term_project/proposal_example.html" target="_blank">example project proposal</a> (Note that your data proposal will likely differ slightly from this one):</li>
-<li>Download the following <a href="static/term_project/proposal.Rmd" download><code>proposal.Rmd</code></a> template R Markdown file and start filling it in.</li>
+<li>Get a sense for the requirements of this project phase by reading a
+possible <a href="static/term_project/proposal_example.html"
+target="_blank">example project proposal</a> (Note that your data
+proposal will likely differ slightly from this one):</li>
+<li>Download the following
+<a href="static/term_project/proposal.Rmd" download><code>proposal.Rmd</code></a>
+template R Markdown file and start filling it in.</li>
 </ul>
-<div id="work-on-your-proposal" class="section level2">
-<h2><span class="header-section-number">3.1</span> Work on your proposal</h2>
-<p>Your data may require some wrangling to get it in the appropriate format. Given that this is not a class where data wrangling is a central focus, we suggest you check out the following resources:</p>
+<div id="work-on-your-proposal" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Work on your
+proposal</h2>
+<p>Your data may require some wrangling to get it in the appropriate
+format. Given that this is not a class where data wrangling is a central
+focus, we suggest you check out the following resources:</p>
 <ol style="list-style-type: decimal">
-<li>The Spinelli Center evening tutoring hours on Sun-Thurs 7-9pm. All student tutors there have taken SDS 192 Data Science and can thus help you get the data into the appropriate format.</li>
-<li>Be sure to look at our <a href="https://moderndive.com/C-appendixC.html#data-wrangling" target="_blank">data wrangling “Tips &amp; Tricks”</a> ModernDive page written by Jenny Smetzer. It’s based on the seven most common data wrangling questions we’ve encountered from students while they were working on their term projects:</li>
+<li>The Spinelli Center evening tutoring hours on Sun-Thurs 7-9pm. All
+student tutors there have taken SDS 192 Data Science and can thus help
+you get the data into the appropriate format.</li>
+<li>Be sure to look at our <a
+href="https://moderndive.com/C-appendixC.html#data-wrangling"
+target="_blank">data wrangling “Tips &amp; Tricks”</a> ModernDive page
+written by Jenny Smetzer. It’s based on the seven most common data
+wrangling questions we’ve encountered from students while they were
+working on their term projects:</li>
 </ol>
 <p><img src="static/images/data_wrangling.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="what-to-submit-1" class="section level2">
+<div id="what-to-submit-1" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> What to submit</h2>
-<p>Only the group leader will make a single submission on behalf of the whole group. They will submit:</p>
+<p>Only the group leader will make a single submission on behalf of the
+whole group. They will submit:</p>
 <ol style="list-style-type: decimal">
 <li>The <code>proposal.Rmd</code> R Markdown file</li>
 <li>The <code>proposal.html</code> HTML report file</li>
-<li>Only if your data is confidential or sensitive in nature, submit your Excel or CSV file as well. Otherwise you should publish your data as a CSV file on Google Sheets as described above.</li>
+<li>Only if your data is confidential or sensitive in nature, submit
+your Excel or CSV file as well. Otherwise you should publish your data
+as a CSV file on Google Sheets as described above.</li>
 </ol>
 <hr />
 </div>
 </div>
-<div id="submission" class="section level1">
+<div id="submission" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Project Submission</h1>
 <ul>
-<li>Get a sense for the requirements of this project phase by reading only the following sections of this possible <a href="static/term_project/resubmission_example.html" target="_blank">project resubmission</a> (Note that your data proposal will likely differ slightly from this one):
+<li>Get a sense for the requirements of this project phase by reading
+only the following sections of this possible <a
+href="static/term_project/resubmission_example.html"
+target="_blank">project resubmission</a> (Note that your data proposal
+will likely differ slightly from this one):
 <ul>
 <li>Section 1: Introduction</li>
 <li>Section 2: Exploratory data analysis</li>
-<li>Section 3 subsections 3.1, 3.2, and 3.3: Multiple linear regression: Methods, Model Results, Interpreting the regression table.<br />
+<li>Section 3 subsections 3.1, 3.2, and 3.3: Multiple linear regression:
+Methods, Model Results, Interpreting the regression table.<br />
 </li>
 </ul></li>
-<li>Download the following <a href="static/term_project/submission_example.Rmd" download><code>project_submission_example.Rmd</code></a> template R Markdown file and start filling it in.</li>
+<li>Download the following
+<a href="static/term_project/submission_example.Rmd" download><code>project_submission_example.Rmd</code></a>
+template R Markdown file and start filling it in.</li>
 </ul>
-<div id="complete-your-initial-submission" class="section level2">
-<h2><span class="header-section-number">4.1</span> Complete your initial submission</h2>
+<div id="complete-your-initial-submission" class="section level2"
+number="4.1">
+<h2><span class="header-section-number">4.1</span> Complete your initial
+submission</h2>
 <ul>
-<li>Complete the following sections of <code>project_submission.Rmd</code>:
+<li>Complete the following sections of
+<code>project_submission.Rmd</code>:
 <ul>
 <li>Section 1: Introduction</li>
 <li>Section 2: Exploratory data analysis</li>
-<li>Section 3 subsections 3.1, 3.2, and 3.3: Multiple linear regression: Methods, Model Results, Interpreting the regression table.</li>
+<li>Section 3 subsections 3.1, 3.2, and 3.3: Multiple linear regression:
+Methods, Model Results, Interpreting the regression table.</li>
 </ul></li>
-<li>Do not complete the following sections (you’ll be doing this at the resubmission phase):
+<li>Do not complete the following sections (you’ll be doing this at the
+resubmission phase):
 <ul>
-<li>Section 3 subsections 3.4, 3.5: Inference for multiple regression</li>
-<li>Section 4: Discussion. You will write this conclusion based on the results of sections 3.4 and 3.5.</li>
+<li>Section 3 subsections 3.4, 3.5: Inference for multiple
+regression</li>
+<li>Section 4: Discussion. You will write this conclusion based on the
+results of sections 3.4 and 3.5.</li>
 </ul></li>
 </ul>
 </div>
-<div id="what-to-submit-2" class="section level2">
+<div id="what-to-submit-2" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> What to submit</h2>
-<p>Only the group leader will make a single submission on behalf of the whole group. They will submit:</p>
+<p>Only the group leader will make a single submission on behalf of the
+whole group. They will submit:</p>
 <ol style="list-style-type: decimal">
-<li>The <code>project_submission.Rmd</code> R Markdown file with sections 1, 2, 3.1, 3.2, and 3.3 completed</li>
+<li>The <code>project_submission.Rmd</code> R Markdown file with
+sections 1, 2, 3.1, 3.2, and 3.3 completed</li>
 <li>The <code>project_submission.html</code> HTML report file.</li>
-<li>Only if your data is confidential or sensitive in nature, submit your Excel or CSV file as well. Otherwise you should publish your data as a CSV file on Google Sheets as described above.</li>
+<li>Only if your data is confidential or sensitive in nature, submit
+your Excel or CSV file as well. Otherwise you should publish your data
+as a CSV file on Google Sheets as described above.</li>
 </ol>
 <hr />
 </div>
 </div>
-<div id="resubmission" class="section level1">
-<h1><span class="header-section-number">5</span> Project Resubmission</h1>
-<p>Get a sense for the requirements of this project phase by re-reading all the sections of the possible <a href="static/term_project/resubmission_example.html" target="_blank">project resubmission</a> from the previous submission phase. In particular, read the following new sections:</p>
+<div id="resubmission" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Project
+Resubmission</h1>
+<p>Get a sense for the requirements of this project phase by re-reading
+all the sections of the possible <a
+href="static/term_project/resubmission_example.html"
+target="_blank">project resubmission</a> from the previous submission
+phase. In particular, read the following new sections:</p>
 <ul>
 <li>Sections 3.4, 3.5: Inference for multiple regression</li>
 <li>Section 4: Discussion.</li>
 </ul>
-<div id="revise-your-initial-submission" class="section level2">
-<h2><span class="header-section-number">5.1</span> Revise your initial submission</h2>
-<p>Using the same <code>project_submission.Rmd</code> file you submitted for the project submission phase:</p>
+<div id="revise-your-initial-submission" class="section level2"
+number="5.1">
+<h2><span class="header-section-number">5.1</span> Revise your initial
+submission</h2>
+<p>Using the same <code>project_submission.Rmd</code> file you submitted
+for the project submission phase:</p>
 <ul>
-<li>Incorporate any feedback given to you from the project submission phase.</li>
-<li>Complete Sections 3.4 and 3.5: Inference for multiple regression</li>
-<li>Complete Section 4: Discussion. You will write this conclusion based on the results of sections 3.4 and 3.5.</li>
+<li>Incorporate any feedback given to you from the project submission
+phase.</li>
+<li>Complete Sections 3.4 and 3.5: Inference for multiple
+regression</li>
+<li>Complete Section 4: Discussion. You will write this conclusion based
+on the results of sections 3.4 and 3.5.</li>
 </ul>
 </div>
-<div id="what-to-submit-3" class="section level2">
+<div id="what-to-submit-3" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> What to submit</h2>
-<p>Only the group leader will make a single submission on behalf of the whole group. They will submit:</p>
+<p>Only the group leader will make a single submission on behalf of the
+whole group. They will submit:</p>
 <ol style="list-style-type: decimal">
-<li>The updated <code>project_submission.Rmd</code> R Markdown file.</li>
-<li>The updated <code>project_submission.html</code> HTML report file.</li>
-<li>Only if your data is confidential or sensitive in nature, submit your Excel or CSV file as well. Otherwise you should publish your data as a CSV file on Google Sheets as described above.</li>
+<li>The updated <code>project_submission.Rmd</code> R Markdown
+file.</li>
+<li>The updated <code>project_submission.html</code> HTML report
+file.</li>
+<li>Only if your data is confidential or sensitive in nature, submit
+your Excel or CSV file as well. Otherwise you should publish your data
+as a CSV file on Google Sheets as described above.</li>
 </ol>
 </div>
 </div>

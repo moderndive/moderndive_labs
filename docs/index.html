@@ -14,6 +14,7 @@
 
 <title>ModernDive Labs</title>
 
+<script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -33,7 +34,6 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
@@ -138,11 +138,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -171,8 +175,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -180,16 +184,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -351,8 +348,9 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">ModernDive Labs</h1>
-<h4 class="author">Jenny Smetzer, William Hopper, Beth Brown, Albert Y. Kim, and Chester Ismay</h4>
-<h4 class="date">Last updated on 2022-06-10</h4>
+<h4 class="author">Jenny Smetzer, William Hopper, Beth Brown, Albert Y.
+Kim, and Chester Ismay</h4>
+<h4 class="date">Last updated on 2023-07-14</h4>
 
 </div>
 
@@ -363,99 +361,168 @@ h1{font-weight: 400;}
 <!--
 {target="_blank"}
 -->
-<p></br> <img src="static/images/wide_format.png" width="80%" style="display: block; margin: auto;" /> </br></p>
+<p></br>
+<img src="static/images/wide_format.png" width="80%" style="display: block; margin: auto;" />
+</br></p>
 <div id="welcome" class="section level1">
 <h1>Welcome</h1>
-<p>Welcome to the ModernDive labs page! You can find the following instructor resources:</p>
+<p>Welcome to the ModernDive labs page! You can find the following
+instructor resources:</p>
 <ol style="list-style-type: decimal">
 <li>Example <a href="#problem-sets">problem sets and labs</a>.</li>
 <li>A <a href="#term-project-template">term project</a> template.</li>
-<li>All <a href="#previous-versions">previous online versions</a> of ModernDive.</li>
+<li>All <a href="#previous-versions">previous online versions</a> of
+ModernDive.</li>
 </ol>
 <hr />
 </div>
 <div id="problem-sets" class="section level1">
 <h1>Problem Sets</h1>
-<p>Jenny Smetzer, William Hopper, <a href="https://www.gcc.mass.edu/math/faculty/" target="_blank">Beth Brown</a> and Albert Y. Kim (Smith College) have produced problem sets and lab materials for ModernDive:</p>
+<p>Jenny Smetzer, William Hopper, <a
+href="https://www.gcc.mass.edu/math/faculty/" target="_blank">Beth
+Brown</a> and Albert Y. Kim (Smith College) have produced problem sets
+and lab materials for ModernDive:</p>
 <ul>
 <li><strong>PS01: Introduction to R</strong>:
 <ul>
-<li><a href="static/PS/PS01_intro_to_R_RStudio.html" target="_blank">Problem set</a></li>
+<li><a href="static/PS/PS01_intro_to_R_RStudio.html"
+target="_blank">Problem set</a></li>
 </ul></li>
 <li><strong>PS02: Data visualization with <code>ggplot2</code></strong>:
 <ul>
-<li>A short <a href="static/PS/PS02_pre_lecture.pdf" target="_blank">pre-lecture</a> explaning the Grammar of Graphics as implemented in the <code>ggplot2</code> package</li>
-<li><a href="static/PS/PS02_data_viz.html" target="_blank">Problem set</a></li>
+<li>A short <a href="static/PS/PS02_pre_lecture.pdf"
+target="_blank">pre-lecture</a> explaning the Grammar of Graphics as
+implemented in the <code>ggplot2</code> package</li>
+<li><a href="static/PS/PS02_data_viz.html" target="_blank">Problem
+set</a></li>
 </ul></li>
 <li><strong>PS03: Data wrangling with <code>dplyr</code></strong>:
 <ul>
-<li>A short <a href="static/PS/PS03_pre_lecture.pdf" target="_blank">pre-lecture</a> explaning the <code>%&gt;%</code> operator and <code>dplyr</code> wrangling verbs<br />
+<li>A short <a href="static/PS/PS03_pre_lecture.pdf"
+target="_blank">pre-lecture</a> explaning the <code>%&gt;%</code>
+operator and <code>dplyr</code> wrangling verbs<br />
 </li>
-<li><a href="static/PS/PS03_data_wrangling.html" target="_blank">Problem set</a></li>
+<li><a href="static/PS/PS03_data_wrangling.html" target="_blank">Problem
+set</a></li>
 </ul></li>
 <li><strong>PS04: Regression with one numerical variable</strong>:
 <ul>
-<li><a href="static/PS/PS04_reg_one_num_x.html" target="_blank">Problem set</a></li>
+<li><a href="static/PS/PS04_reg_one_num_x.html" target="_blank">Problem
+set</a></li>
 </ul></li>
 <li><strong>PS05: Regression with one categorical variable</strong>:
 <ul>
-<li><a href="static/PS/PS05_reg_one_cat_x.html" target="_blank">Problem set</a></li>
+<li><a href="static/PS/PS05_reg_one_cat_x.html" target="_blank">Problem
+set</a></li>
 </ul></li>
-<li><strong>PS06: Multiple regression with one numerical and one categorical variable</strong>:
+<li><strong>PS06: Multiple regression with one numerical and one
+categorical variable</strong>:
 <ul>
-<li><a href="static/PS/PS06_multiple_reg.html" target="_blank">Problem set</a></li>
+<li><a href="static/PS/PS06_multiple_reg.html" target="_blank">Problem
+set</a></li>
 </ul></li>
 <li><strong>PS07: Sampling distributions</strong>:
 <ul>
-<li>A short <a href="static/PS/PS07_pre_lecture.html" target="_blank">recap exercise</a> on the effect of sample size on sampling distributions</li>
-<li><a href="static/PS/PS07_sampling_dist.html" target="_blank">Problem set</a></li>
+<li>A short <a href="static/PS/PS07_pre_lecture.html"
+target="_blank">recap exercise</a> on the effect of sample size on
+sampling distributions</li>
+<li><a href="static/PS/PS07_sampling_dist.html" target="_blank">Problem
+set</a></li>
 </ul></li>
 <li><strong>PS08: Confidence intervals and the bootstrap</strong>:
 <ul>
-<li><a href="static/PS/PS08_CI_bootstrap.html" target="_blank">Problem set</a></li>
+<li><a href="static/PS/PS08_CI_bootstrap.html" target="_blank">Problem
+set</a></li>
 </ul></li>
 <li><strong>PS09: Hypothesis testing</strong>:
 <ul>
-<li><a href="static/PS/PS09_hypothesis_testing.html" target="_blank">Problem set</a></li>
+<li><a href="static/PS/PS09_hypothesis_testing.html"
+target="_blank">Problem set</a></li>
 </ul></li>
 <li><strong>NEW - PS10: Inference for regression</strong>:
 <ul>
-<li><a href="static/PS/PS10_inference_for_regression.html" target="_blank">Problem set</a></li>
+<li><a href="static/PS/PS10_inference_for_regression.html"
+target="_blank">Problem set</a></li>
 </ul></li>
 </ul>
 <p>Resources:</p>
 <ul>
-<li>Download all necessary files to reproduce these problem sets here: <a href="static/PS/ModernDive_PS.zip" download><code>ModernDive_PS.zip</code></a>.</li>
-<li>Obtain solutions (verified instructors only) by filling out this <a href="https://docs.google.com/forms/d/e/1FAIpQLSf68Je_Q3ggRJ-74UtL0xG5-IuuKkSTIpEQZWro-8QbO7nmdA/viewform" target="_blank">Google Form</a>.</li>
+<li>Download all necessary files to reproduce these problem sets here:
+<a href="static/PS/ModernDive_PS.zip" download><code>ModernDive_PS.zip</code></a>.</li>
+<li>Obtain solutions (verified instructors only) by filling out this <a
+href="https://docs.google.com/forms/d/e/1FAIpQLSf68Je_Q3ggRJ-74UtL0xG5-IuuKkSTIpEQZWro-8QbO7nmdA/viewform"
+target="_blank">Google Form</a>.</li>
 </ul>
 <hr />
 </div>
 <div id="term-project-template" class="section level1">
 <h1>Term Project</h1>
-<p>We at ModernDive are enthusiastic proponents of the following learning goal for any course that uses our book: <em>Engage in the <a href="https://r4ds.had.co.nz/introduction.html" target="_blank">data/science research pipeline</a> in as faithful a manner as possible while maintaining a level suitable for novices.</em> We think the best way to satisfy this learning goal is for students to complete a term project!</p>
+<p>We at ModernDive are enthusiastic proponents of the following
+learning goal for any course that uses our book: <em>Engage in the <a
+href="https://r4ds.had.co.nz/introduction.html"
+target="_blank">data/science research pipeline</a> in as faithful a
+manner as possible while maintaining a level suitable for novices.</em>
+We think the best way to satisfy this learning goal is for students to
+complete a term project!</p>
 <p><img src="static/images/data_science_pipeline.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Resources:</p>
 <ul>
-<li>Check out an <a href="static/term_project/resubmission_example.html" target="_blank">example term project</a> by Alexis Cohen, Andrianne Dao, and Isabel Gomez analyzing Massachusetts high school data.</li>
-<li>For more information on how we present the term project to students, see the <a href="term_project.html">Term Project</a> page.</li>
-<li>Be sure to look at our <a href="https://moderndive.com/C-appendixC.html#data-wrangling" target="_blank">data wrangling “Tips &amp; Tricks”</a> ModernDive page written by Jenny Smetzer. It’s based on the seven most common data wrangling questions we’ve encountered from students while they were working on their term projects:</li>
+<li>Check out an <a href="static/term_project/resubmission_example.html"
+target="_blank">example term project</a> by Alexis Cohen, Andrianne Dao,
+and Isabel Gomez analyzing Massachusetts high school data.</li>
+<li>For more information on how we present the term project to students,
+see the <a href="term_project.html">Term Project</a> page.</li>
+<li>Be sure to look at our <a
+href="https://moderndive.com/C-appendixC.html#data-wrangling"
+target="_blank">data wrangling “Tips &amp; Tricks”</a> ModernDive page
+written by Jenny Smetzer. It’s based on the seven most common data
+wrangling questions we’ve encountered from students while they were
+working on their term projects:</li>
 </ul>
 <p><img src="static/images/data_wrangling.png" width="70%" style="display: block; margin: auto;" /></p>
 <hr />
 </div>
 <div id="previous-versions" class="section level1">
 <h1>Previous Versions</h1>
-<p>These are the <strong>previous online versions</strong> of the ModernDive textbook that may be out of date:</p>
+<p>These are the <strong>previous online versions</strong> of the
+ModernDive textbook that may be out of date:</p>
 <ul>
-<li><a href="static/previous_versions/v1.0.0/index.html" target="_blank">Version 1.0.0</a> released on November 25, 2019 (<a href="https://github.com/moderndive/ModernDive_book/releases/tag/v1.0.0" target="_blank">source code</a>)</li>
-<li><a href="static//previous_versions/v0.6.1/index.html" target="_blank">Version 0.6.1</a> released on August 28, 2019 (<a href="https://github.com/moderndive/ModernDive_book/releases/tag/v0.6.1" target="_blank">source code</a>)</li>
-<li><a href="static/previous_versions/v0.6.0/index.html" target="_blank">Version 0.6.0</a> released on August 7, 2019 (<a href="https://github.com/moderndive/moderndive_book/releases/tag/v0.6.0" target="_blank">source code</a>)</li>
-<li><a href="static/previous_versions/v0.5.0/index.html" target="_blank">Version 0.5.0</a> released on February 24, 2019 (<a href="https://github.com/moderndive/moderndive_book/releases/tag/v0.5.0" target="_blank">source code</a>)</li>
-<li><a href="static/previous_versions/v0.4.0/index.html" target="_blank">Version 0.4.0</a> released on July 21, 2018 (<a href="https://github.com/moderndive/moderndive_book/releases/tag/v0.4.0" target="_blank">source code</a>)</li>
-<li><a href="static/previous_versions/v0.3.0/index.html" target="_blank">Version 0.3.0</a> released on February 3, 2018 (<a href="https://github.com/moderndive/moderndive_book/releases/tag/v0.3.0" target="_blank">source code</a>)</li>
-<li><a href="static/previous_versions/v0.2.0/index.html" target="_blank">Version 0.2.0</a> released on August 2, 2017 (<a href="https://github.com/moderndive/moderndive_book/releases/tag/v0.2.0" target="_blank">source code</a>)</li>
-<li><a href="static/previous_versions/v0.1.3/index.html" target="_blank">Version 0.1.3</a> released on February 9, 2017 (<a href="https://github.com/moderndive/moderndive_book/releases/tag/v0.1.3" target="_blank">source code</a>)</li>
-<li><a href="static/previous_versions/v0.1.2/index.html" target="_blank">Version 0.1.2</a> released on January 22, 2017 (<a href="https://github.com/moderndive/moderndive_book/releases/tag/v0.1.2" target="_blank">source code</a>)</li>
+<li><a href="static/previous_versions/v1.0.0/index.html"
+target="_blank">Version 1.0.0</a> released on November 25, 2019 (<a
+href="https://github.com/moderndive/ModernDive_book/releases/tag/v1.0.0"
+target="_blank">source code</a>)</li>
+<li><a href="static//previous_versions/v0.6.1/index.html"
+target="_blank">Version 0.6.1</a> released on August 28, 2019 (<a
+href="https://github.com/moderndive/ModernDive_book/releases/tag/v0.6.1"
+target="_blank">source code</a>)</li>
+<li><a href="static/previous_versions/v0.6.0/index.html"
+target="_blank">Version 0.6.0</a> released on August 7, 2019 (<a
+href="https://github.com/moderndive/moderndive_book/releases/tag/v0.6.0"
+target="_blank">source code</a>)</li>
+<li><a href="static/previous_versions/v0.5.0/index.html"
+target="_blank">Version 0.5.0</a> released on February 24, 2019 (<a
+href="https://github.com/moderndive/moderndive_book/releases/tag/v0.5.0"
+target="_blank">source code</a>)</li>
+<li><a href="static/previous_versions/v0.4.0/index.html"
+target="_blank">Version 0.4.0</a> released on July 21, 2018 (<a
+href="https://github.com/moderndive/moderndive_book/releases/tag/v0.4.0"
+target="_blank">source code</a>)</li>
+<li><a href="static/previous_versions/v0.3.0/index.html"
+target="_blank">Version 0.3.0</a> released on February 3, 2018 (<a
+href="https://github.com/moderndive/moderndive_book/releases/tag/v0.3.0"
+target="_blank">source code</a>)</li>
+<li><a href="static/previous_versions/v0.2.0/index.html"
+target="_blank">Version 0.2.0</a> released on August 2, 2017 (<a
+href="https://github.com/moderndive/moderndive_book/releases/tag/v0.2.0"
+target="_blank">source code</a>)</li>
+<li><a href="static/previous_versions/v0.1.3/index.html"
+target="_blank">Version 0.1.3</a> released on February 9, 2017 (<a
+href="https://github.com/moderndive/moderndive_book/releases/tag/v0.1.3"
+target="_blank">source code</a>)</li>
+<li><a href="static/previous_versions/v0.1.2/index.html"
+target="_blank">Version 0.1.2</a> released on January 22, 2017 (<a
+href="https://github.com/moderndive/moderndive_book/releases/tag/v0.1.2"
+target="_blank">source code</a>)</li>
 </ul>
 </div>
 
