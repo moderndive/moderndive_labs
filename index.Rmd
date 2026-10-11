@@ -64,10 +64,10 @@ Jenny Smetzer, William Hopper, [Beth Brown](https://www.gcc.mass.edu/math/facult
 * **PS01: Introduction to R**:
     + [Problem set](static/PS/PS01_intro_to_R_RStudio.html){target="_blank"}
 * **PS02: Data visualization with `ggplot2`**:
-    + A short [pre-lecture](static/PS/PS02_pre_lecture.pdf){target="_blank"} explaning the Grammar of Graphics as implemented in the `ggplot2` package
+    + A short [pre-lecture](static/PS/PS02_pre_lecture.pdf){target="_blank"} explaining the Grammar of Graphics as implemented in the `ggplot2` package
     + [Problem set](static/PS/PS02_data_viz.html){target="_blank"}
 * **PS03: Data wrangling with `dplyr`**:
-    + A short [pre-lecture](static/PS/PS03_pre_lecture.pdf){target="_blank"} explaning the `%>%` operator and `dplyr` wrangling verbs  
+    + A short [pre-lecture](static/PS/PS03_pre_lecture.pdf){target="_blank"} explaining the native pipe `|>` and `dplyr` wrangling verbs  
     + [Problem set](static/PS/PS03_data_wrangling.html){target="_blank"}
 * **PS04: Regression with one numerical variable**:
     + [Problem set](static/PS/PS04_reg_one_num_x.html){target="_blank"}
