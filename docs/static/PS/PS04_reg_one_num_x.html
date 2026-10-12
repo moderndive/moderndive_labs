@@ -1821,5 +1821,34 @@ $(document).ready(function ()  {
   })();
 </script>
 
+<script type="text/javascript">
+// Do not edit this code block/chunk. On a narrow screen, a wide table or
+// equation scrolls sideways in its own box instead of running off the page.
+// Only what is too wide gets the box, so a wide screen shows no change.
+function fitWide() {
+  document.querySelectorAll("table").forEach(function (table) {
+    var parent = table.parentElement;
+    if (parent.dataset.scrollBox || table.offsetWidth <= parent.clientWidth) return;
+    var box = document.createElement("div");
+    box.dataset.scrollBox = "1";
+    box.style.overflowX = "auto";
+    box.style.marginBottom = getComputedStyle(table).marginBottom;
+    table.style.marginBottom = "0";
+    parent.insertBefore(box, table);
+    box.appendChild(table);
+  });
+  document.querySelectorAll(".MathJax_Display").forEach(function (eq) {
+    if (eq.scrollWidth <= eq.clientWidth) return;
+    eq.style.overflowX = "auto";
+    eq.style.overflowY = "hidden";
+  });
+}
+// Measured once MathJax has finished, which changes how wide things are.
+function fitWideLater() {
+  if (window.MathJax && MathJax.Hub) MathJax.Hub.Queue(fitWide); else fitWide();
+}
+window.addEventListener("load", fitWideLater);
+window.addEventListener("resize", fitWideLater);
+</script>
 </body>
 </html>
