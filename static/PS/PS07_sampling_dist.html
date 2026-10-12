@@ -1714,8 +1714,8 @@ n50_3rep &lt;- gss_14 %&gt;%
 <h1>Question 1.b)</h1>
 <p>How do the <span class="math inline">\(\hat{p}\)</span> estimates from different samples compare? Why was your estimate different each time?</p>
 <p><strong>Answer: </strong></p>
-<div id="estimating-widehatse-from-a-single-sample" class="section level3">
-<h3>Estimating <span class="math inline">\(\widehat{SE}\)</span> from a single sample</h3>
+<div id="estimating-widehatse-from-a-single-sample" class="section level2">
+<h2>Estimating <span class="math inline">\(\widehat{SE}\)</span> from a single sample</h2>
 <p>Typically we only have the opportunity to collect <strong>one sample</strong> for our study, and so we have to use the amount of variability in our <strong>single sample</strong> as an estimate of the amount of variability we might expect in our results if we had taken a random sample of 50 different people. The <span class="math inline">\(\widehat{SE}_{\hat{p}}\)</span> serves as an <strong>ESTIMATE</strong> of <strong>sampling variability</strong> if you only have a <strong>single sample</strong>. The formula for estimating the standard error of <span class="math inline">\(\hat{p}\)</span> is the following:</p>
 <p><span class="math display">\[\widehat{SE}_{\hat{p}}  \approx  \sqrt{\frac{\hat{p} \times (1-\hat{p})}{n}}\]</span></p>
 <blockquote>
@@ -1829,8 +1829,8 @@ n50_1000rep &lt;- gss_14 %&gt;%
 </tbody>
 </table>
 </div>
-<div id="visualizing-the-sampling-distribution-of-hatp-for-n-50" class="section level3">
-<h3>Visualizing the sampling distribution of <span class="math inline">\(\hat{p}\)</span> for n = 50</h3>
+<div id="visualizing-the-sampling-distribution-of-hatp-for-n-50" class="section level2">
+<h2>Visualizing the sampling distribution of <span class="math inline">\(\hat{p}\)</span> for n = 50</h2>
 <p>We can plot the <strong>sampling distribution</strong> of these 1000 <span class="math inline">\(\hat{p}\)</span> estimates of divorced respondents with a histogram, like so:</p>
 <pre class="r"><code>ggplot(p_hat_n50_1000rep, aes(x = p_hat)) +
   geom_histogram(binwidth = 0.02, color = &quot;black&quot;, fill = &quot;aquamarine3&quot;, boundary=0) +
@@ -1843,8 +1843,8 @@ n50_1000rep &lt;- gss_14 %&gt;%
 <h1>Question 3</h1>
 <p>Based on the histogram above, what appeared to be a very common (i.e., likely) value of <span class="math inline">\(\hat{p}\)</span>? What was a very uncommon (i.e., unlikely) value?</p>
 <p><strong>Answer:</strong></p>
-<div id="mean-and-standard-error-of-the-sampling-distribution-of-hatp-for-n-50" class="section level3">
-<h3>Mean and standard error of the sampling distribution of <span class="math inline">\(\hat{p}\)</span> for n = 50</h3>
+<div id="mean-and-standard-error-of-the-sampling-distribution-of-hatp-for-n-50" class="section level2">
+<h2>Mean and standard error of the sampling distribution of <span class="math inline">\(\hat{p}\)</span> for n = 50</h2>
 <p>Finally we can estimate the mean of the sampling distribution by calculating the mean of all 1000 <span class="math inline">\(\hat{p}\)</span> estimates, and the standard error of the sampling distribution by calculating the standard deviation of all 1000 <span class="math inline">\(\hat{p}\)</span> values like so:</p>
 <pre class="r"><code>p_hat_n50_1000rep %&gt;% 
   summarize(M_p_hat = mean(p_hat), 

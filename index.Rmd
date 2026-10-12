@@ -62,39 +62,39 @@ Welcome to the ModernDive labs page! You can find the following instructor resou
 Jenny Smetzer, William Hopper, [Beth Brown](https://www.gcc.mass.edu/math/faculty/){target="_blank"} and Albert Y. Kim (Smith College) have produced problem sets and lab materials for ModernDive:
 
 * **PS01: Introduction to R**:
-    + A short [pre-lecture](static/PS/ch01_pre_lecture.pdf){target="_blank"} on R, RStudio, packages, and your first data frame
+    + A short [pre-lecture](static/PS/ch01_pre_lecture.html){target="_blank"} on R, RStudio, packages, and your first data frame ([PDF for printing](static/PS/ch01_pre_lecture.pdf){target="_blank"})
     + [Problem set](static/PS/PS01_intro_to_R_RStudio.html){target="_blank"}
 * **PS02: Data visualization with `ggplot2`**:
-    + A short [pre-lecture](static/PS/PS02_pre_lecture.pdf){target="_blank"} explaining the Grammar of Graphics as implemented in the `ggplot2` package
+    + A short [pre-lecture](static/PS/PS02_pre_lecture.html){target="_blank"} explaining the Grammar of Graphics as implemented in the `ggplot2` package ([PDF for printing](static/PS/PS02_pre_lecture.pdf){target="_blank"})
     + [Problem set](static/PS/PS02_data_viz.html){target="_blank"}
 * **PS03: Data wrangling with `dplyr`**:
-    + A short [pre-lecture](static/PS/PS03_pre_lecture.pdf){target="_blank"} explaining the native pipe `|>` and `dplyr` wrangling verbs
-    + A second [pre-lecture](static/PS/ch04_pre_lecture.pdf){target="_blank"} on importing data with `readr` and reshaping it into tidy format with `tidyr`
+    + A short [pre-lecture](static/PS/PS03_pre_lecture.html){target="_blank"} explaining the native pipe `|>` and `dplyr` wrangling verbs ([PDF for printing](static/PS/PS03_pre_lecture.pdf){target="_blank"})
+    + A second [pre-lecture](static/PS/ch04_pre_lecture.html){target="_blank"} on importing data with `readr` and reshaping it into tidy format with `tidyr` ([PDF for printing](static/PS/ch04_pre_lecture.pdf){target="_blank"})
     + [Problem set](static/PS/PS03_data_wrangling.html){target="_blank"}
 * **PS04: Regression with one numerical variable**:
-    + A short [pre-lecture](static/PS/ch05_pre_lecture.pdf){target="_blank"} on simple linear regression with `lm()` and the `moderndive` regression functions
+    + A short [pre-lecture](static/PS/ch05_pre_lecture.html){target="_blank"} on simple linear regression with `lm()` and the `moderndive` regression functions ([PDF for printing](static/PS/ch05_pre_lecture.pdf){target="_blank"})
     + [Problem set](static/PS/PS04_reg_one_num_x.html){target="_blank"}
 * **PS05: Regression with one categorical variable**:
-    + The PS04 [pre-lecture](static/PS/ch05_pre_lecture.pdf){target="_blank"} covers this chapter too
+    + The PS04 [pre-lecture](static/PS/ch05_pre_lecture.html){target="_blank"} covers this chapter too ([PDF for printing](static/PS/ch05_pre_lecture.pdf){target="_blank"})
     + [Problem set](static/PS/PS05_reg_one_cat_x.html){target="_blank"}
 * **PS06: Multiple regression with one numerical and one categorical variable**:
-    + A short [pre-lecture](static/PS/ch06_pre_lecture.pdf){target="_blank"} on parallel slopes and interaction models
+    + A short [pre-lecture](static/PS/ch06_pre_lecture.html){target="_blank"} on parallel slopes and interaction models ([PDF for printing](static/PS/ch06_pre_lecture.pdf){target="_blank"})
     +  [Problem set](static/PS/PS06_multiple_reg.html){target="_blank"}
 * **PS07: Sampling distributions**:
-    + A short [pre-lecture](static/PS/ch07_pre_lecture.pdf){target="_blank"} on simulating repeated samples and the sampling distribution
+    + A short [pre-lecture](static/PS/ch07_pre_lecture.html){target="_blank"} on simulating repeated samples and the sampling distribution ([PDF for printing](static/PS/ch07_pre_lecture.pdf){target="_blank"})
     + A short [recap exercise](static/PS/PS07_pre_lecture.html){target="_blank"} on the effect of sample size on sampling distributions
     + [Problem set](static/PS/PS07_sampling_dist.html){target="_blank"}
 * **PS08: Confidence intervals and the bootstrap**:
-    + A short [pre-lecture](static/PS/ch08_pre_lecture.pdf){target="_blank"} on the `infer` workflow for bootstrap confidence intervals
+    + A short [pre-lecture](static/PS/ch08_pre_lecture.html){target="_blank"} on the `infer` workflow for bootstrap confidence intervals ([PDF for printing](static/PS/ch08_pre_lecture.pdf){target="_blank"})
     + [Problem set](static/PS/PS08_CI_bootstrap.html){target="_blank"}
 * **PS09: Hypothesis testing**:
-    + A short [pre-lecture](static/PS/ch09_pre_lecture.pdf){target="_blank"} on permutation tests and p-values with `infer`
+    + A short [pre-lecture](static/PS/ch09_pre_lecture.html){target="_blank"} on permutation tests and p-values with `infer` ([PDF for printing](static/PS/ch09_pre_lecture.pdf){target="_blank"})
     + [Problem set](static/PS/PS09_hypothesis_testing.html){target="_blank"}
 * **NEW - PS10: Inference for regression**:
-    + A short [pre-lecture](static/PS/ch10_pre_lecture.pdf){target="_blank"} on confidence intervals for a regression slope
+    + A short [pre-lecture](static/PS/ch10_pre_lecture.html){target="_blank"} on confidence intervals for a regression slope ([PDF for printing](static/PS/ch10_pre_lecture.pdf){target="_blank"})
     + [Problem set](static/PS/PS10_inference_for_regression.html){target="_blank"}
 * **Telling your story with data** (no problem set):
-    + A short [pre-lecture](static/PS/ch11_pre_lecture.pdf){target="_blank"} that runs the whole pipeline on one case study
+    + A short [pre-lecture](static/PS/ch11_pre_lecture.html){target="_blank"} that runs the whole pipeline on one case study ([PDF for printing](static/PS/ch11_pre_lecture.pdf){target="_blank"})
 
 
 Resources:
