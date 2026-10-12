@@ -2392,6 +2392,7 @@ window.QuartoSupport = function () {
 
       var SVG = "http://www.w3.org/2000/svg";
       var CHIP_GAP = 6;   // the least space left between two chips, in px
+      var PAGE_INSET = 30; // the least space between a label and a side of the page
       var CODE_MAX_WIDTH = 900;  // the widest a band may be, in slide points
       var CODE_MAX_BOTTOM = 430; // captions below it need the rest of the page
 
@@ -2562,9 +2563,16 @@ window.QuartoSupport = function () {
             console.warn("[annotate] at=" + JSON.stringify(needle) +
               " is not on the line next to its label row; use .side");
           }
+          // The narrowest it can go, wrapped at every space: the floor for a row
+          // too crowded to give each label its natural width.
+          var natural = chip.offsetWidth;
+          chip.style.width = "min-content";
+          var narrowest = chip.offsetWidth;
+          chip.style.width = "";
           items.push({
             chip: chip,
-            width: chip.offsetWidth,
+            width: natural,
+            narrowest: narrowest,
             box: box,
             wanted: box.left + box.width / 2 - rowBox.left
           });
@@ -2578,7 +2586,29 @@ window.QuartoSupport = function () {
         // fits, and slide the rest along rather than letting them overlap.
         items.sort(function (a, b) { return a.wanted - b.wanted; });
 
-        var edge = 0;
+        // Labels stay PAGE_INSET in from each side of the page, the margin the code
+        // band keeps. Centered on the first word of a call, a long label otherwise
+        // ran to x = 0, where a viewer that trims the page cuts its first letters.
+        var sec = row.closest("section");
+        var secBox = sec ? sec.getBoundingClientRect() : rowBox;
+        var unit = sec ? secBox.width / 960 : 1;
+        var lo = PAGE_INSET * unit - (rowBox.left - secBox.left);
+        var hi = secBox.right - PAGE_INSET * unit - rowBox.left;
+
+        // When the labels side by side are wider than the space between the
+        // margins, narrow each one in proportion so its text wraps onto another
+        // line, never below its longest word. ch04's pivot_longer() row needed
+        // 1017px of the 900 there are, and the last pass then stacked two labels.
+        var room = Math.min(rowBox.width, hi) - Math.max(0, lo) -
+          CHIP_GAP * (items.length - 1);
+        var need = items.reduce(function (n, it) { return n + it.width; }, 0);
+        if (need > room) {
+          items.forEach(function (it) {
+            it.width = Math.max(it.narrowest, Math.floor(it.width * room / need));
+          });
+        }
+
+        var edge = Math.max(0, lo);
         items.forEach(function (it) {
           it.left = Math.max(edge, Math.round(it.wanted - it.width / 2));
           edge = it.left + it.width + CHIP_GAP;
@@ -2587,8 +2617,9 @@ window.QuartoSupport = function () {
         // Only if that ran past the right edge is anything pulled back. Running
         // this pass unconditionally drags every label leftward off its own span.
         var last = items[items.length - 1];
-        if (last.left + last.width > rowBox.width) {
-          var limit = rowBox.width;
+        var right = Math.min(rowBox.width, hi);
+        if (last.left + last.width > right) {
+          var limit = right;
           for (var i = items.length - 1; i >= 0; i--) {
             if (items[i].left + items[i].width > limit) {
               items[i].left = limit - items[i].width;
@@ -2733,6 +2764,7 @@ window.QuartoSupport = function () {
       //   [what to group by]{.brace .side at="origin"}
 
       var SIDE_GAP = 40;   // from the end of the line's text to the label
+      var SIDE_GAP_MIN = 16; // the shortest that arrow gets, to keep a label on the page
 
       function placeSide(section, row, code) {
         row.classList.add("placed", "side-row");
@@ -2793,12 +2825,31 @@ window.QuartoSupport = function () {
           // placed label near the right edge would otherwise shrink to the space
           // left and wrap a word to a line.
           chip.style.left = "0px";
-          chip.style.width = Math.ceil(chip.getBoundingClientRect().width / scale) + 1 + "px";
+          chip.style.width = "min-content";
+          var narrowest = chip.offsetWidth;
+          chip.style.width = "";
+          var w = Math.ceil(chip.getBoundingClientRect().width / scale) + 1;
+          chip.style.width = w + "px";
           var h = chip.offsetHeight;
           var cmid = (box.top + box.bottom) / 2;
           var half = h * scale / 2;
           var labelLeft = sx(Math.max(rightOfInk(cmid - half, cmid + half), lineEnd)) +
                           SIDE_GAP;
+          // Keep it PAGE_INSET in from the right side, as the label rows are.
+          // ch07's "1,000 separate samples" ended 14px from the edge. First shorten
+          // the arrow, down to SIDE_GAP_MIN. Only then wrap the label narrower, and
+          // measure again: a taller label may have to clear a longer line, which
+          // is what pushed ch10's "what to plot" off the page when wrapped first.
+          var over = labelLeft + w - (960 - PAGE_INSET);
+          if (over > 0) labelLeft -= Math.min(over, SIDE_GAP - SIDE_GAP_MIN);
+          for (var k = 0; k < 3 && labelLeft + w > 960 - PAGE_INSET; k++) {
+            w = Math.max(narrowest, Math.floor(960 - PAGE_INSET - labelLeft));
+            chip.style.width = w + "px";
+            h = chip.offsetHeight;
+            half = h * scale / 2;
+            labelLeft = sx(Math.max(rightOfInk(cmid - half, cmid + half), lineEnd)) +
+                        SIDE_GAP_MIN;
+          }
           chip.style.left = labelLeft + "px";
           chip.style.top = Math.round(mid - h / 2) + "px";
 
