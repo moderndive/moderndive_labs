@@ -475,7 +475,15 @@ $(document).ready(function () {
 function fitWide() {
   document.querySelectorAll("table").forEach(function (table) {
     var parent = table.parentElement;
-    if (parent.dataset.scrollBox || table.offsetWidth <= parent.clientWidth) return;
+    if (parent.dataset.scrollBox) {
+      // Widened until it fits again: put the table back as it was.
+      if (table.offsetWidth > parent.clientWidth) return;
+      table.style.marginBottom = "";
+      parent.parentNode.insertBefore(table, parent);
+      parent.remove();
+      return;
+    }
+    if (table.offsetWidth <= parent.clientWidth) return;
     var box = document.createElement("div");
     box.dataset.scrollBox = "1";
     box.style.overflowX = "auto";
@@ -485,9 +493,9 @@ function fitWide() {
     box.appendChild(table);
   });
   document.querySelectorAll(".MathJax_Display").forEach(function (eq) {
-    if (eq.scrollWidth <= eq.clientWidth) return;
-    eq.style.overflowX = "auto";
-    eq.style.overflowY = "hidden";
+    var fits = eq.scrollWidth <= eq.clientWidth;
+    eq.style.overflowX = fits ? "" : "auto";
+    eq.style.overflowY = fits ? "" : "hidden";
   });
 }
 // Measured once MathJax has finished, which changes how wide things are.
